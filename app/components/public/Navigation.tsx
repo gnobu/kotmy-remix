@@ -1,17 +1,18 @@
 import { Link } from '@remix-run/react'
+import Button from './reusables/Button'
 
 export default function Navigation() {
     return (
-        <header>
-            <span><Link to={'/'}>KOTMY</Link></span>
-            <nav>
-                <ul>
+        <header className='flex justify-between items-center wrapper py-5'>
+            <span className='text-2xl font-black'><Link to={'/'}>KOTMY</Link></span>
+            <nav className='flex gap-16 items-center'>
+                <ul className='flex gap-6 text-xl font-bold'>
                     <li><Link to="/contests">Contests</Link></li>
                     <li><Link to="/#contacts">Contacts</Link></li>
                     <li><Link to="/winners">Winners</Link></li>
                     <li><Link to="/results">Results</Link></li>
                 </ul>
-                <Link to={'/'}>Join Now</Link>
+                <Button element='a' href={'/'}>Join Now</Button>
             </nav>
         </header>
     )

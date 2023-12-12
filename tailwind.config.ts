@@ -7,6 +7,10 @@ export default {
       fontFamily: {
         satoshi: ["Satoshi-Regular", "sans-serif"],
       },
+      aspectRatio: {
+        '3/7': '3 / 7',
+        '3/4': '3 / 4',
+      },
       colors: {
         primary: '#262626',
         secondary: '#E6E6FA',
@@ -22,5 +26,4 @@ export default {
       }
     },
   },
-  plugins: [],
 } satisfies Config

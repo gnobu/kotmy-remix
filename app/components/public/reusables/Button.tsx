@@ -15,7 +15,7 @@ export default function Button<El extends keyof JSX.IntrinsicElements>({
 } & React.ComponentProps<El>) {
     const Comp = element as string;
     return (
-        <Comp {...props} className={cn(`py-4 px-8 text-lg outline outline-accent rounded-md font-black ${className}`, {
+        <Comp {...props} className={cn(`py-4 px-8 text-lg outline outline-accent rounded-md font-black whitespace-nowrap ${className}`, {
             'bg-accent text-secondary': variant === 'solid',
             'text-accent': variant === 'outline',
             'border-red-400': kind === 'danger',

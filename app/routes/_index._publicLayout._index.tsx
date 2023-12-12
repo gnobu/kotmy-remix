@@ -1,4 +1,4 @@
-import { hero1, hero2, hero3, hero4, hero5 } from '~/assets/images'
+import { hero1, hero2, hero3, hero4, hero5, sponsorLogo } from '~/assets/images'
 import Button from '~/components/public/reusables/Button'
 
 export default function LandingPage() {
@@ -39,6 +39,19 @@ export default function LandingPage() {
                             <img className='object-cover object-center h-full w-full' src={hero5} alt="kid smiling" />
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section className='wrapper py-8 md:py-16'>
+                <h2 className='font-bold text-xl mb-4'>Who supports us</h2>
+                <div className="flex gap-4 overflow-x-hidden">
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
+                    <img src={sponsorLogo} alt="Zendesk" />
                 </div>
             </section>
         </main>

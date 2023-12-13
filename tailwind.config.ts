@@ -5,7 +5,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ["Satoshi-Regular", "sans-serif"],
+        'satoshi': ["Satoshi-Regular", "sans-serif"],
+        'satoshi-medium': ["Satoshi-Medium", "sans-serif"],
+        'satoshi-bold': ["Satoshi-Bold", "sans-serif"],
+        'satoshi-black': ["Satoshi-Black", "sans-serif"],
       },
       aspectRatio: {
         '3/7': '3 / 7',

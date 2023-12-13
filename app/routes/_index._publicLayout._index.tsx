@@ -4,8 +4,8 @@ import Button from '~/components/public/reusables/Button'
 export default function LandingPage() {
     return (
         <main>
-            <section className='wrapper flex flex-col md:flex-row gap-10 xl:gap-24 md:items-center py-8 md:py-16'>
-                <div className='flex flex-col gap-4 sm:gap-8'>
+            <section className='wrapper flex flex-col md:flex-row gap-16 xl:gap-24 md:items-center py-8 md:py-16'>
+                <div className='flex flex-col gap-6 sm:gap-8'>
                     <h1 className='font-black text-4xl sm:text-5xl xl:text-[64px] leading-tight sm:leading-snug whitespace-nowrap'>
                         Capturing Moments
                         <br />
@@ -56,19 +56,37 @@ export default function LandingPage() {
             </section>
 
             <section className='py-8 md:py-16'>
-                <div className='sm:wrapper bg-secondary md:px-24 py-8 md:py-28 flex flex-col md:flex-row justify-between items-center gap-10 sm:rounded-3xl'>
+                <div className='sm:wrapper bg-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-12 sm:rounded-3xl'>
                     <div className="wrapper">
                         <div className="mb-8">
                             <p className='font-black text-xl'>Our Vision</p>
                             <img className="object-cover object-center" src={underline} alt="underline" width={100} />
                         </div>
-                        <h2 className='text-3xl font-black mb-6 leading-snug'>
+                        <h2 className='text-2xl sm:text-3xl font-black mb-6 leading-snug'>
                             Crafting <span className="text-accent">Unforgettable</span> Moments for Every Child's Special Day.
                         </h2>
                         <p className='font-medium'>To create uniquely memorable and exciting kid's birthdays, we strive to be entertaining, transparent, innovative, creative, exciting, efficient, and reliable in every aspect of our service.</p>
                     </div>
                     <div className="wrapper">
                         <img className="object-cover object-center w-full" src={birthdayPresent} alt="wrapped gift" />
+                    </div>
+                </div>
+            </section>
+
+            <section className='py-8 md:py-16'>
+                <div className='sm:wrapper bg-accent text-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-12 sm:rounded-3xl'>
+                    <div className="wrapper">
+                        <h2 className='text-2xl sm:text-[40px] font-satoshi-black mb-6 leading-snug'>
+                            Refer A Friend And Earn Rewards
+                        </h2>
+                        <p className='font-satoshi-medium mb-8'>Lorem ipsum dolor sit amet consectetur.
+                            Velit egestas auctor in amet dis sed sit egestas.
+                            Viverra morbi eget consectetur accumsan integer.
+                            Mi et etiam amet est egestas tellus quis.
+                        </p>
+                        <span className='inline-block bg-[#E7E7E7] text-primary py-4 px-8 text-lg rounded-md font-black whitespace-nowrap'>COMING SOON</span>
+                    </div>
+                    <div className="wrapper bg-[#E7E7E7] rounded-3xl w-full aspect-square">
                     </div>
                 </div>
             </section>

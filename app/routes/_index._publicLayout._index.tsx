@@ -1,4 +1,4 @@
-import { hero1, hero2, hero3, hero4, hero5, sponsorLogo } from '~/assets/images'
+import { birthdayPresent, hero1, hero2, hero3, hero4, hero5, sponsorLogo, underline } from '~/assets/images'
 import Button from '~/components/public/reusables/Button'
 
 export default function LandingPage() {
@@ -52,6 +52,24 @@ export default function LandingPage() {
                     <img src={sponsorLogo} alt="Zendesk" />
                     <img src={sponsorLogo} alt="Zendesk" />
                     <img src={sponsorLogo} alt="Zendesk" />
+                </div>
+            </section>
+
+            <section className='py-8 md:py-16'>
+                <div className='sm:wrapper bg-secondary md:px-24 py-8 md:py-28 flex flex-col md:flex-row justify-between items-center gap-10 sm:rounded-3xl'>
+                    <div className="wrapper">
+                        <div className="mb-8">
+                            <p className='font-black text-xl'>Our Vision</p>
+                            <img className="object-cover object-center" src={underline} alt="underline" width={100} />
+                        </div>
+                        <h2 className='text-3xl font-black mb-6 leading-snug'>
+                            Crafting <span className="text-accent">Unforgettable</span> Moments for Every Child's Special Day.
+                        </h2>
+                        <p className='font-medium'>To create uniquely memorable and exciting kid's birthdays, we strive to be entertaining, transparent, innovative, creative, exciting, efficient, and reliable in every aspect of our service.</p>
+                    </div>
+                    <div className="wrapper">
+                        <img className="object-cover object-center w-full" src={birthdayPresent} alt="wrapped gift" />
+                    </div>
                 </div>
             </section>
         </main>

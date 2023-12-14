@@ -1,6 +1,7 @@
 import { icons } from '~/assets/icons'
 import { birthdayPresent, hero1, hero2, hero3, hero4, hero5, sponsorLogo, underline } from '~/assets/images'
 import ContactForm from '~/components/public/ContactForm'
+import Footer from '~/components/public/Footer'
 import Button from '~/components/reusables/Button'
 import Svg from '~/components/reusables/Svg'
 
@@ -123,6 +124,7 @@ export default function LandingPage() {
                     <ContactForm />
                 </div>
             </section>
+            <Footer />
         </main>
     )
 }

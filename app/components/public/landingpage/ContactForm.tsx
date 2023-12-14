@@ -1,5 +1,5 @@
-import FormControl from '../reusables/FormControl'
-import Button from '../reusables/Button'
+import FormControl from '../../reusables/FormControl'
+import Button from '../../reusables/Button'
 
 export default function ContactForm() {
     return (

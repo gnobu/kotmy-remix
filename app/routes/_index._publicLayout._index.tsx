@@ -1,13 +1,40 @@
 import { icons } from '~/assets/icons'
 import { birthdayPresent, hero1, hero2, hero3, hero4, hero5, sponsorLogo, underline } from '~/assets/images'
-import ContactForm from '~/components/public/ContactForm'
+import ContactForm from '~/components/public/landingpage/ContactForm'
 import Footer from '~/components/public/Footer'
 import Button from '~/components/reusables/Button'
 import Svg from '~/components/reusables/Svg'
+import WhyCard from '~/components/public/landingpage/WhyCard'
 
+const whyUsData = [
+    {
+        icon: icons.noteIcon,
+        bg: 'bg-[#12457A]',
+        title: 'Free Registration',
+        subtext: 'Unlock the thrill of creative expression by registering for our exclusive yearly and monthly contests.'
+    },
+    {
+        icon: icons.galleryIcon,
+        bg: 'bg-[#EA5A47]',
+        title: 'Monthly Campaigns',
+        subtext: "Successfully organized two annual and twenty-five monthly campaigns."
+    },
+    {
+        icon: icons.cakeIcon,
+        bg: 'bg-[#CE8800]',
+        title: 'Memorable Birthdays',
+        subtext: "To make kids' birthdays unique, memorable, exciting and entertaining."
+    },
+    {
+        icon: icons.trophyIcon,
+        bg: 'bg-[#09AD8A]',
+        title: 'Exciting Contests',
+        subtext: "To be entertaining, transparent, innovative, creative, exciting, effective and reliable."
+    },
+]
 export default function LandingPage() {
     return (
-        <main>
+        <main className='snap-y'>
             <section className='wrapper flex flex-col md:flex-row gap-16 xl:gap-24 md:items-center py-8 md:py-16'>
                 <div className='flex flex-col gap-6 sm:gap-8'>
                     <h1 className='font-black text-4xl sm:text-5xl xl:text-[64px] leading-tight sm:leading-snug whitespace-nowrap'>
@@ -77,7 +104,19 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            <section className='py-8 md:py-16'>
+            <section className='py-8 md:py-16 wrapper flex flex-col items-center'>
+                <div className="mb-6 sm:mb-16">
+                    <h2 className='font-satoshi-black text-2xl'>Why KOTMY?</h2>
+                    <img className="object-fill w-[159px] h-5" src={underline} alt="underline" />
+                </div>
+                <div className="grid gap-6 lg:gap-12 sm:grid-cols-2 max-w-5xl">
+                    {whyUsData.map(item => (
+                        <WhyCard key={item.title} backgroundColor={item.bg} icon={item.icon} title={item.title} subtext={item.subtext} />
+                    ))}
+                </div>
+            </section>
+
+            <section className='sm:py-8 md:py-16'>
                 <div className='sm:wrapper bg-accent text-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-16 sm:rounded-3xl'>
                     <div className="wrapper">
                         <h2 className='text-2xl sm:text-[40px] font-satoshi-black mb-6 leading-snug'>
@@ -95,7 +134,7 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            <section className='py-8 md:py-16'>
+            <section id='contact' className='sm:py-8 md:py-16 sm:-scroll-m-4 md:-scroll-m-8 snap-start'>
                 <div className='sm:wrapper bg-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between gap-16 sm:rounded-3xl'>
                     <div className="wrapper flex flex-col gap-12">
                         <h2 className='text-2xl sm:text-[40px] font-satoshi-black leading-tight'>
@@ -104,7 +143,7 @@ export default function LandingPage() {
                         <div className="flex flex-col lg:flex-row gap-6">
                             <p>
                                 <span className='block font-satoshi-black mb-3'>Phone Us</span>
-                                <span className='font-satoshi-medium'>+234 703 515 9093</span>
+                                <span className='font-satoshi-medium whitespace-nowrap'>+234 703 515 9093</span>
                             </p>
                             <p>
                                 <span className='block font-satoshi-black mb-3'>Email Us</span>
@@ -124,6 +163,7 @@ export default function LandingPage() {
                     <ContactForm />
                 </div>
             </section>
+
             <Footer />
         </main>
     )

@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react'
-import Button from './reusables/Button'
-import Svg from './reusables/Svg'
+import Button from '../reusables/Button'
+import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
 
 export default function Navigation() {

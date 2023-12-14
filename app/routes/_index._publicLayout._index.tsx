@@ -1,5 +1,8 @@
+import { icons } from '~/assets/icons'
 import { birthdayPresent, hero1, hero2, hero3, hero4, hero5, sponsorLogo, underline } from '~/assets/images'
-import Button from '~/components/public/reusables/Button'
+import ContactForm from '~/components/public/ContactForm'
+import Button from '~/components/reusables/Button'
+import Svg from '~/components/reusables/Svg'
 
 export default function LandingPage() {
     return (
@@ -56,7 +59,7 @@ export default function LandingPage() {
             </section>
 
             <section className='py-8 md:py-16'>
-                <div className='sm:wrapper bg-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-12 sm:rounded-3xl'>
+                <div className='sm:wrapper bg-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-16 sm:rounded-3xl'>
                     <div className="wrapper">
                         <div className="mb-8">
                             <p className='font-black text-xl'>Our Vision</p>
@@ -74,7 +77,7 @@ export default function LandingPage() {
             </section>
 
             <section className='py-8 md:py-16'>
-                <div className='sm:wrapper bg-accent text-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-12 sm:rounded-3xl'>
+                <div className='sm:wrapper bg-accent text-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-16 sm:rounded-3xl'>
                     <div className="wrapper">
                         <h2 className='text-2xl sm:text-[40px] font-satoshi-black mb-6 leading-snug'>
                             Refer A Friend And Earn Rewards
@@ -88,6 +91,36 @@ export default function LandingPage() {
                     </div>
                     <div className="wrapper bg-[#E7E7E7] rounded-3xl w-full aspect-square">
                     </div>
+                </div>
+            </section>
+
+            <section className='py-8 md:py-16'>
+                <div className='sm:wrapper bg-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between gap-16 sm:rounded-3xl'>
+                    <div className="wrapper flex flex-col gap-12">
+                        <h2 className='text-2xl sm:text-[40px] font-satoshi-black leading-tight'>
+                            Do you want to know more about the way we work?
+                        </h2>
+                        <div className="flex flex-col lg:flex-row gap-6">
+                            <p>
+                                <span className='block font-satoshi-black mb-3'>Phone Us</span>
+                                <span className='font-satoshi-medium'>+234 703 515 9093</span>
+                            </p>
+                            <p>
+                                <span className='block font-satoshi-black mb-3'>Email Us</span>
+                                <span className='font-satoshi-medium'>kidmonthyear@gmail.com</span>
+                            </p>
+                        </div>
+                        <div>
+                            <span className='block font-satoshi-black mb-3'>Follow Us</span>
+                            <span className='flex gap-4'>
+                                <Svg src={icons.twitterXIcon} width={'24px'} height={'24px'} />
+                                <Svg src={icons.instagramIcon} width={'24px'} height={'24px'} />
+                                <Svg src={icons.facebookIcon} width={'24px'} height={'24px'} />
+                                <Svg src={icons.youtubeIcon} width={'24px'} height={'24px'} />
+                            </span>
+                        </div>
+                    </div>
+                    <ContactForm />
                 </div>
             </section>
         </main>

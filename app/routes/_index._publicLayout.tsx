@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+import Footer from "~/components/public/Footer";
 import Navigation from "~/components/public/Navigation";
 
 export const meta: MetaFunction = () => {
@@ -14,6 +15,7 @@ export default function Index() {
     <div className="min-h-screen bg-primary">
       <Navigation />
       <Outlet />
+      <Footer />
     </div>
   );
 }

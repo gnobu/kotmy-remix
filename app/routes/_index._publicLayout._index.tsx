@@ -1,10 +1,12 @@
-import { icons } from '~/assets/icons'
-import { birthdayPresent, hero1, hero2, hero3, hero4, hero5, sponsorLogo, underline } from '~/assets/images'
 import ContactForm from '~/components/public/landingpage/ContactForm'
-import Footer from '~/components/public/Footer'
+import WhyCard from '~/components/public/landingpage/WhyCard'
 import Button from '~/components/reusables/Button'
 import Svg from '~/components/reusables/Svg'
-import WhyCard from '~/components/public/landingpage/WhyCard'
+import {
+    birthdayPresent, hero1, hero2, hero3,
+    hero4, hero5, sponsorLogo, underline
+} from '~/assets/images'
+import { icons } from '~/assets/icons'
 
 const whyUsData = [
     {
@@ -122,7 +124,8 @@ export default function LandingPage() {
                         <h2 className='text-2xl sm:text-[40px] font-satoshi-black mb-6 leading-snug'>
                             Refer A Friend And Earn Rewards
                         </h2>
-                        <p className='font-satoshi-medium mb-8'>Lorem ipsum dolor sit amet consectetur.
+                        <p className='font-satoshi-medium mb-8'>
+                            Lorem ipsum dolor sit amet consectetur.
                             Velit egestas auctor in amet dis sed sit egestas.
                             Viverra morbi eget consectetur accumsan integer.
                             Mi et etiam amet est egestas tellus quis.
@@ -163,8 +166,6 @@ export default function LandingPage() {
                     <ContactForm />
                 </div>
             </section>
-
-            <Footer />
         </main>
     )
 }

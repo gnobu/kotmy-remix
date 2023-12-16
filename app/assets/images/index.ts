@@ -1,3 +1,4 @@
+import logo from './logo.png'
 import hero1 from './hero-1.jpg'
 import hero2 from './hero-2.jpg'
 import hero3 from './hero-3.jpg'
@@ -8,6 +9,6 @@ import birthdayPresent from './birthday_present.png'
 import underline from './underline.png'
 
 export {
-    hero1, hero2, hero3, hero4, hero5,
+    logo, hero1, hero2, hero3, hero4, hero5,
     sponsorLogo,  birthdayPresent, underline
 }

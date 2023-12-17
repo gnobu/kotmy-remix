@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react'
 
 export default function Footer() {
     return (
-        <footer className='border-t border-[#C0BFF3] py-8'>
+        <footer className='border-t border-primary py-8'>
             <div className='wrapper flex flex-wrap gap-6 gap-x-12 justify-between font-bold'>
                 <nav className='flex gap-6 items-center'>
                     <ul className='flex gap-6'>

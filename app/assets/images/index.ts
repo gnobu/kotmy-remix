@@ -7,8 +7,11 @@ import hero5 from './hero-5.jpg'
 import sponsorLogo from './sponsor_logo.png'
 import birthdayPresent from './birthday_present.png'
 import underline from './underline.png'
+import contestImage1 from './contest_image_1.png'
+import contestImage2 from './contest_image_2.png'
 
 export {
     logo, hero1, hero2, hero3, hero4, hero5,
-    sponsorLogo,  birthdayPresent, underline
+    sponsorLogo,  birthdayPresent, underline,
+    contestImage1, contestImage2
 }

@@ -7,33 +7,14 @@ import {
     hero4, hero5, sponsorLogo, underline
 } from '~/assets/images'
 import { icons } from '~/assets/icons'
+import { contests, whyUsData } from '~/lib/data/landingPage.data'
+// import Carousel from 'react-multi-carousel'
+// import "react-multi-carousel/lib/styles.css"
+// import CarouselButtonGroup from '~/components/public/landingpage/CarouselButtonGroup'
+// import { responsiveData } from '~/lib/data/carousel'
+// import ContestCarouselCard from '~/components/public/landingpage/ContestCarouselCard'
 
-const whyUsData = [
-    {
-        icon: icons.noteIcon,
-        bg: 'bg-[#12457A]',
-        title: 'Free Registration',
-        subtext: 'Unlock the thrill of creative expression by registering for our exclusive yearly and monthly contests.'
-    },
-    {
-        icon: icons.galleryIcon,
-        bg: 'bg-[#EA5A47]',
-        title: 'Monthly Campaigns',
-        subtext: "Successfully organized two annual and twenty-five monthly campaigns."
-    },
-    {
-        icon: icons.cakeIcon,
-        bg: 'bg-[#CE8800]',
-        title: 'Memorable Birthdays',
-        subtext: "To make kids' birthdays unique, memorable, exciting and entertaining."
-    },
-    {
-        icon: icons.trophyIcon,
-        bg: 'bg-[#09AD8A]',
-        title: 'Exciting Contests',
-        subtext: "To be entertaining, transparent, innovative, creative, exciting, effective and reliable."
-    },
-]
+
 export default function LandingPage() {
     return (
         <main className='snap-y'>
@@ -105,6 +86,19 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
+
+            {/* <section id="contests" className="contests-section">
+                <Carousel responsive={responsiveData} arrows={false} partialVisible ssr={true}
+                    renderButtonGroupOutside={true} customButtonGroup={<CarouselButtonGroup />}
+                >
+                    {contests
+                        ? contests.map(contest => (
+                            <ContestCarouselCard key={contest._id} contest={contest} />
+                        ))
+                        : <p className='f-s-5 f-w-6'>No active contests to display</p>
+                    }
+                </Carousel>
+            </section> */}
 
             <section className='py-8 md:py-16 wrapper flex flex-col items-center'>
                 <div className="mb-6 sm:mb-16">

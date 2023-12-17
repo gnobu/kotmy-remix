@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Link, NavLink } from '@remix-run/react'
 import Button from '../reusables/Button'
 import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
@@ -12,10 +12,10 @@ export default function Navigation() {
             </Link></span>
             <nav className='hidden md:flex gap-16 items-center'>
                 <ul className='flex gap-6 text-xl font-bold'>
-                    <li><Link to="/contests">Contests</Link></li>
-                    <li><Link to="/#contact">Contact</Link></li>
-                    <li><Link to="/winners">Winners</Link></li>
-                    <li><Link to="/results">Results</Link></li>
+                    <li><NavLink to="/contests" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Contests</NavLink></li>
+                    <li><NavLink to="/#contact" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Contact</NavLink></li>
+                    <li><NavLink to="/winners" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Winners</NavLink></li>
+                    <li><NavLink to="/results" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Results</NavLink></li>
                 </ul>
                 <Button element='a' href={'/'}>Join Now</Button>
             </nav>

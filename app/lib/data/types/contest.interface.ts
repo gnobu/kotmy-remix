@@ -4,4 +4,5 @@ export type Contest = {
     title: string;
     tournamentId: string;
     contestId: string;
+    status: 'registering' | 'ongoing' | 'completed';
 }

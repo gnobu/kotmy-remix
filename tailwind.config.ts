@@ -23,6 +23,9 @@ export default {
         primary: '#DFE3FF',
         secondary: '#F5F6FD',
         accent: '#6246EA',
+        ongoing: '#87A3BF95',
+        completed: '#D1BF0095',
+        registering: '#FF99F695',
       },
       borderColor: {
         primary: '#C0BFF3',

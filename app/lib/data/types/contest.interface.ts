@@ -1,8 +1,10 @@
+export type Status = 'registering' | 'ongoing' | 'completed'
+
 export type Contest = {
     _id: string;
     image: string;
     title: string;
     tournamentId: string;
     contestId: string;
-    status: 'registering' | 'ongoing' | 'completed';
+    status: Status;
 }

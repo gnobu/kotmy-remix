@@ -29,6 +29,11 @@ export default {
       },
       borderColor: {
         primary: '#C0BFF3',
+        secondary: '#EAEBF0',
+      },
+      outlineColor: {
+        primary: '#C0BFF3',
+        secondary: '#EAEBF0',
       }
     },
   },

@@ -9,6 +9,8 @@ import note from './note.svg'
 import trophy from './trophy.svg'
 import arrowLeft from './arrow-left.svg'
 import arrowRight from './arrow-right.svg'
+import arrowPrev from './arrow-prev.svg'
+import arrowNext from './arrow-next.svg'
 import activeDot from './active-dot.svg'
 
 export const icons = {
@@ -23,5 +25,7 @@ export const icons = {
     trophyIcon: `${trophy}#img`,
     arrowLeftIcon: `${arrowLeft}#img`,
     arrowRightIcon: `${arrowRight}#img`,
+    arrowPrevIcon: `${arrowPrev}#img`,
+    arrowNextIcon: `${arrowNext}#img`,
     activeDotIcon: `${activeDot}#img`,
 }

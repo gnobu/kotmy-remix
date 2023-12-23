@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
-import Button from "~/components/reusables/Button"
 import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
 import Svg from "~/components/reusables/Svg"
@@ -86,7 +85,7 @@ export default function ContestResult() {
                         </thead>
                         <tbody>
                             {(new Array(20) as typeof resultData[]).fill(resultData).map((contestant, index) => (
-                                <tr>
+                                <tr key={index}>
                                     {headings.map(heading => (
                                         <td className="border border-secondary px-6" key={heading}>{contestant[heading]}</td>
                                     ))}

@@ -18,6 +18,8 @@ export default {
         primary: '#262626',
         secondary: '#E6E6FA',
         accent: '#6246EA',
+        'success-700': '#2D8A39',
+        'success-500': '#EBFAEB',
       },
       backgroundColor: {
         primary: '#DFE3FF',

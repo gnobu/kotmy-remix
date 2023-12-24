@@ -5,19 +5,19 @@ import ContestCard from "~/components/reusables/ContestCard"
 import { contests } from "~/lib/data/landingPage.data"
 
 export async function loader({ params }: LoaderFunctionArgs) {
-    const { contestId } = params
-    const contest = contests.find(contest => contest._id === contestId)
-    if (!contest) return redirect('/contests')
-    return json({ contest })
+    const { tournamentId } = params
+    const tournament = contests.find(tournament => tournament._id === tournamentId)
+    if (!tournament) return redirect('/contests')
+    return json({ tournament })
 }
 
-export default function ContestPage() {
-    const { contest } = useLoaderData<typeof loader>()
+export default function TournamentPage() {
+    const { tournament } = useLoaderData<typeof loader>()
     return (
         <main className='grow'>
             <header className="wrapper my-16">
                 <h1 className='text-accent text-2xl lg:text-4xl font-satoshi-bold max-w-3xl'>
-                    {contest.title}
+                    {tournament.title}
                 </h1>
             </header>
 
@@ -32,7 +32,7 @@ export default function ContestPage() {
 
             <section className='wrapper my-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center'>
                 {contests.map(contest => (
-                    <ContestCard key={contest._id} contest={contest} to={`/contests/${contest._id}`} withTag />
+                    <ContestCard key={contest._id} contest={contest} to={contest._id} withTag />
                 ))}
             </section>
 

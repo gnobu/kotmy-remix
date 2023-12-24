@@ -75,24 +75,26 @@ export default function ContestResult() {
                         </fieldset>
                         <span className="whitespace-nowrap font-satoshi-bold">SMV: SOCIAL MEDIA VOTES</span>
                     </div>
-                    <table className="w-full table-auto border border-secondary">
-                        <thead>
-                            <tr>
-                                {headings.map(heading => (
-                                    <th className="text-left uppercase font-satoshi-black border border-secondary px-6" key={heading}>{heading}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {(new Array(20) as typeof resultData[]).fill(resultData).map((contestant, index) => (
-                                <tr key={index}>
+                    <div className="w-full overflow-x-auto">
+                        <table className="w-full table-auto border border-secondary">
+                            <thead>
+                                <tr>
                                     {headings.map(heading => (
-                                        <td className="border border-secondary px-6" key={heading}>{contestant[heading]}</td>
+                                        <th className="text-left uppercase font-satoshi-black border border-secondary px-6" key={heading}>{heading}</th>
                                     ))}
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {(new Array(20) as typeof resultData[]).fill(resultData).map((contestant, index) => (
+                                    <tr key={index}>
+                                        {headings.map(heading => (
+                                            <td className="border border-secondary px-6" key={heading}>{contestant[heading]}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                     <div className="flex gap-6 md:gap-8 justify-center items-center p-6 font-satoshi-bold">
                         <button className="flex gap-1 items-center rounded py-1 px-2 hover:outline outline-primary"><Svg src={icons.arrowPrevIcon} /> Prev</button>
                         <span className="whitespace-nowrap">1 of 20</span>

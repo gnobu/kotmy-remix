@@ -66,10 +66,10 @@ export default function ContestResult() {
                 <div className="wrapper py-6">
                     <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 justify-between md:items-center py-6">
                         <fieldset className="flex gap-4 flex-wrap sm:justify-end">
-                            <Select name="stage" id="stage">
+                            <Select name="stage" id="stage" containerClass="bg-secondary">
                                 <option value="1">KID OF JUNE 2023 - STAGE 1 RESULT TABLE</option>
                             </Select>
-                            <Select name="category" id="category">
+                            <Select name="category" id="category" containerClass="bg-secondary">
                                 <option value="">Sort by category</option>
                             </Select>
                         </fieldset>

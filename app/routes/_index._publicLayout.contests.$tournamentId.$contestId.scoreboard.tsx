@@ -8,6 +8,7 @@ import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
 import Svg from "~/components/reusables/Svg"
 import { contests } from "~/lib/data/landingPage.data"
+import { scoreboardData } from "~/lib/data/scoreboardData"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { contestId } = params
@@ -55,7 +56,7 @@ export default function ContestPage() {
             <img src={contest.image} alt="kid smiling" className="wrapper w-full rounded-3xl my-16" />
             <section className="bg-white">
                 <div className="wrapper my-16">
-                    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-6 sm:gap-8 py-6">
+                    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-x-6 sm:gap-x-8 py-6 flex-wrap">
                         <span className="font-medium text-xl">1000 Contestants</span>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <FormControl as='input' type='search' className='min-w-[280px] bg-white' placeholder='Search contestant by name' />
@@ -65,7 +66,7 @@ export default function ContestPage() {
                         </div>
                         <Link to={`/results/${contest._id}`} className="text-accent font-bold hover:underline underline-offset-4">See result table</Link>
                     </div>
-                    <ScoreboardTable />
+                    <ScoreboardTable data={scoreboardData} />
                     <Pagination />
                 </div>
             </section>

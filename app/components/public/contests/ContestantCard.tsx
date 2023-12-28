@@ -1,4 +1,4 @@
-import { Contestant } from '~/lib/data/types/contestant.interface'
+import { Contestant } from '~/lib/types/contestant.interface'
 import SocialLink from './SocialLink'
 
 export default function ContestantCard({ contestant }: { contestant: Contestant }) {

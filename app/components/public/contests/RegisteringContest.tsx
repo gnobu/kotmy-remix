@@ -4,7 +4,7 @@ import Svg from '~/components/reusables/Svg'
 import ContestGuidelines from '../ContestGuidelines'
 import RegistrationSuccess from '../RegistrationSuccess'
 import RegistrationForm from '../RegistrationForm'
-import { Contest } from '~/lib/data/types/contest.interface'
+import { Contest } from '~/lib/types/contest.interface'
 
 export default function RegisteringContest({ contest }: { contest: Contest }) {
     const [registered, setRegistered] = useState(false)

@@ -1,6 +1,6 @@
 import { icons } from "~/assets/icons"
 import { contestImage1, contestImage2 } from "~/assets/images"
-import { Contest } from "./types/contest.interface"
+import { Contest } from "../types/contest.interface"
 
 export const whyUsData = [
     {

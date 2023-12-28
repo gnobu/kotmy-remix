@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { Status } from '~/lib/data/types/contest.interface'
+import { Status } from '~/lib/types/contest.interface'
 
 export default function StatusTag({ status, className }: { status: Status, className?: string }) {
     return (

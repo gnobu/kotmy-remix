@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react"
-import { Contest } from "~/lib/data/types/contest.interface"
+import { Contest } from "~/lib/types/contest.interface"
 import StatusTag from "./StatusTag"
 
 type Props = { contest: Contest, to: string, withTag?: boolean, withCategory?: boolean }

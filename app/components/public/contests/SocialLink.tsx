@@ -1,19 +1,11 @@
 import { Link } from "@remix-run/react"
-import cn from "classnames";
-import { icons } from "~/assets/icons"
+import cn from "classnames"
 import Svg from "~/components/reusables/Svg"
+import { socialIcons } from "~/lib/data/socials"
 
 type Props = {
     type: "facebook" | "instagram" | "twitter" | "tally" | "givaah";
     url: string;
-}
-
-const socialIcons = {
-    "facebook": icons.facebookSolidIcon,
-    "instagram": icons.instagramSolidIcon,
-    "twitter": icons.twitterSolidIcon,
-    "tally": '',
-    "givaah": ''
 }
 
 export default function SocialLink({ type, url }: Props) {

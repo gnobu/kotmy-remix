@@ -6,7 +6,7 @@ import Grade from "./Grade"
 
 export default function ScoreboardTable({ data }: { data: typeof scoreboardData }) {
     return (
-        <table className="w-full table-auto">
+        <table className="w-full table-auto hidden sm:table">
             <thead>
                 <tr>
                     <th className="text-left uppercase text-sm font-satoshi-bold border-b border-secondary px-6 py-3">position</th>
@@ -20,7 +20,7 @@ export default function ScoreboardTable({ data }: { data: typeof scoreboardData 
                 {data.map((contestant, index) => (
                     <tr key={index}>
                         <td className="border-b border-secondary px-6 py-3">{contestant.position}</td>
-                        <td className="border-b border-secondary px-6 py-3 font-satoshi-medium">
+                        <td className="border-b border-secondary px-6 py-3 font-satoshi-medium max-w-[300px] truncate uppercase">
                             {contestant.name}
                             <dl className="lg:hidden">
                                 <dt className="sr-only">progress</dt>

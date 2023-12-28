@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
+import MobileScoreboard from "~/components/public/contests/MobileScoreboard"
 import ScoreboardTable from "~/components/public/contests/ScoreboardTable"
 import FormControl from "~/components/reusables/FormControl"
 import Pagination from "~/components/reusables/Pagination"
@@ -54,10 +55,10 @@ export default function ContestPage() {
                 </div>
             </div>
             <img src={contest.image} alt="kid smiling" className="wrapper w-full rounded-3xl my-16" />
-            <section className="bg-white">
+            <section className="sm:bg-white">
                 <div className="wrapper my-16">
-                    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-x-6 sm:gap-x-8 py-6 flex-wrap">
-                        <span className="font-medium text-xl">1000 Contestants</span>
+                    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-y-4 gap-x-6 sm:gap-x-8 py-6 flex-wrap">
+                        <span className="font-satoshi-medium text-xl">1000 Contestants</span>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <FormControl as='input' type='search' className='min-w-[280px] bg-white' placeholder='Search contestant by name' />
                             <Select containerClass='bg-white'>
@@ -67,6 +68,7 @@ export default function ContestPage() {
                         <Link to={`/results/${contest._id}`} className="text-accent font-bold hover:underline underline-offset-4">See result table</Link>
                     </div>
                     <ScoreboardTable data={scoreboardData} />
+                    <MobileScoreboard data={scoreboardData} />
                     <Pagination />
                 </div>
             </section>

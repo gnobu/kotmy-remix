@@ -1,7 +1,10 @@
+import { hero5 } from "~/assets/images";
+
 export const scoreboardData = [
     {
         'position': 1,
         'name': 'BAKARE GREAT IREAYOMIDE',
+        'image': hero5,
         'progress': 75.234,
         'grade': 'A',
         'votes': {
@@ -12,7 +15,8 @@ export const scoreboardData = [
     },
     {
         'position': 2,
-        'name': 'BAKARE GREAT IREAYOMIDE',
+        'name': 'John Wick',
+        'image': hero5,
         'progress': 60,
         'grade': 'B',
         'votes': {
@@ -23,7 +27,8 @@ export const scoreboardData = [
     },
     {
         'position': 3,
-        'name': 'BAKARE GREAT IREAYOMIDE',
+        'name': 'Olaoluwakitan GREAT IREAYOMIDE',
+        'image': hero5,
         'progress': 50,
         'grade': 'C',
         'votes': {
@@ -35,6 +40,7 @@ export const scoreboardData = [
     {
         'position': 4,
         'name': 'BAKARE GREAT IREAYOMIDE',
+        'image': hero5,
         'progress': 30,
         'grade': 'D',
         'votes': {
@@ -46,6 +52,7 @@ export const scoreboardData = [
     {
         'position': 5,
         'name': 'BAKARE GREAT IREAYOMIDE',
+        'image': hero5,
         'progress': 20,
         'grade': 'E',
         'votes': {
@@ -57,6 +64,7 @@ export const scoreboardData = [
     {
         'position': 6,
         'name': 'BAKARE GREAT IREAYOMIDE',
+        'image': hero5,
         'progress': 10,
         'grade': 'F',
         'votes': {

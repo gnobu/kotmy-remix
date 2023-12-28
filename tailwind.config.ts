@@ -20,6 +20,9 @@ export default {
         accent: '#6246EA',
         'success-700': '#2D8A39',
         'success-500': '#EBFAEB',
+        facebook: '#437EF7',
+        twitter: '#262626',
+        instagram: '#E2341D',
       },
       backgroundColor: {
         primary: '#DFE3FF',
@@ -28,6 +31,9 @@ export default {
         ongoing: '#87A3BF95',
         completed: '#D1BF0095',
         registering: '#FF99F695',
+        facebookBG: '#F5FAFF',
+        twitterBG: '#F6F6F6',
+        instagramBG: '#FFF2F0',
       },
       borderColor: {
         primary: '#C0BFF3',

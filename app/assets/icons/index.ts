@@ -2,6 +2,9 @@ import hamburger from './hamburger.svg'
 import facebook from './facebook.svg'
 import instagram from './instagram.svg'
 import twitterX from './twitter-x.svg'
+import facebookSolid from './facebook-solid.svg'
+import instagramSolid from './instagram-solid.svg'
+import twitterSolid from './twitter-solid.svg'
 import youtube from './youtube.svg'
 import cake from './cake.svg'
 import gallery from './gallery.svg'
@@ -21,6 +24,9 @@ export const icons = {
     facebookIcon: `${facebook}#img`,
     instagramIcon: `${instagram}#img`,
     youtubeIcon: `${youtube}#img`,
+    facebookSolidIcon: `${facebookSolid}#img`,
+    instagramSolidIcon: `${instagramSolid}#img`,
+    twitterSolidIcon: `${twitterSolid}#img`,
     twitterXIcon: `${twitterX}#img`,
     cakeIcon: `${cake}#img`,
     galleryIcon: `${gallery}#img`,

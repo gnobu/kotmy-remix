@@ -14,4 +14,7 @@
         content: url('./assets/icons/active-dot.svg');
         margin-right: .5rem;
     }
+    .progressBar {
+        --progress: 0%;
+    }
 }

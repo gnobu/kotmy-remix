@@ -4,6 +4,6 @@ export const socialIcons = {
     "facebook": icons.facebookSolidIcon,
     "instagram": icons.instagramSolidIcon,
     "twitter": icons.twitterSolidIcon,
-    "tally": '',
-    "givaah": ''
+    "tally": icons.tallyIcon,
+    "givaah": icons.givaahIcon
 }

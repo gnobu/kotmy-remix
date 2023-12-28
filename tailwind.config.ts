@@ -23,6 +23,8 @@ export default {
         facebook: '#437EF7',
         twitter: '#262626',
         instagram: '#E2341D',
+        givaah: '#FFCA08',
+        tally: '#0AAE8B',
       },
       backgroundColor: {
         primary: '#DFE3FF',
@@ -34,6 +36,8 @@ export default {
         facebookBG: '#F5FAFF',
         twitterBG: '#F6F6F6',
         instagramBG: '#FFF2F0',
+        givaahBG: '#FEFCE8',
+        tallyBG: '#EBFEF7',
       },
       borderColor: {
         primary: '#C0BFF3',

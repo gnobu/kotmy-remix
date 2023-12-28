@@ -6,6 +6,8 @@ import facebookSolid from './facebook-solid.svg'
 import instagramSolid from './instagram-solid.svg'
 import twitterSolid from './twitter-solid.svg'
 import youtube from './youtube.svg'
+import givaah from './givaah.svg'
+import tally from './tally.svg'
 import cake from './cake.svg'
 import gallery from './gallery.svg'
 import note from './note.svg'
@@ -28,6 +30,8 @@ export const icons = {
     instagramSolidIcon: `${instagramSolid}#img`,
     twitterSolidIcon: `${twitterSolid}#img`,
     twitterXIcon: `${twitterX}#img`,
+    givaahIcon: `${givaah}#img`,
+    tallyIcon: `${tally}#img`,
     cakeIcon: `${cake}#img`,
     galleryIcon: `${gallery}#img`,
     noteIcon: `${note}#img`,

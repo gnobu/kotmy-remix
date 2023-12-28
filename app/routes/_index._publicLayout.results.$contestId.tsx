@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
+import Pagination from "~/components/reusables/Pagination"
 import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
 import Svg from "~/components/reusables/Svg"
@@ -95,11 +96,7 @@ export default function ContestResult() {
                             </tbody>
                         </table>
                     </div>
-                    <div className="flex gap-6 md:gap-8 justify-center items-center p-6 font-satoshi-bold">
-                        <button className="flex gap-1 items-center rounded py-1 px-2 hover:outline outline-primary"><Svg src={icons.arrowPrevIcon} /> Prev</button>
-                        <span className="whitespace-nowrap">1 of 20</span>
-                        <button className="flex gap-1 items-center rounded py-1 px-2 hover:outline outline-primary">Next <Svg src={icons.arrowNextIcon} /></button>
-                    </div>
+                    <Pagination />
                 </div>
             </section>
         </main>

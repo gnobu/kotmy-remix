@@ -33,25 +33,15 @@ export default function LandingPage() {
                 </div>
                 <div className='grid grid-cols-3 gap-8 xl:gap-9 w-full'>
                     <div className='flex flex-col gap-8 xl:gap-9'>
-                        <div className='aspect-3/7 overflow-hidden rounded-full outline-dashed outline-offset-4'>
-                            <img className='object-cover object-center h-full w-full' src={hero1} alt="kid smiling" />
-                        </div>
-                        {/* <div className='aspect-3/4 grow overflow-hidden rounded-full outline-dashed outline-offset-4'>
-                            <img className='object-cover object-center h-full w-full' src={hero2} alt="kid smiling" />
-                        </div> */}
+                        <img className='aspect-3/7 object-cover rounded-full outline-dashed outline-offset-4 w-full' src={hero1} alt="kid smiling" />
+                        <img className='aspect-3/4 rounded-full outline-dashed outline-offset-4 object-cover w-full' src={hero2} alt="kid smiling" />
                     </div>
                     <div className='flex flex-col gap-8 xl:gap-9 justify-center'>
-                        <div className='aspect-square overflow-hidden rounded-full outline-dashed outline-offset-4'>
-                            <img className='object-cover object-center h-full w-full' src={hero3} alt="kid smiling" />
-                        </div>
-                        <div className='aspect-3/7 overflow-hidden rounded-full outline-dashed outline-offset-4'>
-                            <img className='object-cover object-center h-full w-full' src={hero4} alt="kid smiling" />
-                        </div>
+                        <img className='aspect-square rounded-full outline-dashed outline-offset-4 object-cover w-full' src={hero3} alt="kid smiling" />
+                        <img className='aspect-3/7 rounded-full outline-dashed outline-offset-4 object-cover w-full' src={hero4} alt="kid smiling" />
                     </div>
                     <div className='flex flex-col justify-center'>
-                        <div className='aspect-3/7 overflow-hidden rounded-full outline-dashed outline-offset-4'>
-                            <img className='object-cover object-center h-full w-full' src={hero5} alt="kid smiling" />
-                        </div>
+                        <img className='aspect-3/7 rounded-full outline-dashed outline-offset-4 object-cover w-full' src={hero5} alt="kid smiling" />
                     </div>
                 </div>
             </section>

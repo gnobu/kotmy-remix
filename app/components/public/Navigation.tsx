@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { Link, NavLink } from '@remix-run/react'
 import Button from '../reusables/Button'
 import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
 import { logo } from '~/assets/images'
+import MobileNavigation from './MobileNavigation'
 
 export default function Navigation() {
+    const [showNav, setShowNav] = useState(false)
     return (
         <header className='flex justify-between items-center wrapper py-5'>
             <Link to={'/'}>
@@ -19,7 +22,13 @@ export default function Navigation() {
                 </ul>
                 <Button element='a' href={'/'}>Join Now</Button>
             </nav>
-            <Svg src={icons.hamburgerIcon} width={50} className='sm:hidden' />
+            <button
+                onClick={() => { setShowNav(true) }}
+                className="sm:hidden flex items-center justify-center rounded p-2 px-1 hover:outline outline-primary"
+            >
+                <Svg src={icons.hamburgerIcon} width={40} height={24} />
+            </button>
+            <MobileNavigation onClose={() => { setShowNav(false) }} show={showNav} />
         </header>
     )
 }

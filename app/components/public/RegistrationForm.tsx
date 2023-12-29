@@ -20,7 +20,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit?: () => void }
             </div>
             <div className="grid gap-6 lg:grid-cols-2">
                 <FormControl as='input' type='date' labelText='Date of Birth' id='state' name='state'
-                    min={new Date().toISOString().split("T")[0]}
+                    placeholder='mm/dd/yyyy' min={new Date().toISOString().split("T")[0]}
                 />
                 <Select label='Gender'>
                     <option defaultValue={''}>Gender</option>

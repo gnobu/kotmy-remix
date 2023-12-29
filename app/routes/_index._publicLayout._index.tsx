@@ -27,8 +27,8 @@ export default function LandingPage() {
                     </h1>
                     <p className='text-xl'>Join our monthly/yearly photo contests open to kids, both male and female aged 0-14 years and discover a world of imagination and inspiration.</p>
                     <div className='flex gap-4 flex-wrap'>
-                        <Button element='button'>Join Now</Button>
-                        <Button element='button' variant='outline'>Explore Contests</Button>
+                        <Button element='button' className='w-full sm:w-auto'>Join Now</Button>
+                        <Button element='button' className='w-full sm:w-auto' variant='outline'>Explore Contests</Button>
                     </div>
                 </div>
                 <div className='grid grid-cols-3 gap-8 xl:gap-9 w-full'>

@@ -36,9 +36,9 @@ export default function LandingPage() {
                         <div className='aspect-3/7 overflow-hidden rounded-full outline-dashed outline-offset-4'>
                             <img className='object-cover object-center h-full w-full' src={hero1} alt="kid smiling" />
                         </div>
-                        <div className='aspect-3/4 grow overflow-hidden rounded-full outline-dashed outline-offset-4'>
+                        {/* <div className='aspect-3/4 grow overflow-hidden rounded-full outline-dashed outline-offset-4'>
                             <img className='object-cover object-center h-full w-full' src={hero2} alt="kid smiling" />
-                        </div>
+                        </div> */}
                     </div>
                     <div className='flex flex-col gap-8 xl:gap-9 justify-center'>
                         <div className='aspect-square overflow-hidden rounded-full outline-dashed outline-offset-4'>

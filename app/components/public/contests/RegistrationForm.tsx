@@ -1,12 +1,12 @@
 import { Form } from '@remix-run/react'
-import FormControl from '../reusables/FormControl'
-import Select from '../reusables/Select'
-import Button from '../reusables/Button'
+import FormControl from '../../reusables/FormControl'
+import Select from '../../reusables/Select'
+import Button from '../../reusables/Button'
 import DragnDrop from './DragnDrop'
 
 export default function RegistrationForm({ onSubmit }: { onSubmit?: () => void }) {
     return (
-        <Form className='bg-secondary p-10 sm:rounded-3xl flex flex-col w-full max-w-xl gap-6'>
+        <Form className='bg-secondary p-[5%] sm:p-10 sm:rounded-3xl flex flex-col w-full max-w-xl gap-6'>
             <p className='text-2xl font-satoshi-bold'>
                 Participate by filling in your basic information below and clicking 'Submit'.
             </p>
@@ -20,7 +20,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit?: () => void }
             </div>
             <div className="grid gap-6 lg:grid-cols-2">
                 <FormControl as='input' type='date' labelText='Date of Birth' id='state' name='state'
-                    placeholder='mm/dd/yyyy' min={new Date().toISOString().split("T")[0]}
+                    placeholder='dd/mm/yyyy' max={new Date().toISOString().split("T")[0]}
                 />
                 <Select label='Gender'>
                     <option defaultValue={''}>Gender</option>

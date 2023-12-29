@@ -1,6 +1,6 @@
 // import { useState } from "react"
 import { FileUploader } from "react-drag-drop-files"
-import Svg from "../reusables/Svg"
+import Svg from "../../reusables/Svg"
 import { icons } from "~/assets/icons"
 
 const fileTypes = ["JPG", "PNG"]

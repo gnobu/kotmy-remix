@@ -1,4 +1,4 @@
-import StatusTag from "../reusables/StatusTag";
+import StatusTag from "../../reusables/StatusTag";
 
 const tnc = [
     'To be eligible for this Competition, an individual must: be a legal resident of Nigeria and the age of maturity in the province of Nigeria - 18 years and above; and must be a parent, related guardian or sibling to the competing kid.',

@@ -7,9 +7,9 @@ import { logo } from '~/assets/images'
 export default function Navigation() {
     return (
         <header className='flex justify-between items-center wrapper py-5'>
-            <span className='text-2xl font-black'><Link to={'/'}>
-                <img src={logo} alt="KOTMY" />
-            </Link></span>
+            <Link to={'/'}>
+                <img src={logo} alt="KOTMY" className='sm:w-16' />
+            </Link>
             <nav className='hidden md:flex gap-16 items-center'>
                 <ul className='flex gap-6 text-xl font-bold'>
                     <li><NavLink to="/contests" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Contests</NavLink></li>

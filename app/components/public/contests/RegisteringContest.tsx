@@ -20,7 +20,7 @@ export default function RegisteringContest({ contest }: { contest: Contest }) {
                 </div>
                 <div className="flex flex-col items-center gap-2">
                     <p className="text-xl font-satoshi-bold">Start Date - End Date</p>
-                    <span className="p-4 rounded-full border border-primary bg-secondary flex items-center gap-2 whitespace-nowrap text-xl font-satoshi-bold">
+                    <span className="p-4 rounded-full border border-primary bg-secondary flex items-center gap-2 whitespace-nowrap sm:text-xl font-satoshi-bold">
                         <Svg src={icons.clockIcon} />
                         Registration ends November 7
                     </span>

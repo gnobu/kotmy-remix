@@ -6,7 +6,7 @@ import DragnDrop from './DragnDrop'
 
 export default function RegistrationForm({ onSubmit }: { onSubmit?: () => void }) {
     return (
-        <Form className='bg-secondary p-10 sm:rounded-3xl flex flex-col max-w-xl gap-6'>
+        <Form className='bg-secondary p-10 sm:rounded-3xl flex flex-col w-full max-w-xl gap-6'>
             <p className='text-2xl font-satoshi-bold'>
                 Participate by filling in your basic information below and clicking 'Submit'.
             </p>

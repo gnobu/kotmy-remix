@@ -17,4 +17,7 @@
     .progressBar {
         --progress: 0%;
     }
+    .bg-pattern {
+        background-image: url('./assets/images/bg-pattern.png');
+    }
 }

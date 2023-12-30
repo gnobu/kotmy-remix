@@ -1,0 +1,28 @@
+.carousel-container {
+    padding-block: 8px;
+    overflow: hidden;
+}
+
+.carousel-track {
+    animation: 10s slide infinite linear;
+    white-space: nowrap;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-card {
+    display: inline-block;
+    margin-inline: 6px;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}

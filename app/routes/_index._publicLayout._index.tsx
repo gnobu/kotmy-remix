@@ -4,15 +4,11 @@ import Button from '~/components/reusables/Button'
 import Svg from '~/components/reusables/Svg'
 import {
     birthdayPresent, hero1, hero2, hero3,
-    hero4, hero5, sponsorLogo, underline
+    hero4, hero5, underline
 } from '~/assets/images'
 import { icons } from '~/assets/icons'
 import { contests, whyUsData } from '~/lib/data/landingPage.data'
-// import Carousel from 'react-multi-carousel'
-// import "react-multi-carousel/lib/styles.css"
-// import CarouselButtonGroup from '~/components/public/landingpage/CarouselButtonGroup'
-// import { responsiveData } from '~/lib/data/carousel'
-// import ContestCarouselCard from '~/components/public/landingpage/ContestCarouselCard'
+import SponsorsSlider from '~/components/public/landingpage/SponsorsSlider'
 
 
 export default function LandingPage() {
@@ -48,15 +44,7 @@ export default function LandingPage() {
 
             <section className='wrapper py-8 md:py-16'>
                 <h2 className='font-bold text-xl mb-4'>Who supports us</h2>
-                <div className="flex gap-4 overflow-x-hidden">
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                    <img src={sponsorLogo} alt="Zendesk" />
-                </div>
+                <SponsorsSlider />
             </section>
 
             <section className='py-8 md:py-16'>

@@ -10,7 +10,7 @@ export default function MobileNavigation({ show, onClose }: { show: boolean, onC
             <header className='wrapper py-5'>
                 <div className='flex justify-between items-center' >
                     <Link to={'/'} onClick={onClose}><img src={logo} alt="KOTMY" className='sm:w-16' /></Link>
-                    <button onClick={onClose} className="flex gap-1 items-center rounded p-2 hover:outline outline-primary">
+                    <button onClick={onClose} title='close menu' className="flex gap-1 items-center rounded p-2 hover:outline outline-primary">
                         <Svg src={icons.closeIcon} width={24} height={24} className='sm:hidden' />
                     </button>
                 </div >

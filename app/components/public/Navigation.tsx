@@ -24,6 +24,7 @@ export default function Navigation() {
             </nav>
             <button
                 onClick={() => { setShowNav(true) }}
+                title='hamburger'
                 className="sm:hidden flex items-center justify-center rounded p-2 px-1 hover:outline outline-primary"
             >
                 <Svg src={icons.hamburgerIcon} width={40} height={24} />

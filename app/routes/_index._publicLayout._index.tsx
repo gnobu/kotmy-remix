@@ -2,13 +2,14 @@ import ContactForm from '~/components/public/landingpage/ContactForm'
 import WhyCard from '~/components/public/landingpage/WhyCard'
 import Button from '~/components/reusables/Button'
 import Svg from '~/components/reusables/Svg'
-import {
-    birthdayPresent, hero1, hero2, hero3,
-    hero4, hero5, underline
-} from '~/assets/images'
 import { icons } from '~/assets/icons'
-import { contests, whyUsData } from '~/lib/data/landingPage.data'
+import { whyUsData } from '~/lib/data/landingPage.data'
 import SponsorsSlider from '~/components/public/landingpage/SponsorsSlider'
+import ContestantSlider from '~/components/public/ContestantSlider'
+import {
+    birthdayPresent, hero1, hero2,
+    hero3, hero4, hero5, underline
+} from '~/assets/images'
 
 
 export default function LandingPage() {
@@ -88,6 +89,10 @@ export default function LandingPage() {
                         <WhyCard key={item.title} backgroundColor={item.bg} icon={item.icon} title={item.title} subtext={item.subtext} />
                     ))}
                 </div>
+            </section>
+
+            <section className='sm:py-8 md:py-16'>
+                <ContestantSlider contestants={[{ id: 'sdjc', image: hero1 }, { id: 'adcn', image: hero2 }, { id: 'kjsd', image: hero3 }]} />
             </section>
 
             <section className='sm:py-8 md:py-16'>

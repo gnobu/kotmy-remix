@@ -5,6 +5,8 @@ import ContestGuidelines from './ContestGuidelines'
 import RegistrationSuccess from './RegistrationSuccess'
 import RegistrationForm from './RegistrationForm'
 import { Contest } from '~/lib/types/contest.interface'
+import ContestantSlider from '../ContestantSlider'
+import { hero1, hero2, hero3 } from '~/assets/images'
 
 export default function RegisteringContest({ contest }: { contest: Contest }) {
     const [registered, setRegistered] = useState(false)
@@ -32,6 +34,10 @@ export default function RegisteringContest({ contest }: { contest: Contest }) {
                     <ContestGuidelines />
                     {registered ? <RegistrationSuccess /> : <RegistrationForm onSubmit={() => setRegistered(true)} />}
                 </div>
+            </section>
+            <section className='my-8 md:my-16'>
+                <h2 className='text-2xl sm:text-[40px] leading-snug font-satoshi-black max-w-lg text-center mx-auto my-10'>Over 500 registered participants and counting</h2>
+                <ContestantSlider contestants={[{ id: 'sdjc', image: hero1 }, { id: 'adcn', image: hero2 }, { id: 'kjsd', image: hero3 }]} />
             </section>
         </>
     )

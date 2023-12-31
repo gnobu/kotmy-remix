@@ -6,18 +6,24 @@
 }
 
 .carousel-track {
-    animation: var(--timing) slide infinite linear;
     width: max-content;
     display: inline-block;
 }
 
-.carousel-track:hover {
+.carousel-container:hover .carousel-track {
     animation-play-state: paused;
 }
 
 .carousel-card {
     display: inline-block;
-    margin-inline: 6px;
+}
+
+.slide {
+    animation: var(--timing) slide infinite linear;
+}
+
+.slide-reverse {
+    animation: var(--timing) slide-reverse infinite linear;
 }
 
 @keyframes slide {
@@ -27,5 +33,15 @@
 
     to {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes slide-reverse {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
     }
 }

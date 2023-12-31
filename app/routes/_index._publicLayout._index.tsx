@@ -91,11 +91,11 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            <section className='sm:py-8 md:py-16'>
+            <section className='py-8 md:py-16'>
                 <ContestantSlider contestants={[{ id: 'sdjc', image: hero1 }, { id: 'adcn', image: hero2 }, { id: 'kjsd', image: hero3 }]} />
             </section>
 
-            <section className='sm:py-8 md:py-16'>
+            <section className='pt-4 sm:py-8 md:py-16'>
                 <div className='sm:wrapper bg-[#817EFB] bg-pattern bg-cover bg-left text-secondary md:px-24 py-16 md:py-28 flex flex-col md:flex-row justify-between items-center gap-16 sm:rounded-3xl'>
                     <div className="wrapper">
                         <h2 className='text-2xl sm:text-[40px] font-satoshi-black mb-6 leading-snug'>

@@ -36,7 +36,7 @@ export default function RegisteringContest({ contest }: { contest: Contest }) {
                 </div>
             </section>
             <section className='my-8 md:my-16'>
-                <h2 className='text-2xl sm:text-[40px] leading-snug font-satoshi-black max-w-lg text-center mx-auto my-10'>Over 500 registered participants and counting</h2>
+                <h2 className='text-2xl sm:text-[40px] leading-snug font-satoshi-black w-4/5 max-w-lg text-center mx-auto my-10'>Over 500 registered participants and counting</h2>
                 <ContestantSlider contestants={[{ id: 'sdjc', image: hero1 }, { id: 'adcn', image: hero2 }, { id: 'kjsd', image: hero3 }]} />
             </section>
         </>

@@ -1,10 +1,11 @@
-import { Link, NavLink } from '@remix-run/react'
+import { Link, NavLink, useLocation } from '@remix-run/react'
 import { logo } from '~/assets/images'
 import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
 import Button from '../reusables/Button'
 
 export default function MobileNavigation({ show, onClose }: { show: boolean, onClose: () => void }) {
+    const { pathname } = useLocation()
     return (show
         ? <div className="sm:hidden fixed top-0 left-0 bg-primary w-full h-screen z-10 flex flex-col justify-between">
             <header className='wrapper py-5'>
@@ -16,9 +17,15 @@ export default function MobileNavigation({ show, onClose }: { show: boolean, onC
                 </div >
                 <nav className=''>
                     <ul className='grid gap-6 my-12 text-xl font-bold'>
-                        <li><NavLink onClick={onClose} to="/contests" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Contests</NavLink></li>
-                        <li><NavLink onClick={onClose} to="/winners" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Winners</NavLink></li>
-                        <li><NavLink onClick={onClose} to="/results" className={({ isActive }) => isActive ? 'activeNav text-accent' : ''}>Results</NavLink></li>
+                        <li><NavLink onClick={onClose} to="/contests" className={({ isActive }) => isActive ? 'text-accent flex gap-2 items-center' : ''}>
+                            {pathname.includes('/contests') ? <Svg src={icons.activeDotIcon} width={'.5em'} /> : null} Contests
+                        </NavLink></li>
+                        <li><NavLink onClick={onClose} to="/winners" className={({ isActive }) => isActive ? 'text-accent flex gap-2 items-center' : ''}>
+                            {pathname.includes('/winners') ? <Svg src={icons.activeDotIcon} width={'.5em'} /> : null} Winners
+                        </NavLink></li>
+                        <li><NavLink onClick={onClose} to="/results" className={({ isActive }) => isActive ? 'text-accent flex gap-2 items-center' : ''}>
+                            {pathname.includes('/results') ? <Svg src={icons.activeDotIcon} width={'.5em'} /> : null} Results
+                        </NavLink></li>
                         <li><NavLink onClick={onClose} to="/#contact" className=''>Contact</NavLink></li>
                     </ul>
                     <Button element='a' onClick={onClose} href={'/contests'} className='block w-full sm:w-auto'>Join Now</Button>

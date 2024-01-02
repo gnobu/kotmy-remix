@@ -14,7 +14,7 @@ const notes = [
 
 export default function ContestGuidelines() {
     return (
-        <div className='wrapper sm:max-w-lg'>
+        <div className='wrapper sm:max-w-lg sm:mx-0'>
             <div className="mb-6">
                 <span className="block font-satoshi-bold mb-1">Status</span>
                 <StatusTag status={'registering'} />

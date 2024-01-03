@@ -10,10 +10,8 @@ export default function ContestantCard({ contestant }: { contestant: Contestant 
                 <span className='block font-black uppercase mb-4'>{contestant.fullName}</span>
                 <div className="grid grid-cols-2 gap-4">
                     <SocialLink type={contestant.votes.social_media.type} url={contestant.votes.social_media.url} />
-                    {/* <SocialLink type='tally' url='.' />
-                    <SocialLink type='givaah' url='.' /> */}
-                    <SocialLink type='instagram' url='.' />
-                    <SocialLink type='twitter' url='.' />
+                    <SocialLink type='tally' url='.' />
+                    <SocialLink type='givaah' url='.' />
                 </div>
             </div>
         </article>

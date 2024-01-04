@@ -10,9 +10,11 @@ import hero5 from './hero-5.jpg'
 import logo from './logo.png'
 import sponsorLogo from './sponsor_logo.png'
 import underline from './underline.png'
+import adminAvatar from './admin-avatar.png'
 
 export {
     logo, hero1, hero2, hero3, hero4, hero5,
     sponsorLogo,  birthdayPresent, underline,
-    contestImage1, contestImage2, bgPattern
+    contestImage1, contestImage2, bgPattern,
+    adminAvatar,
 }

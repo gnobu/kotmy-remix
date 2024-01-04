@@ -17,6 +17,7 @@ export default {
       colors: {
         primary: '#262626',
         secondary: '#E6E6FA',
+        'admin-pry': '#5F6D7E',
         accent: '#6246EA',
         'success-700': '#2D8A39',
         'success-500': '#EBFAEB',
@@ -29,6 +30,7 @@ export default {
       backgroundColor: {
         primary: '#DFE3FF',
         secondary: '#F5F6FD',
+        tertiary: '#FAFBFC',
         accent: '#6246EA',
         facebookBG: '#F5FAFF',
         twitterBG: '#F6F6F6',

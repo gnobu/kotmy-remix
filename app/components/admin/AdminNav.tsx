@@ -1,11 +1,10 @@
-import { Link, useLocation } from '@remix-run/react'
+import { NavLink, useLocation } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import Svg from '../reusables/Svg'
-import cn from 'classnames'
 import Select from '../reusables/Select'
 
 const navs = [
-    { label: 'Home', icon: icons.adminHomeIcon, url: '/admin' },
+    { label: 'Home', icon: icons.adminHomeIcon, url: '/admin/overview' },
     { label: 'Admin Accounts', icon: icons.adminUsersIcon, url: '/admin/accounts' },
     { label: 'Contests', icon: icons.adminContestIcon, url: '/admin/contests' },
     { label: 'Tournaments', icon: icons.adminTournamentIcon, url: '/admin/tournaments' },
@@ -20,13 +19,11 @@ export default function AdminNavigation({ show }: { show: boolean }) {
                 <span className='inline-block mb-2 px-6 py-3 font-satoshi-bold'>Navigation Menu</span>
                 <ul className='grid gap-2 text-xl font-bold'>
                     {navs.map(navItem => (
-                        <li key={navItem.label}><Link to={navItem.url}
-                            className={cn('flex gap-3 items-center px-6 py-3 font-semibold border-l-4 hover:bg-[#EEF0FF]', {
-                                'text-accent bg-[#EEF0FF] border-accent': pathname.includes(navItem.url),
-                                'border-transparent': !pathname.includes(navItem.url),
-                            })}>
+                        <li key={navItem.label}><NavLink to={navItem.url}
+                            className={({ isActive }) => `${isActive ? 'text-accent bg-[#EEF0FF] border-accent' : 'border-transparent'} flex gap-3 items-center px-6 py-3 font-semibold border-l-4 hover:bg-[#EEF0FF]`}
+                        >
                             <Svg src={navItem.icon} />{navItem.label}
-                        </Link></li>
+                        </NavLink></li>
                     ))}
                 </ul>
             </nav>
@@ -41,7 +38,7 @@ export default function AdminNavigation({ show }: { show: boolean }) {
                     <option value="dark">Dark</option>
                 </Select>
             </aside>
-        </header>
+        </header >
         : null
     )
 }

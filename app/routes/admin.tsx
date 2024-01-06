@@ -14,9 +14,9 @@ export const meta: MetaFunction = () => {
 export default function AdminLayout() {
     const [showNav, setShowNav] = useState(true)
     return (
-        <div className="h-screen overflow-hidden bg-tertiary flex flex-col text-admin-pry">
+        <div className="bg-tertiary text-admin-pry">
             <PrimaryHeader toggleNav={() => { setShowNav(prev => !prev) }} />
-            <div className="flex h-full">
+            <div className="flex h-[calc(100vh-82.5px)]">
                 <AdminNavigation show={showNav} />
                 <Outlet />
             </div>

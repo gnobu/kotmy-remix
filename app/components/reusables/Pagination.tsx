@@ -1,9 +1,9 @@
 import Svg from './Svg'
 import { icons } from '~/assets/icons'
 
-export default function Pagination() {
+export default function Pagination({ className = '' }: { className?: string }) {
     return (
-        <div className="flex gap-6 md:gap-8 justify-center items-center p-6 font-satoshi-bold">
+        <div className={`flex gap-6 md:gap-8 justify-center items-center font-satoshi-bold ${className}`}>
             <button className="flex gap-1 items-center rounded py-1 px-2 hover:outline outline-primary">
                 <Svg src={icons.arrowPrevIcon} /> Prev
             </button>

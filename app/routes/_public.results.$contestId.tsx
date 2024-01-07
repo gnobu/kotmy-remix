@@ -96,7 +96,7 @@ export default function ContestResult() {
                             </tbody>
                         </table>
                     </div>
-                    <Pagination />
+                    <Pagination className="p-6" />
                 </div>
             </section>
         </main>

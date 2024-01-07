@@ -62,7 +62,7 @@ export default function ContestPage() {
                     </div>
                     <ScoreboardTable data={scoreboardData} />
                     <MobileScoreboard data={scoreboardData} />
-                    <Pagination />
+                    <Pagination className="p-6" />
                 </div>
             </section>
         </main>

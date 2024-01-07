@@ -2,7 +2,7 @@ import cn from "classnames"
 
 export default function ToggleBtn({ onClick, on }: { on: boolean, onClick?: () => void }) {
     return (
-        <button onClick={onClick} className={cn('rounded-full p-0.5 w-9 flex items-center', {
+        <button onClick={onClick} className={cn('rounded-xl p-0.5 w-[34px] flex items-center', {
             'bg-accent justify-end': on,
             'bg-[#DAE0E6]': !on
         })}>

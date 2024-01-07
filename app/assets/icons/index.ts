@@ -1,3 +1,4 @@
+import add from './add.svg'
 import hamburger from './hamburger.svg'
 import adminHamburger from './admin-hamburger.svg'
 import facebook from './facebook.svg'
@@ -31,8 +32,11 @@ import adminFinance from './admin-finance.svg'
 import theme from './theme.svg'
 import profile from './profile.svg'
 import signout from './signout.svg'
+import edit from './edit.svg'
+import trash from './trash.svg'
 
 export const icons = {
+    addIcon: `${add}#img`,
     hamburgerIcon: `${hamburger}#img`,
     adminHamburgerIcon: `${adminHamburger}#img`,
     facebookIcon: `${facebook}#img`,
@@ -66,4 +70,6 @@ export const icons = {
     themeIcon: `${theme}#img`,
     profileIcon: `${profile}#img`,
     signoutIcon: `${signout}#img`,
+    editIcon: `${edit}#img`,
+    trashIcon: `${trash}#img`,
 }

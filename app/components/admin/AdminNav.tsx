@@ -17,7 +17,7 @@ export default function AdminNavigation({ show }: { show: boolean }) {
         ? <header className='bg-secondary border-r border-primary flex flex-col justify-between min-w-[280px]'>
             <nav className='py-6'>
                 <span className='inline-block mb-2 px-6 py-3 font-satoshi-bold'>Navigation Menu</span>
-                <ul className='grid gap-2 text-xl font-bold'>
+                <ul className='grid gap-2 font-bold'>
                     {navs.map(navItem => (
                         <li key={navItem.label}><NavLink to={navItem.url}
                             className={({ isActive }) => `${isActive ? 'text-accent bg-[#EEF0FF] border-accent' : 'border-transparent'} flex gap-3 items-center px-6 py-3 font-semibold border-l-4 hover:bg-[#EEF0FF]`}

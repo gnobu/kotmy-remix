@@ -11,6 +11,7 @@ export default {
         'satoshi-black': ["Satoshi-Black", "sans-serif"],
       },
       aspectRatio: {
+        '2/1': '2 / 1',
         '3/7': '3 / 7',
         '3/4': '3 / 4',
       },

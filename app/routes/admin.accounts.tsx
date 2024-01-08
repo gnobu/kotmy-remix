@@ -27,7 +27,7 @@ export default function Accounts() {
         <main className='w-full overflow-y-auto p-6'>
             <div className="flex justify-between items-center mb-16">
                 <h1 className="text-2xl font-black text-primary">Admin Accounts</h1>
-                <Cta element="a" href='add' className="flex gap-2 items-center rounded-lg px-3 py-2">
+                <Cta element="link" to='add' className="flex gap-2 items-center rounded-lg px-3 py-2">
                     <Svg src={icons.addIcon} width={'.9em'} />
                     Add User
                 </Cta>

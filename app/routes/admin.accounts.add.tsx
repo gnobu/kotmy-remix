@@ -6,9 +6,9 @@ import Select from '~/components/reusables/Select'
 import Cta from '~/components/reusables/Cta'
 import PermissionsFormControl from '~/components/admin/PermissionsFormControl'
 import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'
+import { permissions } from '~/lib/data/admin'
 
 export async function loader({ }: LoaderFunctionArgs) {
-  const permissions = ['manage_users', 'edit_content', 'edit_blog']
   return { permissions }
 }
 

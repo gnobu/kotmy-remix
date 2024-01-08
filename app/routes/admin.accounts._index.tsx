@@ -7,18 +7,11 @@ import Pagination from "~/components/reusables/Pagination"
 import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 import ToggleBtn from "~/components/reusables/ToggleBtn"
+import { adminUsers } from "~/lib/data/admin"
 
 export function loader() {
-    const tableData = [
-        { 'id': 1, 'full name': 'Admin', 'email': 'admin@gmail.com', 'username': 'admin', 'role': 'Role 1', 'access': true, },
-        { 'id': 2, 'full name': 'Nicole Clems', 'email': 'nicole@gmail.com', 'username': 'nicole', 'role': 'Role 2', 'access': false, },
-        { 'id': 3, 'full name': 'Favour Wagor', 'email': 'favour@gmail.com', 'username': 'favour', 'role': 'Role 2', 'access': true, },
-        { 'id': 4, 'full name': 'Oluchi Chinedu', 'email': 'chinedu@gmail.com', 'username': 'Oluchi', 'role': 'Role 3', 'access': false, },
-        { 'id': 5, 'full name': 'Augustine Best', 'email': 'lilklara@gmail.com', 'username': 'lilklara', 'role': 'Role 3', 'access': true, },
-        { 'id': 6, 'full name': 'Davidking Blossom', 'email': 'blossomdavid@gmail.com', 'username': 'davidking', 'role': 'Role 3', 'access': false, },
-    ]
-    const headings = ['full name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof tableData[number])[]
-    return json({ headings, tableData })
+    const headings = ['full name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof adminUsers[number])[]
+    return json({ headings, tableData: adminUsers })
 }
 
 export default function Accounts() {

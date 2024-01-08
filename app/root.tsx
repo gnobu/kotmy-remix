@@ -1,5 +1,5 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node"
 import {
   Links,
   LiveReload,
@@ -7,17 +7,26 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+  useLoaderData,
+} from "@remix-run/react"
 import globalStyles from './global.css'
 import autoplaycarouselStyles from "./autoplaycarousel.css"
+import { nickToast } from "./lib/session.server"
+import Toast from "./components/reusables/Toast"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: globalStyles },
   { rel: "stylesheet", href: autoplaycarouselStyles },
-];
+]
 
-export default function App() {
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { toast } = await nickToast({ request })
+  return { toast }
+}
+
+function Document({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <head>
@@ -27,11 +36,22 @@ export default function App() {
         <Links />
       </head>
       <body className="font-satoshi text-primary">
-        <Outlet />
+        {/* <PageTransitionProgressBar /> */}
+        {children}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
-  );
+  )
+}
+
+export default function App() {
+  const { toast } = useLoaderData<typeof loader>()
+  return (
+    <Document>
+      <Toast toast={toast} />
+      <Outlet />
+    </Document>
+  )
 }

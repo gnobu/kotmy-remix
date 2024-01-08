@@ -7,16 +7,13 @@ import Cta from '~/components/reusables/Cta'
 import PermissionsFormControl from '~/components/admin/PermissionsFormControl'
 import { ActionFunctionArgs, LoaderFunctionArgs, redirect } from '@remix-run/node'
 import { adminUsers, permissions } from '~/lib/data/admin'
-import { commitSession, getSession } from '~/sessions'
+import { setToast } from '~/lib/session.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
   const user = adminUsers.find(user => user.id == params.userId)
-  const session = await getSession(request.headers.get("Cookie"))
   if (!user) {
-    session.flash("alert", "error::Admin user not found")
-    return redirect('/admin/accounts', {
-      headers: { "Set-Cookie": await commitSession(session) }
-    })
+    const { headers } = await setToast({ request, toast: 'error::Admin user not found' })
+    return redirect('/admin/accounts', { headers })
   }
   return { permissions, user }
 }
@@ -25,7 +22,8 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
   console.log(...formData)
   console.log(formData.getAll('permission'))
-  return null
+  const { headers } = await setToast({ request, toast: 'success::User updated  successfully' })
+  return redirect('/admin/accounts', { headers })
 }
 
 export default function EditAdminUser() {

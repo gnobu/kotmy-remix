@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node"
+import { LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
 import Cta from "~/components/reusables/Cta"
@@ -8,10 +8,12 @@ import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 import ToggleBtn from "~/components/reusables/ToggleBtn"
 import { adminUsers } from "~/lib/data/admin"
+import { nickToast } from "~/lib/session.server"
 
-export function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
     const headings = ['full name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof adminUsers[number])[]
-    return json({ headings, tableData: adminUsers })
+    const { headers, toast } = await nickToast({ request })
+    return json({ headings, tableData: adminUsers }, { headers })
 }
 
 export default function Accounts() {

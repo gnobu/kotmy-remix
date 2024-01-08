@@ -1,11 +1,16 @@
 import RoundButton from '~/components/reusables/RoundButton'
-import { Form, useNavigate } from '@remix-run/react'
+import { Form, useLoaderData, useNavigate } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import FormControl from '~/components/reusables/FormControl'
 import Select from '~/components/reusables/Select'
 import Cta from '~/components/reusables/Cta'
 import PermissionsFormControl from '~/components/admin/PermissionsFormControl'
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'
+
+export async function loader({ }: LoaderFunctionArgs) {
+  const permissions = ['manage_users', 'edit_content', 'edit_blog']
+  return { permissions }
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
@@ -15,6 +20,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function AddAdminUser() {
+  const { permissions } = useLoaderData<typeof loader>()
   const navigate = useNavigate()
   return (
     <main className='w-full overflow-y-auto p-6'>
@@ -34,7 +40,7 @@ export default function AddAdminUser() {
           <option value="3">Role 3</option>
         </Select>
 
-        <PermissionsFormControl />
+        <PermissionsFormControl permissions={permissions} />
 
         <div className='flex justify-end gap-6 col-span-2'>
           <Cta element='button' type='reset' className='px-8 py-2 rounded-lg font-medium' variant='outline'>Reset</Cta>

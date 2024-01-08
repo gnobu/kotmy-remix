@@ -5,13 +5,16 @@ import { icons } from '~/assets/icons'
 import Cta from '../reusables/Cta'
 import FormControl from '../reusables/FormControl'
 
-export default function PermissionsFormControl(props: React.ComponentProps<'fieldset'>) {
+export default function PermissionsFormControl({ permissions, ...props }: { permissions: string[] } & React.ComponentProps<'fieldset'>) {
     const [open, setOpen] = useState(false)
     const fieldset = useRef<ElementRef<'fieldset'>>(null)
     function resetFieldset(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.currentTarget.form?.permission.forEach((item: HTMLInputElement) => {
             item.checked = item.defaultChecked
         })
+    }
+    function labelize(persission: string) {
+        return persission.split('_').join(' ')
     }
     return (
         <fieldset ref={fieldset} {...props} className='p-4 rounded-lg bg-transparent border border-primary col-span-2'>
@@ -26,9 +29,11 @@ export default function PermissionsFormControl(props: React.ComponentProps<'fiel
                 >Restore defaults</Cta>
             </div>
             <div className={cn("grid grid-cols-3 gap-6 my-6 mx-3", { 'hidden': !open })}>
-                <FormControl as='input' type='checkbox' name='permission' value={'manage_users'} labelText='Manage Users' labelClassNames='flex whitespace-nowrap items-center justify-between px-4' className='w-min' />
-                <FormControl as='input' type='checkbox' name='permission' value={'edit_content'} labelText='Edit Content' labelClassNames='flex whitespace-nowrap items-center justify-between px-4' className='w-min' />
-                <FormControl as='input' type='checkbox' name='permission' value={'edit_blog'} labelText='Edit Blog' labelClassNames='flex whitespace-nowrap items-center justify-between px-4' className='w-min' defaultChecked />
+                {permissions.map(permission => (
+                    <FormControl key={permission} as='input' type='checkbox' name='permission' value={permission} className='w-min'
+                        labelText={labelize(permission)} labelClassNames='flex capitalize whitespace-nowrap items-center justify-between px-4'
+                    />
+                ))}
             </div>
         </fieldset>
     )

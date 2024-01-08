@@ -1,4 +1,4 @@
-import RoundButton from '~/components/reusables/RoundButton'
+import RoundCta from '~/components/reusables/RoundCta'
 import { Form, useLoaderData, useNavigate } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import FormControl from '~/components/reusables/FormControl'
@@ -25,7 +25,7 @@ export default function AddAdminUser() {
   return (
     <main className='w-full overflow-y-auto p-6'>
       <div className="flex items-center mb-16 gap-4">
-        <RoundButton icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
+        <RoundCta icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
         <h1 className="text-2xl font-black text-primary">Add User</h1>
       </div>
       <Form className='wrapper grid grid-cols-2 gap-6' method='post'>

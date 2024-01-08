@@ -4,7 +4,7 @@ import { icons } from "~/assets/icons"
 import Cta from "~/components/reusables/Cta"
 import FormControl from "~/components/reusables/FormControl"
 import Pagination from "~/components/reusables/Pagination"
-import RoundButton from "~/components/reusables/RoundButton"
+import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 import ToggleBtn from "~/components/reusables/ToggleBtn"
 
@@ -60,9 +60,9 @@ export default function Accounts() {
                                         : <td className="p-3" key={heading}>{user[heading]}</td>
                                 })}
                                 <td className="p-3">
-                                    <div className="grid grid-cols-2 gap-1 items-center">
-                                        <RoundButton icon={icons.editIcon} className="border-[#262626] bg-[#F7F7F8] text-primary" />
-                                        <RoundButton icon={icons.trashIcon} className="border-red-500 bg-red-50 text-red-500" />
+                                    <div className="flex gap-4 items-center">
+                                        <RoundCta icon={icons.editIcon} element="link" to={user.id} className="border-[#262626] bg-[#F7F7F8] text-primary" />
+                                        <RoundCta icon={icons.trashIcon} className="border-red-500 bg-red-50 text-red-500" />
                                     </div>
                                 </td>
                             </tr>

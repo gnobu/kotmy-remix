@@ -5,7 +5,7 @@ import { icons } from '~/assets/icons'
 import Cta from '../reusables/Cta'
 import FormControl from '../reusables/FormControl'
 
-export default function PermissionsFormControl({ permissions, ...props }: { permissions: string[] } & React.ComponentProps<'fieldset'>) {
+export default function PermissionsFormControl({ permissions, defaultPermissions, ...props }: { permissions: string[], defaultPermissions?: string[] } & React.ComponentProps<'fieldset'>) {
     const [open, setOpen] = useState(false)
     const fieldset = useRef<ElementRef<'fieldset'>>(null)
     function resetFieldset(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -31,7 +31,8 @@ export default function PermissionsFormControl({ permissions, ...props }: { perm
             <div className={cn("grid grid-cols-3 gap-6 my-6 mx-3", { 'hidden': !open })}>
                 {permissions.map(permission => (
                     <FormControl key={permission} as='input' type='checkbox' name='permission' value={permission} className='w-min'
-                        labelText={labelize(permission)} labelClassNames='flex capitalize whitespace-nowrap items-center justify-between px-4'
+                        defaultChecked={defaultPermissions?.includes(permission)} labelText={labelize(permission)}
+                        labelClassNames='flex capitalize whitespace-nowrap items-center justify-between px-4'
                     />
                 ))}
             </div>

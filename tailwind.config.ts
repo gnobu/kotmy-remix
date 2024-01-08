@@ -53,6 +53,7 @@ export default {
       borderColor: {
         primary: '#C0BFF3',
         secondary: '#EAEBF0',
+        disabled: '#DAE0E6'
       },
       outlineColor: {
         primary: '#C0BFF3',

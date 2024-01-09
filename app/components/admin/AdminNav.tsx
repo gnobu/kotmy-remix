@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from '@remix-run/react'
+import { NavLink } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import Svg from '../reusables/Svg'
 import Select from '../reusables/Select'
@@ -12,7 +12,6 @@ const navs = [
 ]
 
 export default function AdminNavigation({ show }: { show: boolean }) {
-    const { pathname } = useLocation()
     return (show
         ? <header className='bg-secondary border-r border-primary flex flex-col justify-between min-w-[280px]'>
             <nav className='py-6'>

@@ -34,6 +34,7 @@ import profile from './profile.svg'
 import signout from './signout.svg'
 import edit from './edit.svg'
 import trash from './trash.svg'
+import options from './options.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -72,4 +73,5 @@ export const icons = {
     signoutIcon: `${signout}#img`,
     editIcon: `${edit}#img`,
     trashIcon: `${trash}#img`,
+    optionsIcon: `${options}#img`,
 }

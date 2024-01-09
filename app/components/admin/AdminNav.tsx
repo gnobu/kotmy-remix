@@ -6,8 +6,8 @@ import Select from '../reusables/Select'
 const navs = [
     { label: 'Home', icon: icons.adminHomeIcon, url: '/admin/overview' },
     { label: 'Admin Accounts', icon: icons.adminUsersIcon, url: '/admin/accounts' },
-    { label: 'Contests', icon: icons.adminContestIcon, url: '/admin/contests' },
     { label: 'Tournaments', icon: icons.adminTournamentIcon, url: '/admin/tournaments' },
+    { label: 'Contests', icon: icons.adminContestIcon, url: '/admin/contests' },
     { label: 'Finances', icon: icons.adminFinanceIcon, url: '/admin/finances' },
 ]
 

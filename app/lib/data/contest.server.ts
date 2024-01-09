@@ -104,6 +104,10 @@ export async function getTournaments(): Promise<Tournament[]> {
     return tournaments
 }
 
+export async function getTournament(id: string): Promise<Tournament | null> {
+    return tournaments.find(tournament => tournament.id === id) ?? null
+}
+
 export async function getTournamentsWithContests(): Promise<TournamentWContest[]> {
     return tournaments.map(tournament => ({
         ...tournament,

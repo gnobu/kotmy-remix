@@ -1,7 +1,7 @@
 import { NavLink } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import Svg from '../reusables/Svg'
-import Select from '../reusables/Select'
+import Toggletip from '../reusables/ToggleTip'
 
 const navs = [
     { label: 'Home', icon: icons.adminHomeIcon, url: '/admin/overview' },
@@ -12,6 +12,11 @@ const navs = [
 ]
 
 export default function AdminNavigation({ show }: { show: boolean }) {
+    const mainComponent = (
+        <div className="flex justify-between items-center border border-primary rounded-lg p-2 text-sm cursor-pointer line-clamp-1 hover:outline outline-1 outline-primary">
+            System default
+            <Svg src={icons.arrowDownIcon} />
+        </div>)
     return (show
         ? <header className='bg-secondary border-r border-primary flex flex-col justify-between min-w-[280px]'>
             <nav className='py-6'>
@@ -31,11 +36,12 @@ export default function AdminNavigation({ show }: { show: boolean }) {
                     <Svg src={icons.themeIcon} />
                     Theme
                 </span>
-                <Select>
-                    <option value="default">System default</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </Select>
+                <Toggletip mainComponent={mainComponent}
+                    childContainerClass="bottom-[110%] left-0 bg-tertiary p-2 border border-primary text-xs whitespace-nowrap">
+                    <span className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'>System default</span>
+                    <span className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'>Light</span>
+                    <span className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'>Dark</span>
+                </Toggletip>
             </aside>
         </header >
         : null

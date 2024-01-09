@@ -5,9 +5,11 @@ import TournamentCard from "~/components/admin/tournament/TournamentCard"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
 import { getTournamentsWithContests } from "~/lib/data/contest.server"
+import { nickToast } from "~/lib/session.server"
 
-export async function loader({ }: LoaderFunctionArgs) {
-    return json({ tournaments: await getTournamentsWithContests() })
+export async function loader({ request }: LoaderFunctionArgs) {
+    const { headers } = await nickToast({ request })
+    return json({ tournaments: await getTournamentsWithContests() }, { headers })
 }
 
 export default function Tournaments() {

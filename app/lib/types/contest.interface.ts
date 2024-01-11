@@ -19,4 +19,6 @@ export type Contest = {
     tournamentId: string;
     contestId: string;
     status: Status;
+    start_date: string;
+    end_date: string;
 }

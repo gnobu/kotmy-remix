@@ -19,6 +19,7 @@ export default function Cta({ variant = 'solid', kind = 'primary', ...props }: C
             'bg-gray-300 border-disabled': variant === 'solid' && props.disabled,
             'text-accent border-accent border-2': variant === 'outline',
             'border-red-400 text-red-400': kind === 'danger' && !props.disabled,
+            'border-none': variant === 'ghost'
         })}>{props.children}</button>
     }
     return <Link {...props} className={cn(`border whitespace-nowrap text-center ${props.className}`, {

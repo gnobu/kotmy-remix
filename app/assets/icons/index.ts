@@ -35,6 +35,10 @@ import signout from './signout.svg'
 import edit from './edit.svg'
 import trash from './trash.svg'
 import options from './options.svg'
+import contestants from './contestants.svg'
+import view from './view.svg'
+import doubleArrowRight from './double-arrow-right.svg'
+import arrowUpDown from './arrow-up-down.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -74,4 +78,8 @@ export const icons = {
     editIcon: `${edit}#img`,
     trashIcon: `${trash}#img`,
     optionsIcon: `${options}#img`,
+    contestantsIcon: `${contestants}#img`,
+    viewIcon: `${view}#img`,
+    doubleArrowRightIcon: `${doubleArrowRight}#img`,
+    arrowUpDownIcon: `${arrowUpDown}#img`,
 }

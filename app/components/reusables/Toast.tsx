@@ -1,4 +1,4 @@
-import { Alert, Message, ToastMessage } from "~/lib/types/toast"
+import { Alert, Message, SplitToast, ToastMessage } from "~/lib/types/toast"
 import Svg from "./Svg"
 import { icons } from "~/assets/icons"
 import cn from "classnames"
@@ -23,7 +23,7 @@ export default function Toast({ toast }: { toast?: ToastMessage }) {
 
     if (!toast) return null
     
-    const [type, message] = toast.split('::') as [Alert, Message]
+    const [type, message] = toast.split('::') as SplitToast<typeof toast>
     return (
         <aside className={cn("absolute top-20 right-6 border-2 rounded-lg p-6 flex items-center gap-4", {
             'border-success-700 bg-success-500': type === 'success',

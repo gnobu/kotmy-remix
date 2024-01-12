@@ -1,19 +1,19 @@
 import { ColumnDef } from '@tanstack/react-table'
 import DataTable from '~/components/reusables/DataTable'
 import StatusTag from '~/components/reusables/StatusTag'
-import { Contest } from '~/lib/types/contest.interface'
+import { ContestWStage } from '~/lib/types/contest.interface'
 import ContestTableActions from './ContestTableActions'
 import Pagination from '~/components/reusables/Pagination'
-import CollapsedRow from './CollapsedRow'
+import EditStageForm from './EditStageForm'
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
 
-const columns: ColumnDef<Contest>[] = [
+const columns: ColumnDef<ContestWStage>[] = [
     {
         id: 'expander',
         header: () => null,
         cell: ({ row }) => (row.getCanExpand()
-            ? <button onClick={row.getToggleExpandedHandler()}>
+            ? <button title='expand row' onClick={row.getToggleExpandedHandler()}>
                 <Svg src={icons.arrowDownIcon} className={row.getIsExpanded() ? 'rotate-180' : ''} />
             </button>
             : null
@@ -46,11 +46,11 @@ const columns: ColumnDef<Contest>[] = [
     },
 ]
 
-export default function ContestTable({ data }: { data: Contest[] }) {
+export default function ContestTable({ data }: { data: ContestWStage[] }) {
     return (
         <>
             <DataTable data={data} columns={columns} sortableColumns={['contestId', 'title', 'status', 'timeline']}
-                expandRows getRowCanExpand={() => true} renderSubComponent={CollapsedRow}
+                expandRows getRowCanExpand={() => true} renderSubComponent={EditStageForm}
                 className='text-sm' />
             <div className="flex justify-between items-center my-4">
                 <label className="flex gap-2">Rows per page

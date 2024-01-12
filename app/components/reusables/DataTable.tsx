@@ -78,14 +78,12 @@ export default function DataTable<TData, TValue>({
                                     </td>
                                 })}
                             </tr>
-                            {(expandRows && row.getIsExpanded()) && (
-                                <tr>
-                                    {/* 2nd row is a custom 1 cell row */}
-                                    <td colSpan={row.getVisibleCells().length}>
-                                        {renderSubComponent({ row })}
-                                    </td>
-                                </tr>
-                            )}
+                            <tr className={(expandRows && row.getIsExpanded()) ? '' : 'hidden'}>
+                                {/* 2nd row is a custom 1 cell row */}
+                                <td colSpan={row.getVisibleCells().length}>
+                                    {expandRows && renderSubComponent({ row })}
+                                </td>
+                            </tr>
                         </React.Fragment>
                     ))
                     : <tr className="border-b border-secondary">

@@ -6,12 +6,12 @@ import Cta from '~/components/reusables/Cta'
 import RoundCta from '~/components/reusables/RoundCta'
 import Svg from '~/components/reusables/Svg'
 import Toggletip from '~/components/reusables/ToggleTip'
-import { getContestsInTournament, getTournament } from '~/lib/data/contest.server'
+import { getContestsInTournamentWStages, getTournament } from '~/lib/data/contest.server'
 import { setToast } from '~/lib/session.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const tournament = await getTournament(params.ID!)
-    const contests = await getContestsInTournament(params.ID!)
+    const contests = await getContestsInTournamentWStages(params.ID!)
     if (!tournament) {
         const { headers } = await setToast({ request, toast: 'error::Tournament not found' })
         return redirect('/admin/tournaments', { headers })

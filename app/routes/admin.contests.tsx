@@ -1,14 +1,22 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node"
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { getContests } from "~/lib/data/contest.server"
+import { getContestsWStages } from "~/lib/data/contest.server"
 import { icons } from "~/assets/icons"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
+import { setToast } from "~/lib/session.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
-    const contests = await getContests()
+    const contests = await getContestsWStages()
     return json({ contests })
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+    const formData = await request.formData()
+    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
+    console.log(...formData)
+    return json(null, { headers })
 }
 
 export default function Contests() {

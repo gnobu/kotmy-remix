@@ -8,12 +8,10 @@ import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 import ToggleBtn from "~/components/reusables/ToggleBtn"
 import { adminUsers } from "~/lib/data/admin"
-import { nickToast } from "~/lib/session.server"
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ }: LoaderFunctionArgs) {
     const headings = ['full name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof adminUsers[number])[]
-    const { headers, toast } = await nickToast({ request })
-    return json({ headings, tableData: adminUsers }, { headers })
+    return json({ headings, tableData: adminUsers })
 }
 
 export default function Accounts() {

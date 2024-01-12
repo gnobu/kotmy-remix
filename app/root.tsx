@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle"
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node"
+import { json, type LinksFunction, type LoaderFunctionArgs } from "@remix-run/node"
 import {
   Links,
   LiveReload,
@@ -22,8 +22,8 @@ export const links: LinksFunction = () => [
 
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { toast } = await nickToast({ request })
-  return { toast }
+  const { toast, headers } = await nickToast({ request })
+  return json({ toast }, { headers })
 }
 
 function Document({ children }: { children: React.ReactNode }) {

@@ -1,6 +1,6 @@
 import { icons } from "~/assets/icons"
 
-export const socials = ["facebook", "instagram", "twitter"]
+export const socials = ["facebook", "instagram", "twitter"] as const
 
 export const socialIcons = {
     "facebook": icons.facebookSolidIcon,

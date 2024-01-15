@@ -6,6 +6,7 @@ import { Row } from '@tanstack/react-table'
 import { ContestWStage, Grade, Stage } from '~/lib/types/contest.interface'
 import { useState } from 'react'
 import cn from 'classnames'
+import { parseDateForInput } from '~/lib/date'
 
 export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
   const [selectedStage, setSelectedStage] = useState<Stage | null>(row.original.stages[0] ?? null)
@@ -27,8 +28,8 @@ export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
       {row.original.stages.length
         ? <Form method='POST' className='text-primary text-xs flex flex-col gap-4'>
           <fieldset className="py-4 grid grid-cols-4 gap-3 border-b">
-            <FormControl as='input' id='start_date' name='start_date' labelText='Stage Start Date' type='date' defaultValue={selectedStage?.start_date.split('T')[0]} />
-            <FormControl as='input' id='end_date' name='end_date' labelText='Stage End Date' type='date' defaultValue={selectedStage?.end_date.split('T')[0]} />
+            <FormControl as='input' id='start_date' name='start_date' labelText='Stage Start Date' type='date' defaultValue={parseDateForInput(selectedStage?.start_date)} />
+            <FormControl as='input' id='end_date' name='end_date' labelText='Stage End Date' type='date' defaultValue={parseDateForInput(selectedStage?.end_date)} />
             <FormControl as='input' id='weight' name='weight' labelText='Stage Weight (%)' type='number' min={0} defaultValue={selectedStage?.weight} />
             <FormControl as='input' id='success_count' name='success_count' labelText='Success Count' type='number' min={0} defaultValue={selectedStage?.success_count} />
           </fieldset>

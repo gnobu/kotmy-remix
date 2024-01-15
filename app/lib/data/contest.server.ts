@@ -7,21 +7,21 @@ export const tournaments: Tournament[] = [
         image: contestImage1,
         title: 'Kid of the Month Photo Contest',
         description: 'A monthly photo contest for kids of various age ranges',
-        uniqueId: '1',
+        uniqueId: 'kotm',
     },
     {
         id: '2',
         image: contestImage2,
         title: 'Kid of the Year Contest',
         description: 'An annual photo contest for kids of various age ranges',
-        uniqueId: '2',
+        uniqueId: 'koty',
     },
     {
         id: '3',
         image: contestImage1,
         title: 'My Birthday Splash Contest',
         description: 'A monthly photo contest for kids celebrrating their birthdays in the contest month',
-        uniqueId: '3',
+        uniqueId: 'mbds',
     }
 ]
 

@@ -35,7 +35,7 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
             </fieldset>
 
             <CategoryInputs />
-            <StageInputs stages={numOfStages} />
+            <StageInputs stages={Array(numOfStages).fill(null)} />
 
             <fieldset className="grid gap-6">
                 <legend className='text-lg mb-4 font-bold'>Submission Guidelines</legend>

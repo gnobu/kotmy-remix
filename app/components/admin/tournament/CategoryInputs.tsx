@@ -3,9 +3,9 @@ import { icons } from '~/assets/icons'
 import FormControl from '~/components/reusables/FormControl'
 import Svg from '~/components/reusables/Svg'
 
-export default function CategoryInputs() {
+export default function CategoryInputs({ categories }: { categories?: string[] }) {
     const [newCategory, setNewCategory] = useState('')
-    const [catogories, setCategories] = useState<string[]>([])
+    const [catogories, setCategories] = useState<string[]>(categories ?? [])
     function addCategory() {
         if (!newCategory || catogories.includes(newCategory)) return
         setCategories(prev => ([...prev, newCategory]))

@@ -1,3 +1,5 @@
+import { socials } from "../data/socials"
+
 export type Status = 'registering' | 'ongoing' | 'completed'
 export type StageStatus = 'yet_to_start' | 'ongoing' | 'completed'
 
@@ -28,7 +30,12 @@ export type ContestWStage = Contest & { stages: Stage[] }
 
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
 
-export type Rate = "social_media" | "tally" | "judge" | "givaah"
+export type Rate = {
+    "social_media": { type: typeof socials[number]; amount: number },
+    "tally": number,
+    "judge": number,
+    "givaah": number,
+}
 
 export type Stage = {
     id: string;
@@ -36,7 +43,7 @@ export type Stage = {
     "end_date": string;
     "weight": number;
     "success_count": number;
-    "rates": Record<Rate, number>
+    "rates": Rate
     "grade": Record<Grade, [number, number]>;
     "format": "STRAIGHT" | 'PAIRED' | 'GROUPED';
     "active": boolean;

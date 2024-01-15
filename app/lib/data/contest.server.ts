@@ -161,7 +161,7 @@ const stages: Stage[] = [
         "start_date": "2023-03-05T05:31:05.493000+00:00",
         "end_date": "2023-10-05T05:31:05.493000+00:00",
         "rates": {
-            "social_media": 45,
+            "social_media": { type: 'facebook', amount: 45 },
             "judge": 0,
             "tally": 0,
             "givaah": 55,
@@ -192,7 +192,7 @@ const stages: Stage[] = [
         "start_date": "2023-03-05T05:31:05.493000+00:00",
         "end_date": "2023-10-05T05:31:05.493000+00:00",
         "rates": {
-            "social_media": 45,
+            "social_media": { type: 'instagram', amount: 45 },
             "judge": 0,
             "tally": 0,
             "givaah": 55,
@@ -225,7 +225,7 @@ const stages: Stage[] = [
         "contest_id": "1",
         "stage": 3,
         "rates": {
-            "social_media": 45,
+            "social_media": { type: 'twitter', amount: 45 },
             "judge": 0,
             "tally": 0,
             "givaah": 55,

@@ -35,7 +35,7 @@ export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
           </fieldset>
           <fieldset className="pt-2 py-4 grid grid-cols-4 gap-3 border-b">
             <legend className='font-bold text-sm text-admin-pry'>Stage Rates <span className='font-normal'>(must sum up to 100%)</span></legend>
-            <FormControl as='input' id='social_media_rate' name='social_media_rate' labelText='Social Media Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.social_media} />
+            <FormControl as='input' id='social_media_rate' name='social_media_rate' labelText='Social Media Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.social_media.amount} />
             <FormControl as='input' id='tally_rate' name='tally_rate' labelText='Tally Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.tally} />
             <FormControl as='input' id='givaah_rate' name='givaah_rate' labelText='Givaah Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.givaah} />
             <FormControl as='input' id='judge_rate' name='judge_rate' labelText='Judge Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.judge} />

@@ -1,21 +1,14 @@
-// import { useState } from "react"
 import { FileUploader } from "react-drag-drop-files"
 import Svg from "../../reusables/Svg"
 import { icons } from "~/assets/icons"
 
 const fileTypes = ["JPG", "PNG"]
 
-export default function DragnDrop() {
-    // const [files, setFiles] = useState<Blob[]>([])
-    const handleChange = (file: Blob) => {
-        console.log(file)
-        // setFiles(prev => ([...prev, file]))
-    }
+export default function DragnDrop({ className = '', labelText = 'Upload Images' }: { className?: string, labelText?: string }) {
     return (
-        <div className="w-full max-w-full overflow-hidden">
-            <span className="font-bold">Upload Images</span>
+        <div className={`w-full max-w-full overflow-hidden ${className}`}>
+            <span className="font-bold">{labelText}</span>
             <FileUploader
-                handleChange={handleChange}
                 name="images"
                 types={fileTypes}
                 multiple={true}

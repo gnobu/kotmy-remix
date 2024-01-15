@@ -7,15 +7,17 @@ import Select from '~/components/reusables/Select'
 import CategoryInputs from './CategoryInputs'
 import StageInputs from './StageInputs'
 
-export default function CreateContestForm() {
+export default function CreateContestForm({ tournaments }: { tournaments: Pick<Tournament, 'uniqueId'>[] }) {
     const [numOfStages, setNumOfStages] = useState(1)
     return (
         <Form className='max-w-[700px] mx-auto grid gap-12 text-sm' method='post'>
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
 
             <fieldset className="grid gap-6 grid-cols-2">
-                <Select name="tournament" id="tournament" label='Tournament'>
-                    <option value="kotm">KOTM</option>
+                <Select name="tournament" id="tournament" label='Tournament' className="uppercase">
+                    {tournaments.map(tournament => (
+                        <option key={tournament.uniqueId} value={tournament.uniqueId}>{tournament.uniqueId}</option>
+                    ))}
                 </Select>
                 <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' required />
                 <FormControl as='textarea' rows={3} labelClassNames='col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' required />

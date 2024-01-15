@@ -17,7 +17,8 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
 
             <fieldset className="grid gap-6 grid-cols-2">
-                <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={defaultTournament}>
+                <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={defaultTournament} required>
+                    <option value=''>Select a tournament</option>
                     {tournaments.map(tournament => (
                         <option key={tournament.uniqueId} value={tournament.uniqueId}>{tournament.uniqueId}</option>
                     ))}

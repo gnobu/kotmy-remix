@@ -19,12 +19,19 @@ export type Contest = {
     id: string;
     image: string;
     title: string;
+    description: string;
     tournamentId: string;
+    unique_tournament_id: string;
     contestId: string;
     status: Status;
     start_date: string;
     end_date: string;
+    reg_deadline: string;
     categories: Record<string, string>;
+    prizes: string;
+    sub_req: string;
+    terms_cond: string;
+    add_info: string;
 }
 export type ContestWStage = Contest & { stages: Stage[] }
 

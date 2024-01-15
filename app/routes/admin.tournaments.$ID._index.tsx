@@ -36,7 +36,7 @@ export default function Tournament() {
                         <p className="font-medium text-xs line-clamp-2">{tournament.description}</p>
                     </div>
                     <div className="flex gap-6 items-center">
-                        <Cta element="link" to='/admin/contests/add' variant='outline'
+                        <Cta element="link" to={`/admin/contests/add?tournament=${tournament.uniqueId}`} variant='outline'
                             className="flex gap-2 items-center rounded-lg px-3 py-2 border-secondary text-primary font-medium hover:border-primary">
                             <Svg src={icons.addIcon} width={'.9em'} />
                             Add Contest

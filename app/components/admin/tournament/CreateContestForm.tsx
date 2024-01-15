@@ -1,20 +1,23 @@
 import { useState } from 'react'
-import { Form } from '@remix-run/react'
+import { Form, useSearchParams } from '@remix-run/react'
 import DragnDrop from '~/components/public/contests/DragnDrop'
 import Cta from '~/components/reusables/Cta'
 import FormControl from '~/components/reusables/FormControl'
 import Select from '~/components/reusables/Select'
 import CategoryInputs from './CategoryInputs'
 import StageInputs from './StageInputs'
+import { Tournament } from '~/lib/types/contest.interface'
 
 export default function CreateContestForm({ tournaments }: { tournaments: Pick<Tournament, 'uniqueId'>[] }) {
     const [numOfStages, setNumOfStages] = useState(1)
+    const [searchParams] = useSearchParams()
+    const defaultTournament = searchParams.get('tournament') ?? undefined
     return (
         <Form className='max-w-[700px] mx-auto grid gap-12 text-sm' method='post'>
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
 
             <fieldset className="grid gap-6 grid-cols-2">
-                <Select name="tournament" id="tournament" label='Tournament' className="uppercase">
+                <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={defaultTournament}>
                     {tournaments.map(tournament => (
                         <option key={tournament.uniqueId} value={tournament.uniqueId}>{tournament.uniqueId}</option>
                     ))}

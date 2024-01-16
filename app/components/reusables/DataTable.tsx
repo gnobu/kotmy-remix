@@ -27,6 +27,7 @@ export default function DataTable<TData, TValue>({
     const [sorting, setSorting] = React.useState<SortingState>([])
     const expandOptions: Partial<TableOptions<TData>> = expandRows
         ? { getRowCanExpand, getExpandedRowModel: getExpandedRowModel() } : {}
+    const [rowSelection, setRowSelection] = React.useState({})
     const table = useReactTable({
         data, columns, getCoreRowModel: getCoreRowModel(),
         state: { sorting, rowSelection },

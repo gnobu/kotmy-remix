@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import DataTable from '~/components/reusables/DataTable'
 import StatusTag from '~/components/reusables/StatusTag'
+import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
 import { ContestWStage } from '~/lib/types/contest.interface'
 import ContestTableActions from './ContestTableActions'
 import Pagination from '~/components/reusables/Pagination'
@@ -21,15 +22,21 @@ const columns: ColumnDef<ContestWStage>[] = [
     },
     {
         accessorKey: "contestId",
-        header: "ID",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="id" />
+        ),
         cell: ({ row }) => (<span className='uppercase'>{row.getValue('contestId')}</span>)
     }, {
         accessorKey: "title",
-        header: "contest",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="contest" />
+        ),
         cell: ({ row }) => (<span className='uppercase line-clamp-1'>{row.getValue('title')}</span>)
     }, {
-        header: "timeline",
         accessorKey: "timeline",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="timeline" />
+        ),
         cell: ({ row }) => (
             <p>
                 <span className='block whitespace-nowrap'>{row.original.start_date.split('.')[0].replace('T', ', ')}</span>
@@ -38,6 +45,9 @@ const columns: ColumnDef<ContestWStage>[] = [
         )
     }, {
         accessorKey: "status",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="status" />
+        ),
         cell: ({ row }) => (<StatusTag status={row.getValue('status')} />)
     }, {
         id: 'actions',
@@ -49,7 +59,7 @@ const columns: ColumnDef<ContestWStage>[] = [
 export default function ContestTable({ data }: { data: ContestWStage[] }) {
     return (
         <>
-            <DataTable data={data} columns={columns} sortableColumns={['contestId', 'title', 'status', 'timeline']}
+            <DataTable data={data} columns={columns}
                 expandRows getRowCanExpand={() => true} renderSubComponent={EditStageForm}
                 className='text-sm' />
             <div className="flex justify-between items-center my-4">

@@ -1,17 +1,14 @@
 import React from "react"
 import {
-    Column, ColumnDef, Row, SortingState,
+    ColumnDef, Row, SortingState,
     TableOptions,
     flexRender, getCoreRowModel, getExpandedRowModel, getSortedRowModel,
     useReactTable
 } from "@tanstack/react-table"
-import Svg from "./Svg"
-import { icons } from "~/assets/icons"
 
 type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
-    sortableColumns?: string[]
     className?: string
 } & ({
     expandRows?: false
@@ -24,7 +21,7 @@ type DataTableProps<TData, TValue> = {
 })
 
 export default function DataTable<TData, TValue>({
-    data, columns, sortableColumns = [], className = '',
+    data, columns, className = '',
     expandRows, getRowCanExpand, renderSubComponent
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
@@ -32,34 +29,21 @@ export default function DataTable<TData, TValue>({
         ? { getRowCanExpand, getExpandedRowModel: getExpandedRowModel() } : {}
     const table = useReactTable({
         data, columns, getCoreRowModel: getCoreRowModel(),
-        state: { sorting }, getSortedRowModel: getSortedRowModel(), onSortingChange: setSorting,
+        state: { sorting, rowSelection },
+        getSortedRowModel: getSortedRowModel(), onSortingChange: setSorting,
+        onRowSelectionChange: setRowSelection,
         ...expandOptions
     })
-    function canSortColumn(column: Column<TData, unknown>) {
-        if (!sortableColumns.length) return false
-        return column.getCanSort() && sortableColumns?.includes(column.id)
-    }
     return (
         <table className={`w-full ${className}`}>
             <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id} className="border-b border-secondary">
-                        {headerGroup.headers.map(header => {
-                            return canSortColumn(header.column)
-                                ? <th className="text-left uppercase font-satoshi-black p-3 cursor-pointer hover:bg-secondary"
-                                    key={header.id} onClick={() => header.column.toggleSorting(header.column.getIsSorted() === "asc")}>
-                                    {header.isPlaceholder
-                                        ? null
-                                        : <span className="flex items-center">
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
-                                            <Svg src={icons.arrowUpDownIcon} className="" />
-                                        </span>
-                                    }
-                                </th>
-                                : <th className="text-left uppercase font-satoshi-black p-3" key={header.id}>
-                                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                                </th>
-                        })}
+                        {headerGroup.headers.map(header => (
+                            <th className="text-left uppercase font-satoshi-black p-3 [&:has([data-sortable=true])]:cursor-pointer [&:has([data-sortable=true])]:hover:bg-secondary" key={header.id}>
+                                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                            </th>
+                        ))}
                     </tr>
                 ))}
             </thead>

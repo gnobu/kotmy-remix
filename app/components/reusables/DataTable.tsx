@@ -1,6 +1,7 @@
 import React from "react"
 import {
     ColumnDef, Row, SortingState,
+    Table,
     TableOptions,
     flexRender, getCoreRowModel, getExpandedRowModel, getSortedRowModel,
     useReactTable
@@ -10,6 +11,7 @@ type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     className?: string
+    TableActions?: ({ table }: { table: Table<TData> }) => React.ReactNode
 } & ({
     expandRows?: false
     renderSubComponent?: undefined
@@ -21,7 +23,7 @@ type DataTableProps<TData, TValue> = {
 })
 
 export default function DataTable<TData, TValue>({
-    data, columns, className = '',
+    data, columns, className = '', TableActions,
     expandRows, getRowCanExpand, renderSubComponent
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
@@ -36,46 +38,49 @@ export default function DataTable<TData, TValue>({
         ...expandOptions
     })
     return (
-        <table className={`w-full ${className}`}>
-            <thead>
-                {table.getHeaderGroups().map(headerGroup => (
-                    <tr key={headerGroup.id} className="border-b border-secondary">
-                        {headerGroup.headers.map(header => (
-                            <th className="text-left uppercase font-satoshi-black p-3 [&:has([data-sortable=true])]:cursor-pointer [&:has([data-sortable=true])]:hover:bg-secondary" key={header.id}>
-                                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                            </th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody>
-                {table.getRowModel().rows.length
-                    ? table.getRowModel().rows.map(row => (
-                        <React.Fragment key={row.id}>
-                            {/* first row is a normal row */}
-                            <tr key={row.id}
-                                className="border-b border-secondary"
-                                data-state={row.getIsSelected() && "selected"}
-                            >
-                                {row.getVisibleCells().map(cell => {
-                                    return <td className="p-3" key={cell.id}>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        <div className="">
+            {TableActions ? <TableActions table={table} /> : null}
+            <table className={`w-full ${className}`}>
+                <thead>
+                    {table.getHeaderGroups().map(headerGroup => (
+                        <tr key={headerGroup.id} className="border-b border-secondary">
+                            {headerGroup.headers.map(header => (
+                                <th className="text-left uppercase font-satoshi-black p-3 [&:has([data-sortable=true])]:cursor-pointer [&:has([data-sortable=true])]:hover:bg-secondary" key={header.id}>
+                                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody>
+                    {table.getRowModel().rows.length
+                        ? table.getRowModel().rows.map(row => (
+                            <React.Fragment key={row.id}>
+                                {/* first row is a normal row */}
+                                <tr key={row.id}
+                                    className="border-b border-secondary hover:bg-secondary"
+                                    data-state={row.getIsSelected() && "selected"}
+                                >
+                                    {row.getVisibleCells().map(cell => {
+                                        return <td className="p-3" key={cell.id}>
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </td>
+                                    })}
+                                </tr>
+                                <tr className={(expandRows && row.getIsExpanded()) ? 'hover:bg-secondary' : 'hidden'}>
+                                    {/* 2nd row is a custom 1 cell row */}
+                                    <td colSpan={row.getVisibleCells().length}>
+                                        {expandRows && renderSubComponent({ row })}
                                     </td>
-                                })}
-                            </tr>
-                            <tr className={(expandRows && row.getIsExpanded()) ? '' : 'hidden'}>
-                                {/* 2nd row is a custom 1 cell row */}
-                                <td colSpan={row.getVisibleCells().length}>
-                                    {expandRows && renderSubComponent({ row })}
-                                </td>
-                            </tr>
-                        </React.Fragment>
-                    ))
-                    : <tr className="border-b border-secondary">
-                        <td className="p-3" colSpan={columns.length}></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                                </tr>
+                            </React.Fragment>
+                        ))
+                        : <tr className="border-b border-secondary">
+                            <td className="p-3" colSpan={columns.length}></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     )
 }

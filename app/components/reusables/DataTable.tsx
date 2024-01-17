@@ -67,7 +67,7 @@ export default function DataTable<TData, TValue>({
                                         </td>
                                     })}
                                 </tr>
-                                <tr className={(expandRows && row.getIsExpanded()) ? 'hover:bg-secondary' : 'hidden'}>
+                                <tr className={(expandRows && row.getIsExpanded()) ? 'hover:bg-secondary focus-within:bg-secondary' : 'hidden'}>
                                     {/* 2nd row is a custom 1 cell row */}
                                     <td colSpan={row.getVisibleCells().length}>
                                         {expandRows && renderSubComponent({ row })}

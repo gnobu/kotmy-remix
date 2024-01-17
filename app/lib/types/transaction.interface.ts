@@ -8,3 +8,11 @@ export type TallyTransaction = {
     date: string,
     status: 'pending' | 'verified' | 'revoked',
 }
+
+export type IncomeSummary = {
+    contest: string,
+    description: string,
+    session: string,
+    paystack: number,
+    bank: number,
+}

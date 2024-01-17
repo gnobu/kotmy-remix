@@ -15,7 +15,8 @@ export function DataTableColumnHeader<TData, TValue>({
 }: DataTableColumnHeaderProps<TData, TValue>) {
     if (!column.getCanSort()) return title
     return (
-        <span data-sortable onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} className="flex items-center">
+        <span data-sortable className={`flex items-center ${className}`}
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
             <span>{title}</span>
             <Svg src={icons.arrowUpDownIcon} />
         </span>

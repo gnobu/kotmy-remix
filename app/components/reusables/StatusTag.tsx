@@ -4,7 +4,7 @@ type Color = 'red' | 'yellow' | 'green'
 type StatusTagProps = { status: string, className?: string }
 
 const safe = ['ongoing', 'verified']
-const danger = ['completed']
+const danger = ['completed', 'revoked']
 
 export default function StatusTag({ status, className }: StatusTagProps) {
     const color: Color = safe.includes(status) ? 'green' : danger.includes(status) ? 'red' : 'yellow'

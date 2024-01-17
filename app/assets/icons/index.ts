@@ -39,6 +39,8 @@ import contestants from './contestants.svg'
 import view from './view.svg'
 import doubleArrowRight from './double-arrow-right.svg'
 import arrowUpDown from './arrow-up-down.svg'
+import check from './check.svg'
+import doubleArrowDiagonal from './double-arrow-diagonal.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -82,4 +84,6 @@ export const icons = {
     viewIcon: `${view}#img`,
     doubleArrowRightIcon: `${doubleArrowRight}#img`,
     arrowUpDownIcon: `${arrowUpDown}#img`,
+    checkIcon: `${check}#img`,
+    doubleArrowDiagonalIcon: `${doubleArrowDiagonal}#img`,
 }

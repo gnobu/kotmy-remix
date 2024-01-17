@@ -2,7 +2,7 @@ import { scoreboardData } from '~/lib/data/scoreboardData'
 import ProgressBar from './ProgressBar'
 import Grade from './Grade'
 import VoteLink from './VoteLink'
-import { numberSlang } from '~/lib/numberSlang'
+import { numberSlang } from '~/lib/numbers.utils'
 
 export default function MobileScoreboard({ data }: { data: typeof scoreboardData }) {
     return (

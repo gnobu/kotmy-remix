@@ -4,3 +4,7 @@ export function numberSlang(value: number) {
     else if (value >= 1000) return `${(value / 1000)}k`
     else return value
 }
+
+export function numberFormatter(number: number, options: Intl.NumberFormatOptions = {}) {
+    return new Intl.NumberFormat('en-NG', options).format(number)
+}

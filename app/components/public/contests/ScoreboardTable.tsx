@@ -1,7 +1,7 @@
 import { scoreboardData } from "~/lib/data/scoreboardData"
 import VoteLink from "./VoteLink"
 import ProgressBar from "./ProgressBar"
-import { numberSlang } from "~/lib/numberSlang"
+import { numberSlang } from "~/lib/numbers.utils"
 import Grade from "./Grade"
 
 export default function ScoreboardTable({ data }: { data: typeof scoreboardData }) {

@@ -9,7 +9,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "~/components/ui/dialog"
+} from "~/components/reusables/Dialog"
 import { cn } from "~/lib/utils"
 
 export default function AdmitContestantDialog({ disabled }: { disabled: boolean }) {

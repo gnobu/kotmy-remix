@@ -6,7 +6,7 @@ import { Row } from '@tanstack/react-table'
 import { ContestWStage, Grade, Stage } from '~/lib/types/contest.interface'
 import { useState } from 'react'
 import cn from 'classnames'
-import { parseDateForInput } from '~/lib/date'
+import { parseDateForInput } from '~/lib/dates.utils'
 
 export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
   const [selectedStage, setSelectedStage] = useState<Stage | null>(row.original.stages[0] ?? null)

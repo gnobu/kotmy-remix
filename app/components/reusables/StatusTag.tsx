@@ -1,14 +1,14 @@
 import cn from 'classnames'
-import { Status } from '~/lib/types/contest.interface'
-import Svg from './Svg'
-import { icons } from '~/assets/icons'
 
-export default function StatusTag({ status, className }: { status: Status, className?: string }) {
-    return (
-        <span className={cn(`w-fit px-4 py-2 rounded-md text-sm capitalize font-satoshi-medium flex gap-2 items-center ${className}`, {
-            'bg-yellow-100 text-yellow-700': status === 'registering',
-            'bg-green-100 text-green-700': status === 'ongoing',
-            'bg-red-100 text-red-700': status === 'completed',
-        })}><Svg src={icons.activeDotIcon} width={'.5em'} /> {status}</span>
-    )
+type Color = 'red' | 'yellow' | 'green'
+type StatusTagProps = { status: string, className?: string }
+
+const safe = ['ongoing', 'verified']
+const danger = ['completed']
+
+export default function StatusTag({ status, className }: StatusTagProps) {
+    const color: Color = safe.includes(status) ? 'green' : danger.includes(status) ? 'red' : 'yellow'
+    return <span className={cn(`w-fit px-4 pl-7 py-1.5 bg-${color}-100  text-${color}-700 rounded-md text-sm capitalize font-satoshi-medium flex items-center ${className}`)}>
+        <span className={`before:content-['•'] before:absolute relative before:-left-4 before:top-[10%] before:bg-${color}-700 before:text-2xl before:leading-3`}>{status}</span>
+    </span>
 }

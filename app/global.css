@@ -87,4 +87,8 @@
   .bg-pattern {
     background-image: url('./assets/images/bg-pattern.png');
   }
+
+  .mobileNav {
+    --left: 100%;
+  }
 }

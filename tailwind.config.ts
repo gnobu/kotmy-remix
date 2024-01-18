@@ -97,7 +97,7 @@ export default {
           to: { left: "0" },
         },
         "slide-out-left": {
-          from: { left: "0" },
+          from: { left: "var(--left)" },
           to: { left: "100%" },
         },
       },

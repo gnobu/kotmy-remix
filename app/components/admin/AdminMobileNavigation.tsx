@@ -5,6 +5,7 @@ import Svg from '../reusables/Svg'
 import Toggletip from '../reusables/ToggleTip'
 import { cn } from '~/lib/utils'
 import { adminAvatar } from '~/assets/images'
+import { useRef } from 'react'
 
 const primaryNavs = [
     { label: 'Home', icon: icons.adminHomeIcon, url: '/admin/overview' },
@@ -25,6 +26,8 @@ const secondaryNavs = [
 ]
 
 export default function AdminMobileNavigation({ show, onClose }: { show: boolean, onClose: () => void }) {
+    const mobileNav = useRef<HTMLDivElement>(null)
+    mobileNav.current?.style.setProperty('--left', `0%`)
     const { pathname } = useLocation()
     function isSublinkActive(url: string) { return new RegExp(url, 'i').test(pathname) }
     const mainComponent = (
@@ -32,8 +35,8 @@ export default function AdminMobileNavigation({ show, onClose }: { show: boolean
             System default
             <Svg src={icons.arrowDownIcon} />
         </div>)
-    return (<div data-show={show}
-        className='flex flex-col fixed top-0 z-10 data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left bg-secondary w-full h-screen overflow-y-auto'>
+    return (<div data-show={show} ref={mobileNav}
+        className='mobileNav flex flex-col fixed top-0 z-10 data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left bg-secondary w-full h-screen overflow-y-auto'>
         <div className="flex justify-between items-center py-4 px-6 border-b">
             <span className="font-satoshi-bold">NAVIGATION MENU</span>
             <button

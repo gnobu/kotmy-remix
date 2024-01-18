@@ -10,7 +10,7 @@ export default function MobileNavigation({ show, onClose }: { show: boolean, onC
     const mobileNav = useRef<HTMLDivElement>(null)
     mobileNav.current?.style.setProperty('--left', `0%`)
     return (<div data-show={show} ref={mobileNav}
-        className="sm:hidden fixed top-0 left-0 bg-primary w-full h-screen z-10 flex flex-col justify-between mobileNav data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left">
+        className="sm:hidden fixed top-0 left-0 bg-primary w-full h-dvh z-10 flex flex-col justify-between mobileNav data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left">
         <header className='wrapper py-5'>
             <div className='flex justify-between items-center' >
                 <Link to={'/'} onClick={onClose}><img src={logo} alt="KOTMY" className='sm:w-16' /></Link>

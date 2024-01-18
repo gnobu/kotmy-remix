@@ -38,7 +38,7 @@ export default function AdminMobileNavigation({ show, onClose }: { show: boolean
             <Svg src={icons.arrowDownIcon} />
         </div>)
     return (<div data-show={show} ref={mobileNav}
-        className='mobileNav flex flex-col fixed top-0 z-10 data-[show=true]:animate-slide-in-left data-[show=false]:left-fu data-[show=false]:animate-slide-out- bg-secondary w-full h-dvh overflow-y-auto'>
+        className='mobileNav flex flex-col fixed top-0 bottom-0 z-10 data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left bg-secondary w-full overflow-y-auto'>
         <div className="flex justify-between items-center py-4 px-6 border-b">
             <span className="font-satoshi-bold">NAVIGATION MENU</span>
             <button

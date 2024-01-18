@@ -14,7 +14,7 @@ export default function DragnDrop({ className = '', labelText = 'Upload Images' 
                 multiple={true}
 
             >
-                <div className="flex flex-col gap-4 items-center p-6 border-2 border-primary border-dashed rounded-lg">
+                <div className="flex flex-col gap-4 items-center p-6 border-2 hover:border-primary border-dashed rounded-lg">
                     <div className="border-2 border-black p-4 rounded-full w-fit">
                         <Svg src={icons.imageIcon} />
                     </div>

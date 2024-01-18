@@ -17,7 +17,7 @@ export default function PermissionsFormControl({ permissions, defaultPermissions
         return persission.split('_').join(' ')
     }
     return (
-        <fieldset ref={fieldset} {...props} className='p-4 rounded-lg bg-transparent border border-primary col-span-2'>
+        <fieldset ref={fieldset} {...props} className='p-4 rounded-lg bg-transparent border hover:border-primary col-span-2'>
             <div className="flex justify-between">
                 <span className='flex gap-2 items-center font-bold cursor-pointer grow' onClick={() => setOpen(prev => !prev)}>
                     <Svg src={icons.arrowDownIcon} className={open ? '' : '-rotate-90'} />

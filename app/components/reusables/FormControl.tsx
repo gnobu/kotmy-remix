@@ -12,7 +12,7 @@ type Props =
   } & React.TextareaHTMLAttributes<HTMLTextAreaElement>)
 
 export default function FormControl({ labelClassNames, labelText, ...props }: Props) {
-  const formControlClasses = 'p-3 rounded-lg bg-transparent border border-primary w-full font-medium focus:outline-accent'
+  const formControlClasses = 'p-3 rounded-lg bg-transparent border hover:border-primary w-full font-medium focus:outline-accent'
   return (
     <label htmlFor={props.id} className={`block font-bold ${labelClassNames}`}>{labelText}
       {props.as === 'input'

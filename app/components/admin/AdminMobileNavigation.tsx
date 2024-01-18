@@ -5,7 +5,7 @@ import Svg from '../reusables/Svg'
 import Toggletip from '../reusables/ToggleTip'
 import { cn } from '~/lib/utils'
 import { adminAvatar } from '~/assets/images'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 const primaryNavs = [
     { label: 'Home', icon: icons.adminHomeIcon, url: '/admin/overview' },
@@ -27,7 +27,9 @@ const secondaryNavs = [
 
 export default function AdminMobileNavigation({ show, onClose }: { show: boolean, onClose: () => void }) {
     const mobileNav = useRef<HTMLDivElement>(null)
-    mobileNav.current?.style.setProperty('--left', `0%`)
+    useEffect(() => {
+        mobileNav.current?.style.setProperty('--left', `0%`)
+    }, [])
     const { pathname } = useLocation()
     function isSublinkActive(url: string) { return new RegExp(url, 'i').test(pathname) }
     const mainComponent = (

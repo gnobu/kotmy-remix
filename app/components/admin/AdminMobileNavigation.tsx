@@ -27,9 +27,9 @@ const secondaryNavs = [
 
 export default function AdminMobileNavigation({ show, onClose }: { show: boolean, onClose: () => void }) {
     const mobileNav = useRef<HTMLDivElement>(null)
-    useEffect(() => {
-        mobileNav.current?.style.setProperty('--left', `0%`)
-    }, [])
+    // useEffect(() => {
+    //     mobileNav.current?.style.setProperty('--left', `0%`)
+    // }, [])
     const { pathname } = useLocation()
     function isSublinkActive(url: string) { return new RegExp(url, 'i').test(pathname) }
     const mainComponent = (

@@ -1,6 +1,8 @@
 import type { MetaFunction } from "@remix-run/node"
 import { Outlet } from "@remix-run/react"
 import { useState } from "react"
+import AdminMobileNavigation from "~/components/admin/AdminMobileNavigation"
+import MobileHeader from "~/components/admin/MobileHeader"
 import AdminNavigation from "~/components/admin/AdminNav"
 import PrimaryHeader from "~/components/admin/PrimaryHeader"
 
@@ -12,14 +14,21 @@ export const meta: MetaFunction = () => {
 }
 
 export default function AdminLayout() {
-    const [showNav, setShowNav] = useState(true)
-    return (
-        <div className="bg-tertiary text-admin-pry">
+    const [showNav, setShowNav] = useState(false)
+    return (<>
+        {/* MOBILE */}
+        <div className="sm:hidden bg-tertiary text-admin-pry">
+            <MobileHeader toggleNav={() => { setShowNav(prev => !prev) }} />
+            <AdminMobileNavigation onClose={() => { setShowNav(false) }} show={showNav} />
+            <Outlet />
+        </div>
+        {/* TAB/DESKTOP */}
+        <div className="hidden sm:block bg-tertiary text-admin-pry">
             <PrimaryHeader toggleNav={() => { setShowNav(prev => !prev) }} />
             <div className="flex h-[calc(100vh-82.5px)]">
                 <AdminNavigation show={showNav} />
                 <Outlet />
             </div>
         </div>
-    )
+    </>)
 }

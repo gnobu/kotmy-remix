@@ -15,12 +15,12 @@ export const meta: MetaFunction = () => {
 
 export default function AdminLayout() {
     const [showNav, setShowNav] = useState(false)
-    useLayoutEffect(() => {
-        function handleWindowSize() { setShowNav(window.innerWidth >= 640) }
-        handleWindowSize()
-        window.addEventListener('resize', handleWindowSize)
-        return () => { window.removeEventListener('resize', handleWindowSize) }
-    }, [])
+    // useLayoutEffect(() => {
+    //     function handleWindowSize() { setShowNav(window.innerWidth >= 640) }
+    //     handleWindowSize()
+    //     window.addEventListener('resize', handleWindowSize)
+    //     return () => { window.removeEventListener('resize', handleWindowSize) }
+    // }, [])
     return (<>
         {/* MOBILE */}
         <div className="sm:hidden bg-tertiary text-admin-pry">

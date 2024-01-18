@@ -27,9 +27,9 @@ const secondaryNavs = [
 
 export default function AdminMobileNavigation({ show, onClose }: { show: boolean, onClose: () => void }) {
     const mobileNav = useRef<HTMLDivElement>(null)
-    // useEffect(() => {
-    //     mobileNav.current?.style.setProperty('--left', `0%`)
-    // }, [])
+    useEffect(() => {
+        mobileNav.current?.style.setProperty('--left', `0%`)
+    }, [])
     const { pathname } = useLocation()
     function isSublinkActive(url: string) { return new RegExp(url, 'i').test(pathname) }
     const mainComponent = (
@@ -38,7 +38,7 @@ export default function AdminMobileNavigation({ show, onClose }: { show: boolean
             <Svg src={icons.arrowDownIcon} />
         </div>)
     return (<div data-show={show} ref={mobileNav}
-        className='mobileNav hidden data-[show=true]:flex flex-col fixed w-full h-screen top-0 z-10 data-[show=true]:animate-slide-in-left bg-secondary overflow-y-auto'>
+        className='mobileNav flex flex-col fixed w-full h-dvh top-0 z-10 data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left bg-secondary overflow-y-auto'>
         <div className="flex justify-between items-center py-4 px-6 border-b">
             <span className="font-satoshi-bold">NAVIGATION MENU</span>
             <button

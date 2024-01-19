@@ -31,7 +31,7 @@ export default function AdminNavigation({ show }: { show: boolean }) {
             <Svg src={icons.arrowDownIcon} />
         </div>)
     return (show
-        ? <header className='bg-secondary border-r  flex flex-col justify-between min-w-[280px]'>
+        ? <header className='bg-secondary border-r hidden sm:flex flex-col justify-between min-w-[280px]'>
             <nav className='py-6'>
                 <span className='inline-block mb-2 px-6 py-3 font-satoshi-bold'>Navigation Menu</span>
                 <ul className='grid gap-2 font-bold'>

@@ -16,22 +16,15 @@ export const meta: MetaFunction = () => {
 export default function AdminLayout() {
     const [showNav, setShowNav] = useState(false)
     useEffect(() => {
-        setShowNav(window.innerWidth >= 640) 
+        setShowNav(window.innerWidth >= 640)
     }, [])
-    return (<>
-        {/* MOBILE */}
-        <div className="sm:hidden bg-tertiary text-admin-pry">
-            <MobileHeader toggleNav={() => { setShowNav(prev => !prev) }} />
-            <AdminMobileNavigation onClose={() => { setShowNav(false) }} show={showNav} />
+    return (<div className="bg-tertiary text-admin-pry">
+        <PrimaryHeader toggleNav={() => { setShowNav(prev => !prev) }} />
+        <MobileHeader toggleNav={() => { setShowNav(prev => !prev) }} />
+        <AdminMobileNavigation onClose={() => { setShowNav(false) }} show={showNav} />
+        <div className="sm:flex sm:h-[calc(100vh-82.5px)]">
+            <AdminNavigation show={showNav} />
             <Outlet />
         </div>
-        {/* TAB/DESKTOP */}
-        <div className="hidden sm:block bg-tertiary text-admin-pry">
-            <PrimaryHeader toggleNav={() => { setShowNav(prev => !prev) }} />
-            <div className="flex h-[calc(100vh-82.5px)]">
-                <AdminNavigation show={showNav} />
-                <Outlet />
-            </div>
-        </div>
-    </>)
+    </div>)
 }

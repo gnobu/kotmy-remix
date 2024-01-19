@@ -5,7 +5,7 @@ import { logo } from "~/assets/images"
 
 export default function MobileHeader({ toggleNav }: { toggleNav: () => void }) {
     return (
-        <div className="flex items-center gap-4 p-4 border-b">
+        <div className="flex sm:hidden items-center gap-4 p-4 border-b">
             <Link to={'/'}>
                 <img src={logo} alt="KOTMY" />
             </Link>

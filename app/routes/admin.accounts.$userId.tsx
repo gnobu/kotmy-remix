@@ -36,8 +36,8 @@ export default function EditAdminUser() {
         <h1 className="text-2xl font-black text-primary">Edit User</h1>
       </div>
       <Form className='wrapper grid grid-cols-2 gap-6' method='post'>
-        <FormControl as='input' labelText='First Name' className='' placeholder='Enter first name' id='firstName' name='firstName' defaultValue={user['full name'].split(' ')[0]} required />
-        <FormControl as='input' labelText='Last Name' className='' placeholder='Enter last name' id='lastName' name='lastName' defaultValue={user['full name'].split(' ')[1]} required />
+        <FormControl as='input' labelText='First Name' className='' placeholder='Enter first name' id='firstName' name='firstName' defaultValue={user.full_name.split(' ')[0]} required />
+        <FormControl as='input' labelText='Last Name' className='' placeholder='Enter last name' id='lastName' name='lastName' defaultValue={user.full_name.split(' ')[1]} required />
         <FormControl as='input' labelText='Email Address' className='' placeholder='Enter email address' id='email' name='email' defaultValue={user.email} required />
         <FormControl as='input' labelText='Username' className='' placeholder='Enter username' id='username' name='username' defaultValue={user.username} required />
         <FormControl as='input' type='password' labelText='Password' className='' placeholder='Create password' id='password' name='password' defaultValue={user.password} required />

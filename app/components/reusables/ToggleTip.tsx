@@ -23,7 +23,7 @@ export default function Toggletip({ mainComponent, children, mainContainerClass 
         <div ref={toggletip} onClick={() => { setOpen(prev => !prev) }}
             className={`relative cursor-pointer ${mainContainerClass}`}>
             {mainComponent}
-            <div className={`absolute min-w-full rounded-2xl ${open ? '' : 'hidden'} ${childContainerClass}`}>
+            <div className={`absolute min-w-full rounded-2xl z-10 ${open ? '' : 'hidden'} ${childContainerClass}`}>
                 {children}
             </div>
         </div>

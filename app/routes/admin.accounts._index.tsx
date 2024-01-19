@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
+import AdminCard from "~/components/admin/accounts/AdminUserCard"
 import Cta from "~/components/reusables/Cta"
 import FormControl from "~/components/reusables/FormControl"
 import Pagination from "~/components/reusables/Pagination"
@@ -10,7 +11,7 @@ import ToggleBtn from "~/components/reusables/ToggleBtn"
 import { adminUsers } from "~/lib/data/admin"
 
 export async function loader({ }: LoaderFunctionArgs) {
-    const headings = ['full name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof adminUsers[number])[]
+    const headings = ['full_name', 'email', 'username', 'role', 'access'] satisfies (keyof typeof adminUsers[number])[]
     return json({ headings, tableData: adminUsers })
 }
 
@@ -18,18 +19,29 @@ export default function Accounts() {
     const { headings, tableData } = useLoaderData<typeof loader>()
     return (
         <main className='w-full overflow-y-auto p-6'>
-            <div className="flex justify-between items-center mb-16">
+            <div className="flex justify-between items-center mb-8 sm:mb-16">
                 <h1 className="text-2xl font-black text-primary">Admin Accounts</h1>
-                <Cta element="link" to='add' className="flex gap-2 items-center rounded-lg px-3 py-2">
+                <Cta element="link" to='add' className="hidden sm:flex gap-2 items-center rounded-lg px-3 py-2">
                     <Svg src={icons.addIcon} width={'.9em'} />
                     Add User
                 </Cta>
             </div>
-            <div className="flex justify-between items-center my-6">
+            <div className="flex flex-col gap-3 sm:flex-row justify-between sm:items-center my-8">
                 <p className="font-semibold">Registered Admin Users</p>
-                <FormControl as="input" type="search" placeholder="Search user..." className="min-w-[280px]" />
+                <FormControl as="input" type="search" placeholder="Search user..." className="text-sm min-w-[280px]" />
+                <Cta element="link" to='add' className="sm:hidden flex gap-2 items-center justify-center rounded-lg px-3 py-2">
+                    <Svg src={icons.addIcon} width={'.9em'} />
+                    Add User
+                </Cta>
             </div>
-            <div className="w-full overflow-x-auto">
+
+            {/* MOBILE */}
+            <div className="sm:hidden grid gap-4 my-6">
+                {tableData.map(user => (<AdminCard key={user.id} user={user} />))}
+            </div>
+
+            {/* TAB/DESKTOP */}
+            <div className="hidden sm:block w-full overflow-x-auto">
                 <table className="w-full table-auto">
                     <thead>
                         <tr className="border-b border-secondary">
@@ -63,7 +75,7 @@ export default function Accounts() {
                     </tbody>
                 </table>
             </div>
-            <div className="flex justify-between items-center my-4">
+            <div className="hidden sm:flex justify-between items-center my-4">
                 <label className="flex gap-2">Rows per page
                     <input type="number" name="rows" id="rows" className="w-10 pl-2 rounded-md border" defaultValue={10} />
                 </label>

@@ -26,9 +26,9 @@ export default function StageContestants() {
     const navigate = useNavigate()
     return (
         <main className='w-full overflow-y-auto p-6'>
-            <div className="flex items-center mb-16 gap-4">
+            <div className="flex items-start mb-16 gap-4">
                 <RoundCta icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
-                <h1 className="text-xl font-black text-primary capitalize">{contest.title} - Stage {stage.stage} contestants</h1>
+                <h1 className="text-lg xs:text-xl font-black text-primary capitalize">{contest.title} - Stage {stage.stage} contestants</h1>
             </div>
             <section className='my-12'>
                 <ContestantTable data={contestants} />

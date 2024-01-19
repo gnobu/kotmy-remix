@@ -74,8 +74,10 @@ const columns: ColumnDef<RegistrationTableData>[] = [
 export default function ContestRegistrationsTable({ data }: { data: RegistrationTableData[] }) {
     return (
         <>
-            <DataTable data={data} columns={columns} className='text-xs' />
-            <div className="flex justify-between items-center my-4">
+            <div className="w-full overflow-x-auto">
+                <DataTable data={data} columns={columns} className='text-xs' />
+            </div>
+            <div className="max-sm:flex-col max-xs:text-xs sm:w-4/5 mx-auto flex gap-2 justify-between items-center my-5">
                 <label className="flex gap-2">Rows per page
                     <input type="number" name="rows" id="rows" className="w-10 pl-2 rounded-md border" defaultValue={10} />
                 </label>

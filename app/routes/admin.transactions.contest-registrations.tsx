@@ -46,8 +46,8 @@ export default function ContestRegistrations() {
   const { tranasctions } = useLoaderData<typeof loader>()
   return (
     <main className='w-full overflow-y-auto p-6'>
-      <section className="flex justify-between items-center mb-16">
-        <h1 className="text-2xl font-black text-primary">Registration Transactions</h1>
+      <section className="flex justify-between items-center mb-8 sm:mb-16">
+        <h1 className="text-xl xs:text-2xl font-black text-primary">Registration Transactions</h1>
       </section>
       <section className='my-12'>
         <ContestRegistrationsTable data={tranasctions} />

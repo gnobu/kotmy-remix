@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node"
 import { Outlet } from "@remix-run/react"
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import AdminMobileNavigation from "~/components/admin/AdminMobileNavigation"
 import MobileHeader from "~/components/admin/MobileHeader"
 import AdminNavigation from "~/components/admin/AdminNav"
@@ -15,7 +15,7 @@ export const meta: MetaFunction = () => {
 
 export default function AdminLayout() {
     const [showNav, setShowNav] = useState(false)
-    useLayoutEffect(() => {
+    useEffect(() => {
         setShowNav(window.innerWidth >= 640) 
     }, [])
     return (<>

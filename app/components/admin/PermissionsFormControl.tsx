@@ -4,6 +4,7 @@ import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
 import Cta from '../reusables/Cta'
 import FormControl from '../reusables/FormControl'
+import { CounterClockwiseClockIcon as Restore } from '@radix-ui/react-icons'
 
 export default function PermissionsFormControl({ permissions, defaultPermissions, ...props }: { permissions: string[], defaultPermissions?: string[] } & React.ComponentProps<'fieldset'>) {
     const [open, setOpen] = useState(false)
@@ -17,16 +18,19 @@ export default function PermissionsFormControl({ permissions, defaultPermissions
         return persission.split('_').join(' ')
     }
     return (
-        <fieldset ref={fieldset} {...props} className='p-4 rounded-lg bg-transparent border hover:border-primary col-span-2'>
+        <fieldset ref={fieldset} {...props} className='p-2 sm:p-4 rounded-lg bg-transparent border hover:border-primary sm:col-span-2'>
             <div className="flex justify-between">
                 <span className='flex gap-2 items-center font-bold cursor-pointer grow' onClick={() => setOpen(prev => !prev)}>
                     <Svg src={icons.arrowDownIcon} className={open ? '' : '-rotate-90'} />
                     Permissions
                 </span>
-                <Cta element='button' type='button' variant='outline' kind='danger'
-                    className='px-8 py-2 rounded-lg font-medium'
+                <Cta element='button' type='button' variant='outline' aria-label='restore defaults'
+                    className='p-2 sm:px-8 sm:py-2 rounded-lg font-medium text-red-500 border-secondary hover:border-red-300'
                     onClick={resetFieldset}
-                >Restore defaults</Cta>
+                >
+                    <Restore className='text-inherit sm:hidden'/>
+                    <span className="hidden sm:inline">Restore defaults</span>
+                </Cta>
             </div>
             <div className={cn("grid grid-cols-3 gap-6 my-6 mx-3", { 'hidden': !open })}>
                 {permissions.map(permission => (

@@ -25,12 +25,12 @@ export default function AdminUserCard({ user }: { user: AdminUser }) {
                 <div className='flex gap-3 items-center'>
                     <img src={adminAvatar} alt="cartoon head" width={40} height={40} />
                     <span className="grid">
-                        <span className='text-primary'>{user.full_name}</span>
-                        <span>{user.email}</span>
+                        <span className='text-primary line-clamp-1'>{user.full_name}</span>
+                        <span className='line-clamp-1'>{user.email}</span>
                     </span>
                 </div>
                 <span className="flex gap-3 items-center">
-                    {user.access ? 'Enabled' : 'Disabled'}
+                    <span className="max-xs:hidden">{user.access ? 'Enabled' : 'Disabled'}</span>
                     <ToggleBtn on={user.access} />
                 </span>
             </div>

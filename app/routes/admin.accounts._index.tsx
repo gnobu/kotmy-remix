@@ -28,7 +28,7 @@ export default function Accounts() {
             </div>
             <div className="flex flex-col gap-3 sm:flex-row justify-between sm:items-center my-8">
                 <p className="font-semibold">Registered Admin Users</p>
-                <FormControl as="input" type="search" placeholder="Search user..." className="text-sm min-w-[280px]" />
+                <FormControl as="input" type="search" placeholder="Search user..." className="text-sm xs:min-w-[280px]" />
                 <Cta element="link" to='add' className="sm:hidden flex gap-2 items-center justify-center rounded-lg px-3 py-2">
                     <Svg src={icons.addIcon} width={'.9em'} />
                     Add User

@@ -35,7 +35,7 @@ export default function EditAdminUser() {
         <RoundCta icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
         <h1 className="text-2xl font-black text-primary">Edit User</h1>
       </div>
-      <Form className='sm:wrapper grid sm:grid-cols-2 gap-6 text-sm' method='post'>
+      <Form className='sm:wrapper grid sm:grid-cols-2 gap-3 sm:gap-6 text-sm' method='post'>
         <FormControl as='input' labelText='First Name' className='' placeholder='Enter first name' id='firstName' name='firstName' defaultValue={user.full_name.split(' ')[0]} required />
         <FormControl as='input' labelText='Last Name' className='' placeholder='Enter last name' id='lastName' name='lastName' defaultValue={user.full_name.split(' ')[1]} required />
         <FormControl as='input' labelText='Email Address' className='' placeholder='Enter email address' id='email' name='email' defaultValue={user.email} required />
@@ -49,7 +49,7 @@ export default function EditAdminUser() {
 
         <PermissionsFormControl permissions={permissions} defaultPermissions={user.permissions} />
 
-        <div className='flex justify-end gap-3 sm:gap-6 sm:col-span-2'>
+        <div className='flex justify-end gap-3 sm:gap-6 sm:col-span-2 mt-4'>
           <Cta element='button' type='reset' className='px-4 py-1 sm:px-8 sm:py-2 rounded-lg font-medium border-secondary active:border-accent' variant='outline'>Reset</Cta>
           <Cta element='button' type='submit' className='px-4 py-1 sm:px-8 sm:py-2 rounded-lg font-medium'>Submit</Cta>
         </div>

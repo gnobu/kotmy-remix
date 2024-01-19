@@ -19,7 +19,7 @@ export default function PermissionsFormControl({ permissions, defaultPermissions
     }
     return (
         <fieldset ref={fieldset} {...props} className='p-2 sm:p-4 rounded-lg bg-transparent border hover:border-primary sm:col-span-2'>
-            <div className="flex justify-between">
+            <div data-open={open} className="flex justify-between data-[open=true]:pb-2 sm:data-[open=true]:pb-3 data-[open=true]:border-b">
                 <span className='flex gap-2 items-center font-bold cursor-pointer grow' onClick={() => setOpen(prev => !prev)}>
                     <Svg src={icons.arrowDownIcon} className={open ? '' : '-rotate-90'} />
                     Permissions
@@ -28,11 +28,11 @@ export default function PermissionsFormControl({ permissions, defaultPermissions
                     className='p-2 sm:px-8 sm:py-2 rounded-lg font-medium text-red-500 border-secondary hover:border-red-300'
                     onClick={resetFieldset}
                 >
-                    <Restore className='text-inherit sm:hidden'/>
+                    <Restore className='text-inherit sm:hidden' />
                     <span className="hidden sm:inline">Restore defaults</span>
                 </Cta>
             </div>
-            <div className={cn("grid grid-cols-3 gap-6 my-6 mx-3", { 'hidden': !open })}>
+            <div className={cn("grid sm:grid-cols-3 gap-6 mt-4 sm:mx-3", { 'hidden': !open })}>
                 {permissions.map(permission => (
                     <FormControl key={permission} as='input' type='checkbox' name='permission' value={permission} className='w-min'
                         defaultChecked={defaultPermissions?.includes(permission)} labelText={labelize(permission)}

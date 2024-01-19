@@ -12,6 +12,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        'xs': '300px',
+      },
       fontFamily: {
         'satoshi': ["Satoshi-Regular", "sans-serif"],
         'satoshi-medium': ["Satoshi-Medium", "sans-serif"],

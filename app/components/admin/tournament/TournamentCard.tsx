@@ -9,10 +9,10 @@ import { TournamentWContest } from "~/lib/types/contest.interface"
 export default function TournamentCard({ tournament }: { tournament: TournamentWContest }) {
     const mainComponent = <RoundCta icon={icons.optionsIcon} className='border-transparent hover:border-disabled' />
     return (
-        <aside className='p-6 border border-disabled rounded-xl bg-white shadow'>
-            <div className="flex gap-3 items-start">
+        <aside className='p-6 border border-disabled rounded-xl bg-white shadow overflow-hidden'>
+            <div className="flex gap-3 items-start justify-between max-xs:flex-wrap">
                 <img src={tournament.image} alt="children smiling" className="w-24 aspect-square rounded-md object-cover" />
-                <div className="self-center grow">
+                <div className="self-center grow max-xs:order-1">
                     <h3 className="text-primary font-satoshi-black uppercase line-clamp-1">{tournament.title}</h3>
                     <p className="font-medium text-xs line-clamp-2">{tournament.description}</p>
                 </div>
@@ -26,9 +26,9 @@ export default function TournamentCard({ tournament }: { tournament: TournamentW
                     >Delete Tournament</button>
                 </Toggletip>
             </div>
-            <hr className='my-5' />
+            <hr className='mt-4 mb-1' />
             <span className="text-primary text-sm font-satoshi-bold mb-3">{tournament.contests.length} contests created</span>
-            <div className="flex justify-between items-center">
+            <div className="grid gap-2 xs:flex justify-between items-center">
                 <LayeredImages images={tournament.contests} />
                 <Link to={tournament.id} className="flex gap-2 items-center font-semibold hover:text-accent">View Contests <Svg src={icons.arrowNextIcon} /></Link>
             </div>

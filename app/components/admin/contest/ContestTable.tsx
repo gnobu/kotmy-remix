@@ -59,10 +59,12 @@ const columns: ColumnDef<ContestWStage>[] = [
 export default function ContestTable({ data }: { data: ContestWStage[] }) {
     return (
         <>
-            <DataTable data={data} columns={columns}
-                expandRows getRowCanExpand={() => true} renderSubComponent={EditStageForm}
-                className='text-sm' />
-            <div className="flex justify-between items-center my-4">
+            <div className="w-full overflow-x-auto">
+                <DataTable data={data} columns={columns}
+                    expandRows getRowCanExpand={() => true} renderSubComponent={EditStageForm}
+                    className='max-xs:text-xs text-sm' />
+            </div>
+            <div className="max-sm:flex-col max-xs:text-xs sm:w-4/5 mx-auto flex gap-2 justify-between items-center my-5">
                 <label className="flex gap-2">Rows per page
                     <input type="number" name="rows" id="rows" className="w-10 pl-2 rounded-md border" defaultValue={10} />
                 </label>

@@ -24,25 +24,25 @@ export default function Tournament() {
     const navigate = useNavigate()
     const mainComponent = <RoundCta icon={icons.optionsIcon} className='border-disabled hover:border-primary' />
     return (
-        <main className='w-full overflow-y-auto p-6'>
-            <div className="flex items-center mb-16 gap-4">
+        <main className='w-full overflow-y-auto max-xs:p-3 p-6'>
+            <div className="flex items-center mb-8 sm:mb-16 gap-4">
                 <RoundCta icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
             </div>
-            <section className="flex gap-6 max-w-xl mx-auto">
-                <img src={tournament.image} alt="tournament banner" className='w-[120px] aspect-square object-cover rounded-lg' />
-                <div className="flex flex-col gap-6 justify-between">
+            <section className="flex items-start gap-4 sm:gap-6 max-w-xl mx-auto max-xs:text-sm">
+                <img src={tournament.image} alt="tournament banner" className='max-xs:w-20 w-24 sm:w-[120px] aspect-square object-cover rounded-lg' />
+                <div className="flex flex-col gap-4 sm:gap-6 justify-between">
                     <div className="">
                         <h1 className="text-primary font-satoshi-black uppercase line-clamp-1">{tournament.title}</h1>
                         <p className="font-medium text-xs line-clamp-2">{tournament.description}</p>
                     </div>
-                    <div className="flex gap-6 items-center">
+                    <div className="flex gap-4 sm:gap-6 items-center">
                         <Cta element="link" to={`/admin/contests/add?tournament=${tournament.uniqueId}`} variant='outline'
-                            className="flex gap-2 items-center rounded-lg px-3 py-2 border-secondary text-primary font-medium hover:border-primary">
+                            className="flex gap-2 items-center rounded-lg px-3 py-2 border-secondary text-primary font-medium hover:border-primary max-xs:text-xs">
                             <Svg src={icons.addIcon} width={'.9em'} />
                             Add Contest
                         </Cta>
                         <Toggletip mainComponent={mainComponent}
-                            childContainerClass="top-[120%] left-0 bg-tertiary p-2 border border-disabled text-xs whitespace-nowrap"
+                            childContainerClass="top-[120%] max-sm:right-0 sm:left-0 bg-tertiary p-2 border border-disabled text-xs whitespace-nowrap"
                         >
                             <Link to={`edit`}
                                 className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'

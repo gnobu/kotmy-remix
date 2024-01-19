@@ -12,6 +12,7 @@ export async function loader({ }: LoaderFunctionArgs) {
 
 export default function Tournaments() {
     const { tournaments } = useLoaderData<typeof loader>()
+    const numberOfContests = tournaments.reduce((total, tournament) => (total + tournament.contests.length), 0)
     return (
         <main className='w-full overflow-y-auto p-6'>
             <section className="flex justify-between items-center mb-8 sm:mb-16">
@@ -21,19 +22,19 @@ export default function Tournaments() {
                     Create Tournament
                 </Cta>
             </section>
-            <aside className="p-3 border rounded-md my-4 bg-[#F6F8FA] text-sm">
+            <aside className="sm:flex justify-evenly max-w-xl mx-auto gap-2 p-3 border rounded-md my-4 bg-[#F6F8FA] text-sm">
                 <div className='flex gap-3 items-center'>
                     <span className="bg-tertiary p-2 rounded-full border"><Svg src={icons.adminTournamentIcon} className="text-primary" /></span>
                     <span className="grid">
-                        <span className='text-primary font-satoshi-black'>10</span>
+                        <span className='text-primary font-satoshi-black'>{tournaments.length}</span>
                         <span className=''>Tournaments Created</span>
                     </span>
                 </div>
-                <hr className="my-2" />
+                <div className="max-sm:my-2 max-sm:border-t sm:border-r sm:h-10" />
                 <div className='flex gap-3 items-center'>
                     <span className="bg-tertiary p-2 rounded-full border"><Svg src={icons.adminContestIcon} className="text-primary" /></span>
                     <span className="grid">
-                        <span className='text-primary font-satoshi-black'>10</span>
+                        <span className='text-primary font-satoshi-black'>{numberOfContests}</span>
                         <span className=''>Contests Created</span>
                     </span>
                 </div>

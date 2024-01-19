@@ -17,7 +17,7 @@ import { cn } from "~/lib/utils"
 export default function AddTallyDialog() {
     return <Dialog>
         <DialogTrigger title='add tally transaction'
-            className={cn(`flex items-center gap-2 rounded-lg px-3 py-2 bg-accent text-secondary`)}>
+            className={cn(`flex items-center justify-center gap-2 rounded-lg px-3 py-2 bg-accent text-secondary`)}>
             <Svg src={icons.addIcon} width={'.9em'} />
             Add Payment
         </DialogTrigger>
@@ -26,7 +26,7 @@ export default function AddTallyDialog() {
                 <DialogTitle>Add Tally Transaction</DialogTitle>
                 <DialogDescription>
                     <Form method='POST' className='text-primary text-xs flex flex-col gap-4'>
-                        <fieldset className="py-4 grid grid-cols-3 gap-3">
+                        <fieldset className="py-4 grid sm:grid-cols-3 gap-3">
                             <FormControl as='input' id='sender' name='sender' labelText='Sender' />
                             <Select label='Contest' name="contest">
                                 <option value=''>Select a contest</option>

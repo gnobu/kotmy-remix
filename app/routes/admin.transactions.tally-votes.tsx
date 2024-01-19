@@ -48,7 +48,7 @@ export default function TallyVotes() {
     const { tranasctions } = useLoaderData<typeof loader>()
     return (
         <main className='w-full overflow-y-auto p-6'>
-            <section className="flex justify-between items-center mb-16">
+            <section className="flex max-sm:flex-col gap-10 justify-between sm:items-center mb-6 sm:mb-16">
                 <h1 className="text-2xl font-black text-primary">Tally Votes</h1>
                 <AddTallyDialog />
             </section>

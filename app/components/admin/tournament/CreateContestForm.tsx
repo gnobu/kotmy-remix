@@ -13,10 +13,10 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
     const [searchParams] = useSearchParams()
     const defaultTournament = searchParams.get('tournament') ?? undefined
     return (
-        <Form className='max-w-[700px] mx-auto grid gap-12 text-sm' method='post'>
+        <Form className='max-w-[700px] mx-auto my-8 grid gap-6 sm:gap-12 text-sm' method='post'>
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
 
-            <fieldset className="grid gap-6 grid-cols-2">
+            <fieldset className="grid gap-3 sm:gap-6 sm:grid-cols-2">
                 <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={defaultTournament} required>
                     <option value=''>Select a tournament</option>
                     {tournaments.map(tournament => (
@@ -24,20 +24,20 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
                     ))}
                 </Select>
                 <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' required />
-                <FormControl as='textarea' rows={3} labelClassNames='col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' required />
+                <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' required />
                 <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' required />
                 <FormControl as='input' type='number' labelText='Number of Stages' id='no_stages' name='no_stages' value={numOfStages} onChange={(e) => setNumOfStages(+e.target.value)} min={1} required />
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' required />
                 <FormControl as='input' type='date' labelText='Contest End Date' id='end_date' name='end_date' required />
                 <FormControl as='input' type='date' labelText='Registration Deadline' id='reg_deadline' name='reg_deadline' required />
                 <FormControl as='textarea' rows={2} labelText='Contest Prizes' placeholder='Enter contest prizes' id='prizes' name='prizes' required />
-                <DragnDrop className='col-span-2' />
+                <DragnDrop className='sm:col-span-2' />
             </fieldset>
 
             <CategoryInputs />
             <StageInputs stages={Array(numOfStages).fill(null)} />
 
-            <fieldset className="grid gap-6">
+            <fieldset className="grid gap-3 sm:gap-6">
                 <legend className='text-lg mb-4 font-bold'>Submission Guidelines</legend>
                 <FormControl as='textarea' rows={4} labelText='Submission Requirements' placeholder='Enter text here...' id='sub_req' name='sub_req' required />
                 <FormControl as='textarea' rows={4} labelText='Terms & Conditions' placeholder='Enter text here...' id='tnc' name='tnc' required />
@@ -45,7 +45,7 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
             </fieldset>
 
             <div className='flex justify-end gap-6'>
-                <Cta element='button' type='submit' className='px-8 py-2 rounded-lg font-medium'>Create Contest</Cta>
+                <Cta element='button' type='submit' className='px-8 py-2 rounded-lg font-medium max-sm:grow'>Create Contest</Cta>
             </div>
         </Form>
     )

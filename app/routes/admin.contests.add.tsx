@@ -24,7 +24,7 @@ export default function AddContest() {
     const navigate = useNavigate()
     return (
         <main className='w-full overflow-y-auto p-6'>
-            <div className="flex items-center mb-16 gap-4">
+            <div className="flex items-center mb-10 sm:mb-16 gap-4">
                 <RoundCta icon={icons.arrowPrevIcon} className="hover:bg-[#F7F7F8] text-primary" onClick={() => navigate(-1)} />
                 <span className="font-black text-primary">Create Contest</span>
             </div>

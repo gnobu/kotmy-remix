@@ -17,7 +17,7 @@ export default function CategoryInputs({ categories }: { categories?: string[] }
     return (
         <div>
             <span className='font-bold'>Categories</span>
-            <fieldset className="grid gap-6 grid-cols-3 border border-secondary p-3 rounded-lg">
+            <fieldset className="grid gap-3 sm:gap-6 sm:grid-cols-3 border border-secondary p-3 rounded-lg">
                 {catogories.map(category => (
                     <div key={category} className="p-3 rounded-lg border border-secondary flex items-center">
                         <input type="text" className="grow pointer-events-none" name='category' defaultValue={category} />
@@ -27,7 +27,7 @@ export default function CategoryInputs({ categories }: { categories?: string[] }
                         </button>
                     </div>
                 ))}
-                <div className="flex gap-6 items-end col-span-3">
+                <div className="flex max-sm:flex-col gap-3 sm:gap-6 sm:items-end sm:col-span-3">
                     <FormControl as='input' placeholder='Enter new category' id='new_catogory' value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
                     <button type='button' onClick={addCategory}
                         className='flex gap-2 items-center whitespace-nowrap px-8 py-3 rounded-lg border border-secondary hover:border-slate-400'>

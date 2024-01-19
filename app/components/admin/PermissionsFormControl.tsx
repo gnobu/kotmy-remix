@@ -25,7 +25,7 @@ export default function PermissionsFormControl({ permissions, defaultPermissions
                     Permissions
                 </span>
                 <Cta element='button' type='button' variant='outline' aria-label='restore defaults'
-                    className='p-2 sm:px-8 sm:py-2 rounded-lg font-medium text-red-500 border-secondary hover:border-red-300'
+                    className='p-2 sm:px-8 sm:py-2 rounded-lg font-medium text-red-500 border-secondary active:border-red-300 sm:hover:border-red-300'
                     onClick={resetFieldset}
                 >
                     <Restore className='text-inherit sm:hidden' />

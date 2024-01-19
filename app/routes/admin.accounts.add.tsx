@@ -42,9 +42,9 @@ export default function AddAdminUser() {
 
         <PermissionsFormControl permissions={permissions} />
 
-        <div className='flex justify-end gap-3 sm:gap-6 sm:col-span-2 mt-4'>
-          <Cta element='button' type='reset' className='px-4 py-1 sm:px-8 sm:py-2 rounded-lg font-medium border-secondary active:border-accent' variant='outline'>Reset</Cta>
-          <Cta element='button' type='submit' className='px-4 py-1 sm:px-8 sm:py-2 rounded-lg font-medium'>Submit</Cta>
+        <div className='grid grid-cols-2 sm:flex justify-end gap-3 sm:gap-6 sm:col-span-2 mt-4'>
+          <Cta element='button' type='reset' className='px-4 sm:px-8 py-2 rounded-lg font-medium border-secondary active:border-accent' variant='outline'>Reset</Cta>
+          <Cta element='button' type='submit' className='px-4 sm:px-8 py-2 rounded-lg font-medium'>Submit</Cta>
         </div>
       </Form>
     </main>

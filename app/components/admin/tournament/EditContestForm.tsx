@@ -15,28 +15,30 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
     const [fileList, setFileList] = useState<FileList | null>(null)
     const { filePreview, clearFilePreview, fileName } = useFilePreview(fileList)
     return (
-        <Form className='max-w-[700px] mx-auto grid gap-12 text-sm' method='post'>
+        <Form className='max-w-xl mx-auto grid gap-6 sm:gap-12 text-sm' method='post'>
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
             <div className="flex items-center gap-x-5">
                 {filePreview
                     ? <img className="w-20 h-20 rounded-lg object-cover" src={filePreview} alt="chosen image" />
                     : contest.image
-                        ? <img className="w-20 h-20 rounded-lg object-cover" src={contest.image} alt="Contest banner" />
+                        ? <img className="w-20 h-20 rounded-lg object-cover" src={contest.image} alt="Tournament banner" />
                         : <div className="w-20 h-20 rounded-lg bg-slate-400"></div>
                 }
-                <label htmlFor='image' className="border-2 border-secondary text-primary cursor-pointer font-semibold py-2 px-4 rounded-lg">
-                    Change Photo
-                    <input id="image" name='image' type="file" onChange={(e) => { setFileList(e.currentTarget.files) }} className="hidden" />
-                </label>
-                {filePreview
-                    ? <>
-                        <span>{fileName}</span>
-                        <Svg src={icons.closeIcon} onClick={clearFilePreview} className='text-red-600' />
-                    </>
-                    : null
-                }
+                <div className="flex flex-col items-start gap-2 max-xs:text-xs">
+                    <label htmlFor='image' className="border-2 border-secondary text-primary cursor-pointer font-semibold py-2 px-4 rounded-lg">
+                        Change Photo
+                        <input id="image" name='image' type="file" onChange={(e) => { setFileList(e.currentTarget.files) }} className="hidden" />
+                    </label>
+                    <span className='flex items-center gap-3'>
+                        <span>{fileName || 'PNG, JPG (max. 1440x900px)'}</span>
+                        {fileName
+                            ? <Svg src={icons.closeIcon} onClick={clearFilePreview} className='text-red-600 cursor-pointer' />
+                            : null
+                        }
+                    </span>
+                </div>
             </div>
-            <fieldset className="grid gap-6 grid-cols-2">
+            <fieldset className="grid gap-3 sm:gap-6 sm:grid-cols-2">
                 <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={contest.unique_tournament_id} required>
                     <option value=''>Select a tournament</option>
                     {tournaments.map(tournament => (
@@ -44,7 +46,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
                     ))}
                 </Select>
                 <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' defaultValue={contest.title} required />
-                <FormControl as='textarea' rows={3} labelClassNames='col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' defaultValue={contest.description} required />
+                <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' defaultValue={contest.description} required />
                 <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={contest.contestId} required />
                 <FormControl as='input' type='number' labelText='Number of Stages' id='no_stages' name='no_stages' defaultValue={contest.stages.length} min={1} required />
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' defaultValue={parseDateForInput(contest.start_date)} required />
@@ -63,7 +65,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
                 <FormControl as='textarea' rows={4} labelText='Additional Information' placeholder='Enter text here...' id='add_info' name='add_info' defaultValue={contest.add_info} required />
             </fieldset>
 
-            <div className='flex justify-end gap-6'>
+            <div className='flex max-sm:flex-col justify-end gap-3 sm:gap-6'>
                 <Cta element='button' type='reset' onClick={clearFilePreview} className='px-8 py-2 rounded-lg font-medium border-secondary hover:border-slate-400 text-primary' variant='outline'>Reset Form</Cta>
                 <Cta element='button' type='submit' className='px-8 py-2 rounded-lg font-medium'>Edit Contest</Cta>
             </div>

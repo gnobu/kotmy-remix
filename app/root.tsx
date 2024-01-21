@@ -13,6 +13,7 @@ import globalStyles from './global.css'
 import autoplaycarouselStyles from "./autoplaycarousel.css"
 import { nickToast } from "./lib/session.server"
 import Toast from "./components/reusables/Toast"
+import PageTransitionProgressBar from "./components/reusables/PageProgress"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -36,7 +37,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="font-satoshi text-primary">
-        {/* <PageTransitionProgressBar /> */}
+        <PageTransitionProgressBar />
         {children}
         <ScrollRestoration />
         <Scripts />

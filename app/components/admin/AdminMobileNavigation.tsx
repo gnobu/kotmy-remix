@@ -53,7 +53,9 @@ export default function AdminMobileNavigation({ show, onClose }: { show: boolean
             <header>
                 <nav aria-label='primary navigation'>
                     <div className='flex gap-3 items-center bg-white px-6 py-2 border-b'>
-                        <img src={adminAvatar} alt="cartoon head" width={40} height={40} />
+                        <span className="p-2 border border-disabled rounded-full">
+                            <img src={adminAvatar} alt="cartoon head" width={24} height={24} />
+                        </span>
                         <span className="grid">
                             <span className='block text-sm font-satoshi-bold'>Admin</span>
                             <span className='block text-xs font-satoshi-medium'>admin@kotmy.com</span>

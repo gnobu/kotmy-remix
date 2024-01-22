@@ -9,7 +9,7 @@ import hero4 from './hero-4.jpg'
 import hero5 from './hero-5.jpg'
 import sponsorLogo from './sponsor_logo.png'
 import underline from './underline.png'
-import adminAvatar from './admin-avatar.png'
+import adminAvatar from './admin-avatar.svg'
 
 export {
     hero1, hero2, hero3, hero4, hero5,

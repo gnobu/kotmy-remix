@@ -23,7 +23,9 @@ export default function AdminUserCard({ user }: { user: AdminUser }) {
             </div>
             <div className="flex gap-4 justify-between">
                 <div className='flex gap-3 items-center'>
-                    <img src={adminAvatar} alt="cartoon head" width={40} height={40} />
+                    <span className="p-1.5 border border-disabled rounded-full">
+                        <img src={adminAvatar} alt="cartoon head" width={24} height={24} />
+                    </span>
                     <span className="grid">
                         <span className='text-primary line-clamp-1'>{user.full_name}</span>
                         <span className='line-clamp-1'>{user.email}</span>

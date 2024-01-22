@@ -7,7 +7,7 @@ import Toggletip from '../reusables/ToggleTip'
 export default function AdminToolbar() {
     const mainComponent = (
         <div tabIndex={0}
-            className='relative p-2 rounded-full border  flex items-center gap-4 cursor-pointer hover:bg-[#EEF0FF]'>
+            className='relative p-2 rounded-full border flex items-center gap-4 cursor-pointer bg-tertiary hover:bg-[#EEF0FF]'>
             <div className='flex gap-3 items-center'>
                 <span className="p-2 border border-disabled rounded-full">
                     <img src={adminAvatar} alt="cartoon head" width={24} height={24} />

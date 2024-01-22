@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from '@remix-run/react'
 import Button from '../reusables/Button'
 import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
-import { logo } from '~/assets/images'
 import MobileNavigation from './MobileNavigation'
 
 export default function Navigation() {
@@ -11,8 +10,8 @@ export default function Navigation() {
     const { pathname } = useLocation()
     return (
         <header className='flex justify-between items-center wrapper py-5'>
-            <Link to={'/'}>
-                <img src={logo} alt="KOTMY" className='sm:w-16' />
+            <Link to={'/'} aria-label='home'>
+                <Svg src={icons.logoIcon} className='w-9 h-9 sm:w-16 sm:h-16' />
             </Link>
             <nav className='hidden md:flex gap-16 items-center'>
                 <ul className='flex gap-6 text-xl font-bold'>

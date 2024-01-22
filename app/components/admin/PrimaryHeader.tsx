@@ -2,7 +2,6 @@ import { Link } from '@remix-run/react'
 import FormControl from '../reusables/FormControl'
 import AdminToolbar from './AdminToolbar'
 import Svg from '../reusables/Svg'
-import { logo } from '~/assets/images'
 import { icons } from '~/assets/icons'
 
 export default function PrimaryHeader({ toggleNav }: { toggleNav: () => void }) {
@@ -17,7 +16,7 @@ export default function PrimaryHeader({ toggleNav }: { toggleNav: () => void }) 
                     <Svg src={icons.adminHamburgerIcon} width={40} height={24} />
                 </button>
                 <Link to={'/'} className='text-accent flex items-center gap-6 whitespace-nowrap font-satoshi-black'>
-                    <img src={logo} alt="KOTMY" className='' />
+                    <Svg src={icons.logoIcon} width={37} height={36} />
                     KOTMY-ADMIN
                 </Link>
             </div>

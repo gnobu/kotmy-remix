@@ -41,6 +41,7 @@ import doubleArrowRight from './double-arrow-right.svg'
 import arrowUpDown from './arrow-up-down.svg'
 import check from './check.svg'
 import doubleArrowDiagonal from './double-arrow-diagonal.svg'
+import logo from './logo.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -86,4 +87,5 @@ export const icons = {
     arrowUpDownIcon: `${arrowUpDown}#img`,
     checkIcon: `${check}#img`,
     doubleArrowDiagonalIcon: `${doubleArrowDiagonal}#img`,
+    logoIcon: `${logo}#img`,
 }

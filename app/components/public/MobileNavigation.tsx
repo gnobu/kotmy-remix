@@ -1,5 +1,4 @@
 import { Link, NavLink, useLocation } from '@remix-run/react'
-import { logo } from '~/assets/images'
 import Svg from '../reusables/Svg'
 import { icons } from '~/assets/icons'
 import Button from '../reusables/Button'
@@ -13,7 +12,7 @@ export default function MobileNavigation({ show, onClose }: { show: boolean, onC
         className="sm:hidden fixed top-0 left-0 bg-primary w-full h-dvh z-10 flex flex-col justify-between mobileNav data-[show=true]:animate-slide-in-left data-[show=false]:left-full data-[show=false]:animate-slide-out-left">
         <header className='wrapper py-5'>
             <div className='flex justify-between items-center' >
-                <Link to={'/'} onClick={onClose}><img src={logo} alt="KOTMY" className='sm:w-16' /></Link>
+                <Link to={'/'} onClick={onClose} aria-label='home'><Svg src={icons.logoIcon} width={37} height={36} /></Link>
                 <button onClick={onClose} title='close menu' className="flex gap-1 items-center rounded p-2 hover:outline outline-primary">
                     <Svg src={icons.closeIcon} width={24} height={24} className='sm:hidden' />
                 </button>

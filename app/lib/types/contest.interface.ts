@@ -21,7 +21,7 @@ export type Contest = {
     title: string;
     description: string;
     tournamentId: string;
-    unique_tournament_id: string;
+    tournament_unique_id: string;
     contestId: string;
     status: Status;
     start_date: string;

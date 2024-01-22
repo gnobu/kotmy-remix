@@ -39,7 +39,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
                 </div>
             </div>
             <fieldset className="grid gap-3 sm:gap-6 sm:grid-cols-2">
-                <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={contest.unique_tournament_id} required>
+                <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={contest.tournament_unique_id} required>
                     <option value=''>Select a tournament</option>
                     {tournaments.map(tournament => (
                         <option key={tournament.uniqueId} value={tournament.uniqueId}>{tournament.uniqueId}</option>

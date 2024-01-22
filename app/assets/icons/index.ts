@@ -42,6 +42,10 @@ import arrowUpDown from './arrow-up-down.svg'
 import check from './check.svg'
 import doubleArrowDiagonal from './double-arrow-diagonal.svg'
 import logo from './logo.svg'
+import warning from './warning.svg'
+import avatar from './admin-avatar.svg'
+import hidden from './hidden.svg'
+import lock from './lock.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -88,4 +92,8 @@ export const icons = {
     checkIcon: `${check}#img`,
     doubleArrowDiagonalIcon: `${doubleArrowDiagonal}#img`,
     logoIcon: `${logo}#img`,
+    warningIcon: `${warning}#img`,
+    avatarIcon: `${avatar}#img`,
+    hiddenIcon: `${hidden}#img`,
+    lockIcon: `${lock}#img`,
 }

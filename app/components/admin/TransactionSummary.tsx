@@ -40,7 +40,7 @@ export default function TransactionSummary({ data }: Props) {
                 {Object.entries(yearData).map(([transaction, amount], idx) => (
                     <span className="flex justify-between py-3 border-b last:border-b-0 text-primary font-medium">
                         <span className="flex items-center gap-2 capitalize">
-                            <div className={cn("w-3 h-3 rounded-full", `bg-[${colors[idx]}]`)}></div>
+                            <div className={cn("w-3 h-3 rounded-[4px]", `bg-[${colors[idx]}]`)}></div>
                             {transaction}
                         </span>
                         <span>{numberFormatter(amount, numberFormatterOptions)}</span>

@@ -19,6 +19,7 @@ export default function TransactionSummary({ data }: Props) {
             label: 'Income',
             data: Object.values(yearData),
             backgroundColor: colors,
+            hoverOffset: 10
         }]
     }
     return (

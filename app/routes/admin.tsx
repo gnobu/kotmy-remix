@@ -22,7 +22,7 @@ export default function AdminLayout() {
         <PrimaryHeader toggleNav={() => { setShowNav(prev => !prev) }} />
         <MobileHeader toggleNav={() => { setShowNav(prev => !prev) }} />
         <AdminMobileNavigation onClose={() => { setShowNav(false) }} show={showNav} />
-        <div className="sm:flex sm:h-[calc(100vh-82.5px)]">
+        <div className="sm:flex sm:h-[calc(100vh-85px)]">
             <AdminNavigation show={showNav} />
             <Outlet />
         </div>

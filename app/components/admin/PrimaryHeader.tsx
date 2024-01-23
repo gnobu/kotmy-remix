@@ -6,7 +6,7 @@ import { icons } from '~/assets/icons'
 
 export default function PrimaryHeader({ toggleNav }: { toggleNav: () => void }) {
     return (
-        <header className='hidden sm:flex justify-between items-center gap-4 px-6 py-3 bg-secondary border-b'>
+        <header className='h-[85px] hidden sm:flex justify-between items-center gap-4 px-6 py-3 bg-secondary border-b'>
             <div className="flex gap-6">
                 <button
                     onClick={toggleNav}

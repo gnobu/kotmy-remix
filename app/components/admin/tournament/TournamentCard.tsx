@@ -5,11 +5,12 @@ import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 import Toggletip from "~/components/reusables/ToggleTip"
 import { TournamentWContest } from "~/lib/types/contest.interface"
+import { cn } from "~/lib/utils"
 
-export default function TournamentCard({ tournament }: { tournament: TournamentWContest }) {
+export default function TournamentCard({ tournament, className }: { tournament: TournamentWContest, className?: string }) {
     const mainComponent = <RoundCta icon={icons.optionsIcon} className='border-transparent hover:border-disabled' />
     return (
-        <aside className='p-6 border border-disabled rounded-xl bg-white shadow overflow-hidden'>
+        <aside className={cn('p-6 border border-disabled rounded-xl bg-white shadow overflow-hidden', className)}>
             <div className="flex gap-3 items-start justify-between max-xs:flex-wrap">
                 <img src={tournament.image} alt="children smiling" className="w-24 aspect-square rounded-md object-cover" />
                 <div className="self-center grow max-xs:order-1">
@@ -19,7 +20,7 @@ export default function TournamentCard({ tournament }: { tournament: TournamentW
                 <Toggletip mainComponent={mainComponent}
                     childContainerClass="top-[110%] right-0 bg-tertiary p-2 border border-disabled text-xs whitespace-nowrap"
                 >
-                    <Link to={`${tournament.id}/edit`}
+                    <Link to={`/admin/tournaments/${tournament.id}/edit`}
                         className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'
                     >Edit Tournament</Link>
                     <button className="p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium"
@@ -30,7 +31,7 @@ export default function TournamentCard({ tournament }: { tournament: TournamentW
             <span className="text-primary text-sm font-satoshi-bold mb-3">{tournament.contests.length} contests created</span>
             <div className="grid gap-2 xs:flex justify-between items-center">
                 <LayeredImages images={tournament.contests} />
-                <Link to={tournament.id} className="flex gap-2 items-center font-semibold hover:text-accent">View Contests <Svg src={icons.arrowNextIcon} /></Link>
+                <Link to={`/admin/tournaments/${tournament.id}`} className="flex gap-2 items-center font-semibold hover:text-accent">View Contests <Svg src={icons.arrowNextIcon} /></Link>
             </div>
         </aside>
     )

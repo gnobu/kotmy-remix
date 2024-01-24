@@ -1,21 +1,21 @@
-import { LoaderFunctionArgs, SerializeFrom, json } from "@remix-run/node"
+import { LoaderFunctionArgs, json } from "@remix-run/node"
 import { ClientLoaderFunctionArgs, useLoaderData } from "@remix-run/react"
 import { icons } from "~/assets/icons"
 import TournamentCard from "~/components/admin/tournament/TournamentCard"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
+import { memoryCache as cache } from "~/lib/cache"
 import { getTournamentsWithContests } from "~/lib/data/contest.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
     return json({ tournaments: await getTournamentsWithContests() })
 }
 
-let cache: Awaited<SerializeFrom<typeof loader>>
 export async function clientLoader({ request, serverLoader }: ClientLoaderFunctionArgs) {
-    console.log(cache, request);
-    if (cache) return cache
+    const cachedItem = await cache.getItem('tournaments')
+    if (cachedItem) return cachedItem
     const loaderData = await serverLoader<typeof loader>()
-    cache = loaderData
+    cache.setItem('tournaments', loaderData)
     return loaderData
 }
 clientLoader.hydrate = true

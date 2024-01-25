@@ -4,7 +4,7 @@ import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
 import { IPagedModel } from "~/lib/api/types/paged-model.interface"
 
-export class TournamentRepository implements ITournamentRepository {
+class TournamentRepository implements ITournamentRepository {
     async getTournaments(): Promise<ITournamentDTO[]> {
         return await ApiCall.call({
             url: ApiEndPoints.getTournaments
@@ -39,3 +39,4 @@ export class TournamentRepository implements ITournamentRepository {
         })
     }
 }
+export const tournamentRepo = new TournamentRepository()

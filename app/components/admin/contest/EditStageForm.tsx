@@ -33,8 +33,8 @@ export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
             <FormControl as='input' id='weight' name='weight' labelText='Stage Weight (%)' type='number' min={0} defaultValue={selectedStage?.weight} />
             <FormControl as='input' id='success_count' name='success_count' labelText='Success Count' type='number' min={0} defaultValue={selectedStage?.success_count} />
           </fieldset>
-          <fieldset className="pt-2 py-4 grid grid-cols-4 gap-3 border-b">
-            <legend className='font-bold text-sm text-admin-pry'>Stage Rates <span className='font-normal'>(must sum up to 100%)</span></legend>
+          <fieldset className="pt-2 pb-4 grid grid-cols-4 gap-3 border-b">
+            <legend className='font-bold text-sm text-admin-pry w-max'>Stage Rates <span className='font-normal'>(must sum up to 100%)</span></legend>
             <FormControl as='input' id='social_media_rate' name='social_media_rate' labelText='Social Media Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.social_media.amount} />
             <FormControl as='input' id='tally_rate' name='tally_rate' labelText='Tally Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.tally} />
             <FormControl as='input' id='givaah_rate' name='givaah_rate' labelText='Givaah Rate (%)' type='number' min={0} defaultValue={selectedStage?.rates.givaah} />

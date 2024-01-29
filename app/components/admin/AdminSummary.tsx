@@ -13,7 +13,7 @@ export default function AdminSummary({ users }: { users: AdminUser[] }) {
                 </Cta>
             </div>
             <div className="px-4 grid">
-                {users.map(user => (
+                {users.slice(0, 5).map(user => (
                     <AdminUserCard key={user.id} user={user} className="border-0 shadow-none rounded-none border-b last:border-b-0" />
                 ))}
             </div>

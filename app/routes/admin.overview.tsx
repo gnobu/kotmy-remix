@@ -10,9 +10,9 @@ import { getContestsWStages, getTournamentsWithContests } from "~/lib/data/conte
 
 export async function loader({ }: LoaderFunctionArgs) {
     return json({
-        adminUsers: adminUsers.slice(0, 5),
-        tournaments: (await getTournamentsWithContests()).slice(0, 2),
-        contests: (await getContestsWStages()).slice(0, 5),
+        adminUsers: adminUsers,
+        tournaments: await getTournamentsWithContests(),
+        contests: await getContestsWStages(),
         transactions: {
             '2024': { product: 23000, registration: 10000, tally: 42094 },
             '2023': { product: 20000, registration: 9000, tally: 30500 },

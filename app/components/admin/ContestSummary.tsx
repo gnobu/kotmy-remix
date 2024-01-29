@@ -1,8 +1,14 @@
 import { ContestWStage } from "~/lib/types/contest.interface"
 import Cta from "../reusables/Cta"
 import ContestTable from "./contest/ContestTable"
+import { Aggregator, AggregatorItem } from "./Aggregator"
+import Svg from "../reusables/Svg"
+import { icons } from "~/assets/icons"
 
 export default function ContestSummary({ contests }: { contests: ContestWStage[] }) {
+    const ongoingCount = contests.filter(contest => contest.status === 'ongoing').length
+    const yetToStartCount = contests.filter(contest => contest.status === 'registering').length
+    const closedCount = contests.filter(contest => contest.status === 'completed').length
     return <div className="border rounded-xl overflow-hidden grow">
         <div className="flex gap-2 xs:gap-4 justify-between items-center py-3 px-4 border-b">
             <h3 className="text-primary font-bold max-sm:text-xs">Contests</h3>
@@ -12,7 +18,45 @@ export default function ContestSummary({ contests }: { contests: ContestWStage[]
             </Cta>
         </div>
         <div className="px-4">
-            <ContestTable data={contests} />
+            <Aggregator className="my-4">
+                <AggregatorItem>
+                    <span className="bg-tertiary p-2 rounded-full border">
+                        <Svg src={icons.adminContestIcon} className="text-primary" />
+                    </span>
+                    <span className="grid">
+                        <span className='text-primary font-satoshi-black'>{contests.length}</span>
+                        <span className=''>Contests Created</span>
+                    </span>
+                </AggregatorItem>
+                <AggregatorItem className='flex gap-3 items-center'>
+                    <span className="bg-tertiary p-2 rounded-full border">
+                        <Svg src={icons.adminContestIcon} className="text-primary" />
+                    </span>
+                    <span className="grid">
+                        <span className='text-primary font-satoshi-black'>{ongoingCount}</span>
+                        <span className=''>Ongoing Contests</span>
+                    </span>
+                </AggregatorItem>
+                <AggregatorItem className='flex gap-3 items-center'>
+                    <span className="bg-tertiary p-2 rounded-full border">
+                        <Svg src={icons.adminContestIcon} className="text-primary" />
+                    </span>
+                    <span className="grid">
+                        <span className='text-primary font-satoshi-black'>{yetToStartCount}</span>
+                        <span className=''>Yet To Start Contests</span>
+                    </span>
+                </AggregatorItem>
+                <AggregatorItem className='flex gap-3 items-center'>
+                    <span className="bg-tertiary p-2 rounded-full border">
+                        <Svg src={icons.adminContestIcon} className="text-primary" />
+                    </span>
+                    <span className="grid">
+                        <span className='text-primary font-satoshi-black'>{closedCount}</span>
+                        <span className=''>Closed Contests</span>
+                    </span>
+                </AggregatorItem>
+            </Aggregator>
+            <ContestTable data={contests.slice(0, 5)} />
         </div>
     </div>
 }

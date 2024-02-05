@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Form, useSearchParams } from '@remix-run/react'
 import DragnDrop from '~/components/public/contests/DragnDrop'
 import Cta from '~/components/reusables/Cta'
@@ -9,7 +8,6 @@ import StageInputs from './StageInputs'
 import { Tournament } from '~/lib/types/contest.interface'
 
 export default function CreateContestForm({ tournaments }: { tournaments: Pick<Tournament, 'uniqueId'>[] }) {
-    const [numOfStages, setNumOfStages] = useState(1)
     const [searchParams] = useSearchParams()
     const defaultTournament = searchParams.get('tournament') ?? undefined
     return (
@@ -26,16 +24,16 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<T
                 <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' required />
                 <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' required />
                 <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' required />
-                <FormControl as='input' type='number' labelText='Number of Stages' id='no_stages' name='no_stages' value={numOfStages} onChange={(e) => setNumOfStages(+e.target.value)} min={1} required />
+                {/* <FormControl as='input' type='number' labelText='Number of Stages' id='no_stages' name='no_stages' value={numOfStages} onChange={(e) => setNumOfStages(+e.target.value)} min={1} required /> */}
+                <FormControl as='input' type='date' labelText='Registration Deadline' id='reg_deadline' name='reg_deadline' required />
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' required />
                 <FormControl as='input' type='date' labelText='Contest End Date' id='end_date' name='end_date' required />
-                <FormControl as='input' type='date' labelText='Registration Deadline' id='reg_deadline' name='reg_deadline' required />
-                <FormControl as='textarea' rows={2} labelText='Contest Prizes' placeholder='Enter contest prizes' id='prizes' name='prizes' required />
+                <FormControl as='textarea' rows={2} labelText='Contest Prizes' labelClassNames='sm:col-span-2' placeholder='Enter contest prizes' id='prizes' name='prizes' required />
                 <DragnDrop className='sm:col-span-2' />
             </fieldset>
 
             <CategoryInputs />
-            <StageInputs stages={Array(numOfStages).fill(null)} />
+            <StageInputs />
 
             <fieldset className="grid gap-3 sm:gap-6">
                 <legend className='text-lg mb-4 font-bold'>Submission Guidelines</legend>

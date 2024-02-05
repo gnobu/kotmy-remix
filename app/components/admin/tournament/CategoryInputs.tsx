@@ -20,7 +20,7 @@ export default function CategoryInputs({ categories }: { categories?: string[] }
             <fieldset className="grid gap-3 sm:gap-6 sm:grid-cols-3 border border-secondary p-3 rounded-lg">
                 {catogories.map(category => (
                     <div key={category} className="p-3 rounded-lg border border-secondary flex items-center">
-                        <input type="text" className="grow pointer-events-none" name='category' defaultValue={category} />
+                        <input type="text" className="grow pointer-events-none bg-transparent" name='category' defaultValue={category} />
                         <button type='button'>
                             <Svg src={icons.closeIcon} width={'.9em'}
                                 className='hover:text-red-400' onClick={() => removeCategory(category)} />

@@ -2,12 +2,13 @@ import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import OngoingContest from "~/components/public/contests/OngoingContest"
 import RegisteringContest from "~/components/public/contests/RegisteringContest"
-import { contests } from "~/lib/data/landingPage.data"
+import { getContest } from "~/lib/data/contest.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
-    const { contestId } = params
-    const contest = contests.find(contest => contest._id === contestId)
-    if (!contest) return redirect('/contests')
+    const { tournamentId, contestId } = params
+    if (!contestId) return redirect(`/contests/${tournamentId}`)
+    const contest = await getContest(contestId)
+    if (!contest) return redirect(`/contests/${tournamentId}`)
     return json({ contest })
 }
 

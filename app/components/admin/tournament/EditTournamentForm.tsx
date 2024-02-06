@@ -5,9 +5,9 @@ import Cta from '~/components/reusables/Cta'
 import FormControl from '~/components/reusables/FormControl'
 import Svg from '~/components/reusables/Svg'
 import useFilePreview from '~/hooks/useFilePreview'
-import { Tournament } from '~/lib/types/contest.interface'
+import { ITournament } from '~/models/tournament/types/tournament.interface'
 
-export default function EditTournamentForm({ tournament }: { tournament: Tournament }) {
+export default function EditTournamentForm({ tournament }: { tournament: ITournament }) {
     const [fileList, setFileList] = useState<FileList | null>(null)
     const { filePreview, clearFilePreview, fileName } = useFilePreview(fileList)
     console.log(fileName);
@@ -36,8 +36,8 @@ export default function EditTournamentForm({ tournament }: { tournament: Tournam
                         </span>
                     </div>
                 </div>
-                <FormControl as='input' labelText='Tournament Name' placeholder='Enter tournament name' id='name' name='name' defaultValue={tournament.title} required />
-                <FormControl as='input' labelText='Tournament Unique ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={tournament.uniqueId} required />
+                <FormControl as='input' labelText='Tournament Name' placeholder='Enter tournament name' id='name' name='name' defaultValue={tournament.name} required />
+                <FormControl as='input' labelText='Tournament Unique ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={tournament.id} required />
                 <FormControl as='textarea' rows={3} labelText='Tournament Description' placeholder='Enter tournament description' id='description' name='description' defaultValue={tournament.description} required />
             </div>
             <div className='flex max-sm:flex-col justify-end gap-3 sm:gap-6'>

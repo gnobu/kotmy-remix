@@ -1,11 +1,11 @@
-import { ContestWStage } from "~/lib/types/contest.interface"
 import Cta from "../reusables/Cta"
 import ContestTable from "./contest/ContestTable"
 import { Aggregator, AggregatorItem } from "./Aggregator"
 import Svg from "../reusables/Svg"
 import { icons } from "~/assets/icons"
+import { IContestWStage } from "~/models/contest/types/contest.interface"
 
-export default function ContestSummary({ contests }: { contests: ContestWStage[] }) {
+export default function ContestSummary({ contests }: { contests: IContestWStage[] }) {
     const ongoingCount = contests.filter(contest => contest.status === 'ongoing').length
     const yetToStartCount = contests.filter(contest => contest.status === 'registering').length
     const closedCount = contests.filter(contest => contest.status === 'completed').length

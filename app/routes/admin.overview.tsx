@@ -6,12 +6,12 @@ import ContestSummary from "~/components/admin/ContestSummary"
 import TournamentSummary from "~/components/admin/TournamentSummary"
 import TransactionSummary from "~/components/admin/TransactionSummary"
 import { adminUsers } from "~/lib/data/admin"
-import { getContestsWStages, getTournamentsWithContests } from "~/lib/data/contest.server"
+import { getContestsWStages, getTournaments } from "~/lib/data/contest.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
     return json({
         adminUsers: adminUsers,
-        tournaments: await getTournamentsWithContests(),
+        tournaments: await getTournaments(),
         contests: await getContestsWStages(),
         transactions: {
             '2024': { product: 23000, registration: 10000, tally: 42094 },

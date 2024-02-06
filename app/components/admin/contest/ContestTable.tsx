@@ -2,14 +2,14 @@ import { ColumnDef } from '@tanstack/react-table'
 import DataTable from '~/components/reusables/DataTable'
 import StatusTag from '~/components/reusables/StatusTag'
 import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
-import { ContestWStage } from '~/lib/types/contest.interface'
 import ContestTableActions from './ContestTableActions'
 import Pagination from '~/components/reusables/Pagination'
 import EditStageForm from './EditStageForm'
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
+import { IContestWStage } from '~/models/contest/types/contest.interface'
 
-const columns: ColumnDef<ContestWStage>[] = [
+const columns: ColumnDef<IContestWStage>[] = [
     {
         id: 'expander',
         header: () => null,
@@ -21,17 +21,17 @@ const columns: ColumnDef<ContestWStage>[] = [
         )
     },
     {
-        accessorKey: "contestId",
+        accessorKey: "id",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="id" />
         ),
-        cell: ({ row }) => (<span className='uppercase'>{row.getValue('contestId')}</span>)
+        cell: ({ row }) => (<span className='uppercase'>{row.getValue('id')}</span>)
     }, {
-        accessorKey: "title",
+        accessorKey: "name",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="contest" />
         ),
-        cell: ({ row }) => (<span className='uppercase line-clamp-1'>{row.getValue('title')}</span>)
+        cell: ({ row }) => (<span className='uppercase line-clamp-1'>{row.getValue('name')}</span>)
     }, {
         accessorKey: "timeline",
         header: ({ column }) => (
@@ -56,7 +56,7 @@ const columns: ColumnDef<ContestWStage>[] = [
     },
 ]
 
-export default function ContestTable({ data, pagination }: { data: ContestWStage[], pagination?: boolean }) {
+export default function ContestTable({ data, pagination }: { data: IContestWStage[], pagination?: boolean }) {
     return (
         <>
             <div className="w-full overflow-x-auto">

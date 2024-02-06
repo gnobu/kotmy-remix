@@ -7,13 +7,14 @@ import FormControl from "~/components/reusables/FormControl"
 import Pagination from "~/components/reusables/Pagination"
 import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
-import { contests } from "~/lib/data/landingPage.data"
+import { getContest } from "~/lib/data/contest.server"
 import { scoreboardData } from "~/lib/data/scoreboardData"
 
 export async function loader({ params }: LoaderFunctionArgs) {
-    const { contestId } = params
-    const contest = contests.find(contest => contest._id === contestId)
-    if (!contest) return redirect('/contests')
+    const { tournamentId, contestId } = params
+    if (!contestId) return redirect(`/contests/${tournamentId}`)
+    const contest = await getContest(contestId)
+    if (!contest) return redirect(`/contests/${tournamentId}`)
     return json({ contest })
 }
 
@@ -24,11 +25,8 @@ export default function ContestPage() {
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
                 <div className="grid">
                     <div className="max-w-2xl">
-                        <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3 uppercase">{contest.title}</h1>
-                        <p className="font-satoshi-medium">Lorem ipsum dolor sit amet consectetur. Dolor ut porta id in placerat.
-                            Neque egestas tellus facilisis varius eu pretium id.
-                            Commodo sed pellentesque lacus consequat ipsum. Enim elit elit
-                        </p>
+                        <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3 uppercase">{contest.name}</h1>
+                        <p className="font-satoshi-medium">{contest.description}</p>
                     </div>
                     <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                         <div className="">
@@ -46,7 +44,7 @@ export default function ContestPage() {
                     </div>
                     <ContestTimer deadline={new Date(Date.now() + 104705000)} title='contest ends in' />
                 </div>
-                <img src={contest.image} alt="kid smiling" className="w-full rounded-3xl" />
+                <img src={contest.image ?? ''} alt="kid smiling" className="w-full rounded-3xl" />
             </header>
             <section className="sm:bg-white">
                 <div className="wrapper my-16">
@@ -58,7 +56,7 @@ export default function ContestPage() {
                                 <option value="1">Stage 1</option>
                             </Select>
                         </div>
-                        <Link to={`/results/${contest._id}`} className="text-accent font-bold hover:underline underline-offset-4">See result table</Link>
+                        <Link to={`/results/${contest.id}`} className="text-accent font-bold hover:underline underline-offset-4">See result table</Link>
                     </div>
                     <ScoreboardTable data={scoreboardData} />
                     <MobileScoreboard data={scoreboardData} />

@@ -1,7 +1,15 @@
+import { json } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import ContestCard from '~/components/reusables/ContestCard'
-import { contests } from '~/lib/data/landingPage.data'
+import { getTournaments } from '~/lib/data/contest.server'
+
+export async function loader() {
+  const tournaments = await getTournaments()
+  return json({ tournaments })
+}
 
 export default function Contests() {
+  const { tournaments } = useLoaderData<typeof loader>()
   return (
     <main className='grow'>
       <header className="wrapper my-16">
@@ -11,8 +19,8 @@ export default function Contests() {
       </header>
 
       <section className='wrapper my-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center'>
-        {contests.map(contest => (
-          <ContestCard key={contest._id} contest={contest} to={`/contests/${contest._id}`} />
+        {tournaments.map(tournament => (
+          <ContestCard key={tournament.id} contest={tournament} to={`/contests/${tournament.id}`} />
         ))}
       </section>
     </main>

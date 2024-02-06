@@ -1,16 +1,15 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { icons } from "~/assets/icons"
 import Pagination from "~/components/reusables/Pagination"
 import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
-import Svg from "~/components/reusables/Svg"
-import { contests } from "~/lib/data/landingPage.data"
+import { getContest } from "~/lib/data/contest.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { contestId } = params
-    const contest = contests.find(contest => contest._id === contestId)
-    if (!contest) return redirect('/results')
+    if (!contestId) return redirect(`/resluts`)
+    const contest = await getContest(contestId)
+    if (!contest) return redirect(`/results`)
     return json({ result: contest })
 }
 
@@ -34,7 +33,7 @@ export default function ContestResult() {
         <main className='grow'>
             <header className="wrapper my-16">
                 <h1 className='text-accent text-2xl lg:text-4xl lg:leading-snug font-satoshi-bold max-w-3xl uppercase mb-10'>
-                    {result.title} Result Table
+                    {result.name} Result Table
                 </h1>
                 <div className="grid gap-6 max-w-2xl">
                     <div className="">

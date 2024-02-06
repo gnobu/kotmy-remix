@@ -1,20 +1,38 @@
-import { IContestDTO } from "~/models/contest/types/contest.interface"
+import { IContest, IContestDto, dtoToContestInTournament } from "~/models/contest/types/contest.interface"
 
-export interface ITournamentDTO {
-    id: string
-    image: string
-    title: string
+export interface ITournamentDto {
+    _id: string
+    str_id: string
+    created_at: string
+    updated_at: string
+    is_deleted: boolean,
+    unique_id: string
+    name: string
     description: string
-    uniqueId: string
+    image_url: string | null,
+    contests: Pick<IContestDto, 'contest_unique_id' | '_id' | 'image_url' | 'name' | 'status'>[]
 }
 
-export interface ITournamentWContestDTO extends ITournamentDTO {
-    contests: IContestDTO[]
+export interface ITournament {
+    id: string
+    name: string
+    description: string
+    image: string | null
+    contests: Pick<IContest, 'id' | 'image' | 'name' | 'status'>[]
 }
 
 export interface ITournamentRepository {
-    getTournaments(): Promise<ITournamentDTO[]>
-    getTournamentsWContests(): Promise<ITournamentWContestDTO[]>
-    getTournamentById(tournamentId: string): Promise<ITournamentDTO | null>
-    createTournament(tournament: Partial<ITournamentDTO>, token: string): Promise<ITournamentDTO>
+    getTournaments(): Promise<ITournament[]>
+    getTournamentById(tournamentId: string): Promise<ITournament | null>
+    createTournament(tournament: Partial<ITournament>, token: string): Promise<ITournament>
+}
+
+export function dtoToTournament(tournament: ITournamentDto): ITournament {
+    return {
+        id: tournament.unique_id,
+        name: tournament.name,
+        description: tournament.description,
+        image: tournament.image_url,
+        contests: tournament.contests.map(contest => dtoToContestInTournament(contest))
+    }
 }

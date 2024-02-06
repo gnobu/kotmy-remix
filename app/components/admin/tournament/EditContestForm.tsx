@@ -4,14 +4,15 @@ import FormControl from '~/components/reusables/FormControl'
 import Select from '~/components/reusables/Select'
 import CategoryInputs from './CategoryInputs'
 import StageInputs from './StageInputs'
-import { ContestWStage, Tournament } from '~/lib/types/contest.interface'
 import { parseDateForInput } from '~/lib/dates.utils'
 import { useState } from 'react'
 import useFilePreview from '~/hooks/useFilePreview'
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
+import { ITournament } from '~/models/tournament/types/tournament.interface'
+import { IContestWStage } from '~/models/contest/types/contest.interface'
 
-export default function EditContestForm({ tournaments, contest }: { tournaments: Pick<Tournament, 'uniqueId'>[], contest: ContestWStage }) {
+export default function EditContestForm({ tournaments, contest }: { tournaments: Pick<ITournament, 'id'>[], contest: IContestWStage }) {
     const [fileList, setFileList] = useState<FileList | null>(null)
     const { filePreview, clearFilePreview, fileName } = useFilePreview(fileList)
     return (
@@ -42,12 +43,12 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
                 <Select name="tournament" id="tournament" label='Tournament' className="uppercase" defaultValue={contest.tournament_unique_id} required>
                     <option value=''>Select a tournament</option>
                     {tournaments.map(tournament => (
-                        <option key={tournament.uniqueId} value={tournament.uniqueId}>{tournament.uniqueId}</option>
+                        <option key={tournament.id} value={tournament.id}>{tournament.id}</option>
                     ))}
                 </Select>
-                <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' defaultValue={contest.title} required />
+                <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' defaultValue={contest.name} required />
                 <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' defaultValue={contest.description} required />
-                <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={contest.contestId} required />
+                <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={contest.id} required />
                 <FormControl as='input' type='date' labelText='Registration Deadline' id='reg_deadline' name='reg_deadline' defaultValue={parseDateForInput(contest.reg_deadline)} required />
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' defaultValue={parseDateForInput(contest.start_date)} required />
                 <FormControl as='input' type='date' labelText='Contest End Date' id='end_date' name='end_date' defaultValue={parseDateForInput(contest.end_date)} required />

@@ -3,13 +3,13 @@ import Cta from '~/components/reusables/Cta'
 import FormControl from '~/components/reusables/FormControl'
 import GradeInputs from './GradeInputs'
 import { Row } from '@tanstack/react-table'
-import { ContestWStage, Grade, Stage } from '~/lib/types/contest.interface'
 import { useState } from 'react'
 import cn from 'classnames'
 import { parseDateForInput } from '~/lib/dates.utils'
+import { IContestWStage, Grade, IStage } from '~/models/contest/types/contest.interface'
 
-export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
-  const [selectedStage, setSelectedStage] = useState<Stage | null>(row.original.stages[0] ?? null)
+export default function EditStageForm({ row }: { row: Row<IContestWStage> }) {
+  const [selectedStage, setSelectedStage] = useState<IStage | null>(row.original.stages[0] ?? null)
   return (
     <div className='p-6'>
       <div className="p-3 flex gap-2 border border-disabled bg-[#F6F8FA] rounded-md">
@@ -52,7 +52,7 @@ export default function EditStageForm({ row }: { row: Row<ContestWStage> }) {
               className='px-3 py-2 rounded-md font-bold min-w-[90px] border-secondary hover:border-slate-400 text-primary'>Close Form</Cta>
             <Cta element='button' type='submit' className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Submit</Cta>
           </div>
-          <input type="hidden" name='contest_id' value={selectedStage?.contest_id} />
+          <input type="hidden" name='contest_id' value={selectedStage?.contest_unique_id} />
           <input type="hidden" name='id' value={selectedStage?.id} />
         </Form>
         : null

@@ -1,8 +1,16 @@
+import { json } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import Button from '~/components/reusables/Button'
 import ContestCard from '~/components/reusables/ContestCard'
-import { contests } from '~/lib/data/landingPage.data'
+import { getContests } from '~/lib/data/contest.server'
+
+export async function loader() {
+  const contests = await getContests({ where: { status: 'completed' } })
+  return json({ contests })
+}
 
 export default function Results() {
+  const { contests } = useLoaderData<typeof loader>()
   return (
     <main className='grow'>
       <header className="wrapper my-16">
@@ -21,7 +29,7 @@ export default function Results() {
 
       <section className='wrapper my-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center'>
         {contests.map(contest => (
-          <ContestCard key={contest._id} contest={contest} to={`/results/${contest._id}`} withTag withCategory />
+          <ContestCard key={contest.id} contest={contest} to={`/results/${contest.id}`} withTag withCategory />
         ))}
       </section>
 

@@ -2,11 +2,12 @@ import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import Button from "~/components/reusables/Button"
 import ContestCard from "~/components/reusables/ContestCard"
-import { contests } from "~/lib/data/landingPage.data"
+import { getTournament } from "~/lib/data/contest.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { tournamentId } = params
-    const tournament = contests.find(tournament => tournament._id === tournamentId)
+    if (!tournamentId) return redirect('/contests')
+    const tournament = await getTournament(tournamentId)
     if (!tournament) return redirect('/contests')
     return json({ tournament })
 }
@@ -17,10 +18,9 @@ export default function TournamentPage() {
         <main className='grow'>
             <header className="wrapper my-16">
                 <h1 className='text-accent text-2xl lg:text-4xl font-satoshi-bold max-w-3xl'>
-                    {tournament.title}
+                    {tournament.name}
                 </h1>
             </header>
-
             <section className='wrapper'>
                 <div className="p-2 rounded-full bg-secondary flex w-fit">
                     <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium bg-accent text-white">All KOTM</span>
@@ -29,13 +29,11 @@ export default function TournamentPage() {
                     <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium">Completed</span>
                 </div>
             </section>
-
             <section className='wrapper my-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center'>
-                {contests.map(contest => (
-                    <ContestCard key={contest._id} contest={contest} to={contest._id} withTag />
+                {tournament.contests.map(contest => (
+                    <ContestCard key={contest.id} contest={contest} to={contest.id} withTag />
                 ))}
             </section>
-
             <div className="wrapper my-20 flex justify-center">
                 <Button element="button" variant="outline">See more contests</Button>
             </div>

@@ -1,6 +1,6 @@
 export type IFetcherError = {
-    detail: string
-    statusCode: number
+    detail: string | TValidationError[]
+    // statusCode: number
 }
 
 export type TValidationError = {

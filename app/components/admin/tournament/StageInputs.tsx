@@ -66,6 +66,7 @@ export default function StageInputs({ stages }: { stages?: Partial<IStage>[] }) 
                     Add Stage
                 </button>
             </div>
+            <input type="hidden" name="no_of_stages" value={stagesState.length} />
         </div>
     )
 }

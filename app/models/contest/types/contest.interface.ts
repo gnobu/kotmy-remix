@@ -1,3 +1,4 @@
+import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { socials } from "~/lib/data/socials"
 
 export type ContestStatus = 'not_started' | 'registering' | 'ongoing' | 'completed'
@@ -78,7 +79,7 @@ export interface IStage {
 }
 
 export interface ICreateContestDTO {
-    image: string
+    image?: File
     name: string
     desc: string
     tournament_unique_id: string
@@ -86,7 +87,7 @@ export interface ICreateContestDTO {
     start_date: string
     end_date: string
     reg_deadline: string
-    categories: string[] // no longer a dict
+    categories: string // no longer a dict
     prizes: string
     sub_req: string
     terms_cond: string
@@ -133,7 +134,7 @@ export function dtoToContestInTournament(contest: Pick<IContestDto, 'contest_uni
 export interface IContestRepository {
     getContests(): Promise<IContest[]>
     getContestById(contestId: string): Promise<IContest | null>
-    createContest(contest: ICreateContestDTO, token: string): Promise<IContest>
+    createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
     deleteContest(contestId: string): Promise<string | null>
     updateContest(contestId: string): Promise<IContest | null>
 }

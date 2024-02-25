@@ -5,6 +5,7 @@ import CreateContestForm from '~/components/admin/tournament/CreateContestForm'
 import RoundCta from '~/components/reusables/RoundCta'
 import { icons } from '~/assets/icons'
 import { getTournaments } from '~/lib/data/contest.server'
+import { contestRepo, prepareCreateContestPayload } from '~/models/contest/contest.server'
 
 export async function loader({ }: LoaderFunctionArgs) {
     const tournaments = await getTournaments()
@@ -12,11 +13,14 @@ export async function loader({ }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    const formData = await request.formData()
-    console.log(...formData)
-    console.log(formData.getAll('category'))
-    const { headers } = await setToast({ request, toast: 'success::A new contest has been created' })
-    return redirect('/admin/contests', { headers })
+    const payload = prepareCreateContestPayload(await request.formData())
+    const { data, error } = await contestRepo.createContest(payload)
+    if (data) {
+        const { headers } = await setToast({ request, toast: 'success::A new contest has been created' })
+        return redirect('/admin/contests', { headers })
+    }
+    const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+    return json(null, { headers })
 }
 
 export default function AddContest() {

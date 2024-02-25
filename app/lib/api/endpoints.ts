@@ -33,7 +33,7 @@ export class ApiEndPoints {
         return `/api/tournament/${id}`
     }
     static get createContest() {
-        return "/contest/add_contest"
+        return "/admin/contest"
     }
     static updateContest(id: string) {
         return `/contest/${id}`

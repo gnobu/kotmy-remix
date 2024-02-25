@@ -1,28 +1,29 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios"
 import { FetcherError } from "./fetcherError"
+import { IFetcherError, TFetcherResponse, TValidationError } from "./types/fetcher.interface"
 
 export class ApiCall {
-    static _proxy = 'https://web-production-88a1.up.railway.app'
+    static _proxy = 'https://web-production-88a1.up.railway.app/v2/api'
     static _instance = axios.create({
         baseURL: this._proxy,
         timeout: 20000,
     })
 
-    static async call<TResponseDTO, TErrorDTO extends { message: string }, TRequestDTO>(
+    static async call<TResponseDTO, TRequestDTO, TErrorDTO = { detail: string | TValidationError[] }>(
         callConfig: AxiosRequestConfig<TRequestDTO>
-    ) {
+    ): Promise<TFetcherResponse<TResponseDTO, TErrorDTO | IFetcherError>> {
         try {
             const { data } = await this._instance.request<TResponseDTO>(callConfig)
-            return data
+            return { data }
         } catch (err) {
             let error = err as AxiosError<TErrorDTO>
-            let errorMessage = "An error Occurred"
+            let errorMessage = "An Error Occurred"
             let status = 500
             if (error.response) {
-                throw new FetcherError(error.response.data.message, error.response.status)
+                return { error: error.response.data }
             } else {
                 console.log(error)
-                throw new FetcherError(errorMessage, status)
+                return { error: new FetcherError(errorMessage, status) }
             }
         }
     }

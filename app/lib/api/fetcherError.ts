@@ -1,11 +1,11 @@
-import { IFetcherError } from "./types/error.interface"
+import { IFetcherError } from "./types/fetcher.interface"
 
 export class FetcherError extends Error implements IFetcherError {
-    public error: string
+    public detail: string
     public statusCode: number
     constructor(error: string, statusCode: number) {
         super()
-        this.error = error
+        this.detail = error
         this.statusCode = statusCode
     }
 }

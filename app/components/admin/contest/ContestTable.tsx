@@ -61,7 +61,7 @@ export default function ContestTable({ data, pagination }: { data: IContestWStag
         <>
             <div className="w-full overflow-x-auto">
                 <DataTable data={data} columns={columns}
-                    expandRows getRowCanExpand={() => true} renderSubComponent={EditStageForm}
+                    expandRows getRowCanExpand={() => true} SubComponent={EditStageForm}
                     className='max-xs:text-xs text-sm' />
             </div>
             {pagination

@@ -14,17 +14,17 @@ type DataTableProps<TData, TValue> = {
     TableActions?: ({ table }: { table: Table<TData> }) => React.ReactNode
 } & ({
     expandRows?: false
-    renderSubComponent?: undefined
+    SubComponent?: undefined
     getRowCanExpand?: (row: Row<TData>) => false
 } | {
     expandRows: true
-    renderSubComponent: (props: { row: Row<TData> }) => React.ReactElement
+    SubComponent: React.FC<{ row: Row<TData> }>
     getRowCanExpand: (row: Row<TData>) => boolean
 })
 
 export default function DataTable<TData, TValue>({
     data, columns, className = '', TableActions,
-    expandRows, getRowCanExpand, renderSubComponent
+    expandRows, getRowCanExpand, SubComponent
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const expandOptions: Partial<TableOptions<TData>> = expandRows
@@ -67,10 +67,10 @@ export default function DataTable<TData, TValue>({
                                         </td>
                                     })}
                                 </tr>
-                                <tr className={(expandRows && row.getIsExpanded()) ? 'hover:bg-secondary focus-within:bg-secondary' : 'hidden'}>
+                                <tr className={'hover:bg-secondary focus-within:bg-secondary'}>
                                     {/* 2nd row is a custom 1 cell row */}
                                     <td colSpan={row.getVisibleCells().length}>
-                                        {expandRows && renderSubComponent({ row })}
+                                        {expandRows && row.getIsExpanded() && <SubComponent row={row} />}
                                     </td>
                                 </tr>
                             </React.Fragment>

@@ -1,11 +1,12 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
+import { contestRepo } from "~/models/contest/contest.server"
 import { getContestsWStages } from "~/lib/data/contest.server"
-import { icons } from "~/assets/icons"
+import { setToast } from "~/lib/session.server"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
-import { setToast } from "~/lib/session.server"
+import { icons } from "~/assets/icons"
 
 export async function loader({ }: LoaderFunctionArgs) {
     const contests = await getContestsWStages()
@@ -14,8 +15,20 @@ export async function loader({ }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
-    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
     console.log(...formData)
+    const intent = formData.get('intent') as 'delete' | 'migrate' | 'open_registration'
+    if (intent === 'delete') {
+        const contestId = formData.get('contestId') as string
+        const { data, error } = await contestRepo.deleteContest(contestId)
+        if (data) {
+            const { headers } = await setToast({ request, toast: 'success::The contest has been deleted' })
+            return json(null, { headers })
+        }
+        const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
+        console.log(error)
+        return json(null, { headers })
+    }
+    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
     return json(null, { headers })
 }
 

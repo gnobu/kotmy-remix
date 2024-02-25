@@ -1,6 +1,7 @@
-import { icons } from '~/assets/icons'
+import DeleteContestDialog from './DeleteContestDialog'
 import RoundCta from '~/components/reusables/RoundCta'
 import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { icons } from '~/assets/icons'
 
 export default function ContestTableActions({ rowData }: { rowData: IContestWStage }) {
     const activeStageId = rowData.stages.find(stage => stage.active === true || stage.status === 'ONGOING')?.id
@@ -10,7 +11,7 @@ export default function ContestTableActions({ rowData }: { rowData: IContestWSta
             <RoundCta icon={icons.editIcon} element="link" to={`/admin/contests/${rowData.id}`} className="border-[#262626] bg-[#F7F7F8] text-primary" />
             <RoundCta icon={icons.viewIcon} className="border-yellow-700 bg-yellow-100 text-yellow-700" />
             <RoundCta icon={icons.doubleArrowRightIcon} className="border-indigo-700 bg-indigo-100 text-indigo-700" />
-            <RoundCta icon={icons.trashIcon} className="border-red-500 bg-red-50 text-red-500" />
+            <DeleteContestDialog contest={rowData} />
         </div>
     )
 }

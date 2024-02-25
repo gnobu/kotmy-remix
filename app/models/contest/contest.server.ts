@@ -18,6 +18,13 @@ class ContestRepository implements IContestRepository {
             data: contest
         })
     }
+    async deleteContest(contestId: string, token = TOKEN): Promise<TFetcherResponse<boolean>> {
+        return await ApiCall.call({
+            method: MethodsEnum.DELETE,
+            url: ApiEndPoints.deleteContest(contestId),
+            headers: { Authorization: `Bearer ${token}` },
+        })
+    }
     // async getContests(): Promise<IContest[]> {
     //     const contests = await ApiCall.call({
     //         url: ApiEndPoints.getContests
@@ -30,12 +37,6 @@ class ContestRepository implements IContestRepository {
     //         url: `${ApiEndPoints.getContests}/${contestId}`
     //     })
     // }
-    // async deleteContest(contestId: string): Promise<string | null> {
-    //     return await ApiCall.call({
-    //         method: MethodsEnum.GET,
-    //         url: ApiEndPoints.deleteContest(contestId)
-    //     })
-    // }
     async updateContest(contestId: string): Promise<IContest | null> {
         throw new Error("Method not implemented.")
     }
@@ -43,9 +44,6 @@ class ContestRepository implements IContestRepository {
         throw new Error("Method not implemented.")
     }
     getContestById(contestId: string): Promise<IContest | null> {
-        throw new Error("Method not implemented.")
-    }
-    deleteContest(contestId: string): Promise<string | null> {
         throw new Error("Method not implemented.")
     }
 }

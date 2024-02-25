@@ -39,7 +39,7 @@ export class ApiEndPoints {
         return `/contest/${id}`
     }
     static deleteContest(id: string) {
-        return `/contest/${id}`
+        return `/admin/contest/${id}`
     }
     static updateStage(id: string) {
         return `/contest/stage/${id}`

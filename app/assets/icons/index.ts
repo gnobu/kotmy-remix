@@ -46,6 +46,7 @@ import warning from './warning.svg'
 import avatar from './admin-avatar.svg'
 import hidden from './hidden.svg'
 import lock from './lock.svg'
+import question from './question.svg'
 
 export const icons = {
     addIcon: `${add}#img`,
@@ -96,4 +97,5 @@ export const icons = {
     avatarIcon: `${avatar}#img`,
     hiddenIcon: `${hidden}#img`,
     lockIcon: `${lock}#img`,
+    questionIcon: `${question}#img`,
 }

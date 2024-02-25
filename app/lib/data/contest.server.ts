@@ -4,6 +4,7 @@ import { IContest, IContestWStage, IStage } from "~/models/contest/types/contest
 
 export const contests: IContest[] = [
     {
+        _id: 'kotm1',
         id: 'kotm1',
         image: contestImage1,
         name: 'Kid of February 2024',
@@ -20,6 +21,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'kotm2',
         id: 'kotm2',
         image: contestImage2,
         name: 'Kid of January 2024',
@@ -36,6 +38,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'kotm3',
         id: 'kotm3',
         image: contestImage1,
         name: 'Kid of December 2023',
@@ -52,6 +55,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'koty4',
         id: 'koty4',
         image: contestImage2,
         name: 'Kid of the Year 2025',
@@ -68,6 +72,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'koty5',
         id: 'koty5',
         image: contestImage1,
         name: 'Kid of the Year 2024',
@@ -84,6 +89,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'koty6',
         id: 'koty6',
         image: contestImage2,
         name: 'Kid of the Year 2023',
@@ -100,6 +106,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'mbds7',
         id: 'mbds7',
         image: contestImage2,
         name: 'My Birthday Splash February 2024',
@@ -116,6 +123,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'mbds8',
         id: 'mbds8',
         image: contestImage1,
         name: 'My Birthday Splash January 2024',
@@ -132,6 +140,7 @@ export const contests: IContest[] = [
         add_info: 'Some additional information',
     },
     {
+        _id: 'mbds9',
         id: 'mbds9',
         image: contestImage2,
         name: 'My Birthday Splash December 2023',

@@ -39,6 +39,7 @@ export interface IContestDto {
 }
 
 export interface IContest {
+    _id: string
     id: string
     name: string
     description: string
@@ -105,6 +106,7 @@ export interface ICreateStageDTO {
 
 export function dtoToContest(contest: IContestDto): IContest {
     return {
+        _id: contest._id,
         id: contest.contest_unique_id,
         name: contest.name,
         description: contest.desc,
@@ -135,6 +137,6 @@ export interface IContestRepository {
     getContests(): Promise<IContest[]>
     getContestById(contestId: string): Promise<IContest | null>
     createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
-    deleteContest(contestId: string): Promise<string | null>
+    deleteContest(contestId: string): Promise<TFetcherResponse<boolean>>
     updateContest(contestId: string): Promise<IContest | null>
 }

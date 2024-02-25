@@ -3,16 +3,13 @@ export class ApiEndPoints {
     static get getTournaments(): string {
         return "/api/tournament"
     }
-    static get getContests() {
-        return "/contest"
-    }
     static getContestsInTournament(tournamentUniqueId: string) {
         return `/contest/tournament/${tournamentUniqueId}`
     }
     static getTournamentsPaged(page: number) {
         return `/api/tournament_paged?page=${page}`;
     }
-
+    
     // ADMIN
     static get createAdminAccount(): string {
         return "/users/admin_create_user"
@@ -34,6 +31,9 @@ export class ApiEndPoints {
     }
     static get createContest() {
         return "/admin/contest"
+    }
+    static get getContests() {
+        return "/admin/contest/"
     }
     static updateContest(id: string) {
         return `/contest/${id}`

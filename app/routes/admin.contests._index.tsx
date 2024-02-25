@@ -1,7 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { contestRepo } from "~/models/contest/contest.server"
-import { getContestsWStages } from "~/lib/data/contest.server"
 import { setToast } from "~/lib/session.server"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"
@@ -9,7 +8,8 @@ import Svg from "~/components/reusables/Svg"
 import { icons } from "~/assets/icons"
 
 export async function loader({ }: LoaderFunctionArgs) {
-    const contests = await getContestsWStages()
+    const { data: contests, error } = await contestRepo.getContests()
+    if (error) throw new Error(error.detail as string)
     return json({ contests })
 }
 
@@ -25,7 +25,6 @@ export async function action({ request }: ActionFunctionArgs) {
             return json(null, { headers })
         }
         const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
-        console.log(error)
         return json(null, { headers })
     }
     const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })

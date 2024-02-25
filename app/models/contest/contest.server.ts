@@ -1,7 +1,7 @@
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
-import { IContest, IContestDto, IContestRepository, ICreateContestDTO, dtoToContest } from "./types/contest.interface"
+import { IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, dtoToContest } from "./types/contest.interface"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 
 const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX2FkbWluIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImV4cCI6MTczMTk2NDg1Nn0.dDA5RkNkP4kf4sWrfivrP8dSYgR0a10BZra_Pk01IBQ"
@@ -25,12 +25,13 @@ class ContestRepository implements IContestRepository {
             headers: { Authorization: `Bearer ${token}` },
         })
     }
-    // async getContests(): Promise<IContest[]> {
-    //     const contests = await ApiCall.call({
-    //         url: ApiEndPoints.getContests
-    //     }) as IContestDto[]
-    //     return contests.map(contest => dtoToContest(contest))
-    // }
+    async getContests(): Promise<TFetcherResponse<IContestWStage[]>> {
+        const { data: contests, error } = await ApiCall.call<IContestDto[], unknown>({
+            url: ApiEndPoints.getContests
+        })
+        if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
+        return { error }
+    }
     // async getContestById(contestId: string): Promise<IContest | null> {
     //     return await ApiCall.call({
     //         method: MethodsEnum.GET,
@@ -38,9 +39,6 @@ class ContestRepository implements IContestRepository {
     //     })
     // }
     async updateContest(contestId: string): Promise<IContest | null> {
-        throw new Error("Method not implemented.")
-    }
-    getContests(): Promise<IContest[]> {
         throw new Error("Method not implemented.")
     }
     getContestById(contestId: string): Promise<IContest | null> {

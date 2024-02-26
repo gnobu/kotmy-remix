@@ -48,7 +48,14 @@ const columns: ColumnDef<IContestWStage>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="status" />
         ),
-        cell: ({ row }) => (<StatusTag status={row.getValue('status')} />)
+        cell: ({ row }) => {
+            const status = (row.getValue('status') as string).split('_').join(' ')
+            const color = status === 'registering'
+                ? 'yellow' : status === 'ongoing'
+                    ? 'green' : status === 'completed'
+                        ? 'red' : 'gray'
+            return <StatusTag status={status} color={color} />
+        }
     }, {
         id: 'actions',
         header: 'actions',

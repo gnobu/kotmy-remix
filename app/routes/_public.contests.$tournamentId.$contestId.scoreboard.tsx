@@ -20,6 +20,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export default function ContestPage() {
     const { contest } = useLoaderData<typeof loader>()
+    const color = contest.status === 'registering'
+        ? 'yellow' : contest.status === 'ongoing'
+            ? 'green' : contest.status === 'completed'
+                ? 'red' : 'gray'
     return (
         <main className='grow'>
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
@@ -31,7 +35,7 @@ export default function ContestPage() {
                     <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Status</span>
-                            <StatusTag status={contest.status} />
+                            <StatusTag status={contest.status} color={color} />
                         </div>
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Age Categories</span>

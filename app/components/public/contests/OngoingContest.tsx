@@ -25,6 +25,10 @@ const contestant: Contestant = {
 }
 
 export default function OngoingContest({ contest }: { contest: IContest }) {
+    const status = contest.status
+    const color = status === 'ongoing'
+        ? 'green' : status === 'completed'
+            ? 'red' : 'gray'
     return (
         <>
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
@@ -36,7 +40,7 @@ export default function OngoingContest({ contest }: { contest: IContest }) {
                     <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Status</span>
-                            <StatusTag status={contest.status} />
+                            <StatusTag status={status} color={color} />
                         </div>
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Age Categories</span>

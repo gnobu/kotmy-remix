@@ -17,7 +17,7 @@ export default function ContestGuidelines() {
         <div className='wrapper sm:max-w-lg sm:mx-0'>
             <div className="mb-6">
                 <span className="block font-satoshi-bold mb-1">Status</span>
-                <StatusTag status={'registering'} />
+                <StatusTag status={'registering'} color="yellow" />
             </div>
             <div className="grid gap-4 sm:grid-cols-2 my-8">
                 <div className="">

@@ -67,7 +67,14 @@ const columns: ColumnDef<RegistrationTableData>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="status" />
         ),
-        cell: ({ getValue }) => (<StatusTag status={getValue<RegistrationTableData['status']>()} />)
+        cell: ({ getValue }) => {
+            const status = getValue<RegistrationTableData['status']>()
+            const color = status === 'pending'
+                ? 'yellow' : status === 'verified'
+                    ? 'green' : status === 'revoked'
+                        ? 'red' : 'gray'
+            return <StatusTag status={status} color={color} />
+        }
     }
 ]
 

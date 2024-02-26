@@ -28,7 +28,10 @@ const headings = Object.keys(resultData) as (keyof typeof resultData)[]
 
 export default function ContestResult() {
     const { result } = useLoaderData<typeof loader>()
-
+    const color = result.status === 'registering'
+        ? 'yellow' : result.status === 'ongoing'
+            ? 'green' : result.status === 'completed'
+                ? 'red' : 'gray'
     return (
         <main className='grow'>
             <header className="wrapper my-16">
@@ -38,7 +41,7 @@ export default function ContestResult() {
                 <div className="grid gap-6 max-w-2xl">
                     <div className="">
                         <span className="block font-satoshi-bold mb-1">Status</span>
-                        <StatusTag status={result.status} />
+                        <StatusTag status={result.status} color={color} />
                     </div>
                     <div className="grid grid-cols-2 gap-14">
                         <div className="">

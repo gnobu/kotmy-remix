@@ -9,7 +9,7 @@ export default function StatusTag({ status, className, color = 'gray' }: StatusT
         'bg-red-100 text-red-700': color === 'red',
         'bg-gray-100 text-gray-700': color === 'gray',
     })}>
-        <span className={`before:content-['•'] before:absolute relative before:-left-4 before:top-[10%] before:text-2xl before:leading-3`}>
+        <span className="before:content-['•'] before:absolute relative before:-left-4 before:top-[10%] before:text-2xl before:leading-3 whitespace-nowrap">
             {status}
         </span>
     </span>

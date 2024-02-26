@@ -28,7 +28,7 @@ export default function CreateContestForm({ tournaments }: { tournaments: Pick<I
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' required />
                 <FormControl as='input' type='date' labelText='Contest End Date' id='end_date' name='end_date' required />
                 <FormControl as='textarea' rows={2} labelText='Contest Prizes' labelClassNames='sm:col-span-2' placeholder='Enter contest prizes' id='prizes' name='prizes' required />
-                <DragnDrop className='sm:col-span-2' />
+                <DragnDrop className='sm:col-span-2' name='image' multiple={false} />
             </fieldset>
 
             <CategoryInputs />

@@ -74,7 +74,7 @@ export function prepareCreateContestPayload(formData: FormData) {
         add_info: formData.get('add_info') as string,
         sub_req: formData.get('sub_req') as string,
         terms_cond: formData.get('tnc') as string,
-        image: formData.get('images') as File || null,
+        image: formData.get('image') as File || null,
         categories: JSON.stringify(formData.getAll('category')),
         no_of_stages: no_of_stages,
         stages: JSON.stringify(stages)

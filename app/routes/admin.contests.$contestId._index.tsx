@@ -3,13 +3,15 @@ import { useLoaderData, useNavigate } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import EditContestForm from '~/components/admin/tournament/EditContestForm'
 import RoundCta from '~/components/reusables/RoundCta'
-import { getContestWStages, getTournaments } from '~/lib/data/contest.server'
+import { getTournaments } from '~/lib/data/contest.server'
 import { setToast } from '~/lib/session.server'
+import { contestRepo, prepareContestPayload } from '~/models/contest/contest.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const tournaments = await getTournaments()
-    const contest = await getContestWStages(params.contestId!)
-    if (!contest) {
+    const { data: contest, error } = await contestRepo.getContestById(params.contestId!)
+    if (error || !contest) {
+        console.log(error)
         const { headers } = await setToast({ request, toast: 'error::The contest was not found' })
         return redirect('/admin/contests', { headers })
     }
@@ -18,9 +20,17 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
-    console.log(...formData)
-    console.log(formData.getAll('category'))
-    const { headers } = await setToast({ request, toast: 'success::The contest has been updated' })
+    const payload = prepareContestPayload(formData)
+    const { data, error } = await contestRepo.updateContest({ contestId: formData.get('contestId') as string, dto: payload })
+    if (data) {
+        const { headers } = await setToast({ request, toast: 'success::The contest has been updated' })
+        return redirect('/admin/contests', { headers })
+    } else if (error) {
+        console.log(JSON.stringify(error))
+        const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+        return json(null, { headers })
+    }
+    const { headers } = await setToast({ request, toast: `error::Sorry, this contest no longer exists` })
     return redirect('/admin/contests', { headers })
 }
 

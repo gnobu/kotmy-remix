@@ -16,7 +16,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
     const [fileList, setFileList] = useState<FileList | null>(null)
     const { filePreview, clearFilePreview, fileName } = useFilePreview(fileList)
     return (
-        <Form className='max-w-[700px] mx-auto grid gap-6 sm:gap-12 text-sm' method='post'>
+        <Form className='max-w-[700px] mx-auto grid gap-6 sm:gap-12 text-sm' method='post' encType='multipart/form-data'>
             <h1 className='text-2xl font-bold text-primary'>Contest Details</h1>
             <div className="flex items-center gap-x-5">
                 {filePreview
@@ -67,7 +67,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
 
             <div className='flex max-sm:flex-col justify-end gap-3 sm:gap-6'>
                 <Cta element='button' type='reset' onClick={clearFilePreview} className='px-8 py-2 rounded-lg font-medium border-secondary hover:border-slate-400 text-primary' variant='outline'>Reset Form</Cta>
-                <Cta element='button' type='submit' className='px-8 py-2 rounded-lg font-medium'>Edit Contest</Cta>
+                <Cta element='button' type='submit' name='contestId' value={contest._id} className='px-8 py-2 rounded-lg font-medium'>Edit Contest</Cta>
             </div>
         </Form>
     )

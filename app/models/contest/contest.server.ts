@@ -32,22 +32,30 @@ class ContestRepository implements IContestRepository {
         if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
         return { error }
     }
-    // async getContestById(contestId: string): Promise<IContest | null> {
-    //     return await ApiCall.call({
-    //         method: MethodsEnum.GET,
-    //         url: `${ApiEndPoints.getContests}/${contestId}`
-    //     })
-    // }
-    async updateContest(contestId: string): Promise<IContest | null> {
-        throw new Error("Method not implemented.")
+    async getContestById(contestId: string): Promise<TFetcherResponse<IContestWStage | null>> {
+        const { data: contest, error } = await ApiCall.call<IContestDto, unknown>({
+            url: ApiEndPoints.getContestById(contestId)
+        })
+        if (error) return { error }
+        return { data: dtoToContest(contest) as IContestWStage | null }
     }
-    getContestById(contestId: string): Promise<IContest | null> {
-        throw new Error("Method not implemented.")
+    async updateContest({ contestId, dto, token = TOKEN }: { contestId: string, dto: FormData, token?: string }): Promise<TFetcherResponse<IContestWStage | null>> {
+        const { data: contest, error } = await ApiCall.call<IContestDto | null, unknown>({
+            url: ApiEndPoints.updateContest(contestId),
+            method: MethodsEnum.PUT,
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            },
+            data: dto
+        })
+        if (error) return { error }
+        return { data: dtoToContest(contest) as IContestWStage | null }
     }
 }
 export const contestRepo = new ContestRepository()
 
-export function prepareCreateContestPayload(formData: FormData) {
+export function prepareContestPayload(formData: FormData) {
     const no_of_stages = parseInt(formData.get('no_of_stages') as string)
     const stages = []
     for (let i = 1; i <= no_of_stages; i++) {

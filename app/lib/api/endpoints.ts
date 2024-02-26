@@ -35,8 +35,11 @@ export class ApiEndPoints {
     static get getContests() {
         return "/admin/contest/"
     }
-    static updateContest(id: string) {
+    static getContestById(id: string) {
         return `/contest/${id}`
+    }
+    static updateContest(id: string) {
+        return `/admin/contest/${id}`
     }
     static deleteContest(id: string) {
         return `/admin/contest/${id}`

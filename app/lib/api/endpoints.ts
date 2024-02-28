@@ -1,7 +1,7 @@
 export class ApiEndPoints {
     // GENERAL
     static get getTournaments(): string {
-        return "/api/tournament"
+        return "/tournament"
     }
     static getContestsInTournament(tournamentUniqueId: string) {
         return `/contest/tournament/${tournamentUniqueId}`

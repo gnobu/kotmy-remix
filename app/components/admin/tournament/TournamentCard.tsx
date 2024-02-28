@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react"
 import { icons } from "~/assets/icons"
+import { contestImage1 } from "~/assets/images"
 import LayeredImages from "~/components/reusables/LayeredImages"
 import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
@@ -12,7 +13,7 @@ export default function TournamentCard({ tournament, className }: { tournament: 
     return (
         <aside className={cn('p-6 border border-disabled rounded-xl bg-white shadow overflow-hidden', className)}>
             <div className="flex gap-3 items-start justify-between max-xs:flex-wrap">
-                <img src={tournament.image ?? ''} alt="children smiling" className="w-24 aspect-square rounded-md object-cover" />
+                <img src={tournament.image || contestImage1} alt="children smiling" className="w-24 aspect-square rounded-md object-cover" />
                 <div className="self-center grow max-xs:order-1">
                     <h3 className="text-primary font-satoshi-black uppercase line-clamp-1">{tournament.name}</h3>
                     <p className="font-medium text-xs line-clamp-2">{tournament.description}</p>

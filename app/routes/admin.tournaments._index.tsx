@@ -5,10 +5,12 @@ import TournamentCard from "~/components/admin/tournament/TournamentCard"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
 import { memoryCache as cache } from "~/lib/cache"
-import { getTournaments } from "~/lib/data/contest.server"
+import { tournamentRepo } from "~/models/tournament/tournament.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
-    return json({ tournaments: await getTournaments() })
+    const { data: tournaments, error } = await tournamentRepo.getTournaments()
+    if (error) throw new Error(error.detail as string)
+    return json({ tournaments })
 }
 
 export async function clientLoader({ request, serverLoader }: ClientLoaderFunctionArgs) {

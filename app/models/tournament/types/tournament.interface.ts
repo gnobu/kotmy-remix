@@ -1,3 +1,4 @@
+import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { IContest, IContestDto, dtoToContestInTournament } from "~/models/contest/types/contest.interface"
 
 export interface ITournamentDto {
@@ -22,9 +23,9 @@ export interface ITournament {
 }
 
 export interface ITournamentRepository {
-    getTournaments(): Promise<ITournament[]>
-    getTournamentById(tournamentId: string): Promise<ITournament | null>
-    createTournament(tournament: Partial<ITournament>, token: string): Promise<ITournament>
+    getTournaments(): Promise<TFetcherResponse<ITournament[]>>
+    getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament | null>>
+    createTournament(tournament: Partial<ITournament>, token: string): Promise<TFetcherResponse<ITournament>>
 }
 
 export function dtoToTournament(tournament: ITournamentDto): ITournament {

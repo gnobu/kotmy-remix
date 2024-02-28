@@ -53,6 +53,7 @@ export default function StageInputs({ stages }: { stages?: Partial<IStage>[] }) 
                                     <option key={social} value={social}>{social}</option>
                                 ))}
                             </Select>
+                            {stage._id ? <input type="hidden" name={`stage_${index + 1}_id`} value={stage._id} /> : null}
                         </fieldset>
                         <button type='button' className='m-4' title='delete stage'>
                             <Svg src={icons.closeIcon} width={'.9em'}

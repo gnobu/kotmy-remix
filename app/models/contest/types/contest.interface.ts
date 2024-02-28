@@ -61,7 +61,7 @@ export interface IContestWStage extends IContest {
 }
 
 export interface IStage {
-    id: string
+    _id: string
     contest_unique_id: string
     stage: number
     weight: number

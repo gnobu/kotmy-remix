@@ -60,6 +60,7 @@ export function prepareContestPayload(formData: FormData) {
     const stages = []
     for (let i = 1; i <= no_of_stages; i++) {
         stages.push({
+            "_id": formData.get(`stage_${i}_id`),
             "stage": i,
             "weight": formData.get(`weight_${i}`),
             "rates": {

@@ -33,7 +33,7 @@ export class ApiEndPoints {
         return "/admin/contest"
     }
     static get getContests() {
-        return "/admin/contest/"
+        return "/admin/contest"
     }
     static getContestById(id: string) {
         return `/contest/${id}`

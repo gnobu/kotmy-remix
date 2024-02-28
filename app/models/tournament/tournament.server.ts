@@ -13,17 +13,18 @@ class TournamentRepository implements ITournamentRepository {
         if (error) return { error }
         return { data: tournaments.map(tournament => dtoToTournament(tournament)) }
     }
-    getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament | null>> {
-        throw new Error("Method not implemented.")
+    async getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament | null>> {
+        const { data: tournament, error } = await ApiCall.call<ITournamentDto, unknown>({
+            method: MethodsEnum.GET,
+            url: ApiEndPoints.getTournamentById(tournamentId)
+        })
+        if (error || !tournament) return { error: error ?? { detail: 'Tournament was not found' } }
+        return { data: dtoToTournament(tournament) }
     }
     createTournament(tournament: Partial<ITournament>, token: string): Promise<TFetcherResponse<ITournament>> {
         throw new Error("Method not implemented.")
     }
     // async getTournamentById(tournamentId: string): Promise<ITournament | null> {
-    //     return await ApiCall.call({
-    //         method: MethodsEnum.GET,
-    //         url: `${ApiEndPoints.getTournaments}/${tournamentId}`
-    //     })
     // }
     // async createTournament(tournament: Partial<ITournament>, token: string): Promise<ITournament> {
     //     return await ApiCall.call({

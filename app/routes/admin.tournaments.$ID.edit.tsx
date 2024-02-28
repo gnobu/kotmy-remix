@@ -5,11 +5,13 @@ import EditTournamentForm from '~/components/admin/tournament/EditTournamentForm
 import RoundCta from '~/components/reusables/RoundCta'
 import { getTournament } from '~/lib/data/contest.server'
 import { setToast } from '~/lib/session.server'
+import { tournamentRepo } from '~/models/tournament/tournament.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
-    const tournament = await getTournament(params.ID!)
+    // const tournament = await getTournament(params.ID!)
+    const { data: tournament, error } = await tournamentRepo.getTournamentById(params.ID!)
     if (!tournament) {
-        const { headers } = await setToast({ request, toast: 'error::Tournament not found' })
+        const { headers } = await setToast({ request, toast: `error::${error?.detail}` })
         return redirect('/admin/tournaments', { headers })
     }
     return json({ tournament })
@@ -24,6 +26,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function EditTournament() {
     const { tournament } = useLoaderData<typeof loader>()
+    console.log(tournament)
     const navigate = useNavigate()
     return (
         <main className='w-full overflow-y-auto p-6'>

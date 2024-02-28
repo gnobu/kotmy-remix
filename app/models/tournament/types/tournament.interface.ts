@@ -9,7 +9,7 @@ export interface ITournamentDto {
     is_deleted: boolean,
     unique_id: string
     name: string
-    description: string
+    desc: string
     image_url: string | null,
     contests: Pick<IContestDto, 'contest_unique_id' | '_id' | 'image_url' | 'name' | 'status'>[]
 }
@@ -32,7 +32,7 @@ export function dtoToTournament(tournament: ITournamentDto): ITournament {
     return {
         id: tournament.unique_id,
         name: tournament.name,
-        description: tournament.description,
+        description: tournament.desc,
         image: tournament.image_url,
         contests: tournament.contests.map(contest => dtoToContestInTournament(contest))
     }

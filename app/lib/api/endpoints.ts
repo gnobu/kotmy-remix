@@ -27,7 +27,7 @@ export class ApiEndPoints {
         return "/api/tournament"
     }
     static updateTournament(id: string) {
-        return `/api/tournament/${id}`
+        return `/admin/tournament/${id}`
     }
     static deleteTournament(id: string) {
         return `/api/tournament/${id}`

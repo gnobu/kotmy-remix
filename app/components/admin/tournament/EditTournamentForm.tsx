@@ -10,9 +10,8 @@ import { ITournament } from '~/models/tournament/types/tournament.interface'
 export default function EditTournamentForm({ tournament }: { tournament: ITournament }) {
     const [fileList, setFileList] = useState<FileList | null>(null)
     const { filePreview, clearFilePreview, fileName } = useFilePreview(fileList)
-    console.log(fileName);
     return (
-        <Form className='max-w-xl mx-auto grid gap-6 sm:gap-12 text-sm' method='post'>
+        <Form className='max-w-xl mx-auto grid gap-6 sm:gap-12 text-sm' method='post' encType='multipart/form-data'>
             <h1 className='text-xl xs:text-2xl font-bold text-primary'>Edit Tournament</h1>
             <div className="grid gap-3 sm:gap-6">
                 <div className="flex items-center gap-x-5">
@@ -42,7 +41,7 @@ export default function EditTournamentForm({ tournament }: { tournament: ITourna
             </div>
             <div className='flex max-sm:flex-col justify-end gap-3 sm:gap-6'>
                 <Cta element='button' onClick={clearFilePreview} type='reset' className='px-8 py-2 rounded-lg font-medium border-secondary active:border-accent sm:hover:border-accent' variant='outline'>Reset</Cta>
-                <Cta element='button' type='submit' className='px-8 py-2 rounded-lg font-medium'>Edit Tournament</Cta>
+                <Cta element='button' type='submit' name='tournamentId' value={tournament._id} className='px-8 py-2 rounded-lg font-medium'>Edit Tournament</Cta>
             </div>
         </Form>
     )

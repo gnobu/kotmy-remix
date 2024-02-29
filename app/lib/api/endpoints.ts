@@ -24,7 +24,7 @@ export class ApiEndPoints {
         return "/users/all_roles"
     }
     static get createTournament() {
-        return "/api/tournament"
+        return "/admin/tournament"
     }
     static updateTournament(id: string) {
         return `/admin/tournament/${id}`

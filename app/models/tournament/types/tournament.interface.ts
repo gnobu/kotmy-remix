@@ -33,7 +33,7 @@ export interface ITournament {
 export interface ITournamentRepository {
     getTournaments(): Promise<TFetcherResponse<ITournament[]>>
     getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament | null>>
-    createTournament(tournament: Partial<ITournament>, token: string): Promise<TFetcherResponse<ITournament>>
+    createTournament(dto: FormData, token: string): Promise<TFetcherResponse<ITournament>>
     updateTournament(payload: { id: string; dto: FormData; token: string }): Promise<TFetcherResponse<ITournament>>
 }
 

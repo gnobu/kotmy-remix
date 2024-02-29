@@ -1,13 +1,19 @@
-import { ActionFunctionArgs, redirect } from '@remix-run/node'
+import { ActionFunctionArgs, json, redirect } from '@remix-run/node'
 import { useNavigate } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import CreateTournamentForm from '~/components/admin/tournament/CreateTournamentForm'
 import RoundCta from '~/components/reusables/RoundCta'
 import { setToast } from '~/lib/session.server'
+import { prepareTournamentDto, tournamentRepo } from '~/models/tournament/tournament.server'
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
-    console.log(...formData)
+    const payload = prepareTournamentDto(formData)
+    const { error } = await tournamentRepo.createTournament(payload)
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error?.detail}` })
+        return json(error, { headers })
+    }
     const { headers } = await setToast({ request, toast: 'success::A new tournament has been created' })
     return redirect('/admin/tournaments', { headers })
 }

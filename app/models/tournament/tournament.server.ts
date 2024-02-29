@@ -22,8 +22,18 @@ class TournamentRepository implements ITournamentRepository {
         if (error || !tournament) return { error: error ?? { detail: 'Tournament was not found' } }
         return { data: dtoToTournament(tournament) }
     }
-    createTournament(tournament: Partial<ITournament>, token: string): Promise<TFetcherResponse<ITournament>> {
-        throw new Error("Method not implemented.")
+    async createTournament(dto: FormData, token = TOKEN): Promise<TFetcherResponse<ITournament>> {
+        const { data: tournament, error } = await ApiCall.call<ITournamentDto, unknown>({
+            method: MethodsEnum.POST,
+            url: ApiEndPoints.createTournament,
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            },
+            data: dto
+        })
+        if (error) return { error }
+        return { data: dtoToTournament(tournament) }
     }
     async updateTournament({ id, dto, token = TOKEN }: { id: string; dto: FormData; token?: string }): Promise<TFetcherResponse<ITournament>> {
         const { data: tournament, error } = await ApiCall.call<ITournamentDto | null, unknown>({
@@ -38,23 +48,6 @@ class TournamentRepository implements ITournamentRepository {
         if (error || !tournament) return { error: error ?? { detail: 'Tournament was not found' } }
         return { data: dtoToTournament(tournament) }
     }
-    // async createTournament(tournament: Partial<ITournament>, token: string): Promise<ITournament> {
-    //     return await ApiCall.call({
-    //         method: MethodsEnum.POST,
-    //         url: ApiEndPoints.createTournament,
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Authorization: `Bearer ${token}`
-    //         },
-    //         data: JSON.stringify(tournament)
-    //     })
-    // }
-    // async getTournamentsPaged(page: number): Promise<IPagedModel<ITournament>> {
-    //     return await ApiCall.call({
-    //         method: MethodsEnum.GET,
-    //         url: ApiEndPoints.getTournamentsPaged(page)
-    //     })
-    // }
 }
 export const tournamentRepo = new TournamentRepository()
 

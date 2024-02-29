@@ -48,6 +48,13 @@ class TournamentRepository implements ITournamentRepository {
         if (error || !tournament) return { error: error ?? { detail: 'Tournament was not found' } }
         return { data: dtoToTournament(tournament) }
     }
+    async deleteTournament(tournamentId: string, token = TOKEN): Promise<TFetcherResponse<null>> {
+        return await ApiCall.call({
+            url: ApiEndPoints.deleteTournament(tournamentId),
+            method: MethodsEnum.DELETE,
+            headers: { Authorization: `Bearer ${token}` },
+        })
+    }
 }
 export const tournamentRepo = new TournamentRepository()
 

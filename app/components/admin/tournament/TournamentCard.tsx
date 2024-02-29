@@ -1,11 +1,13 @@
 import { Link } from "@remix-run/react"
-import { icons } from "~/assets/icons"
-import { contestImage1 } from "~/assets/images"
+
+import DeleteTournamentDialog from "./DeleteTournamentDialog"
 import LayeredImages from "~/components/reusables/LayeredImages"
+import Toggletip from "~/components/reusables/ToggleTip"
 import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
-import Toggletip from "~/components/reusables/ToggleTip"
 import { cn } from "~/lib/utils"
+import { icons } from "~/assets/icons"
+import { contestImage1 } from "~/assets/images"
 import { ITournament } from "~/models/tournament/types/tournament.interface"
 
 export default function TournamentCard({ tournament, className }: { tournament: ITournament, className?: string }) {
@@ -24,8 +26,7 @@ export default function TournamentCard({ tournament, className }: { tournament: 
                     <Link to={`/admin/tournaments/${tournament.id}/edit`}
                         className='p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium'
                     >Edit Tournament</Link>
-                    <button className="p-2 flex items-center gap-2 hover:bg-[#EEF0FF] rounded-lg font-satoshi-medium"
-                    >Delete Tournament</button>
+                    <DeleteTournamentDialog tournament={tournament} />
                 </Toggletip>
             </div>
             <hr className='mt-4 mb-1' />

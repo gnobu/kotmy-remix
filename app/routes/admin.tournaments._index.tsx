@@ -1,11 +1,13 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node"
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { ClientLoaderFunctionArgs, useLoaderData } from "@remix-run/react"
-import { icons } from "~/assets/icons"
+
+import { tournamentRepo } from "~/models/tournament/tournament.server"
+import { setToast } from "~/lib/session.server"
+import { memoryCache as cache } from "~/lib/cache"
 import TournamentCard from "~/components/admin/tournament/TournamentCard"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
-import { memoryCache as cache } from "~/lib/cache"
-import { tournamentRepo } from "~/models/tournament/tournament.server"
+import { icons } from "~/assets/icons"
 
 export async function loader({ }: LoaderFunctionArgs) {
     const { data: tournaments, error } = await tournamentRepo.getTournaments()
@@ -21,6 +23,22 @@ export async function clientLoader({ request, serverLoader }: ClientLoaderFuncti
     return loaderData
 }
 clientLoader.hydrate = true
+
+export async function action({ request }: ActionFunctionArgs) {
+    const formData = await request.formData()
+    const intent = formData.get('intent') as 'delete'
+    if (intent === 'delete') {
+        const tournamentId = formData.get('tournamentId') as string
+        const { data, error } = await tournamentRepo.deleteTournament(tournamentId)
+        if (error) {
+            const { headers } = await setToast({ request, toast: 'error::Could not delete the tournament' })
+            return json(error, { headers })
+        }
+        const { headers } = await setToast({ request, toast: 'success::The tournament has been deleted' })
+        return json(data, { headers })
+    }
+    return json(null)
+}
 
 export default function Tournaments() {
     const { tournaments } = useLoaderData<typeof loader>()

@@ -11,6 +11,7 @@ import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
 import { ITournament } from '~/models/tournament/types/tournament.interface'
 import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { noImage } from '~/assets/images'
 
 export default function EditContestForm({ tournaments, contest }: { tournaments: Pick<ITournament, 'id'>[], contest: IContestWStage }) {
     const [fileList, setFileList] = useState<FileList | null>(null)
@@ -21,9 +22,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
             <div className="flex items-center gap-x-5">
                 {filePreview
                     ? <img className="w-20 h-20 rounded-lg object-cover" src={filePreview} alt="chosen image" />
-                    : contest.image
-                        ? <img className="w-20 h-20 rounded-lg object-cover" src={contest.image} alt="Tournament banner" />
-                        : <div className="w-20 h-20 rounded-lg bg-slate-400"></div>
+                    : <img className="w-20 h-20 rounded-lg object-cover" src={contest.image || noImage} alt="Contest banner" />
                 }
                 <div className="flex flex-col items-start gap-2 max-xs:text-xs">
                     <label htmlFor='image' className="border-2 border-secondary text-primary cursor-pointer font-semibold py-2 px-4 rounded-lg">

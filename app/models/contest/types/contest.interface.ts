@@ -138,6 +138,7 @@ export function dtoToContestInTournament(contest: Pick<IContestDto, 'contest_uni
 export interface IContestRepository {
     getContests(): Promise<TFetcherResponse<IContest[]>>
     getContestById(contestId: string): Promise<TFetcherResponse<IContest | null>>
+    adminGetContestsInTournament(tournamentUniqueId: string, token: string): Promise<TFetcherResponse<IContestWStage[]>>
     createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
     deleteContest(contestId: string): Promise<TFetcherResponse<boolean>>
     updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest | null>>

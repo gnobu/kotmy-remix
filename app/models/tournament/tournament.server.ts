@@ -14,8 +14,8 @@ class TournamentRepository implements ITournamentRepository {
         if (error) return { error }
         return { data: tournaments.map(tournament => dtoToTournament(tournament)) }
     }
-    async getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament | null>> {
-        const { data: tournament, error } = await ApiCall.call<ITournamentDto, unknown>({
+    async getTournamentById(tournamentId: string): Promise<TFetcherResponse<ITournament>> {
+        const { data: tournament, error } = await ApiCall.call<ITournamentDto | null, unknown>({
             method: MethodsEnum.GET,
             url: ApiEndPoints.getTournamentById(tournamentId)
         })

@@ -39,6 +39,14 @@ class ContestRepository implements IContestRepository {
         if (error) return { error }
         return { data: dtoToContest(contest) as IContestWStage | null }
     }
+    async adminGetContestsInTournament(tournamentUniqueId: string, token = TOKEN): Promise<TFetcherResponse<IContestWStage[]>> {
+        const { data: contests, error } = await ApiCall.call<IContestDto[], unknown>({
+            url: ApiEndPoints.adminGetContestsInTournament(tournamentUniqueId),
+            headers: { Authorization: `Bearer ${token}` },
+        })
+        if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
+        return { error }
+    }
     async updateContest({ contestId, dto, token = TOKEN }: { contestId: string, dto: FormData, token?: string }): Promise<TFetcherResponse<IContestWStage | null>> {
         const { data: contest, error } = await ApiCall.call<IContestDto | null, unknown>({
             url: ApiEndPoints.updateContest(contestId),

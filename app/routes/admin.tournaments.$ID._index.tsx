@@ -1,19 +1,22 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
 import { Link, useLoaderData, useNavigate } from '@remix-run/react'
-import { icons } from '~/assets/icons'
-import ContestTable from '~/components/admin/contest/ContestTable'
-import Cta from '~/components/reusables/Cta'
-import RoundCta from '~/components/reusables/RoundCta'
-import Svg from '~/components/reusables/Svg'
-import Toggletip from '~/components/reusables/ToggleTip'
-import { getContestsInTournamentWStages, getTournament } from '~/lib/data/contest.server'
+
+import { tournamentRepo } from '~/models/tournament/tournament.server'
+import { contestRepo } from '~/models/contest/contest.server'
 import { setToast } from '~/lib/session.server'
+import ContestTable from '~/components/admin/contest/ContestTable'
+import Toggletip from '~/components/reusables/ToggleTip'
+import RoundCta from '~/components/reusables/RoundCta'
+import Cta from '~/components/reusables/Cta'
+import Svg from '~/components/reusables/Svg'
+import { icons } from '~/assets/icons'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
-    const tournament = await getTournament(params.ID!)
-    const contests = await getContestsInTournamentWStages(params.ID!)
-    if (!tournament) {
-        const { headers } = await setToast({ request, toast: 'error::Tournament not found' })
+    const { data: tournament, error: tournamentError } = await tournamentRepo.getTournamentById(params.ID!)
+    const { data: contests, error: contestError } = await contestRepo.adminGetContestsInTournament(params.ID!)
+    if (tournamentError || contestError) {
+        let error = tournamentError?.detail ?? contestError?.detail ?? 'An error occured while fetching the contests'
+        const { headers } = await setToast({ request, toast: `error::${error}` })
         return redirect('/admin/tournaments', { headers })
     }
     return json({ tournament, contests })

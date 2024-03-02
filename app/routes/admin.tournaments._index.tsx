@@ -1,9 +1,9 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
-import { ClientLoaderFunctionArgs, useLoaderData } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 
 import { tournamentRepo } from "~/models/tournament/tournament.server"
 import { setToast } from "~/lib/session.server"
-import { memoryCache as cache } from "~/lib/cache"
+// import { memoryCache as cache } from "~/lib/cache"
 import TournamentCard from "~/components/admin/tournament/TournamentCard"
 import Cta from "~/components/reusables/Cta"
 import Svg from "~/components/reusables/Svg"
@@ -15,14 +15,14 @@ export async function loader({ }: LoaderFunctionArgs) {
     return json({ tournaments })
 }
 
-export async function clientLoader({ request, serverLoader }: ClientLoaderFunctionArgs) {
-    const cachedItem = await cache.getItem('tournaments')
-    if (cachedItem) return cachedItem
-    const loaderData = await serverLoader<typeof loader>()
-    cache.setItem('tournaments', loaderData)
-    return loaderData
-}
-clientLoader.hydrate = true
+// export async function clientLoader({ request, serverLoader }: ClientLoaderFunctionArgs) {
+//     const cachedItem = await cache.getItem('tournaments')
+//     if (cachedItem) return cachedItem
+//     const loaderData = await serverLoader<typeof loader>()
+//     cache.setItem('tournaments', loaderData)
+//     return loaderData
+// }
+// clientLoader.hydrate = true
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()

@@ -8,12 +8,14 @@ import TransactionSummary from "~/components/admin/TransactionSummary"
 import { adminUsers } from "~/lib/data/admin"
 import { getTournaments } from "~/lib/data/contest.server"
 import { contestRepo } from "~/models/contest/contest.server"
+import { tournamentRepo } from "~/models/tournament/tournament.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
     const { data: contests } = await contestRepo.getContests()
+    const { data: tournaments } = await tournamentRepo.getTournaments()
     return json({
         adminUsers: adminUsers,
-        tournaments: await getTournaments(),
+        tournaments: tournaments ?? [],
         contests: contests ?? [],
         transactions: {
             '2024': { product: 23000, registration: 10000, tally: 42094 },

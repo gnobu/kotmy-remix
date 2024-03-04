@@ -1,8 +1,10 @@
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
-import { IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, dtoToContest } from "./types/contest.interface"
+import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IStage, Social, dtoToContest } from "./types/contest.interface"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
+import { setToast } from "~/lib/session.server"
+import { json } from "@remix-run/node"
 
 const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX2FkbWluIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImV4cCI6MTczMTk2NDg1Nn0.dDA5RkNkP4kf4sWrfivrP8dSYgR0a10BZra_Pk01IBQ"
 
@@ -60,6 +62,16 @@ class ContestRepository implements IContestRepository {
         if (error) return { error }
         return { data: dtoToContest(contest) as IContestWStage | null }
     }
+    async updateStage({ stageId, dto, token = TOKEN }: { stageId: string; dto: Partial<IStage>; token?: string }): Promise<TFetcherResponse<IStage>> {
+        const { data: stage, error } = await ApiCall.call<IStage | null, unknown>({
+            url: ApiEndPoints.updateStage(stageId),
+            method: MethodsEnum.PATCH,
+            headers: { Authorization: `Bearer ${token}` },
+            data: dto
+        })
+        if (error || !stage) return { error: error ?? { detail: "The stage was not found" } }
+        return { data: stage }
+    }
 }
 export const contestRepo = new ContestRepository()
 
@@ -101,4 +113,54 @@ export function prepareContestPayload(formData: FormData) {
         if (value !== null || value != undefined) payload.append(key, value)
     })
     return payload
+}
+
+export async function deleteContest(formData: FormData, request: Request) {
+    const contestId = formData.get('contestId') as string
+    const { data, error } = await contestRepo.deleteContest(contestId)
+    if (data) {
+        const { headers } = await setToast({ request, toast: 'success::The contest has been deleted' })
+        return json(null, { headers })
+    }
+    console.log(error)
+    const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
+    return json(null, { headers })
+}
+
+export async function updateStage(formData: FormData, request: Request) {
+    const stageId = formData.get('stageId') as string
+    const dto = prepareStageDto(formData)
+    const { data, error } = await contestRepo.updateStage({ stageId, dto })
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
+    return json(data, { headers })
+}
+
+export function prepareStageDto(formData: FormData) {
+    return {
+        "weight": parseInt(formData.get('weight') as string),
+        "start_date": new Date(formData.get('start_date') as string).toISOString(),
+        "end_date": new Date(formData.get('end_date') as string).toISOString(),
+        "rates": {
+            "social_media": {
+                "type": formData.get('social_media_type') as Social,
+                "amount": parseInt(formData.get('social_media_rate') as string),
+            },
+            "tally": parseInt(formData.get('tally_rate') as string),
+            "judge": parseInt(formData.get('judge_rate') as string),
+            "givaah": parseInt(formData.get('givaah_rate') as string),
+        },
+        "success_count": parseInt(formData.get('success_count') as string),
+        "grade": {
+            "A": [parseInt(formData.get('min_A') as string), parseInt(formData.get('max_A') as string)],
+            "B": [parseInt(formData.get('min_B') as string), parseInt(formData.get('max_B') as string)],
+            "C": [parseInt(formData.get('min_C') as string), parseInt(formData.get('max_C') as string)],
+            "D": [parseInt(formData.get('min_D') as string), parseInt(formData.get('max_D') as string)],
+            "E": [parseInt(formData.get('min_E') as string), parseInt(formData.get('max_E') as string)],
+            "F": [parseInt(formData.get('min_F') as string), parseInt(formData.get('max_F') as string)]
+        } satisfies Record<Grade, [number, number]>
+    }
 }

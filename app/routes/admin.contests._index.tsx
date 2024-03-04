@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { contestRepo } from "~/models/contest/contest.server"
+import { contestRepo, deleteContest, updateStage } from "~/models/contest/contest.server"
 import { setToast } from "~/lib/session.server"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"
@@ -15,19 +15,11 @@ export async function loader({ }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
+    const intent = formData.get('intent') as 'delete' | 'update_stage' | 'migrate' | 'open_registration'
+    if (intent === 'delete') return await deleteContest(formData, request)
+    if (intent === 'update_stage') return await updateStage(formData, request)
     console.log(...formData)
-    const intent = formData.get('intent') as 'delete' | 'migrate' | 'open_registration'
-    if (intent === 'delete') {
-        const contestId = formData.get('contestId') as string
-        const { data, error } = await contestRepo.deleteContest(contestId)
-        if (data) {
-            const { headers } = await setToast({ request, toast: 'success::The contest has been deleted' })
-            return json(null, { headers })
-        }
-        const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
-        return json(null, { headers })
-    }
-    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
+    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
     return json(null, { headers })
 }
 

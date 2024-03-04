@@ -4,10 +4,11 @@ import { socials } from "~/lib/data/socials"
 export type ContestStatus = 'not_started' | 'registering' | 'ongoing' | 'completed'
 export type StageStatus = "NOT_STARTED" | "ONGOING" | "ENDED"
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
+export type Social = typeof socials[number]
 
 export type Rate = {
     social_media: {
-        type: typeof socials[number]
+        type: Social
         amount: number
     }
     tally: number
@@ -142,4 +143,5 @@ export interface IContestRepository {
     createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
     deleteContest(contestId: string): Promise<TFetcherResponse<boolean>>
     updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest | null>>
+    updateStage(payload: { stageId: string, dto: IStage, token: string }): Promise<TFetcherResponse<IStage>>
 }

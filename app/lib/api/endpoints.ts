@@ -51,7 +51,7 @@ export class ApiEndPoints {
         return `/admin/contest/${id}`
     }
     static updateStage(id: string) {
-        return `/contest/stage/${id}`
+        return `/admin/stage/${id}`
     }
     static migrateStage({ oldStageId, newStageId }: { oldStageId: string, newStageId: string }) {
         return `/contest/migration?oldstageid=${oldStageId}&newstageid=${newStageId}`

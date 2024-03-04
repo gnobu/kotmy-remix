@@ -7,8 +7,8 @@ import { IContestWStage } from "~/models/contest/types/contest.interface"
 
 export default function ContestSummary({ contests }: { contests: IContestWStage[] }) {
     const ongoingCount = contests.filter(contest => contest.status === 'ongoing').length
-    const yetToStartCount = contests.filter(contest => contest.status === 'registering').length
-    const closedCount = contests.filter(contest => contest.status === 'completed').length
+    const yetToStartCount = contests.filter(contest => contest.status === 'yet_to_start').length
+    const closedCount = contests.filter(contest => ['completed', 'registering'].includes(contest.status)).length
     return <div className="border rounded-xl overflow-hidden grow">
         <div className="flex gap-2 xs:gap-4 justify-between items-center py-3 px-4 border-b">
             <h3 className="text-primary font-bold max-sm:text-xs">Contests</h3>

@@ -105,7 +105,7 @@ export interface ICreateStageDTO {
     rates: Rate
 }
 
-export function dtoToContest(contest: IContestDto | null): IContest | IContestWStage | null {
+export function dtoToContest(contest: IContestDto): IContest | IContestWStage {
     if (!contest) return contest
     return {
         _id: contest._id,
@@ -138,10 +138,10 @@ export function dtoToContestInTournament(contest: Pick<IContestDto, 'contest_uni
 
 export interface IContestRepository {
     getContests(): Promise<TFetcherResponse<IContest[]>>
-    getContestById(contestId: string): Promise<TFetcherResponse<IContest | null>>
+    getContestById(contestId: string): Promise<TFetcherResponse<IContest>>
     adminGetContestsInTournament(tournamentUniqueId: string, token: string): Promise<TFetcherResponse<IContestWStage[]>>
     createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
     deleteContest(contestId: string): Promise<TFetcherResponse<boolean>>
-    updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest | null>>
+    updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest>>
     updateStage(payload: { stageId: string, dto: IStage, token: string }): Promise<TFetcherResponse<IStage>>
 }

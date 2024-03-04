@@ -34,12 +34,12 @@ class ContestRepository implements IContestRepository {
         if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
         return { error }
     }
-    async getContestById(contestId: string): Promise<TFetcherResponse<IContestWStage | null>> {
-        const { data: contest, error } = await ApiCall.call<IContestDto, unknown>({
+    async getContestById(contestId: string): Promise<TFetcherResponse<IContestWStage>> {
+        const { data: contest, error } = await ApiCall.call<IContestDto | null, unknown>({
             url: ApiEndPoints.getContestById(contestId)
         })
-        if (error) return { error }
-        return { data: dtoToContest(contest) as IContestWStage | null }
+        if (error || !contest) return { error: error ?? { detail: "The contest was not found" } }
+        return { data: dtoToContest(contest) as IContestWStage }
     }
     async adminGetContestsInTournament(tournamentUniqueId: string, token = TOKEN): Promise<TFetcherResponse<IContestWStage[]>> {
         const { data: contests, error } = await ApiCall.call<IContestDto[], unknown>({
@@ -49,7 +49,7 @@ class ContestRepository implements IContestRepository {
         if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
         return { error }
     }
-    async updateContest({ contestId, dto, token = TOKEN }: { contestId: string, dto: FormData, token?: string }): Promise<TFetcherResponse<IContestWStage | null>> {
+    async updateContest({ contestId, dto, token = TOKEN }: { contestId: string, dto: FormData, token?: string }): Promise<TFetcherResponse<IContestWStage>> {
         const { data: contest, error } = await ApiCall.call<IContestDto | null, unknown>({
             url: ApiEndPoints.updateContest(contestId),
             method: MethodsEnum.PUT,
@@ -59,8 +59,8 @@ class ContestRepository implements IContestRepository {
             },
             data: dto
         })
-        if (error) return { error }
-        return { data: dtoToContest(contest) as IContestWStage | null }
+        if (error || !contest) return { error: error ?? { detail: "This contest no longer exists" } }
+        return { data: dtoToContest(contest) as IContestWStage }
     }
     async updateStage({ stageId, dto, token = TOKEN }: { stageId: string; dto: Partial<IStage>; token?: string }): Promise<TFetcherResponse<IStage>> {
         const { data: stage, error } = await ApiCall.call<IStage | null, unknown>({

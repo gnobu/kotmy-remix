@@ -1,8 +1,9 @@
 import { useReducer } from 'react'
-import { icons } from '~/assets/icons'
+
 import FormControl from "~/components/reusables/FormControl"
 import Select from "~/components/reusables/Select"
 import Svg from '~/components/reusables/Svg'
+import { icons } from '~/assets/icons'
 import { socials } from "~/lib/data/socials"
 import { IStage } from '~/models/contest/types/contest.interface'
 
@@ -15,7 +16,7 @@ function reducer(stages: Partial<IStage>[], action: { type: StageAction, stageNu
             rates: { social_media: { type: 'facebook', amount: 0 }, tally: 0, judge: 0, givaah: 0, }
         } as IStage]
     } else if (action.type === 'remove') {
-        return stages.filter(stage => stage.stage !== action.stageNumber)
+        return stages.filter(stage => stage.stage !== action.stageNumber || stage._id !== action.value)
     } else if (action.type === 'edit_sm_type') {
         return stages.map(stage => {
             if (stage.stage === action.stageNumber) {
@@ -55,10 +56,13 @@ export default function StageInputs({ stages }: { stages?: Partial<IStage>[] }) 
                             </Select>
                             {stage._id ? <input type="hidden" name={`stage_${index + 1}_id`} value={stage._id} /> : null}
                         </fieldset>
-                        <button type='button' className='m-4' title='delete stage'>
-                            <Svg src={icons.closeIcon} width={'.9em'}
-                                className='hover:text-red-400' onClick={() => dispatch({ type: 'remove', stageNumber: stage.stage })} />
-                        </button>
+                        {stage._id
+                            ? <button type='submit' className='m-4' title='delete stage' name='intent' value={stage._id}>
+                                <Svg src={icons.closeIcon} width={'.9em'} className='hover:text-red-400' />
+                            </button>
+                            : <button type='button' className='m-4' value={stage._id} onClick={() => dispatch({ type: 'remove', stageNumber: stage.stage })}>
+                                <Svg src={icons.closeIcon} width={'.9em'} className='hover:text-red-400' />
+                            </button>}
                     </div>
                 ))}
                 <button type='button' onClick={() => dispatch({ type: 'add' })}

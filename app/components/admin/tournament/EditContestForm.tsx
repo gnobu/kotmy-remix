@@ -55,7 +55,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
             </fieldset>
 
             <CategoryInputs categories={Object.values(contest.categories)} />
-            <StageInputs stages={contest.stages} />
+            <StageInputs key={contest.stages.length} stages={contest.stages} />
 
             <fieldset className="grid gap-6">
                 <legend className='text-lg mb-4 font-bold'>Submission Guidelines</legend>

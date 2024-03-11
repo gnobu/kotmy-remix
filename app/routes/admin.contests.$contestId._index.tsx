@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from '@remix-run/node'
-import { useLoaderData, useNavigate } from '@remix-run/react'
+import { useActionData, useLoaderData, useNavigate } from '@remix-run/react'
 import { icons } from '~/assets/icons'
 import EditContestForm from '~/components/admin/tournament/EditContestForm'
 import RoundCta from '~/components/reusables/RoundCta'
@@ -20,6 +20,16 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
+    const intent = formData.get('intent')
+    if (intent) {
+        const { error } = await contestRepo.deleteStage({ stageId: formData.get('intent') as string })
+        if (error) {
+            console.log(JSON.stringify(error))
+            const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+            return json({ error }, { headers })
+        }
+        return json({ data: 'deleted' })
+    }
     const payload = prepareContestPayload(formData)
     const { data, error } = await contestRepo.updateContest({ contestId: formData.get('contestId') as string, dto: payload })
     if (data) {
@@ -28,11 +38,12 @@ export async function action({ request }: ActionFunctionArgs) {
     } else if (error) {
         console.log(JSON.stringify(error))
         const { headers } = await setToast({ request, toast: `error::${error.detail}` })
-        return json(null, { headers })
+        return json({ error }, { headers })
     }
     const { headers } = await setToast({ request, toast: `error::Sorry, this contest no longer exists` })
     return redirect('/admin/contests', { headers })
 }
+export type EditContestAction = typeof action
 
 export default function EditContest() {
     const { tournaments, contest } = useLoaderData<typeof loader>()

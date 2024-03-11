@@ -72,6 +72,15 @@ class ContestRepository implements IContestRepository {
         if (error || !stage) return { error: error ?? { detail: "The stage was not found" } }
         return { data: stage }
     }
+    async deleteStage({ stageId, token = TOKEN }: { stageId: string; token?: string }): Promise<TFetcherResponse<null>> {
+        const { data, error } = await ApiCall.call<null, unknown>({
+            url: ApiEndPoints.deleteStage(stageId),
+            method: MethodsEnum.DELETE,
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        if (error) return { error: error }
+        return { data }
+    }
 }
 export const contestRepo = new ContestRepository()
 

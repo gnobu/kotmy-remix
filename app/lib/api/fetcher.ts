@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios"
 import { TFetcherResponse, TValidationError } from "./types/fetcher.interface"
 
 export class ApiCall {
-    static _proxy = 'https://web-production-88a1.up.railway.app/v2/api'
+    static _proxy = process.env._API_URL
     static _instance = axios.create({
         baseURL: this._proxy,
         timeout: 20000,

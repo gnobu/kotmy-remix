@@ -1,10 +1,11 @@
 import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import ContestCard from '~/components/reusables/ContestCard'
-import { getTournaments } from '~/lib/data/contest.server'
+import { tournamentRepo } from '~/models/tournament/tournament.server'
 
 export async function loader() {
-  const tournaments = await getTournaments()
+  const { data: tournaments, error } = await tournamentRepo.getTournaments()
+  if (error) throw new Error(error.detail as string)
   return json({ tournaments })
 }
 

@@ -1,14 +1,15 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
+
 import Button from "~/components/reusables/Button"
 import ContestCard from "~/components/reusables/ContestCard"
-import { getTournament } from "~/lib/data/contest.server"
+import { tournamentRepo } from "~/models/tournament/tournament.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { tournamentId } = params
     if (!tournamentId) return redirect('/contests')
-    const tournament = await getTournament(tournamentId)
-    if (!tournament) return redirect('/contests')
+    const { data: tournament, error } = await tournamentRepo.getTournamentById(tournamentId)
+    if (error) return redirect('/contests')
     return json({ tournament })
 }
 

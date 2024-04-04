@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
-import { hero5 } from '~/assets/images'
+
+import { hero5, noImage } from '~/assets/images'
 import FormControl from '~/components/reusables/FormControl'
 import Select from '~/components/reusables/Select'
 import StatusTag from '~/components/reusables/StatusTag'
-import { Contestant } from '~/lib/types/contestant.interface'
 import ContestantCard from './ContestantCard'
 import Button from '~/components/reusables/Button'
 import ContestTimer from './ContestTimer'
-import { IContest } from '~/models/contest/types/contest.interface'
+import { Contestant } from '~/lib/types/contestant.interface'
+import { IContestWStage } from '~/models/contest/types/contest.interface'
 
 const contestant: Contestant = {
     id: '1',
@@ -24,11 +25,12 @@ const contestant: Contestant = {
     }
 }
 
-export default function OngoingContest({ contest }: { contest: IContest }) {
+export default function OngoingContest({ contest }: { contest: IContestWStage }) {
     const status = contest.status
     const color = status === 'ongoing'
         ? 'green' : status === 'completed'
             ? 'red' : 'gray'
+    console.log(contest.stages)
     return (
         <>
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
@@ -43,17 +45,19 @@ export default function OngoingContest({ contest }: { contest: IContest }) {
                             <StatusTag status={status} color={color} />
                         </div>
                         <div className="">
-                            <span className="block font-satoshi-bold mb-1">Age Categories</span>
-                            <span className="block">0 - 14 Years</span>
+                            <span className="block font-satoshi-bold mb-1">Categories</span>
+                            <div className="flex gap-4 flex-wrap capitalize">
+                                {contest.categories.map(category => (<span key={category}>~ {category}</span>))}
+                            </div>
                         </div>
                         <div className="col-span-2">
                             <span className="block font-satoshi-bold mb-1">Prizes</span>
-                            <span className="block">3 million naira worth of prizes for winners.</span>
+                            <span className="block">{contest.prizes}</span>
                         </div>
                     </div>
-                    <ContestTimer deadline={new Date(Date.now() + 104705000)} title='contest ends in' />
+                    <ContestTimer deadline={new Date(contest.end_date)} title='contest ends in' />
                 </div>
-                <img src={contest.image ?? ''} alt="kid smiling" className="w-full rounded-3xl" />
+                <img src={contest.image || noImage} alt="kid smiling" className="w-full rounded-3xl h-[350px] object-cover" />
             </header>
             <section className="wrapper my-16">
                 <h2 className="text-accent text-lg lg:text-2xl font-satoshi-bold mb-3 sm:mb-6 uppercase">{contest.name} contestants</h2>
@@ -72,7 +76,7 @@ export default function OngoingContest({ contest }: { contest: IContest }) {
                     ))}
                 </div>
                 <div className="wrapper my-20 flex justify-center">
-                    <Button element="button" variant="outline">See more contests</Button>
+                    <Button element="button" variant="outline">See more contestants</Button>
                 </div>
             </section>
         </>

@@ -59,4 +59,7 @@ export class ApiEndPoints {
     static migrateStage({ oldStageId, newStageId }: { oldStageId: string, newStageId: string }) {
         return `/contest/migration?oldstageid=${oldStageId}&newstageid=${newStageId}`
     }
+    static toggleRegistration({ contestId }: { contestId: string }) {
+        return `/admin/contest/can_register/${contestId}`
+    }
 }

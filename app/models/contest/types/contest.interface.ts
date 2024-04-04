@@ -145,4 +145,5 @@ export interface IContestRepository {
     updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest>>
     updateStage(payload: { stageId: string, dto: IStage, token: string }): Promise<TFetcherResponse<IStage>>
     deleteStage(payload: { stageId: string, token: string }): Promise<TFetcherResponse<null>>
+    toggleRegistration(payload: { contestId: string, token: string }): Promise<TFetcherResponse<IContest>>
 }

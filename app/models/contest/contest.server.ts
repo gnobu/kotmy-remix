@@ -81,6 +81,15 @@ class ContestRepository implements IContestRepository {
         if (error) return { error: error }
         return { data }
     }
+    async toggleRegistration({ contestId, token = TOKEN }: { contestId: string; token?: string }): Promise<TFetcherResponse<IContest>> {
+        const { data: contest, error } = await ApiCall.call<IContestDto | null, unknown>({
+            url: ApiEndPoints.toggleRegistration({ contestId }),
+            method: MethodsEnum.PATCH,
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        if (error || !contest) return { error: error ?? { detail: "The contest was not found" } }
+        return { data: dtoToContest(contest) as IContestWStage }
+    }
 }
 export const contestRepo = new ContestRepository()
 
@@ -131,9 +140,8 @@ export async function deleteContest(formData: FormData, request: Request) {
         const { headers } = await setToast({ request, toast: 'success::The contest has been deleted' })
         return json(null, { headers })
     }
-    console.log(error)
     const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
-    return json(null, { headers })
+    return json(error, { headers })
 }
 
 export async function updateStage(formData: FormData, request: Request) {
@@ -145,6 +153,17 @@ export async function updateStage(formData: FormData, request: Request) {
         return json(error, { headers })
     }
     const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
+    return json(data, { headers })
+}
+
+export async function toggleRegistration(formData: FormData, request: Request) {
+    const contestId = formData.get('contestId') as string
+    const { data, error } = await contestRepo.toggleRegistration({ contestId })
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, toast: 'success::The contest has been updated' })
     return json(data, { headers })
 }
 

@@ -1,16 +1,17 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from '@remix-run/node'
-import { useActionData, useLoaderData, useNavigate } from '@remix-run/react'
-import { icons } from '~/assets/icons'
-import EditContestForm from '~/components/admin/tournament/EditContestForm'
-import RoundCta from '~/components/reusables/RoundCta'
-import { getTournaments } from '~/lib/data/contest.server'
+import { useLoaderData, useNavigate } from '@remix-run/react'
+
 import { setToast } from '~/lib/session.server'
 import { contestRepo, prepareContestPayload } from '~/models/contest/contest.server'
+import { tournamentRepo } from '~/models/tournament/tournament.server'
+import EditContestForm from '~/components/admin/tournament/EditContestForm'
+import RoundCta from '~/components/reusables/RoundCta'
+import { icons } from '~/assets/icons'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
-    const tournaments = await getTournaments()
+    const { data: tournaments = [] } = await tournamentRepo.getTournaments()
     const { data: contest, error } = await contestRepo.getContestById(params.contestId!)
-    if (error || !contest) {
+    if (error) {
         console.log(error)
         const { headers } = await setToast({ request, toast: 'error::The contest was not found' })
         return redirect('/admin/contests', { headers })

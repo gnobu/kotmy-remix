@@ -62,4 +62,7 @@ export class ApiEndPoints {
     static toggleRegistration({ contestId }: { contestId: string }) {
         return `/admin/contest/can_register/${contestId}`
     }
+    static getContestantsInStage({ stageId }: { stageId: string }) {
+        return `/contestant/${stageId}`
+    }
 }

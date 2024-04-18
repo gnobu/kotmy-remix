@@ -1,12 +1,12 @@
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
-import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IStage, Social, dtoToContest } from "./types/contest.interface"
+import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IStage, IStageWContestant, Social, dtoToContest } from "./types/contest.interface"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { setToast } from "~/lib/session.server"
 import { json } from "@remix-run/node"
 
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX2FkbWluIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImV4cCI6MTczMTk2NDg1Nn0.dDA5RkNkP4kf4sWrfivrP8dSYgR0a10BZra_Pk01IBQ"
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGUiOiJhZG1pbiIsInBlcm1pc3Npb25zIjpbIm1hbmFnZSB1c2VycyIsIm1hbmFnZSBjb250ZW50IiwibWFuYWdlIGJsb2ciLCJtYW5hZ2UgcGF5bWVudCIsIm1hbmFnZSBjb250ZXN0IiwibWFuYWdlIHZvdGVzIl0sImV4cCI6MTczODE3MzAzMH0.RTojBU2VNW-XqSCfd-qWSz_JU2jYmH3BCljPSWlKrLc"
 
 class ContestRepository implements IContestRepository {
     async createContest(contest: FormData, token = TOKEN): Promise<TFetcherResponse<IContest>> {
@@ -45,6 +45,13 @@ class ContestRepository implements IContestRepository {
         const { data: contests, error } = await ApiCall.call<IContestDto[], unknown>({
             url: ApiEndPoints.adminGetContestsInTournament(tournamentUniqueId),
             headers: { Authorization: `Bearer ${token}` },
+        })
+        if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
+        return { error }
+    }
+    async getContestsInTournament(tournamentUniqueId: string): Promise<TFetcherResponse<IContestWStage[]>> {
+        const { data: contests, error } = await ApiCall.call<IContestDto[], unknown>({
+            url: ApiEndPoints.getContestsInTournament(tournamentUniqueId),
         })
         if (contests) return { data: contests.map(contest => dtoToContest(contest) as IContestWStage) }
         return { error }
@@ -89,6 +96,13 @@ class ContestRepository implements IContestRepository {
         })
         if (error || !contest) return { error: error ?? { detail: "The contest was not found" } }
         return { data: dtoToContest(contest) as IContestWStage }
+    }
+    async getContestantsInStage(payload: { stageId: string }): Promise<TFetcherResponse<IStageWContestant>> {
+        const { data, error } = await ApiCall.call<IStageWContestant, unknown>({
+            url: ApiEndPoints.getContestantsInStage(payload)
+        })
+        if (error) return { error: error ?? { detail: "Could not fetch the stage data" } }
+        return { data }
     }
 }
 export const contestRepo = new ContestRepository()

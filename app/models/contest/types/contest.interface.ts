@@ -80,6 +80,61 @@ export interface IStage {
     contestants_view_folder: string
 }
 
+export interface IStageWContestant extends IStage {
+    contestants: IContestant[]
+}
+
+export interface IContestant {
+    _id: string,
+    created_at: string,
+    updated_at: string,
+    is_deleted: boolean,
+    stage_id: string,
+    contestant_biodata_id: string,
+    image: null,
+    vote: {
+        social_media: number,
+        tally: number,
+        judge: number,
+        givaah: number,
+        bonus: number,
+    },
+    social_media_url: string,
+    code: string,
+    is_evicted: boolean,
+    category: string,
+    rank: number,
+    image_url: string,
+    result: {
+        overall_vote_percentage: number,
+        position: number,
+        grade: string,
+        total_votes: number,
+        weighted_scores: {
+            social_media: number,
+            tally: number,
+            judge: number,
+            givaah: number,
+            bonus: number,
+        }
+    },
+    contestant_biodata: {
+        _id: string,
+        created_at: string,
+        updated_at: string,
+        is_deleted: boolean,
+        first_name: string,
+        last_name: string,
+        dob: string,
+        sex: string,
+        email: string,
+        state_of_residence: string,
+        whatsapp_no: string,
+        info: string,
+    }
+}
+
+
 export interface ICreateContestDTO {
     image?: File
     name: string
@@ -140,10 +195,12 @@ export interface IContestRepository {
     getContests(): Promise<TFetcherResponse<IContest[]>>
     getContestById(contestId: string): Promise<TFetcherResponse<IContest>>
     adminGetContestsInTournament(tournamentUniqueId: string, token: string): Promise<TFetcherResponse<IContestWStage[]>>
+    getContestsInTournament(tournamentUniqueId: string): Promise<TFetcherResponse<IContestWStage[]>>
     createContest(contest: FormData, token: string): Promise<TFetcherResponse<IContest>>
     deleteContest(contestId: string): Promise<TFetcherResponse<boolean>>
     updateContest(payload: { contestId: string, dto: FormData, token: string }): Promise<TFetcherResponse<IContest>>
     updateStage(payload: { stageId: string, dto: IStage, token: string }): Promise<TFetcherResponse<IStage>>
     deleteStage(payload: { stageId: string, token: string }): Promise<TFetcherResponse<null>>
     toggleRegistration(payload: { contestId: string, token: string }): Promise<TFetcherResponse<IContest>>
+    getContestantsInStage(payload: { stageId: string }): Promise<TFetcherResponse<IStageWContestant>>
 }

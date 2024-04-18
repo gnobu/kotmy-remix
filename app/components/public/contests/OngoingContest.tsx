@@ -1,36 +1,21 @@
 import { Link } from 'react-router-dom'
+import { useSearchParams } from '@remix-run/react'
 
-import { hero5, noImage } from '~/assets/images'
 import FormControl from '~/components/reusables/FormControl'
-import Select from '~/components/reusables/Select'
 import StatusTag from '~/components/reusables/StatusTag'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/reusables/select-shad'
 import ContestantCard from './ContestantCard'
-import Button from '~/components/reusables/Button'
 import ContestTimer from './ContestTimer'
-import { Contestant } from '~/lib/types/contestant.interface'
-import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { noImage } from '~/assets/images'
+import { IContestWStage, IStageWContestant } from '~/models/contest/types/contest.interface'
 
-const contestant: Contestant = {
-    id: '1',
-    fullName: 'Bakare Great Ireayomide',
-    email: 'bakaregreat@hotmail.com',
-    dob: '09-12-2019',
-    gender: 'female',
-    image: hero5,
-    state_of_residence: 'Abuja',
-    votes: {
-        social_media: { type: 'facebook', count: 0, url: '.' },
-        givah: 0,
-        tally: 0
-    }
-}
-
-export default function OngoingContest({ contest }: { contest: IContestWStage }) {
+export default function OngoingContest({ contest, stage }: { contest: IContestWStage, stage: IStageWContestant | null }) {
+    const [_, setUrlSearchParams] = useSearchParams()
     const status = contest.status
     const color = status === 'ongoing'
         ? 'green' : status === 'completed'
             ? 'red' : 'gray'
-    console.log(contest.stages)
+
     return (
         <>
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
@@ -63,21 +48,28 @@ export default function OngoingContest({ contest }: { contest: IContestWStage })
                 <h2 className="text-accent text-lg lg:text-2xl font-satoshi-bold mb-3 sm:mb-6 uppercase">{contest.name} contestants</h2>
                 <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 sm:gap-8">
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <FormControl as='input' type='search' className='min-w-[280px] bg-white' placeholder='Search contestant by name' />
-                        <Select containerClass='bg-white'>
-                            <option value="1">Stage 1</option>
+                        <FormControl as='input' type='search' className='min-w-[280px] bg-white py-2 text-sm' placeholder='Search contestant by name' />
+                        <Select value={String(stage?.stage)} onValueChange={(val) => setUrlSearchParams(prev => { prev.set('stage', val); return prev })}>
+                            <SelectTrigger className="w-[180px] h-auto rounded-lg shadow-none bg-white hover:border-accent">
+                                <SelectValue placeholder={"Stage 1"} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {contest.stages.map(stage => (
+                                    <SelectItem key={stage.stage} value={String(stage.stage)} className='focus:bg-blue-700/25'>Stage {stage.stage}</SelectItem>
+                                ))}
+                            </SelectContent>
                         </Select>
                     </div>
                     <Link to={'scoreboard'} className="text-accent font-bold hover:underline underline-offset-4">See scoreboard</Link>
                 </div>
                 <div className="my-16 grid sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-16">
-                    {(new Array(10).fill(contestant) as Contestant[]).map((contestant, index) => (
-                        <ContestantCard key={index} contestant={contestant} />
+                    {stage?.contestants.map((contestant) => (
+                        <ContestantCard key={contestant.code} contestant={contestant} socialMedia={stage.rates.social_media.type} />
                     ))}
                 </div>
-                <div className="wrapper my-20 flex justify-center">
+                {/* <div className="wrapper my-20 flex justify-center">
                     <Button element="button" variant="outline">See more contestants</Button>
-                </div>
+                </div> */}
             </section>
         </>
     )

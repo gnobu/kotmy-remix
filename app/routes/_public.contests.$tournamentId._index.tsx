@@ -3,14 +3,21 @@ import { useLoaderData } from "@remix-run/react"
 
 import Button from "~/components/reusables/Button"
 import ContestCard from "~/components/reusables/ContestCard"
+import { contestRepo } from "~/models/contest/contest.server"
 import { tournamentRepo } from "~/models/tournament/tournament.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { tournamentId } = params
     if (!tournamentId) return redirect('/contests')
     const { data: tournament, error } = await tournamentRepo.getTournamentById(tournamentId)
+    const { data: contests } = await contestRepo.getContestsInTournament(tournamentId)
     if (error) return redirect('/contests')
-    return json({ tournament })
+    return json({
+        tournament: {
+            ...tournament,
+            contests: contests ?? tournament.contests.filter(contest => contest.status !== 'yet_to_start')
+        }
+    })
 }
 
 export default function TournamentPage() {
@@ -23,11 +30,11 @@ export default function TournamentPage() {
                 </h1>
             </header>
             <section className='wrapper'>
-                <div className="p-2 rounded-full bg-secondary flex w-fit">
-                    <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium bg-accent text-white">All KOTM</span>
-                    <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium">Ongoing</span>
-                    <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium">Registering</span>
-                    <span className="whitespace-nowrap text-xs sm:text-base p-3 sm:px-6 sm:py-4 rounded-full font-satoshi-medium">Completed</span>
+                <div className="p-2 rounded-full bg-secondary flex w-fit text-xs sm:text-base">
+                    <span className="whitespace-nowrap p-2 sm:px-4 sm:py-3 rounded-full font-satoshi-medium bg-accent text-white">All KOTM</span>
+                    <span className="whitespace-nowrap p-2 sm:px-4 sm:py-3 rounded-full font-satoshi-medium">Ongoing</span>
+                    <span className="whitespace-nowrap p-2 sm:px-4 sm:py-3 rounded-full font-satoshi-medium">Registering</span>
+                    <span className="whitespace-nowrap p-2 sm:px-4 sm:py-3 rounded-full font-satoshi-medium">Completed</span>
                 </div>
             </section>
             <section className='wrapper my-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center'>

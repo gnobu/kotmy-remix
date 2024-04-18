@@ -4,7 +4,7 @@ import Svg from "~/components/reusables/Svg"
 import { socialIcons } from "~/lib/data/socials"
 
 type Props = {
-    type: "facebook" | "instagram" | "twitter" | "tally" | "givaah";
+    type: keyof typeof socialIcons;
     url: string;
 }
 

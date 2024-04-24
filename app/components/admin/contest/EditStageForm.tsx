@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Form } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 import cn from 'classnames'
 import { Row } from '@tanstack/react-table'
 
@@ -27,7 +27,7 @@ export default function Stages({ row }: { row: Row<IContestWStage> }) {
         }
       </div>
       {selectedStage
-        ? <EditStageForm key={selectedStage._id} stage={selectedStage} closeForm={row.getToggleExpandedHandler()} />
+        ? <EditStageForm key={selectedStage._id} stage={selectedStage} contestId={row.original.id} closeForm={row.getToggleExpandedHandler()} />
         : null
       }
     </div >
@@ -35,7 +35,7 @@ export default function Stages({ row }: { row: Row<IContestWStage> }) {
 }
 
 
-function EditStageForm({ stage, closeForm }: { stage: IStage, closeForm: () => void }) {
+function EditStageForm({ stage, contestId, closeForm }: { stage: IStage, contestId: string, closeForm: () => void }) {
   return (
     <Form method='POST' className='text-primary text-xs flex flex-col gap-4'>
       <fieldset className="py-4 grid grid-cols-4 gap-3 border-b">
@@ -58,10 +58,13 @@ function EditStageForm({ stage, closeForm }: { stage: IStage, closeForm: () => v
         ))}
       </fieldset>
 
-      <div className='flex justify-end gap-6'>
-        <Cta element='button' type='button' variant='outline' onClick={closeForm}
-          className='px-3 py-2 rounded-md font-bold min-w-[90px] border-secondary hover:border-slate-400 text-primary'>Close Form</Cta>
-        <Cta element='button' type='submit' name='intent' value='update_stage' className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Submit</Cta>
+      <div className='flex justify-between items-center gap-6'>
+        <Link to={`${contestId}/${stage._id}`} className='text-accent hover:text-accent/80 font-semibold'>View contestants</Link>
+        <div className='flex justify-end gap-6'>
+          <Cta element='button' type='button' variant='outline' onClick={closeForm}
+            className='px-3 py-2 rounded-md font-bold min-w-[90px] border-secondary hover:border-slate-400 text-primary'>Close Form</Cta>
+          <Cta element='button' type='submit' name='intent' value='update_stage' className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Submit</Cta>
+        </div>
       </div>
       <input type="hidden" name='social_media_type' value={stage.rates.social_media.type} />
       <input type="hidden" name='stageId' value={stage._id} />

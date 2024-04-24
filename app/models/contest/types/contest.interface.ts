@@ -2,7 +2,7 @@ import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { socials } from "~/lib/data/socials"
 
 export type ContestStatus = 'yet_to_start' | 'registering' | 'ongoing' | 'completed'
-export type StageStatus = "NOT_STARTED" | "ONGOING" | "ENDED"
+export type StageStatus = "yet_to_start" | "ongoing" | "completed"
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
 export type Social = typeof socials[number]
 

@@ -1,11 +1,12 @@
 import { Table } from '@tanstack/react-table'
-import { ContestantDto } from '~/lib/types/contestant.interface'
+
 import EditContestantDialog from './EditContestantDialog'
 import DeleteContestantDialog from './DeleteContestantDialog'
 import EvictContestantDialog from './EvictContestantDialog'
 import AdmitContestantDialog from './AdmitContestantDialog'
+import { IContestant } from '~/models/contest/types/contest.interface'
 
-export default function ContestantTableActions({ table }: { table: Table<ContestantDto> }) {
+export default function ContestantTableActions({ table }: { table: Table<IContestant> }) {
     const singleRowSelected = table.getFilteredSelectedRowModel().rows.length === 1
     const rowsSelected = table.getFilteredSelectedRowModel().rows.length >= 1
     return <div className="flex gap-4 items-center px-3 mb-3">

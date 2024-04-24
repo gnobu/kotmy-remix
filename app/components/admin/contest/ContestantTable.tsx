@@ -1,12 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
+
 import Checkbox from '~/components/reusables/Checkbox'
 import DataTable from '~/components/reusables/DataTable'
 import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
 import Pagination from '~/components/reusables/Pagination'
-import { ContestantDto } from '~/lib/types/contestant.interface'
 import ContestantTableActions from './ContestantTableActions'
+import { IContestant } from '~/models/contest/types/contest.interface'
 
-const columns: ColumnDef<ContestantDto>[] = [
+const columns: ColumnDef<IContestant>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -39,15 +40,15 @@ const columns: ColumnDef<ContestantDto>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="contestant" />
         ),
-        accessorFn: (row) => row.biodata.full_name
+        accessorFn: (row) => `${row.contestant_biodata.first_name} ${row.contestant_biodata.last_name}`
     },
     {
         id: 'dob',
-        accessorFn: (row) => row.biodata.dob
+        accessorFn: (row) => row.contestant_biodata.dob
     },
     {
         id: 'state',
-        accessorFn: (row) => row.biodata.state_of_residence
+        accessorFn: (row) => row.contestant_biodata.state_of_residence
     },
     {
         accessorKey: 'code',
@@ -60,21 +61,21 @@ const columns: ColumnDef<ContestantDto>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="s-media" />
         ),
-        accessorFn: (row) => row.votes.social_media.count
+        accessorFn: (row) => row.vote.social_media
     },
     {
         id: 'tally',
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="tally" />
         ),
-        accessorFn: (row) => row.votes.tally
+        accessorFn: (row) => row.vote.tally
     },
     {
         id: 'givaah',
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="givaah" />
         ),
-        accessorFn: (row) => row.votes.givaah
+        accessorFn: (row) => row.vote.givaah
     },
     {
         accessorKey: 'grade',
@@ -84,18 +85,18 @@ const columns: ColumnDef<ContestantDto>[] = [
     },
 ]
 
-export default function ContestantTable({ data }: { data: ContestantDto[] }) {
+export default function ContestantTable({ data }: { data: IContestant[] }) {
     return (
         <>
             <div className="w-full overflow-x-auto">
                 <DataTable data={data} columns={columns} className='text-sm' TableActions={ContestantTableActions} />
             </div>
-            <div className="max-sm:flex-col max-xs:text-xs sm:w-4/5 mx-auto flex gap-2 justify-between items-center my-5">
+            {/* <div className="max-sm:flex-col max-xs:text-xs sm:w-4/5 mx-auto flex gap-2 justify-between items-center my-5">
                 <label className="flex gap-2">Rows per page
                     <input type="number" name="rows" id="rows" className="w-10 pl-2 rounded-md border" defaultValue={10} />
                 </label>
                 <Pagination />
-            </div>
+            </div> */}
         </>
     )
 }

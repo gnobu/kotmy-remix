@@ -1,6 +1,7 @@
 import { noImage } from '~/assets/images'
 import SocialLink from './SocialLink'
-import { IContestant, Social } from '~/models/contest/types/contest.interface'
+import { Social } from '~/models/contest/types/contest.interface'
+import { IContestant } from '~/models/contestant/types/contestant.interface'
 
 export default function ContestantCard({ contestant, socialMedia }: { contestant: IContestant, socialMedia: Social }) {
     const fullName = `${contestant.contestant_biodata.first_name} ${contestant.contestant_biodata.last_name}`

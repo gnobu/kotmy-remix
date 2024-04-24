@@ -4,7 +4,7 @@ import EditContestantDialog from './EditContestantDialog'
 import DeleteContestantDialog from './DeleteContestantDialog'
 import EvictContestantDialog from './EvictContestantDialog'
 import AdmitContestantDialog from './AdmitContestantDialog'
-import { IContestant } from '~/models/contest/types/contest.interface'
+import { IContestant } from '~/models/contestant/types/contestant.interface'
 
 export default function ContestantTableActions({ table }: { table: Table<IContestant> }) {
     const singleRowSelected = table.getFilteredSelectedRowModel().rows.length === 1

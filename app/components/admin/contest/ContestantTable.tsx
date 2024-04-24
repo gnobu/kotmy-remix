@@ -5,7 +5,7 @@ import DataTable from '~/components/reusables/DataTable'
 import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
 import Pagination from '~/components/reusables/Pagination'
 import ContestantTableActions from './ContestantTableActions'
-import { IContestant } from '~/models/contest/types/contest.interface'
+import { IContestant } from '~/models/contestant/types/contestant.interface'
 
 const columns: ColumnDef<IContestant>[] = [
     {

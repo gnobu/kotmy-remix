@@ -76,7 +76,7 @@ export default function DataTable<TData, TValue>({
                             </React.Fragment>
                         ))
                         : <tr className="border-b border-secondary">
-                            <td className="p-3" colSpan={columns.length}></td>
+                            <td className="p-3 text-center" colSpan={columns.length}>No data to display</td>
                         </tr>
                     }
                 </tbody>

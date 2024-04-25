@@ -20,7 +20,7 @@ type Props = (
 
 export default function FormControl({ labelClassNames, labelText, error, ...props }: Props) {
   const [showPassword, setShowPassword] = useState(false)
-  const formControlClasses = cn('p-3 rounded-lg cursor-text w-full font-medium outline outline-1 outline-secondary hover:outline-accent focus-within:outline',
+  const formControlClasses = cn('p-3 py-2 rounded-lg cursor-text w-full font-medium outline outline-1 outline-secondary hover:outline-accent focus-within:outline',
     'flex gap-2 items-center', { 'outline-red-400 hover:outline-red-400': error }, props.className
   )
   const errorElement = <span className={cn('mt-1 text-red-400 font-semibold leading-none flex gap-1.5 items-end', { 'hidden': !error })}>
@@ -33,7 +33,7 @@ export default function FormControl({ labelClassNames, labelText, error, ...prop
           <div aria-invalid={!!error} className={formControlClasses}>
             <Svg src={props.icon ?? ''} className={cn('basis-6', { 'hidden': !props.icon })} />
             <input {...props} type={props.type === 'password' && showPassword ? 'text' : props.type}
-              className={cn('bg-transparent autofill:bg-transparent outline-none grow shrink min-w-0')} />
+              className={cn('bg-transparent autofill:bg-transparent outline-none grow shrink min-w-0 h-6')} />
             <Svg src={showPassword ? icons.hiddenIcon : icons.viewIcon}
               onClick={() => setShowPassword(prev => !prev)}
               className={cn('basis-6 cursor-pointer', { 'hidden': props.type !== 'password' })} />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useActionData } from '@remix-run/react'
 
 import ContestGuidelines from './ContestGuidelines'
 import RegistrationSuccess from './RegistrationSuccess'
@@ -7,9 +7,10 @@ import ContestantSlider from '../ContestantSlider'
 import ContestTimer from './ContestTimer'
 import { hero1, hero2, hero3 } from '~/assets/images'
 import { IContest } from '~/models/contest/types/contest.interface'
+import { RegisterAction } from '~/routes/_public.contests.$tournamentId.$contestId._index'
 
 export default function RegisteringContest({ contest }: { contest: IContest }) {
-    const [registered, setRegistered] = useState(false)
+    const actionRes = useActionData<RegisterAction>()
     return (
         <>
             <header className="wrapper my-16 grid md:grid-cols-2 justify-between gap-6 md:gap-8">
@@ -25,7 +26,7 @@ export default function RegisteringContest({ contest }: { contest: IContest }) {
             <section className="sm:wrapper my-16">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-8">
                     <ContestGuidelines contest={contest} />
-                    {registered ? <RegistrationSuccess /> : <RegistrationForm onSubmit={() => setRegistered(true)} />}
+                    {actionRes?.data ? <RegistrationSuccess contestant={actionRes.data} /> : <RegistrationForm contest={contest} />}
                 </div>
             </section>
             <section className='my-8 md:my-16'>

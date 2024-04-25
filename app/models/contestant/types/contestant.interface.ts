@@ -1,3 +1,5 @@
+import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
+
 export interface IContestant {
     _id: string,
     created_at: string,
@@ -48,3 +50,35 @@ export interface IContestant {
     }
 }
 
+export interface ILeanContestant {
+    _id: string,
+    created_at: string,
+    updated_at: string,
+    is_deleted: boolean,
+    stage_id: string,
+    contestant_biodata_id: string,
+    image: null,
+    vote: {
+        social_media: number,
+        tally: number,
+        judge: number,
+        givaah: number,
+        bonus: number,
+    },
+    social_media_url: string,
+    code: string,
+    is_evicted: boolean,
+    category: string,
+    rank: number,
+    image_url: string,
+    result: null,
+    contestant_biodata: null
+}
+
+
+export interface IContestantRepository {
+    registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
+    updateContestant(): Promise<TFetcherResponse<IContestant>>
+    voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
+    toggleEvictContestant(): Promise<TFetcherResponse<ILeanContestant>>
+}

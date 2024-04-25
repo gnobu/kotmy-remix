@@ -10,7 +10,10 @@ export class ApiEndPoints {
         return `/contest/tournament/${tournamentUniqueId}`
     }
     static getTournamentsPaged(page: number) {
-        return `/api/tournament_paged?page=${page}`;
+        return `/api/tournament_paged?page=${page}`
+    }
+    static registerContestant(contestId: string) {
+        return `/contestant/register_for_contest/${contestId}`
     }
     
     // ADMIN

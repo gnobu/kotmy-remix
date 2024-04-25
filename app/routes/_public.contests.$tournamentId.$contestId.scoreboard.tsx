@@ -1,25 +1,21 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { Link, useLoaderData } from "@remix-run/react"
+import { Link, useRouteLoaderData, useSearchParams } from "@remix-run/react"
+
 import ContestTimer from "~/components/public/contests/ContestTimer"
 import MobileScoreboard from "~/components/public/contests/MobileScoreboard"
 import ScoreboardTable from "~/components/public/contests/ScoreboardTable"
 import FormControl from "~/components/reusables/FormControl"
 import Pagination from "~/components/reusables/Pagination"
-import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
-import { getContest } from "~/lib/data/contest.server"
-import { scoreboardData } from "~/lib/data/scoreboardData"
+import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "~/components/reusables/select-shad"
+import { noImage } from "~/assets/images"
+import { StageContestantsLoader } from "./_public.contests.$tournamentId.$contestId"
 
-export async function loader({ params }: LoaderFunctionArgs) {
-    const { tournamentId, contestId } = params
-    if (!contestId) return redirect(`/contests/${tournamentId}`)
-    const contest = await getContest(contestId)
-    if (!contest) return redirect(`/contests/${tournamentId}`)
-    return json({ contest })
-}
 
 export default function ContestPage() {
-    const { contest } = useLoaderData<typeof loader>()
+    const stageContestants = useRouteLoaderData<StageContestantsLoader>("routes/_public.contests.$tournamentId.$contestId")
+    if (!stageContestants) throw new Error("Could not load stage contestants")
+    const { contest, stage } = stageContestants
+    const [_, setUrlSearchParams] = useSearchParams()
     const color = contest.status === 'registering'
         ? 'yellow' : contest.status === 'ongoing'
             ? 'green' : contest.status === 'completed'
@@ -38,32 +34,41 @@ export default function ContestPage() {
                             <StatusTag status={contest.status} color={color} />
                         </div>
                         <div className="">
-                            <span className="block font-satoshi-bold mb-1">Age Categories</span>
-                            <span className="block">0 - 14 Years</span>
+                            <span className="block font-satoshi-bold mb-1">Categories</span>
+                            <div className="flex gap-4 flex-wrap capitalize">
+                                {contest.categories.map(category => (<span key={category}>~ {category}</span>))}
+                            </div>
                         </div>
                         <div className="col-span-2">
                             <span className="block font-satoshi-bold mb-1">Prizes</span>
-                            <span className="block">3 million naira worth of prizes for winners.</span>
+                            <span className="block">{contest.prizes}</span>
                         </div>
                     </div>
-                    <ContestTimer deadline={new Date(Date.now() + 104705000)} title='contest ends in' />
+                    <ContestTimer deadline={new Date(contest.end_date)} title='contest ends in' />
                 </div>
-                <img src={contest.image ?? ''} alt="kid smiling" className="w-full rounded-3xl" />
+                <img src={contest.image || noImage} alt="kid smiling" className="w-full rounded-3xl h-[350px] object-cover" />
             </header>
             <section className="sm:bg-white">
                 <div className="wrapper my-16">
                     <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-y-4 gap-x-6 sm:gap-x-8 py-6 flex-wrap">
-                        <span className="font-satoshi-medium text-xl">1000 Contestants</span>
+                        <span className="font-satoshi-medium text-xl">{stage?.contestants.length ?? 0} Contestants</span>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <FormControl as='input' type='search' className='min-w-[280px] bg-white' placeholder='Search contestant by name' />
-                            <Select containerClass='bg-white'>
-                                <option value="1">Stage 1</option>
+                            <Select value={String(stage?.stage)} onValueChange={(val) => setUrlSearchParams(prev => { prev.set('stage', val); return prev })}>
+                                <SelectTrigger className="sm:w-[180px] h-auto rounded-lg shadow-none bg-white hover:border-accent">
+                                    <SelectValue placeholder={"Stage 1"} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {contest.stages.map(stage => (
+                                        <SelectItem key={stage.stage} value={String(stage.stage)} className='focus:bg-blue-700/25'>Stage {stage.stage}</SelectItem>
+                                    ))}
+                                </SelectContent>
                             </Select>
                         </div>
-                        <Link to={`/results/${contest.id}`} className="text-accent font-bold hover:underline underline-offset-4">See result table</Link>
+                        <Link to={`/results/${contest.id}`} className="w-fit text-accent font-bold hover:underline underline-offset-4">See result table</Link>
                     </div>
-                    <ScoreboardTable data={scoreboardData} />
-                    <MobileScoreboard data={scoreboardData} />
+                    <ScoreboardTable contestants={stage?.contestants ?? []} socialMediaType={stage?.rates.social_media.type ?? 'kotmy'} />
+                    <MobileScoreboard contestants={stage?.contestants ?? []} socialMediaType={stage?.rates.social_media.type ?? 'kotmy'} />
                     <Pagination className="p-6" />
                 </div>
             </section>

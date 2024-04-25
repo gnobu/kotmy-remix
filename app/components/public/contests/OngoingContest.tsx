@@ -50,7 +50,7 @@ export default function OngoingContest({ contest, stage }: { contest: IContestWS
                     <div className="flex flex-col sm:flex-row gap-4">
                         <FormControl as='input' type='search' className='min-w-[280px] bg-white py-2 text-sm' placeholder='Search contestant by name' />
                         <Select value={String(stage?.stage)} onValueChange={(val) => setUrlSearchParams(prev => { prev.set('stage', val); return prev })}>
-                            <SelectTrigger className="w-[180px] h-auto rounded-lg shadow-none bg-white hover:border-accent">
+                            <SelectTrigger className="sm:w-[180px] h-auto rounded-lg shadow-none bg-white hover:border-accent">
                                 <SelectValue placeholder={"Stage 1"} />
                             </SelectTrigger>
                             <SelectContent>
@@ -60,7 +60,7 @@ export default function OngoingContest({ contest, stage }: { contest: IContestWS
                             </SelectContent>
                         </Select>
                     </div>
-                    <Link to={'scoreboard'} className="text-accent font-bold hover:underline underline-offset-4">See scoreboard</Link>
+                    <Link to={'scoreboard'} className="w-fit text-accent font-bold hover:underline underline-offset-4">See scoreboard</Link>
                 </div>
                 <div className="my-16 grid sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-16">
                     {stage?.contestants.map((contestant) => (

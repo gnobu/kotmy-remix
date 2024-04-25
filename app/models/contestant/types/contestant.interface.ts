@@ -32,7 +32,8 @@ export interface IContestant {
             judge: number,
             givaah: number,
             bonus: number,
-        }
+        },
+        device_voted_for_contestant: boolean
     },
     contestant_biodata: {
         _id: string,

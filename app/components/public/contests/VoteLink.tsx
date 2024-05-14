@@ -11,7 +11,7 @@ type Props = {
 
 export default function VoteLink({ type, url, count }: Props) {
     return (
-        <Link to={url} className={cn(`p-2 flex items-center gap-2 border rounded-full`, {
+        <Link to={url} className={cn(`p-2 flex items-center gap- border rounded-full`, {
             'border-facebook text-facebook bg-facebookBG': type === 'facebook',
             'border-instagram text-instagram bg-instagramBG': type === 'instagram',
             'border-twitter text-twitter bg-twitterBG': type === 'twitter',
@@ -27,7 +27,7 @@ export default function VoteLink({ type, url, count }: Props) {
             })}>
                 <Svg src={socialIcons[type]} />
             </span>
-            <span className="text-xs font-bold">{count}</span>
+            <span className="grow text-xs font-bold text-center mr-2">{count}</span>
         </Link>
     )
 }

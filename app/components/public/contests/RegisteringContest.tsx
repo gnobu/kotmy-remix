@@ -5,7 +5,7 @@ import RegistrationSuccess from './RegistrationSuccess'
 import RegistrationForm from './RegistrationForm'
 import ContestantSlider from '../ContestantSlider'
 import ContestTimer from './ContestTimer'
-import { hero1, hero2, hero3 } from '~/assets/images'
+import { hero1, hero2, hero3, noImage } from '~/assets/images'
 import { IContest } from '~/models/contest/types/contest.interface'
 import { RegisterAction } from '~/routes/_public.contests.$tournamentId.$contestId._index'
 
@@ -21,7 +21,7 @@ export default function RegisteringContest({ contest }: { contest: IContest }) {
                     </div>
                     <ContestTimer deadline={new Date(contest.reg_deadline)} title='registration ends in' />
                 </div>
-                <img src={contest.image ?? ""} alt="kid smiling" className="w-full rounded-3xl h-[350px] object-cover" />
+                <img src={contest.image || noImage} alt="kid smiling" className="w-full rounded-3xl h-[350px] object-cover" />
             </header>
             <section className="sm:wrapper my-16">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-8">

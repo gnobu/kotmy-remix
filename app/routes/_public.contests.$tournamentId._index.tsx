@@ -15,7 +15,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     return json({
         tournament: {
             ...tournament,
-            contests: contests ?? tournament.contests.filter(contest => contest.status !== 'yet_to_start')
+            contests: contests?.toReversed() ?? tournament.contests.filter(contest => contest.status !== 'yet_to_start').toReversed()
         }
     })
 }

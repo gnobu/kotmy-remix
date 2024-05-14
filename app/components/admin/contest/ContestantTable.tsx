@@ -6,6 +6,7 @@ import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHea
 import ContestantTableActions from './ContestantTableActions'
 import { IContestant } from '~/models/contestant/types/contestant.interface'
 import { formatDate } from '~/lib/dates.utils'
+import StatusTag from '~/components/reusables/StatusTag'
 
 const columns: ColumnDef<IContestant>[] = [
     {
@@ -80,8 +81,18 @@ const columns: ColumnDef<IContestant>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="grade" />
         ),
-        accessorFn: (row) => row.result.grade
-    },
+        accessorFn: (row) => row.result.grade || '-'
+    }, {
+        accessorKey: "is_evicted",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="status" />
+        ),
+        cell: ({ row }) => {
+            const status = (row.getValue<boolean>('is_evicted'))
+            const color = status ? 'red' : 'green'
+            return <StatusTag status={status ? 'Evicted' : 'Safe'} color={color} />
+        }
+    }
 ]
 
 export default function ContestantTable({ data }: { data: IContestant[] }) {

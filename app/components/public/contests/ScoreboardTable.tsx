@@ -44,13 +44,13 @@ export default function ScoreboardTable({ contestants, socialMediaType }: { cont
                             </dl>
                         </td>
                         <td className="px-6 py-3 hidden xl:table-cell"><Grade grade={contestant.result.grade} /></td>
-                        <td className="px-6 py-3 grid grid-cols-3 gap-2">
+                        <td className="px-6 py-3 grid grid-cols-2 gap-2">
                             <VoteLink type={socialMediaType}
                                 url={contestant.social_media_url}
                                 count={numberSlang(contestant.vote.social_media)}
                             />
                             <VoteLink type={'tally'} url={'.'} count={numberSlang(contestant.vote.tally)} />
-                            <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} />
+                            {/* <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} /> */}
                         </td>
                     </tr>
                 ))}

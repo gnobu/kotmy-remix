@@ -14,7 +14,7 @@ export default function ContestantCard({ contestant, socialMedia }: { contestant
                 <div className="grid grid-cols-2 gap-4">
                     <SocialLink type={socialMedia} url={contestant.social_media_url} />
                     <SocialLink type='tally' url='.' />
-                    <SocialLink type='givaah' url='.' />
+                    {/* <SocialLink type='givaah' url='.' /> */}
                 </div>
             </div>
         </article>

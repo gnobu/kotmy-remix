@@ -29,7 +29,7 @@ export default function MobileScoreboard({ contestants, socialMediaType }: { con
                             count={numberSlang(contestant.vote.social_media)}
                         />
                         <VoteLink type={'tally'} url={'.'} count={numberSlang(contestant.vote.tally)} />
-                        <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} />
+                        {/* <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} /> */}
                     </div>
                 </article>
             ))}

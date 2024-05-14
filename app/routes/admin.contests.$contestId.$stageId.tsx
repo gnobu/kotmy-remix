@@ -21,6 +21,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     }
     return json({ contest, stage })
 }
+export type StageContestantsLoader = typeof loader
 
 export default function StageContestants() {
     const { contest, stage } = useLoaderData<typeof loader>()

@@ -3,9 +3,9 @@ import { ColumnDef } from '@tanstack/react-table'
 import Checkbox from '~/components/reusables/Checkbox'
 import DataTable from '~/components/reusables/DataTable'
 import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
-import Pagination from '~/components/reusables/Pagination'
 import ContestantTableActions from './ContestantTableActions'
 import { IContestant } from '~/models/contestant/types/contestant.interface'
+import { formatDate } from '~/lib/dates.utils'
 
 const columns: ColumnDef<IContestant>[] = [
     {
@@ -14,9 +14,7 @@ const columns: ColumnDef<IContestant>[] = [
             <div className="flex place-content-center">
                 <Checkbox
                     className='h-4 w-4'
-                    checked={
-                        table.getIsAllPageRowsSelected()
-                    }
+                    checked={table.getIsAllPageRowsSelected()}
                     onCheckedChange={(value) => { table.toggleAllPageRowsSelected(!value) }}
                     aria-label="Select all"
                 />
@@ -44,7 +42,7 @@ const columns: ColumnDef<IContestant>[] = [
     },
     {
         id: 'dob',
-        accessorFn: (row) => row.contestant_biodata.dob
+        accessorFn: (row) => formatDate(new Date(row.contestant_biodata.dob))
     },
     {
         id: 'state',
@@ -82,6 +80,7 @@ const columns: ColumnDef<IContestant>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="grade" />
         ),
+        accessorFn: (row) => row.result.grade
     },
 ]
 

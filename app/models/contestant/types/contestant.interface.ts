@@ -76,10 +76,28 @@ export interface ILeanContestant {
     contestant_biodata: null
 }
 
+export interface IEditContestantDTO {
+    biodata: {
+        first_name?: string,
+        last_name?: string,
+        dob?: string,
+        sex?: string,
+        email?: string,
+        state_of_residence?: string,
+        whatsapp_no?: string,
+    },
+    social_media_url?: string,
+    vote: {
+        social_media?: number,
+        judge?: number,
+        bonus?: number,
+    }
+}
+
 
 export interface IContestantRepository {
     registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
-    updateContestant(): Promise<TFetcherResponse<IContestant>>
+    editContestant(payload: { dto: IEditContestantDTO, contestantId: string }, token: string): Promise<TFetcherResponse<IContestant>>
     voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
     toggleEvictContestant(): Promise<TFetcherResponse<ILeanContestant>>
 }

@@ -63,9 +63,10 @@ export default function EditContestantDialog({ disabled, contestant }: { disable
                                 </fieldset>
 
                                 <div className='flex justify-end gap-6'>
+                                    <input type="hidden" name="contestant_id" value={contestant._id} />
                                     <Cta element='button' type='reset' variant='outline'
                                         className='px-3 py-2 rounded-md font-bold min-w-[90px] border-secondary hover:border-slate-400 text-primary'>Reset</Cta>
-                                    <Cta element='button' type='submit' className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Submit</Cta>
+                                    <Cta element='button' type='submit' name="intent" value='edit' className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Submit</Cta>
                                 </div>
                             </Form>
                         </DialogDescription>

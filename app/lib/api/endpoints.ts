@@ -15,6 +15,9 @@ export class ApiEndPoints {
     static registerContestant(contestId: string) {
         return `/contestant/register_for_contest/${contestId}`
     }
+    static getContestantsInStage({ stageId }: { stageId: string }) {
+        return `/contestant/${stageId}`
+    }
     
     // ADMIN
     static get createAdminAccount(): string {
@@ -65,7 +68,7 @@ export class ApiEndPoints {
     static toggleRegistration({ contestId }: { contestId: string }) {
         return `/admin/contest/can_register/${contestId}`
     }
-    static getContestantsInStage({ stageId }: { stageId: string }) {
-        return `/contestant/${stageId}`
+    static editContestant(contestantId: string) {
+        return `/admin/contestant/${contestantId}`
     }
 }

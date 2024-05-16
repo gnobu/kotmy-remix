@@ -22,6 +22,8 @@ import arrowNext from './arrow-next.svg'
 import activeDot from './active-dot.svg'
 import clock from './clock.svg'
 import close from './close.svg'
+import downArrow from './down-arrow.svg'
+import upArrow from './up-arrow.svg'
 import image from './image.svg'
 import alertCheck from './alert-check.svg'
 import adminHome from './admin-home.svg'
@@ -73,6 +75,8 @@ export const icons = {
     activeDotIcon: `${activeDot}#img`,
     clockIcon: `${clock}#img`,
     closeIcon: `${close}#img`,
+    downArrowIcon: `${downArrow}#img`,
+    upArrowIcon: `${upArrow}#img`,
     imageIcon: `${image}#img`,
     alertCheckIcon: `${alertCheck}#img`,
     adminHomeIcon: `${adminHome}#img`,

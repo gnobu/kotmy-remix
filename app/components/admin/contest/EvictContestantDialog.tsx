@@ -19,7 +19,7 @@ export default function EvictContestantDialog({ disabled }: { disabled: boolean 
                 className={cn(`flex items-center justify-center border min-w-[32px] min-h-[32px] rounded-full border-red-500 bg-red-50 text-red-500`, {
                     'bg-slate-100 border-slate-400 text-slate-400 cursor-not-allowed': disabled
                 })}>
-                <Svg src={icons.closeIcon} className='w-3' />
+                <Svg src={icons.downArrowIcon} className='size-3.5' />
             </DialogTrigger>
             <DialogContent className="bg-secondary">
                 <DialogHeader>

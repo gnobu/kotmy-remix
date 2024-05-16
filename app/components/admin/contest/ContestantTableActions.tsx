@@ -15,6 +15,6 @@ export default function ContestantTableActions({ table }: { table: Table<IContes
         <EditContestantDialog disabled={!singleRowSelected} contestant={contestant} />
         <DeleteContestantDialog disabled={!rowsSelected} />
         <EvictContestantDialog disabled={!rowsSelected} contestants={contestants} />
-        <AdmitContestantDialog disabled={!rowsSelected} />
+        <AdmitContestantDialog disabled={!rowsSelected} contestants={contestants} />
     </div>
 }

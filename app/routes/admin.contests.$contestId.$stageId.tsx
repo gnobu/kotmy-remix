@@ -6,7 +6,7 @@ import { setToast } from "~/lib/session.server"
 import { icons } from "~/assets/icons"
 import ContestantTable from "~/components/admin/contest/ContestantTable"
 import RoundCta from "~/components/reusables/RoundCta"
-import { editContestant } from "~/models/contestant/actions.server"
+import { editContestant, toggleEvictContestants } from "~/models/contestant/actions.server"
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { contestId, stageId } = params
@@ -34,9 +34,8 @@ export async function action({ params, request }: LoaderFunctionArgs) {
             contestantId: formData.get('contestant_id') as string
         }, request)
     }
+    if (intent === 'admit' || intent === 'evict') return await toggleEvictContestants(formData, request)
     // if (intent === 'delete') return await deleteContest(formData, request)
-    // if (intent === 'admit') return await toggleRegistration(formData, request)
-    // if (intent === 'evict') return await toggleRegistration(formData, request)
     console.log(...formData)
     const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
     return json(null, { headers })

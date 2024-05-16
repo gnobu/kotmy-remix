@@ -1,5 +1,5 @@
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
-import { IContestant, IContestantRepository, IEditContestantDTO, ILeanContestant } from "./types/contestant.interface"
+import { IContestant, IContestantRepository, IEditContestantDTO, ILeanContestant, IToggleEvictContestantDTO } from "./types/contestant.interface"
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
@@ -23,10 +23,15 @@ class ContestantRepository implements IContestantRepository {
             data: payload.dto
         })
     }
-    voteContestant(): Promise<TFetcherResponse<ILeanContestant>> {
-        throw new Error("Method not implemented.")
+    async toggleEvictContestants(dto: IToggleEvictContestantDTO, token = TOKEN): Promise<TFetcherResponse<void>> {
+        return await ApiCall.call({
+            method: MethodsEnum.PATCH,
+            url: ApiEndPoints.toggleEvictContestants,
+            headers: { Authorization: `Bearer ${token}` },
+            data: dto
+        })
     }
-    toggleEvictContestant(): Promise<TFetcherResponse<ILeanContestant>> {
+    voteContestant(): Promise<TFetcherResponse<ILeanContestant>> {
         throw new Error("Method not implemented.")
     }
 }

@@ -1,8 +1,7 @@
-import { icons } from "~/assets/icons"
-import Cta from "~/components/reusables/Cta"
-import Svg from "~/components/reusables/Svg"
+import { useFetcher } from "@remix-run/react"
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -11,8 +10,13 @@ import {
     DialogTrigger,
 } from "~/components/reusables/Dialog"
 import { cn } from "~/lib/utils"
+import { icons } from "~/assets/icons"
+import Svg from "~/components/reusables/Svg"
+import { IContestant } from "~/models/contestant/types/contestant.interface"
 
-export default function EvictContestantDialog({ disabled }: { disabled: boolean }) {
+export default function EvictContestantDialog({ disabled, contestants }: { disabled: boolean, contestants: IContestant[] }) {
+    const fetcher = useFetcher()
+    const ids = contestants.map(contestant => contestant._id).join('|')
     return (
         <Dialog>
             <DialogTrigger disabled={disabled} title='Evict contestant'
@@ -21,15 +25,29 @@ export default function EvictContestantDialog({ disabled }: { disabled: boolean 
                 })}>
                 <Svg src={icons.downArrowIcon} className='size-3.5' />
             </DialogTrigger>
-            <DialogContent className="bg-secondary">
+            <DialogContent className="bg-secondary p-0 gap-0">
                 <DialogHeader>
-                    <DialogTitle>Evict contestant</DialogTitle>
-                    <DialogDescription>
-                        This contestant will be evicted from this stage. Are you sure you want to proceed?
+                    <DialogTitle className="p-4 flex gap-3">
+                        <div className="size-11 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Svg src={icons.questionIcon} />
+                        </div>
+                        <p>
+                            <span className="block">Evict Contestants</span>
+                            <span className="font-normal text-base text-admin-pry">Confirm the eviction of these contestants</span>
+                        </p>
+                    </DialogTitle>
+                    <DialogDescription className="border-y p-4">
+                        <span className="text-primary mb-2 block">The selected contestants will not proceed to the next stage. Are you sure you want to proceed?</span>
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter className='flex justify-end gap-6'>
-                    <Cta element='button' type='submit' kind="danger" className='px-3 py-2 rounded-md font-bold min-w-[90px] text-white'>Proceed</Cta>
+                <DialogFooter className='flex justify-end gap-6 p-4'>
+                    <fetcher.Form method="post">
+                        <input type="hidden" name="contestants_ids" value={ids} />
+                        <input type="hidden" name="stage_id" value={contestants[0]?.stage_id} />
+                        <DialogClose type='submit' name="intent" value='evict' className='bg-red-500 px-10 py-2 rounded-md font-bold min-w-[90px] text-white'>
+                            Proceed
+                        </DialogClose>
+                    </fetcher.Form>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

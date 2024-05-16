@@ -71,4 +71,7 @@ export class ApiEndPoints {
     static editContestant(contestantId: string) {
         return `/admin/contestant/${contestantId}`
     }
+    static get toggleEvictContestants() {
+        return `/admin/contestant/toggle_evict_multiple`
+    }
 }

@@ -1,7 +1,7 @@
 import { json } from "@remix-run/node"
 import { setToast } from "~/lib/session.server"
 import { contestantRepo } from "./contestant.server"
-import { IEditContestantDTO } from "./types/contestant.interface"
+import { IEditContestantDTO, IToggleEvictContestantDTO } from "./types/contestant.interface"
 
 export async function editContestant(payload: { dto: FormData, contestantId: string }, request: Request) {
     const dto = prepareContestantDTO(payload.dto)
@@ -12,6 +12,21 @@ export async function editContestant(payload: { dto: FormData, contestantId: str
     }
     const { headers } = await setToast({ request, toast: `error::${error.detail ?? 'Could not update the contestant'}` })
     return json(error, { headers })
+}
+
+export async function toggleEvictContestants(formData: FormData, request: Request) {
+    const dto: IToggleEvictContestantDTO = {
+        action: formData.get('intent') as 'evict' | 'admit',
+        stage_id: formData.get('stage_id') as string,
+        contestants_ids: (formData.get('contestants_ids') as string).split('|')
+    }
+    const { error } = await contestantRepo.toggleEvictContestants(dto)
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error.detail ?? 'Sorry, we could not update the contestants statuses at this time'}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, toast: "success::The contestants' statuses have been updated" })
+    return json(null, { headers })
 }
 
 export function prepareContestantDTO(formData: FormData) {

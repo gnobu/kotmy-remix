@@ -94,10 +94,16 @@ export interface IEditContestantDTO {
     }
 }
 
+export interface IToggleEvictContestantDTO {
+    stage_id: string,
+    action: 'evict' | 'admit',
+    contestants_ids: string[]
+}
+
 
 export interface IContestantRepository {
     registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
     editContestant(payload: { dto: IEditContestantDTO, contestantId: string }, token: string): Promise<TFetcherResponse<IContestant>>
     voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
-    toggleEvictContestant(): Promise<TFetcherResponse<ILeanContestant>>
+    toggleEvictContestants(dto: IToggleEvictContestantDTO, token: string): Promise<TFetcherResponse<void>>
 }

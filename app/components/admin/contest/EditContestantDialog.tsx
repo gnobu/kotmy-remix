@@ -16,6 +16,7 @@ import { cn } from "~/lib/utils"
 import { IContestant } from "~/models/contestant/types/contestant.interface"
 import { parseDateForInput } from "~/lib/dates.utils"
 import { StageContestantsLoader } from "~/routes/admin.contests.$contestId.$stageId"
+import { nigerianStates } from "~/lib/data/states"
 
 export default function EditContestantDialog({ disabled, contestant }: { disabled: boolean, contestant: IContestant }) {
     const { stage } = useLoaderData<StageContestantsLoader>()
@@ -39,8 +40,18 @@ export default function EditContestantDialog({ disabled, contestant }: { disable
                                     <FormControl as='input' id='first_name' name='first_name' labelText='First Name' defaultValue={contestant.contestant_biodata.first_name} />
                                     <FormControl as='input' id='last_name' name='last_name' labelText='Last Name' defaultValue={contestant.contestant_biodata.last_name} />
                                     <FormControl as='input' id='email' name='email' labelText='Email Address' defaultValue={contestant.contestant_biodata.email} />
-                                    <FormControl as='input' labelText='State of Residence' id='state' name='state' defaultValue={contestant.contestant_biodata.state_of_residence} />
-                                    {/* <FormControl as='input' labelText='Code' id='code' name='code' /> */}
+                                    <label htmlFor="gender" className='font-bold flex flex-col'>State of Residence
+                                        <Select name='state' required defaultValue={contestant.contestant_biodata.state_of_residence}>
+                                            <SelectTrigger className="h-10 font-normal rounded-lg shadow-none hover:border-accent">
+                                                <SelectValue placeholder={"State"} />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {Object.entries(nigerianStates).map(([key, label])=>(
+                                                    <SelectItem key={key} value={key} className='focus:bg-blue-700/25'>{label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </label>
                                     <FormControl as='input' type='date' labelText='Date of Birth' id='dob' name='dob' defaultValue={parseDateForInput(contestant.contestant_biodata.dob)} max={new Date().toISOString().split("T")[0]} />
                                     <label htmlFor="gender" className='font-bold flex flex-col'>Gender
                                         <Select name='sex' required defaultValue={contestant.contestant_biodata.sex}>

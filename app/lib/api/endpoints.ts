@@ -69,7 +69,7 @@ export class ApiEndPoints {
         return `/admin/contest/can_register/${contestId}`
     }
     static editContestant(contestantId: string) {
-        return `/admin/contestant/${contestantId}`
+        return `/admin/contestant/with_image/${contestantId}`
     }
     static get toggleEvictContestants() {
         return `/admin/contestant/toggle_evict_multiple`

@@ -1,5 +1,5 @@
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
-import { IContestant, IContestantRepository, IEditContestantDTO, ILeanContestant, IToggleEvictContestantDTO } from "./types/contestant.interface"
+import { IContestant, IContestantRepository, ILeanContestant, IToggleEvictContestantDTO } from "./types/contestant.interface"
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
@@ -15,11 +15,11 @@ class ContestantRepository implements IContestantRepository {
             data: payload.dto
         })
     }
-    async editContestant(payload: { dto: IEditContestantDTO, contestantId: string }, token = TOKEN): Promise<TFetcherResponse<IContestant>> {
+    async editContestant(payload: { dto: FormData, contestantId: string }, token = TOKEN): Promise<TFetcherResponse<IContestant>> {
         return await ApiCall.call({
             method: MethodsEnum.PUT,
             url: ApiEndPoints.editContestant(payload.contestantId),
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
             data: payload.dto
         })
     }

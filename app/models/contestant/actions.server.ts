@@ -47,5 +47,8 @@ export function prepareContestantDTO(formData: FormData) {
             "bonus": +(formData.get('stage_bonus') as string),
         }
     }
-    return payloadObj
+    const dto = new FormData()
+    dto.append('media', formData.get('media') as Blob)
+    dto.append('details', JSON.stringify(payloadObj))
+    return dto
 }

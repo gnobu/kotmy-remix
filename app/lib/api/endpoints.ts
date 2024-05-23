@@ -18,6 +18,12 @@ export class ApiEndPoints {
     static getContestantsInStage({ stageId }: { stageId: string }) {
         return `/contestant/${stageId}`
     }
+    static get getTallyLink(): string {
+        return "/payment"
+    }
+    static get callTallyWebhook(): string {
+        return "/flutterwave-webhook"
+    }
     
     // ADMIN
     static get createAdminAccount(): string {

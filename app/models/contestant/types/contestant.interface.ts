@@ -100,10 +100,21 @@ export interface IToggleEvictContestantDTO {
     contestants_ids: string[]
 }
 
+export interface IGetTallyLinkDTO {
+    provider: string,
+    email: string,
+    phone_number: string,
+    contestant_id: string,
+    number_of_votes: number,
+    redirect_url: string,
+}
+
 
 export interface IContestantRepository {
-    registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
+    callTallyWebhook(dto: unknown): Promise<TFetcherResponse<unknown>>
     editContestant(payload: { dto: FormData, contestantId: string }, token: string): Promise<TFetcherResponse<IContestant>>
-    voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
+    getTallyLink(dto: IGetTallyLinkDTO): Promise<TFetcherResponse<{ payment_link: string }>>
+    registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
     toggleEvictContestants(dto: IToggleEvictContestantDTO, token: string): Promise<TFetcherResponse<void>>
+    voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
 }

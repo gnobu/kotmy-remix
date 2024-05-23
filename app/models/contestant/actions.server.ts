@@ -1,7 +1,7 @@
-import { json } from "@remix-run/node"
+import { json, redirect } from "@remix-run/node"
 import { setToast } from "~/lib/session.server"
 import { contestantRepo } from "./contestant.server"
-import { IEditContestantDTO, IToggleEvictContestantDTO } from "./types/contestant.interface"
+import { IEditContestantDTO, IGetTallyLinkDTO, IToggleEvictContestantDTO } from "./types/contestant.interface"
 
 export async function editContestant(payload: { dto: FormData, contestantId: string }, request: Request) {
     const dto = prepareContestantDTO(payload.dto)
@@ -28,6 +28,66 @@ export async function toggleEvictContestants(formData: FormData, request: Reques
     const { headers } = await setToast({ request, toast: "success::The contestants' statuses have been updated" })
     return json(null, { headers })
 }
+
+export async function getTallyLink(formData: FormData, request: Request) {
+    const dto: IGetTallyLinkDTO = {
+        contestant_id: formData.get('contestant_id') as string,
+        email: formData.get('email') as string,
+        number_of_votes: +(formData.get('vote_quantity') as string),
+        phone_number: formData.get('phone') as string,
+        provider: formData.get('provider') as string,
+        redirect_url: formData.get('redirect_url') as string
+    }
+    const { data, error } = await contestantRepo.getTallyLink(dto)
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, toast: "success::You will be redirected to make the payment" })
+    return redirect(data.payment_link, { headers })
+}
+/**Calls the tally webhook, only for dev testing. REMOVE IN LIVE!!! */
+export async function callTallyWebhook(tx_ref: string) {
+    const dto = {
+        "event": "charge.completed",
+        "data": {
+            "id": 285959875,
+            "tx_ref": tx_ref,
+            "flw_ref": "PeterEkene/FLW270177170",
+            "device_fingerprint": "a42937f4a73ce8bb8b8df14e63a2df31",
+            "amount": 100,
+            "currency": "NGN",
+            "charged_amount": 100,
+            "app_fee": 1.4,
+            "merchant_fee": 0,
+            "processor_response": "Approved by Financial Institution",
+            "auth_model": "PIN",
+            "ip": "197.210.64.96",
+            "narration": "CARD Transaction ",
+            "status": "successful",
+            "payment_type": "card",
+            "created_at": "2020-07-06T19:17:04.000Z",
+            "account_id": 17321,
+            "customer": {
+                "id": 215604089,
+                "name": "Yemi Desola",
+                "phone_number": null,
+                "email": "user@gmail.com",
+                "created_at": "2020-07-06T19:17:04.000Z"
+            },
+            "card": {
+                "first_6digits": "123456",
+                "last_4digits": "7889",
+                "issuer": "VERVE FIRST CITY MONUMENT BANK PLC",
+                "country": "NG",
+                "type": "VERVE",
+                "expiry": "02/23"
+            }
+        }
+    }
+    return await contestantRepo.callTallyWebhook(dto)
+}
+
 
 export function prepareContestantDTO(formData: FormData) {
     const payloadObj: IEditContestantDTO = {

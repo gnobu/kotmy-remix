@@ -5,6 +5,7 @@ import { noImage } from "~/assets/images"
 import { numberSlang } from "~/lib/numbers.utils"
 import { IContestant } from "~/models/contestant/types/contestant.interface"
 import { Social } from "~/models/contest/types/contest.interface"
+import TallyVoteDialog from "./TallyVoteDialog"
 
 export default function ScoreboardTable({ contestants, socialMediaType }: { contestants: IContestant[], socialMediaType: Social }) {
     return (
@@ -49,7 +50,7 @@ export default function ScoreboardTable({ contestants, socialMediaType }: { cont
                                 url={contestant.social_media_url}
                                 count={numberSlang(contestant.vote.social_media)}
                             />
-                            <VoteLink type={'tally'} url={'.'} count={numberSlang(contestant.vote.tally)} />
+                            <TallyVoteDialog contestant={contestant} />
                             {/* <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} /> */}
                         </td>
                     </tr>

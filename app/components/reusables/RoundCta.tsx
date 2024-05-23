@@ -5,11 +5,11 @@ import type { RemixLinkProps } from '@remix-run/react/dist/components'
 import cn from 'classnames'
 
 type RoundCtaProps = (
-    | ({ element?: 'button'; } & React.ButtonHTMLAttributes<HTMLButtonElement>)
+    | ({ element?: 'button'; } & React.ComponentPropsWithRef<'button'>)
     | ({ element: 'link'; } & RemixLinkProps)
 ) & { icon: string, iconClass?: string }
 
-export default function RoundCta({ icon, className = '', iconClass = '', ...props }: RoundCtaProps) {
+export default React.forwardRef(function RoundCta({ icon, className = '', iconClass = '', ...props }: RoundCtaProps, ref: React.ForwardedRef<HTMLButtonElement>) {
     const classNames = cn(`flex items-center justify-center border min-w-[32px] min-h-[32px] rounded-full ${className}`, {
         'bg-slate-100 border-slate-400 text-slate-400 cursor-not-allowed': props['aria-disabled']
     })
@@ -19,8 +19,8 @@ export default function RoundCta({ icon, className = '', iconClass = '', ...prop
         </Link>
     }
     return (
-        <button {...props} className={classNames}>
+        <button ref={ref} {...props} className={classNames}>
             <Svg src={icon} className={iconClass} />
         </button>
     )
-}
+})

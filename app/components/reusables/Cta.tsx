@@ -3,17 +3,17 @@ import { Link } from '@remix-run/react'
 import { RemixLinkProps } from '@remix-run/react/dist/components'
 import cn from 'classnames'
 
-type CtaProps = (
-    | ({ element: 'button'; } & React.ButtonHTMLAttributes<HTMLButtonElement>)
+export type CtaProps = (
+    | ({ element: 'button'; } & React.ComponentPropsWithRef<'button'>)
     | ({ element: 'link'; } & RemixLinkProps)
 ) & {
     variant?: 'solid' | 'outline' | 'ghost';
     kind?: 'primary' | 'danger';
 }
 
-export default function Cta({ variant = 'solid', kind = 'primary', ...props }: CtaProps) {
+export default React.forwardRef(function Cta({ variant = 'solid', kind = 'primary', ...props }: CtaProps, ref: React.ForwardedRef<HTMLButtonElement>) {
     if (props.element === 'button') {
-        return <button {...props} className={cn(`border whitespace-nowrap text-center ${props.className}`, {
+        return <button ref={ref} {...props} className={cn(`border whitespace-nowrap text-center`, {
             'border-disabled text-inherit': props.disabled,
             'bg-accent border-accent hover:bg-accent/90 text-secondary': variant === 'solid',
             'bg-red-600 border-red-600 hover:bg-red-400 text-secondary': variant === 'solid' && kind === 'danger',
@@ -21,12 +21,12 @@ export default function Cta({ variant = 'solid', kind = 'primary', ...props }: C
             'text-accent border-accent border-2': variant === 'outline',
             'border-red-400 text-red-400': kind === 'danger' && !props.disabled,
             'border-none': variant === 'ghost'
-        })}>{props.children}</button>
+        }, props.className)}>{props.children}</button>
     }
-    return <Link {...props} className={cn(`border whitespace-nowrap text-center ${props.className}`, {
+    return <Link {...props} className={cn(`border whitespace-nowrap text-center`, {
         'bg-accent border-accent hover:bg-accent/90 text-secondary': variant === 'solid',
         'text-accent border-accent border-2': variant === 'outline',
         'border-red-400': kind === 'danger',
         'text-red-400': kind === 'danger',
-    })}>{props.children}</Link>
-}
+    }, props.className)}>{props.children}</Link>
+})

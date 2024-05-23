@@ -4,6 +4,7 @@ import DeleteContestDialog from './DeleteContestDialog'
 import RoundCta from '~/components/reusables/RoundCta'
 import { IContestWStage } from '~/models/contest/types/contest.interface'
 import { icons } from '~/assets/icons'
+import MigrateStageDialog from './MigrateStageDialog'
 
 export default function ContestTableActions({ rowData }: { rowData: IContestWStage }) {
     const activeStageId = rowData.stages.find(stage => stage.active || stage.status === 'ongoing')?._id
@@ -19,7 +20,7 @@ export default function ContestTableActions({ rowData }: { rowData: IContestWSta
                 <input type="hidden" name="contestId" value={rowData._id} />
                 <RoundCta icon={icons.viewIcon} name='intent' value={'toggle_registration'} className="border-yellow-700 bg-yellow-100 text-yellow-700" aria-disabled={fetcher.state != 'idle'} title='Open/Close registration' />
             </fetcher.Form>
-            <RoundCta icon={icons.doubleArrowRightIcon} className="border-indigo-700 bg-indigo-100 text-indigo-700" title='Migrate stage' />
+            <MigrateStageDialog contest={rowData} />
             <DeleteContestDialog contest={rowData} />
         </div>
     )

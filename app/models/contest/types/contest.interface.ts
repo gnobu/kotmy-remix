@@ -111,6 +111,11 @@ export interface ICreateStageDTO {
     rates: Rate
 }
 
+export interface IMigrateStageDTO {
+    current_stage_id: string
+    new_stage_id: string
+}
+
 export function dtoToContest(contest: IContestDto): IContest | IContestWStage {
     if (!contest) return contest
     return {
@@ -154,4 +159,5 @@ export interface IContestRepository {
     deleteStage(payload: { stageId: string, token: string }): Promise<TFetcherResponse<null>>
     toggleRegistration(payload: { contestId: string, token: string }): Promise<TFetcherResponse<IContest>>
     getContestantsInStage(payload: { stageId: string }): Promise<TFetcherResponse<IStageWContestant>>
+    migrateStage(payload: IMigrateStageDTO, token: string): Promise<TFetcherResponse<IStageWContestant>>
 }

@@ -1,7 +1,7 @@
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
-import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IStage, IStageWContestant, Social, dtoToContest } from "./types/contest.interface"
+import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IMigrateStageDTO, IStage, IStageWContestant, Social, dtoToContest } from "./types/contest.interface"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { setToast } from "~/lib/session.server"
 import { json } from "@remix-run/node"
@@ -104,6 +104,16 @@ class ContestRepository implements IContestRepository {
         if (error) return { error: error ?? { detail: "Could not fetch the stage data" } }
         return { data }
     }
+    async migrateStage(payload: IMigrateStageDTO, token = TOKEN): Promise<TFetcherResponse<IStageWContestant>> {
+        return await ApiCall.call({
+            url: ApiEndPoints.migrateStage,
+            method: MethodsEnum.POST,
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data: payload
+        })
+    }
 }
 export const contestRepo = new ContestRepository()
 
@@ -205,4 +215,18 @@ export function prepareStageDto(formData: FormData) {
             "F": [parseInt(formData.get('min_F') as string), parseInt(formData.get('max_F') as string)]
         } satisfies Record<Grade, [number, number]>
     }
+}
+
+export async function migrateStage(formData: FormData, request: Request){
+    const payload: IMigrateStageDTO = {
+        current_stage_id: formData.get('from') as string,
+        new_stage_id: formData.get('to') as string
+    }
+    const {data, error} = await contestRepo.migrateStage(payload)
+    if (error) {
+        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, toast: 'success::Contestants have been migrated to the next stage' })
+    return json(data, { headers })
 }

@@ -68,8 +68,8 @@ export class ApiEndPoints {
     static deleteStage(id: string) {
         return `/admin/stage/${id}`
     }
-    static migrateStage({ oldStageId, newStageId }: { oldStageId: string, newStageId: string }) {
-        return `/contest/migration?oldstageid=${oldStageId}&newstageid=${newStageId}`
+    static get migrateStage() {
+        return `/admin/contest/migration`
     }
     static toggleRegistration({ contestId }: { contestId: string }) {
         return `/admin/contest/can_register/${contestId}`

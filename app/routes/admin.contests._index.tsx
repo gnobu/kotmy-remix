@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { contestRepo, deleteContest, toggleRegistration, updateStage } from "~/models/contest/contest.server"
+import { contestRepo, deleteContest, migrateStage, toggleRegistration, updateStage } from "~/models/contest/contest.server"
 import { setToast } from "~/lib/session.server"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"
@@ -19,6 +19,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if (intent === 'delete') return await deleteContest(formData, request)
     if (intent === 'update_stage') return await updateStage(formData, request)
     if (intent === 'toggle_registration') return await toggleRegistration(formData, request)
+    if (intent === 'migrate') return await migrateStage(formData, request)
     console.log(...formData)
     const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
     return json(null, { headers })

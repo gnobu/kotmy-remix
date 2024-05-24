@@ -10,7 +10,7 @@ import { noImage } from '~/assets/images'
 import { IContestWStage, IStageWContestant } from '~/models/contest/types/contest.interface'
 
 export default function OngoingContest({ contest, stage }: { contest: IContestWStage, stage: IStageWContestant | null }) {
-    const [_, setUrlSearchParams] = useSearchParams()
+    const [searchParams, setUrlSearchParams] = useSearchParams()
     const status = contest.status
     const color = status === 'ongoing'
         ? 'green' : status === 'completed'
@@ -60,7 +60,7 @@ export default function OngoingContest({ contest, stage }: { contest: IContestWS
                             </SelectContent>
                         </Select>
                     </div>
-                    <Link to={'scoreboard'} className="w-fit text-accent font-bold hover:underline underline-offset-4">See scoreboard</Link>
+                    <Link to={`scoreboard?${searchParams.toString()}`} className="w-fit text-accent font-bold hover:underline underline-offset-4">See scoreboard</Link>
                 </div>
                 <div className="my-16 grid sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-16">
                     {stage?.contestants.map((contestant) => (

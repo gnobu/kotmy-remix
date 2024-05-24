@@ -20,7 +20,7 @@ import { IContestant } from "~/models/contestant/types/contestant.interface"
 import { StageContestantsLoader } from "~/routes/_public.contests.$tournamentId.$contestId"
 
 
-export default function TallyVoteDialog({ contestant, disabled }: { contestant: IContestant, disabled?: boolean }) {
+export default function TallyVoteDialog({ contestant, disabled, children }: { contestant: IContestant, disabled?: boolean, children?: React.ReactNode }) {
     const stageContestants = useRouteLoaderData<StageContestantsLoader>("routes/_public.contests.$tournamentId.$contestId")
     const formRef = useRef<HTMLFormElement>(null)
     const { pathname, search } = useLocation()
@@ -31,7 +31,7 @@ export default function TallyVoteDialog({ contestant, disabled }: { contestant: 
                 className={cn(`rounded-full outline-none`, {
                     'bg-slate-100 border-slate-400 text-slate-400 cursor-not-allowed': disabled
                 })}>
-                <VoteLink type={'tally'} count={numberSlang(contestant.vote.tally)} className="w-full" />
+                {children ?? <VoteLink type={'tally'} count={numberSlang(contestant.vote.tally)} className="w-full" />}
             </DialogTrigger>
             <DialogContent className="bg-secondary p-0 gap-0">
                 <DialogHeader>

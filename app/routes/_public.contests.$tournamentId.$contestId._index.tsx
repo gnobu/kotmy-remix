@@ -10,13 +10,10 @@ import { StageContestantsLoader } from "./_public.contests.$tournamentId.$contes
 
 export async function action({ request }: LoaderFunctionArgs) {
     const formData = await request.formData()
-    const contestId = formData.get('contestId') as string
-    const { data, error } = await contestantRepo.registerContestant({ contestId, dto: formData })
-    if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail ?? 'Error registering the contestant'}` })
-        return json({ data: null }, { headers })
-    }
-    return json({ data })
+    const intent = formData.get("intent") as "register" | "tally_vote"
+    if (intent === "register") return await registerContestant(formData, request)
+    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
+    return json(null, { headers })
 }
 export type RegisterAction = typeof action
 

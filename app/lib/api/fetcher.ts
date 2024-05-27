@@ -6,6 +6,7 @@ export class ApiCall {
     static _instance = axios.create({
         baseURL: this._proxy,
         timeout: 20000,
+        withCredentials: true
     })
 
     static async call<TResponseDTO, TRequestDTO, TErrorDTO = { detail: string | TValidationError[] }>(

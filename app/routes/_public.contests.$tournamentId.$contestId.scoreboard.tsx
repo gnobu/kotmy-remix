@@ -1,13 +1,12 @@
 import { ActionFunctionArgs, json } from "@remix-run/node"
 import { Link, useRouteLoaderData, useSearchParams } from "@remix-run/react"
 
-import { getTallyLink } from "~/models/contestant/actions.server"
+import { getTallyLink, voteContestant } from "~/models/contestant/actions.server"
 import { setToast } from "~/lib/session.server"
 import ContestTimer from "~/components/public/contests/ContestTimer"
 import FormControl from "~/components/reusables/FormControl"
 import MobileScoreboard from "~/components/public/contests/MobileScoreboard"
 import { noImage } from "~/assets/images"
-import Pagination from "~/components/reusables/Pagination"
 import ScoreboardTable from "~/components/public/contests/ScoreboardTable"
 import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "~/components/reusables/select-shad"
 import StatusTag from "~/components/reusables/StatusTag"
@@ -17,7 +16,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
     const intent = formData.get('intent') as 'tally_vote'
     if (intent === 'tally_vote') return await getTallyLink(formData, request)
-    console.log(...formData)
+    if (intent === "kotmy_vote") return await voteContestant(formData, request)
     const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
     return json(null, { headers })
 }
@@ -80,7 +79,7 @@ export default function Scoreboard() {
                     </div>
                     <ScoreboardTable contestants={stage?.contestants ?? []} socialMediaType={stage?.rates.social_media.type ?? 'kotmy'} />
                     <MobileScoreboard contestants={stage?.contestants ?? []} socialMediaType={stage?.rates.social_media.type ?? 'kotmy'} />
-                    <Pagination className="p-6" />
+                    {/* <Pagination className="p-6" /> */}
                 </div>
             </section>
         </main>

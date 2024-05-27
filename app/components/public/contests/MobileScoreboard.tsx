@@ -5,8 +5,11 @@ import { numberSlang } from '~/lib/numbers.utils'
 import { noImage } from '~/assets/images'
 import { IContestant } from '~/models/contestant/types/contestant.interface'
 import { Social } from '~/models/contest/types/contest.interface'
+import TallyVoteDialog from './TallyVoteDialog'
+import { useFetcher } from '@remix-run/react'
 
 export default function MobileScoreboard({ contestants, socialMediaType }: { contestants: IContestant[], socialMediaType: Social }) {
+    const fetcher = useFetcher()
     return (
         <div className="grid gap-6 sm:hidden">
             {contestants.map(contestant => (
@@ -24,11 +27,23 @@ export default function MobileScoreboard({ contestants, socialMediaType }: { con
                     </div>
                     <p className='mb-2 text-xs font-satoshi-bold text-[#5F6D7E]'>Vote for this contestant</p>
                     <div className="grid grid-cols-3 gap-3">
-                        <VoteLink type={socialMediaType}
-                            url={contestant.social_media_url}
-                            count={numberSlang(contestant.vote.social_media)}
-                        />
-                        <VoteLink type={'tally'} url={'.'} count={numberSlang(contestant.vote.tally)} />
+                        {socialMediaType === "kotmy" ? (
+                            <fetcher.Form method="POST">
+                                <input type="hidden" name="contestant_id" value={contestant._id} />
+                                <input type="hidden" name="stage_id" value={contestant.stage_id} />
+                                <input type="hidden" name="intent" value="kotmy_vote" />
+                                <VoteLink className="w-full" type={socialMediaType}
+                                    url={contestant.social_media_url}
+                                    count={numberSlang(contestant.vote.social_media)}
+                                />
+                            </fetcher.Form>
+                        ) : (
+                            <VoteLink type={socialMediaType}
+                                url={contestant.social_media_url}
+                                count={numberSlang(contestant.vote.social_media)}
+                            />
+                        )}
+                        <TallyVoteDialog contestant={contestant} />
                         {/* <VoteLink type={'givaah'} url={'.'} count={numberSlang(contestant.vote.givaah)} /> */}
                     </div>
                 </article>

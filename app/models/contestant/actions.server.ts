@@ -1,8 +1,8 @@
 import { json, redirect } from "@remix-run/node"
 
-import { setToast } from "~/lib/session.server"
+import { getFingerprint, setToast } from "~/lib/session.server"
 import { contestantRepo } from "./contestant.server"
-import { IEditContestantDTO, IGetTallyLinkDTO, IToggleEvictContestantDTO } from "./types/contestant.interface"
+import { IEditContestantDTO, IGetTallyLinkDTO, IToggleEvictContestantDTO, IVoteContestantDto } from "./types/contestant.interface"
 
 export async function editContestant(payload: { dto: FormData, contestantId: string }, request: Request) {
     const dto = prepareContestantDTO(payload.dto)
@@ -56,6 +56,21 @@ export async function getTallyLink(formData: FormData, request: Request) {
     }
     const { headers } = await setToast({ request, toast: "success::You will be redirected to make the payment" })
     return redirect(data.payment_link, { headers })
+}
+
+export async function voteContestant(formData: FormData, request: Request) {
+    const dto: IVoteContestantDto = {
+        contestant_id: formData.get("contestant_id") as string
+    }
+    const stageId = formData.get("stage_id") as string
+    const { fingerprint, headers: fingerprintHeaders } = await getFingerprint({ request })
+    const { error } = await contestantRepo.voteContestant({ dto, stageId, fingerprint })
+    if (error) {
+        const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}` })
+        return json(error, { headers })
+    }
+    const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: "success::Your vote has been registered" })
+    return json(null, { headers })
 }
 
 /**Calls the tally webhook, only for dev testing. REMOVE IN LIVE!!! */

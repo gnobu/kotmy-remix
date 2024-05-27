@@ -109,6 +109,14 @@ export interface IGetTallyLinkDTO {
     redirect_url: string,
 }
 
+export interface IVoteContestantDto {
+    name?: string,
+    email?: string,
+    phone?: string,
+    device_fingerprint?: string,
+    contestant_id: string
+}
+
 
 export interface IContestantRepository {
     callTallyWebhook(dto: unknown): Promise<TFetcherResponse<unknown>>
@@ -116,5 +124,5 @@ export interface IContestantRepository {
     getTallyLink(dto: IGetTallyLinkDTO): Promise<TFetcherResponse<{ payment_link: string }>>
     registerContestant(payload: { contestId: string, dto: FormData }): Promise<TFetcherResponse<IContestant>>
     toggleEvictContestants(dto: IToggleEvictContestantDTO, token: string): Promise<TFetcherResponse<void>>
-    voteContestant(): Promise<TFetcherResponse<ILeanContestant>>
+    voteContestant(payload: { dto: IVoteContestantDto, stageId: string, fingerprint: string }): Promise<TFetcherResponse<ILeanContestant>>
 }

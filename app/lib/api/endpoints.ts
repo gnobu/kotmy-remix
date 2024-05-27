@@ -24,6 +24,9 @@ export class ApiEndPoints {
     static get callTallyWebhook(): string {
         return "/flutterwave-webhook"
     }
+    static voteContestant(stageId: string) {
+        return `/contestant/sm_vote/${stageId}`
+    }
     
     // ADMIN
     static get createAdminAccount(): string {

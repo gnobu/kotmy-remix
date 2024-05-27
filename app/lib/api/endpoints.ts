@@ -15,7 +15,7 @@ export class ApiEndPoints {
     static registerContestant(contestId: string) {
         return `/contestant/register_for_contest/${contestId}`
     }
-    static getContestantsInStage({ stageId }: { stageId: string }) {
+    static getContestantsInStage(stageId: string) {
         return `/contestant/${stageId}`
     }
     static get getTallyLink(): string {

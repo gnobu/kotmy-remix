@@ -97,9 +97,10 @@ class ContestRepository implements IContestRepository {
         if (error || !contest) return { error: error ?? { detail: "The contest was not found" } }
         return { data: dtoToContest(contest) as IContestWStage }
     }
-    async getContestantsInStage(payload: { stageId: string }): Promise<TFetcherResponse<IStageWContestant>> {
+    async getContestantsInStage(stageId: string, headers: { fingerprint: string }): Promise<TFetcherResponse<IStageWContestant>> {
         const { data, error } = await ApiCall.call<IStageWContestant, unknown>({
-            url: ApiEndPoints.getContestantsInStage(payload)
+            url: ApiEndPoints.getContestantsInStage(stageId),
+            headers: { device_fingerprint: headers.fingerprint }
         })
         if (error) return { error: error ?? { detail: "Could not fetch the stage data" } }
         return { data }
@@ -217,12 +218,12 @@ export function prepareStageDto(formData: FormData) {
     }
 }
 
-export async function migrateStage(formData: FormData, request: Request){
+export async function migrateStage(formData: FormData, request: Request) {
     const payload: IMigrateStageDTO = {
         current_stage_id: formData.get('from') as string,
         new_stage_id: formData.get('to') as string
     }
-    const {data, error} = await contestRepo.migrateStage(payload)
+    const { data, error } = await contestRepo.migrateStage(payload)
     if (error) {
         const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}` })
         return json(error, { headers })

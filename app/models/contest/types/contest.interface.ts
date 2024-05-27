@@ -158,6 +158,6 @@ export interface IContestRepository {
     updateStage(payload: { stageId: string, dto: IStage, token: string }): Promise<TFetcherResponse<IStage>>
     deleteStage(payload: { stageId: string, token: string }): Promise<TFetcherResponse<null>>
     toggleRegistration(payload: { contestId: string, token: string }): Promise<TFetcherResponse<IContest>>
-    getContestantsInStage(payload: { stageId: string }): Promise<TFetcherResponse<IStageWContestant>>
+    getContestantsInStage(stageId: string, headers: { fingerprint: string }): Promise<TFetcherResponse<IStageWContestant>>
     migrateStage(payload: IMigrateStageDTO, token: string): Promise<TFetcherResponse<IStageWContestant>>
 }

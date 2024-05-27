@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { Outlet } from "@remix-run/react"
 
 import { contestRepo } from "~/models/contest/contest.server"
-import { setToast } from "~/lib/session.server"
+import { getFingerprint, setToast } from "~/lib/session.server"
 import { callTallyWebhook } from "~/models/contestant/actions.server"
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
@@ -37,9 +37,10 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
         ? contest.stages.find(stage => stage.stage == +stageQ)?._id
         : contest.stages.find(stage => stage.active)?._id
     ) ?? contest.stages.find(stage => stage.stage == 1)?._id
-    const stage = stageId ? (await contestRepo.getContestantsInStage({ stageId })).data ?? null : null
+    const { fingerprint, headers } = await getFingerprint({ request })
+    const stage = stageId ? (await contestRepo.getContestantsInStage(stageId, { fingerprint })).data ?? null : null
 
-    return json({ contest, stage, baseUrl: process.env._BASE_URL })
+    return json({ contest, stage, baseUrl: process.env._BASE_URL }, { headers })
 }
 export type StageContestantsLoader = typeof loader
 

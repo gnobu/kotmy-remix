@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData, useNavigate } from "@remix-run/react"
 
 import { contestRepo } from "~/models/contest/contest.server"
-import { setToast } from "~/lib/session.server"
+import { getFingerprint, setToast } from "~/lib/session.server"
 import { icons } from "~/assets/icons"
 import ContestantTable from "~/components/admin/contest/ContestantTable"
 import RoundCta from "~/components/reusables/RoundCta"
@@ -10,12 +10,18 @@ import { editContestant, toggleEvictContestants } from "~/models/contestant/acti
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { contestId, stageId } = params
-    const { data: contest, error } = await contestRepo.getContestById(contestId!)
+    if (!contestId || !stageId) throw new Response(null, {
+        status: 404,
+        statusText: "We're sorry, but the resource was not found.",
+    })
+
+    const { data: contest, error } = await contestRepo.getContestById(contestId)
     if (error) {
         const { headers } = await setToast({ request, toast: 'error::Error fetching the contest' })
         return redirect('/admin/contests', { headers })
     }
-    const { data: stage } = await contestRepo.getContestantsInStage({ stageId: stageId! })
+    const { fingerprint } = await getFingerprint({ request })
+    const { data: stage } = await contestRepo.getContestantsInStage(stageId, { fingerprint })
     if (!stage) {
         const { headers } = await setToast({ request, toast: 'error::Error fetching the contestants' })
         return redirect('/admin/contests', { headers })

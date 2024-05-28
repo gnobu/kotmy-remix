@@ -13,7 +13,7 @@ export async function loader({ }: LoaderFunctionArgs) {
     amount: 53000,
     date: new Date().toISOString(),
     status: 'verified',
-}, {
+  }, {
     tx_ref: 'KCRUSHIP4HIYGM72VL',
     sender: 'payments@nefworld.com',
     contest: 'My Kid Crush of December',
@@ -21,7 +21,7 @@ export async function loader({ }: LoaderFunctionArgs) {
     amount: 1000,
     date: new Date().toISOString(),
     status: 'pending',
-}, {
+  }, {
     tx_ref: 'KCRUSHIP4HIYGM72VL',
     sender: 'payments@nefworld.com',
     contest: 'My Kid Crush of December',
@@ -29,14 +29,14 @@ export async function loader({ }: LoaderFunctionArgs) {
     amount: 2000,
     date: new Date().toISOString(),
     status: 'revoked',
-}]
+  }]
   return json({ tranasctions })
 }
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
   console.log(...formData)
-  const { headers } = await setToast({ request, toast: 'success::The transaction has been created' })
+  const { headers } = await setToast({ request, toast: `success::The transaction has been created::${Date.now()}` })
   return json(null, { headers })
 }
 

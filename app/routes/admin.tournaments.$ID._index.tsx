@@ -16,7 +16,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     const { data: contests, error: contestError } = await contestRepo.adminGetContestsInTournament(params.ID!)
     if (tournamentError || contestError) {
         let error = tournamentError?.detail ?? contestError?.detail ?? 'An error occured while fetching the contests'
-        const { headers } = await setToast({ request, toast: `error::${error}` })
+        const { headers } = await setToast({ request, toast: `error::${error}::${Date.now()}` })
         return redirect('/admin/tournaments', { headers })
     }
     return json({ tournament, contests })

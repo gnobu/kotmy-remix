@@ -13,7 +13,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     const { data: contest, error } = await contestRepo.getContestById(params.contestId!)
     if (error) {
         console.log(error)
-        const { headers } = await setToast({ request, toast: 'error::The contest was not found' })
+        const { headers } = await setToast({ request, toast: `error::The contest was not found::${Date.now()}` })
         return redirect('/admin/contests', { headers })
     }
     return json({ tournaments, contest })
@@ -26,7 +26,7 @@ export async function action({ request }: ActionFunctionArgs) {
         const { error } = await contestRepo.deleteStage({ stageId: formData.get('intent') as string })
         if (error) {
             console.log(JSON.stringify(error))
-            const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+            const { headers } = await setToast({ request, toast: `error::${error.detail}::${Date.now()}` })
             return json({ error }, { headers })
         }
         return json({ data: 'deleted' })
@@ -34,14 +34,14 @@ export async function action({ request }: ActionFunctionArgs) {
     const payload = prepareContestPayload(formData)
     const { data, error } = await contestRepo.updateContest({ contestId: formData.get('contestId') as string, dto: payload })
     if (data) {
-        const { headers } = await setToast({ request, toast: 'success::The contest has been updated' })
+        const { headers } = await setToast({ request, toast: `success::The contest has been updated::${Date.now()}` })
         return redirect('/admin/contests', { headers })
     } else if (error) {
         console.log(JSON.stringify(error))
-        const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail}::${Date.now()}` })
         return json({ error }, { headers })
     }
-    const { headers } = await setToast({ request, toast: `error::Sorry, this contest no longer exists` })
+    const { headers } = await setToast({ request, toast: `error::Sorry, this contest no longer exists::${Date.now()}` })
     return redirect('/admin/contests', { headers })
 }
 export type EditContestAction = typeof action

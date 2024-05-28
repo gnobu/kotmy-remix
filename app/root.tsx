@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { cssBundleHref } from "@remix-run/css-bundle"
 import { json, type LinksFunction, type LoaderFunctionArgs } from "@remix-run/node"
 import {
@@ -19,7 +20,6 @@ import Cta from "./components/reusables/Cta"
 import { Toaster } from "./components/reusables/toaster"
 import { useToast } from "./components/reusables/use-toast"
 import { SplitToast } from "./lib/types/toast"
-import { useEffect } from "react"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -55,7 +55,6 @@ function Document({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const { toast: toastMsg } = useLoaderData<typeof loader>()
-  console.log(toastMsg)
   const { toast } = useToast()
   useEffect(() => {
     if (toastMsg) {

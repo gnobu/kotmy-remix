@@ -11,10 +11,10 @@ export async function action({ request }: ActionFunctionArgs) {
     const payload = prepareTournamentDto(formData)
     const { error } = await tournamentRepo.createTournament(payload)
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error?.detail}` })
+        const { headers } = await setToast({ request, toast: `error::${error?.detail}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: 'success::A new tournament has been created' })
+    const { headers } = await setToast({ request, toast: `success::A new tournament has been created::${Date.now()}` })
     return redirect('/admin/tournaments', { headers })
 }
 

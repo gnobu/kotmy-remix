@@ -17,13 +17,13 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
     const { data: contest, error } = await contestRepo.getContestById(contestId)
     if (error) {
-        const { headers } = await setToast({ request, toast: 'error::Error fetching the contest' })
+        const { headers } = await setToast({ request, toast: `error::Error fetching the contest::${Date.now()}` })
         return redirect('/admin/contests', { headers })
     }
     const { fingerprint } = await getFingerprint({ request })
     const { data: stage } = await contestRepo.getContestantsInStage(stageId, { fingerprint })
     if (!stage) {
-        const { headers } = await setToast({ request, toast: 'error::Error fetching the contestants' })
+        const { headers } = await setToast({ request, toast: `error::Error fetching the contestants::${Date.now()}` })
         return redirect('/admin/contests', { headers })
     }
     return json({ contest, stage })
@@ -43,7 +43,7 @@ export async function action({ params, request }: LoaderFunctionArgs) {
     if (intent === 'admit' || intent === 'evict') return await toggleEvictContestants(formData, request)
     // if (intent === 'delete') return await deleteContest(formData, request)
     console.log(...formData)
-    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
+    const { headers } = await setToast({ request, toast: `error::This action is not yet supported::${Date.now()}` })
     return json(null, { headers })
 }
 

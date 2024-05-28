@@ -17,10 +17,10 @@ export async function action({ request }: ActionFunctionArgs) {
     const payload = prepareContestPayload(await request.formData())
     const { data, error } = await contestRepo.createContest(payload)
     if (data) {
-        const { headers } = await setToast({ request, toast: 'success::A new contest has been created' })
+        const { headers } = await setToast({ request, toast: `success::A new contest has been created::${Date.now()}` })
         return redirect('/admin/contests', { headers })
     }
-    const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+    const { headers } = await setToast({ request, toast: `error::${error.detail}::${Date.now()}` })
     return json(null, { headers })
 }
 

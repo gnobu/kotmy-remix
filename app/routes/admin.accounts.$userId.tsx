@@ -12,7 +12,7 @@ import { setToast } from '~/lib/session.server'
 export async function loader({ params, request }: LoaderFunctionArgs) {
   const user = adminUsers.find(user => user.id == params.userId)
   if (!user) {
-    const { headers } = await setToast({ request, toast: 'error::Admin user not found' })
+    const { headers } = await setToast({ request, toast: `error::Admin user not found::${Date.now()}` })
     return redirect('/admin/accounts', { headers })
   }
   return { permissions, user }
@@ -22,7 +22,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
   console.log(...formData)
   console.log(formData.getAll('permission'))
-  const { headers } = await setToast({ request, toast: 'success::User updated  successfully' })
+  const { headers } = await setToast({ request, toast: `success::User updated  successfully::${Date.now()}` })
   return redirect('/admin/accounts', { headers })
 }
 

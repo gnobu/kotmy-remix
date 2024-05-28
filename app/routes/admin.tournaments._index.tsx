@@ -31,10 +31,10 @@ export async function action({ request }: ActionFunctionArgs) {
         const tournamentId = formData.get('tournamentId') as string
         const { data, error } = await tournamentRepo.deleteTournament(tournamentId)
         if (error) {
-            const { headers } = await setToast({ request, toast: 'error::Could not delete the tournament' })
+            const { headers } = await setToast({ request, toast: `error::Could not delete the tournament::${Date.now()}` })
             return json(error, { headers })
         }
-        const { headers } = await setToast({ request, toast: 'success::The tournament has been deleted' })
+        const { headers } = await setToast({ request, toast: `success::The tournament has been deleted::${Date.now()}` })
         return json(data, { headers })
     }
     return json(null)

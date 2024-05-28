@@ -162,33 +162,33 @@ export async function deleteContest(formData: FormData, request: Request) {
     const contestId = formData.get('contestId') as string
     const { data, error } = await contestRepo.deleteContest(contestId)
     if (data) {
-        const { headers } = await setToast({ request, toast: 'success::The contest has been deleted' })
+        const { headers } = await setToast({ request, toast: `success::The contest has been deleted::${Date.now()}` })
         return json(null, { headers })
     }
-    const { headers } = await setToast({ request, toast: 'error::Could not delete the contest' })
+    const { headers } = await setToast({ request, toast: `error::Could not delete the contest::${Date.now()}` })
     return json(error, { headers })
 }
 
 export async function updateStage(formData: FormData, request: Request) {
-    const stageId = formData.get('stageId') as string
+    const stageId = formData.get("stageId") as string
     const dto = prepareStageDto(formData)
     const { data, error } = await contestRepo.updateStage({ stageId, dto })
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: 'success::The stage has been updated' })
+    const { headers } = await setToast({ request, toast: `success::The stage has been updated::${Date.now()}` })
     return json(data, { headers })
 }
 
 export async function toggleRegistration(formData: FormData, request: Request) {
-    const contestId = formData.get('contestId') as string
+    const contestId = formData.get("contestId") as string
     const { data, error } = await contestRepo.toggleRegistration({ contestId })
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: 'success::The contest has been updated' })
+    const { headers } = await setToast({ request, toast: `success::The contest has been updated::${Date.now()}` })
     return json(data, { headers })
 }
 
@@ -220,14 +220,14 @@ export function prepareStageDto(formData: FormData) {
 
 export async function migrateStage(formData: FormData, request: Request) {
     const payload: IMigrateStageDTO = {
-        current_stage_id: formData.get('from') as string,
-        new_stage_id: formData.get('to') as string
+        current_stage_id: formData.get("from") as string,
+        new_stage_id: formData.get("to") as string
     }
     const { data, error } = await contestRepo.migrateStage(payload)
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail || 'Could not perform the action'}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: 'success::Contestants have been migrated to the next stage' })
+    const { headers } = await setToast({ request, toast: `success::Contestants have been migrated to the next stage::${Date.now()}` })
     return json(data, { headers })
 }

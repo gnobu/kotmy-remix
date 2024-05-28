@@ -8,10 +8,10 @@ export async function editContestant(payload: { dto: FormData, contestantId: str
     const dto = prepareContestantDTO(payload.dto)
     const { data, error } = await contestantRepo.editContestant({ dto, contestantId: payload.contestantId })
     if (data) {
-        const { headers } = await setToast({ request, toast: "success::The contestant info has been updated" })
+        const { headers } = await setToast({ request, toast: `success::The contestant info has been updated::${Date.now()}` })
         return json(null, { headers })
     }
-    const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Could not update the contestant"}` })
+    const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Could not update the contestant"}::${Date.now()}` })
     return json(error, { headers })
 }
 
@@ -23,10 +23,10 @@ export async function toggleEvictContestants(formData: FormData, request: Reques
     }
     const { error } = await contestantRepo.toggleEvictContestants(dto)
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Sorry, we could not update the contestants statuses at this time"}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Sorry, we could not update the contestants statuses at this time"}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: "success::The contestants' statuses have been updated" })
+    const { headers } = await setToast({ request, toast: `success::The contestants' statuses have been updated::${Date.now()}` })
     return json(null, { headers })
 }
 
@@ -34,7 +34,7 @@ export async function registerContestant(formData: FormData, request: Request) {
     const contestId = formData.get("contestId") as string
     const { data, error } = await contestantRepo.registerContestant({ contestId, dto: formData })
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Error registering the contestant"}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Error registering the contestant"}::${Date.now()}` })
         return json({ data: null }, { headers })
     }
     return json({ data })
@@ -51,10 +51,10 @@ export async function getTallyLink(formData: FormData, request: Request) {
     }
     const { data, error } = await contestantRepo.getTallyLink(dto)
     if (error) {
-        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}` })
+        const { headers } = await setToast({ request, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, toast: "success::You will be redirected to make the payment" })
+    const { headers } = await setToast({ request, toast: `success::You will be redirected to make the payment::${Date.now()}` })
     return redirect(data.payment_link, { headers })
 }
 
@@ -66,10 +66,10 @@ export async function voteContestant(formData: FormData, request: Request) {
     const { fingerprint, headers: fingerprintHeaders } = await getFingerprint({ request })
     const { error } = await contestantRepo.voteContestant({ dto, stageId, fingerprint })
     if (error) {
-        const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}` })
+        const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: `error::${error.detail ?? "We're sorry, but there seems to be an issue with this action. Please try again later."}::${Date.now()}` })
         return json(error, { headers })
     }
-    const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: "success::Your vote has been registered" })
+    const { headers } = await setToast({ request, headers: fingerprintHeaders, toast: `success::Your vote has been registered::${Date.now()}` })
     return json(null, { headers })
 }
 

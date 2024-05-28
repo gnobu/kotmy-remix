@@ -21,7 +21,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if (intent === 'toggle_registration') return await toggleRegistration(formData, request)
     if (intent === 'migrate') return await migrateStage(formData, request)
     console.log(...formData)
-    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
+    const { headers } = await setToast({ request, toast: `error::This action is not yet supported::${Date.now()}` })
     return json(null, { headers })
 }
 

@@ -14,7 +14,7 @@ export async function action({ request }: LoaderFunctionArgs) {
     if (intent === "register") return await registerContestant(formData, request)
     if (intent === "tally_vote") return await getTallyLink(formData, request)
     if (intent === "kotmy_vote") return await voteContestant(formData, request)
-    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
+    const { headers } = await setToast({ request, toast: `error::This action is not yet supported::${Date.now()}` })
     return json(null, { headers })
 }
 export type RegisterAction = typeof action

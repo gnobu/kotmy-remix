@@ -30,7 +30,7 @@ export async function loader({ }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
   console.log(...formData)
-  const { headers } = await setToast({ request, toast: 'success::The transaction has been created' })
+  const { headers } = await setToast({ request, toast: `success::The transaction has been created::${Date.now()}` })
   return json(null, { headers })
 }
 

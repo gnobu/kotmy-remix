@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const intent = formData.get('intent') as 'tally_vote'
     if (intent === 'tally_vote') return await getTallyLink(formData, request)
     if (intent === "kotmy_vote") return await voteContestant(formData, request)
-    const { headers } = await setToast({ request, toast: 'error::This action is not yet supported' })
+    const { headers } = await setToast({ request, toast: `error::This action is not yet supported::${Date.now()}` })
     return json(null, { headers })
 }
 

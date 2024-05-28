@@ -14,9 +14,12 @@ import {
 import globalStyles from './global.css'
 import autoplaycarouselStyles from "./autoplaycarousel.css"
 import { nickToast } from "./lib/session.server"
-import Toast from "./components/reusables/Toast"
 import PageTransitionProgressBar from "./components/reusables/PageProgress"
 import Cta from "./components/reusables/Cta"
+import { Toaster } from "./components/reusables/toaster"
+import { useToast } from "./components/reusables/use-toast"
+import { SplitToast } from "./lib/types/toast"
+import { useEffect } from "react"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -51,11 +54,24 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { toast } = useLoaderData<typeof loader>()
+  const { toast: toastMsg } = useLoaderData<typeof loader>()
+  console.log(toastMsg)
+  const { toast } = useToast()
+  useEffect(() => {
+    if (toastMsg) {
+      const [type, message] = toastMsg.split('::') as SplitToast<typeof toastMsg>
+      toast({
+        title: type === "success" ? "Success!" : "Oops! There seems to be a problem",
+        variant: type === "success" ? "default" : "destructive",
+        description: message,
+      })
+    }
+  }, [toastMsg])
+
   return (
     <Document>
-      <Toast toast={toast} />
       <Outlet />
+      <Toaster />
     </Document>
   )
 }

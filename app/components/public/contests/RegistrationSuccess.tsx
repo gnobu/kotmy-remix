@@ -1,20 +1,21 @@
 import { icons } from "~/assets/icons"
+import { IContest } from "~/models/contest/types/contest.interface"
 import { IContestant } from "~/models/contestant/types/contestant.interface"
 
-export default function RegistrationSuccess({ contestant }: { contestant: IContestant }) {
+export default function RegistrationSuccess({ contestant, contest }: { contestant: IContestant, contest: IContest }) {
     const fullName = `${contestant.contestant_biodata.first_name} ${contestant.contestant_biodata.last_name}`
     const formattedDob = new Date(contestant.contestant_biodata.dob).toDateString()
-    function truncate(text: string) {
-        const MAX_LENGTH = 24
-        return text.length > MAX_LENGTH ? text.slice(0, MAX_LENGTH) + '...' : text
-    }
     return (
         <div className='bg-secondary p-10 sm:rounded-3xl flex flex-col max-w-xl gap-10'>
             <aside className="border-2 border-success-700 bg-success-500 rounded-xl p-6 flex items-start gap-4">
                 <img src={icons.alertCheckIcon} width={30} height={30} className="mt-1" />
                 <p>
                     <span className="block font-bold mb-2">Dear Esteemed Contestant/Guardian</span>
-                    <span className="font-medium">Congratulations, {fullName}! Your submission to the Kid of December photo 2023 contest has been received successfully!</span>
+                    <span className="font-medium">
+                        Congratulations, {fullName}!
+                        Your submission to {contest.name} has been received successfully.
+                        Your code is <span className="font-semibold">{contestant.code}</span>.
+                    </span>
                 </p>
             </aside>
             <div className="grid sm:grid-cols-2 justify-between gap-6 sm:gap-10">
@@ -32,9 +33,9 @@ export default function RegistrationSuccess({ contestant }: { contestant: IConte
                         <span className="block font-satoshi-bold">Gender</span>
                         <span className="block capitalize">{contestant.contestant_biodata.sex.toLowerCase()}</span>
                     </p>
-                    <p className="">
+                    <p className="min-w-0">
                         <span className="block font-satoshi-bold">Email Address</span>
-                        <span className="block">{truncate(contestant.contestant_biodata.email)}</span>
+                        <span className="block truncate ...">{contestant.contestant_biodata.email}</span>
                     </p>
                     <p className="">
                         <span className="block font-satoshi-bold">State of Residence</span>

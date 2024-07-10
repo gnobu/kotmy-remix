@@ -18,8 +18,8 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
         await callTallyWebhook(tx_ref)
         // create toast
         const toast = tx_status === "completed"
-            ? 'success::Your payment has been received. Your vote will reflect shortly.'
-            : 'error::There seems to be an issue with your payment. Please try again later.'
+            ? `success::Your payment has been received. Your vote will reflect shortly.::${Date.now()}` as const
+            : `error::There seems to be an issue with your payment. Please try again later.::${Date.now()}` as const
         const { headers } = await setToast({ request, toast })
         // clear other query strings and show success toast
         url.searchParams.delete('status')

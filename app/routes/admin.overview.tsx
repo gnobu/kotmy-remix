@@ -6,7 +6,6 @@ import ContestSummary from "~/components/admin/ContestSummary"
 import TournamentSummary from "~/components/admin/TournamentSummary"
 import TransactionSummary from "~/components/admin/TransactionSummary"
 import { adminUsers } from "~/lib/data/admin"
-import { getTournaments } from "~/lib/data/contest.server"
 import { contestRepo } from "~/models/contest/contest.server"
 import { tournamentRepo } from "~/models/tournament/tournament.server"
 

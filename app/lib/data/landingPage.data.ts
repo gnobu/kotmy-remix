@@ -1,6 +1,4 @@
 import { icons } from "~/assets/icons"
-import { contestImage1, contestImage2 } from "~/assets/images"
-import { Contest } from "../types/contest.interface"
 
 export const whyUsData = [
     {
@@ -28,54 +26,3 @@ export const whyUsData = [
         subtext: "To be entertaining, transparent, innovative, creative, exciting, effective and reliable."
     },
 ]
-
-export const contests = [
-    {
-        _id: '1',
-        image: contestImage1,
-        title: 'Kid of the Month Photo Contest 2023',
-        tournamentId: '1',
-        contestId: '1',
-        status: 'registering'
-    },
-    {
-        _id: '2',
-        image: contestImage2,
-        title: 'Kid of the Year Contest 2023',
-        tournamentId: '2',
-        contestId: '2',
-        status: 'registering'
-    },
-    {
-        _id: '3',
-        image: contestImage1,
-        title: 'My Birthday Splash Contest 2023',
-        tournamentId: '3',
-        contestId: '3',
-        status: 'ongoing'
-    },
-    {
-        _id: '4',
-        image: contestImage2,
-        title: '2023 Photo contest ',
-        tournamentId: '4',
-        contestId: '4',
-        status: 'ongoing'
-    },
-    {
-        _id: '5',
-        image: contestImage1,
-        title: 'My Partner and I Contest 2023',
-        tournamentId: '5',
-        contestId: '5',
-        status: 'completed'
-    },
-    {
-        _id: '6',
-        image: contestImage2,
-        title: 'Golden Teen 2023',
-        tournamentId: '6',
-        contestId: '6',
-        status: 'completed'
-    },
-] as Contest[]

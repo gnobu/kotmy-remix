@@ -9,7 +9,7 @@ import { numberFormatter } from '~/lib/numbers.utils'
 import { TallyTransaction } from '~/lib/types/transaction.interface'
 import TallyTableActions from './TallyTableActions'
 
-const numberFormatterOptions = { style: 'currency', currency: 'NGN' }
+const numberFormatterOptions: Intl.NumberFormatOptions = { style: 'currency', currency: 'NGN' }
 const dateOptions: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "short",

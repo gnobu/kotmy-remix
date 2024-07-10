@@ -1,8 +1,7 @@
-import { ButtonGroupProps } from "react-multi-carousel"
 import { icons } from "~/assets/icons"
 import Svg from "~/components/reusables/Svg"
 
-export default function CarouselButtonGroup ({ next, previous }: ButtonGroupProps) {
+export default function CarouselButtonGroup({ next, previous }: { next?: () => void, previous?: () => void }) {
     return (
         <div className="carousel-button-group">
             <button className="small rounded bg-pry carousel-button"

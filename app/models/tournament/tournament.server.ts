@@ -4,7 +4,7 @@ import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX2FkbWluIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImV4cCI6MTczMTk2NDg1Nn0.dDA5RkNkP4kf4sWrfivrP8dSYgR0a10BZra_Pk01IBQ"
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjFkYTc3MTU1MzE3NzdjMDMwZWI2NCIsImVtYWlsIjoiYXR1bWFzYW11ZWxva3BhcmEzQGdtYWlsLmNvbSIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGVzIjpbXSwicGVybWlzc2lvbnMiOltdLCJleHAiOjE3NzExNzM0NDJ9.sHAuj-OTgwKuSpgrsY0vjPeHHnOJNzENSxmYIFo414k"
 
 class TournamentRepository implements ITournamentRepository {
     async getTournaments(): Promise<TFetcherResponse<ITournament[]>> {

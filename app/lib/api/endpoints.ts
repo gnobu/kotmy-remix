@@ -27,6 +27,12 @@ export class ApiEndPoints {
     static voteContestant(stageId: string) {
         return `/contestant/sm_vote/${stageId}`
     }
+    static getContestantViaHash(contestantLink: string) {
+        return `/contestant/link_details/${contestantLink}`
+    }
+    static contestantUploadStageMedia() {
+        return `/contestant/upload_media`
+    }
     
     // ADMIN
     static get createAdminAccount(): string {

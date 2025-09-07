@@ -3,8 +3,9 @@ import { IContestant, IContestantRepository, IGetTallyLinkDTO, ILeanContestant, 
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
+import { IContestWStageWContestant } from "../contest/types/contest.interface"
 
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWZjNTg0ZDdiNmI5Y2RlODI2MTg3MCIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGUiOiJhZG1pbiIsInBlcm1pc3Npb25zIjpbIm1hbmFnZSB1c2VycyIsIm1hbmFnZSBjb250ZW50IiwibWFuYWdlIGJsb2ciLCJtYW5hZ2UgcGF5bWVudCIsIm1hbmFnZSBjb250ZXN0IiwibWFuYWdlIHZvdGVzIl0sImV4cCI6MTczODE3MzAzMH0.RTojBU2VNW-XqSCfd-qWSz_JU2jYmH3BCljPSWlKrLc"
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjFkYTc3MTU1MzE3NzdjMDMwZWI2NCIsImVtYWlsIjoiYXR1bWFzYW11ZWxva3BhcmEzQGdtYWlsLmNvbSIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGVzIjpbXSwicGVybWlzc2lvbnMiOltdLCJleHAiOjE3NzExNzM0NDJ9.sHAuj-OTgwKuSpgrsY0vjPeHHnOJNzENSxmYIFo414k"
 
 class ContestantRepository implements IContestantRepository {
     async callTallyWebhook(dto: unknown): Promise<TFetcherResponse<unknown>> {
@@ -52,6 +53,12 @@ class ContestantRepository implements IContestantRepository {
             url: ApiEndPoints.voteContestant(payload.stageId),
             headers: { device_fingerprint: payload.fingerprint },
             data: payload.dto
+        })
+    }
+    async getContestantViaHash(hash: string): Promise<TFetcherResponse<IContestWStageWContestant>> {
+        return await ApiCall.call({
+            method: MethodsEnum.GET,
+            url: ApiEndPoints.getContestantViaHash(hash),
         })
     }
 }

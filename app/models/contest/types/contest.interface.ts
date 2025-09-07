@@ -62,6 +62,10 @@ export interface IContestWStage extends IContest {
     stages: IStage[]
 }
 
+export interface IContestWStageWContestant extends IContest {
+    stages: IStageWContestant[]
+}
+
 export interface IStage {
     _id: string
     contest_unique_id: string

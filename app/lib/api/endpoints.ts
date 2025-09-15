@@ -1,37 +1,37 @@
 export class ApiEndPoints {
     // GENERAL
     static get getTournaments(): string {
-        return "/tournament"
+        return "/v2/api/tournament"
     }
     static getTournamentById(uniqueId: string): string {
-        return `/tournament/${uniqueId}`
+        return `/v2/api/tournament/${uniqueId}`
     }
     static getContestsInTournament(tournamentUniqueId: string) {
-        return `/contest/tournament/${tournamentUniqueId}`
+        return `/v2/api/contest/tournament/${tournamentUniqueId}`
     }
     static getTournamentsPaged(page: number) {
-        return `/api/tournament_paged?page=${page}`
+        return `/v2/api/tournament_paged?page=${page}`
     }
     static registerContestant(contestId: string) {
-        return `/contestant/register_for_contest/${contestId}`
+        return `/v2/api/contestant/register_for_contest/${contestId}`
     }
     static getContestantsInStage(stageId: string) {
-        return `/contestant/${stageId}`
+        return `/v2/api/contestant/${stageId}`
     }
     static get getTallyLink(): string {
-        return "/payment"
+        return "/v2/api/payment"
     }
     static get callTallyWebhook(): string {
         return "/flutterwave-webhook"
     }
     static voteContestant(stageId: string) {
-        return `/contestant/sm_vote/${stageId}`
+        return `/v2/api/contestant/sm_vote/${stageId}`
     }
     static getContestantViaHash(contestantLink: string) {
-        return `/contestant/link_details/${contestantLink}`
+        return `/v2/api/contestant/link_details/${contestantLink}`
     }
     static contestantUploadStageMedia() {
-        return `/contestant/upload_media`
+        return `/v2/api/contestant/upload_media`
     }
     
     // ADMIN
@@ -45,48 +45,49 @@ export class ApiEndPoints {
         return "/users/all_roles"
     }
     static get createTournament() {
-        return "/admin/tournament"
+        return "v2/api/admin/tournament"
     }
     static updateTournament(id: string) {
-        return `/admin/tournament/${id}`
+        return `v2/api/admin/tournament/${id}`
     }
     static deleteTournament(id: string) {
-        return `/admin/tournament/${id}`
+        return `v2/api/admin/tournament/${id}`
     }
     static get createContest() {
-        return "/admin/contest"
+        return "v2/api/admin/contest"
     }
     static get getContests() {
-        return "/admin/contest"
+        return "v2/api/admin/contest"
     }
     static adminGetContestsInTournament(tournamentUniqueId: string) {
-        return `/admin/contest/tournament/${tournamentUniqueId}`
+        return `v2/api/admin/contest/tournament/${tournamentUniqueId}`
     }
     static getContestById(id: string) {
-        return `/contest/${id}`
+        return `/v2/api/contest/${id}`
+        // return `/v2/api/admin/contest/${id}`
     }
     static updateContest(id: string) {
-        return `/admin/contest/${id}`
+        return `/v2/api/admin/contest/${id}`
     }
     static deleteContest(id: string) {
-        return `/admin/contest/${id}`
+        return `/v2/api/admin/contest/${id}`
     }
     static updateStage(id: string) {
-        return `/admin/stage/${id}`
+        return `/v2/api/admin/stage/${id}`
     }
     static deleteStage(id: string) {
-        return `/admin/stage/${id}`
+        return `/v2/api/admin/stage/${id}`
     }
     static get migrateStage() {
-        return `/admin/contest/migration`
+        return `/v2/api/admin/contest/migration`
     }
     static toggleRegistration({ contestId }: { contestId: string }) {
-        return `/admin/contest/can_register/${contestId}`
+        return `/v2/api/admin/contest/can_register/${contestId}`
     }
     static editContestant(contestantId: string) {
-        return `/admin/contestant/with_image/${contestantId}`
+        return `/v2/api/admin/contestant/with_image/${contestantId}`
     }
     static get toggleEvictContestants() {
-        return `/admin/contestant/toggle_evict_multiple`
+        return `/v2/api/admin/contestant/toggle_evict_multiple`
     }
 }

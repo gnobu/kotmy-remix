@@ -10,6 +10,9 @@ const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjFkYTc3MTU1MzE3
 
 class ContestRepository implements IContestRepository {
     async createContest(contest: FormData, token = TOKEN): Promise<TFetcherResponse<IContest>> {
+        contest.entries().forEach(([key, value]) => {
+            console.log(`${key}: ${value}`)
+        })
         return await ApiCall.call({
             method: MethodsEnum.POST,
             url: ApiEndPoints.createContest,
@@ -146,11 +149,12 @@ export function prepareContestPayload(formData: FormData) {
         add_info: formData.get('add_info') as string,
         sub_req: formData.get('sub_req') as string,
         terms_cond: formData.get('tnc') as string,
-        image: formData.get('image') as File || null,
+        image: formData.get('image') ?  null: (formData.get('image') as File).size === 0 ? null : formData.get('image') as File,
         categories: JSON.stringify(formData.getAll('category')),
         no_of_stages: no_of_stages,
         stages: JSON.stringify(stages)
     }
+    console.log(payloadObj)
     const payload = new FormData()
     Object.entries(payloadObj).forEach(([key, value]) => {
         if (value !== null || value != undefined) payload.append(key, value)

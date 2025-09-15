@@ -6,12 +6,16 @@ import { IEditContestantDTO, IGetTallyLinkDTO, IToggleEvictContestantDTO, IVoteC
 
 export async function editContestant(payload: { dto: FormData, contestantId: string }, request: Request) {
     const dto = prepareContestantDTO(payload.dto)
+
     const { data, error } = await contestantRepo.editContestant({ dto, contestantId: payload.contestantId })
     if (data) {
         const { headers } = await setToast({ request, toast: `success::The contestant info has been updated::${Date.now()}` })
         return json(null, { headers })
     }
     const { headers } = await setToast({ request, toast: `error::${error.detail ?? "Could not update the contestant"}::${Date.now()}` })
+    dto.entries().forEach(entry => {
+        console.log(entry)
+    })
     return json(error, { headers })
 }
 
@@ -135,7 +139,10 @@ export function prepareContestantDTO(formData: FormData) {
         }
     }
     const dto = new FormData()
-    dto.append("media", formData.get("media") as Blob)
+    if(formData.get("media") && (formData.get("media") as File).size > 0){
+
+        dto.append("media", formData.get("media") as Blob)
+    }
     dto.append("details", JSON.stringify(payloadObj))
     return dto
 }

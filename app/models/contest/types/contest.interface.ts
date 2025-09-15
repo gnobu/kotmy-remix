@@ -91,7 +91,7 @@ export interface IStageWContestant extends IStage {
 
 
 export interface ICreateContestDTO {
-    image?: File
+    image: File | null
     name: string
     desc: string
     tournament_unique_id: string

@@ -18,7 +18,11 @@ export default function MigrateStageDialog({ contest, disabled }: { contest: ICo
         }
         return res
     }, [null, null] as [IStage | null, IStage | null])
-    const cannotMigrate = disabled || !stages.at(0) || !stages.at(1)
+
+    let activeStageIdx = contest.stages.findIndex(v => v.active)
+    let activeStageNotTheLastStage = activeStageIdx !== -1 && activeStageIdx < contest.stages.length - 1;
+
+    const cannotMigrate = disabled || !stages.at(0) || !stages.at(1) || !activeStageNotTheLastStage;
     return (
         <Dialog>
             <DialogTrigger asChild>

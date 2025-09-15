@@ -63,11 +63,11 @@ export function prepareTournamentDto(formData: FormData) {
         name: formData.get('name') as string,
         unique_id: formData.get('uniqueId') as string,
         desc: formData.get('description') as string,
-        image: formData.get('image') as File || null,
+        image: !formData.get('image') ?  null: (formData.get('image') as File).size === 0 ? null : formData.get('image') as File,
     }
     const payload = new FormData()
     Object.entries(payloadObj).forEach(([key, value]) => {
-        if (value !== null || value != undefined) payload.append(key, value)
+        if (value !== null && value != undefined) payload.append(key, value)
     })
     return payload
 }

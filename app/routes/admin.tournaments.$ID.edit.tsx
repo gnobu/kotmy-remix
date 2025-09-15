@@ -18,6 +18,10 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()
     const payload = prepareTournamentDto(formData)
+    ///
+    console.log("###############")
+   console.log(Object.fromEntries(payload.entries()))
+    ///
     const { data, error } = await tournamentRepo.updateTournament({ id: formData.get('tournamentId') as string, dto: payload })
     if (data) {
         const { headers } = await setToast({ request, toast: `success::The tournament has been updated::${Date.now()}` })

@@ -2,7 +2,7 @@ import { useFetcher } from '@remix-run/react'
 
 import DeleteContestDialog from './DeleteContestDialog'
 import RoundCta from '~/components/reusables/RoundCta'
-import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { IContestWStage } from '~/services/contest/types/contest.interface'
 import { icons } from '~/assets/icons'
 import MigrateStageDialog from './MigrateStageDialog'
 

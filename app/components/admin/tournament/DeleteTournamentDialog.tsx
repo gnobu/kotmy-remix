@@ -2,7 +2,7 @@ import { useFetcher } from "@remix-run/react"
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger, DialogFooter, DialogHeader, DialogClose } from "~/components/reusables/Dialog"
 import Svg from "~/components/reusables/Svg"
 import { icons } from "~/assets/icons"
-import { ITournament } from "~/models/tournament/types/tournament.interface"
+import { ITournament } from "~/services/tournament/types/tournament.interface"
 
 export default function DeleteTournamentDialog({ tournament, disabled }: { tournament: ITournament; disabled?: boolean }) {
     const fetcher = useFetcher()

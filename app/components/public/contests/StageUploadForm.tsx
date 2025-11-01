@@ -5,8 +5,8 @@ import Button from "../../reusables/Button"
 import DragnDrop from "./DragnDrop"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/reusables/select-shad"
 import { nigerianStates } from "~/lib/data/states"
-import { IContest } from "~/models/contest/types/contest.interface"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { IContest } from "~/services/contest/types/contest.interface"
+import { IContestant } from "~/services/contestant/types/contestant.interface"
 
 export default function StageUploadForm({ contest, contestant, hash }: { contest: IContest, hash: string, contestant?: IContestant }) {
     return (

@@ -5,7 +5,7 @@ import FormControl from '~/components/reusables/FormControl'
 import Select from '~/components/reusables/Select'
 import CategoryInputs from './CategoryInputs'
 import StageInputs from './StageInputs'
-import { ITournament } from '~/models/tournament/types/tournament.interface'
+import { ITournament } from '~/services/tournament/types/tournament.interface'
 
 export default function CreateContestForm({ tournaments }: { tournaments: Pick<ITournament, 'id'>[] }) {
     const [searchParams] = useSearchParams()

@@ -1,5 +1,5 @@
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface";
-import { IContestWStageWContestant } from "~/models/contest/types/contest.interface";
+import { IContestWStageWContestant } from "~/services/contest/types/contest.interface";
 
 export interface IContestant {
   _id: string;
@@ -36,11 +36,13 @@ export interface IContestant {
     };
     device_voted_for_contestant: boolean;
   };
-  contestant_biodata: {
+  contestant_biodata: IContestantBiodata
+  pin?: string
+  allow_update?: boolean
+}
+
+export interface IContestantBiodata {
     _id: string;
-    created_at: string;
-    updated_at: string;
-    is_deleted: boolean;
     first_name: string;
     last_name: string;
     dob: string;
@@ -49,9 +51,8 @@ export interface IContestant {
     state_of_residence: string;
     whatsapp_no: string;
     info: string;
-  };
+  
 }
-
 export interface ILeanContestant {
   _id: string;
   created_at: string;
@@ -78,7 +79,7 @@ export interface ILeanContestant {
 }
 
 export interface IEditContestantDTO {
-  biodata: {
+  biodata?: {
     first_name?: string;
     last_name?: string;
     dob?: string;
@@ -88,7 +89,7 @@ export interface IEditContestantDTO {
     whatsapp_no?: string;
   };
   social_media_url?: string;
-  vote: {
+  vote?: {
     social_media?: number;
     judge?: number;
     bonus?: number;
@@ -120,7 +121,7 @@ export interface IVoteContestantDto {
 
 export interface IContestantRepository {
   callTallyWebhook(dto: unknown): Promise<TFetcherResponse<unknown>>;
-  editContestant(
+  editContestantAdmin(
     payload: { dto: FormData; contestantId: string },
     token: string
   ): Promise<TFetcherResponse<IContestant>>;

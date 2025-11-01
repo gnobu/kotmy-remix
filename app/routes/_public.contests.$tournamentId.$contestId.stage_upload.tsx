@@ -5,7 +5,7 @@ import ContestTimer from "~/components/public/contests/ContestTimer";
 import { noImage } from "~/assets/images";
 import StatusTag from "~/components/reusables/StatusTag";
 import { StageContestantsLoader } from "./_public.contests.$tournamentId.$contestId";
-import { contestantRepo } from "~/models/contestant/contestant.server";
+import { contestantRepo } from "~/services/contestant/contestant.server";
 import { setToast } from "~/lib/session.server";
 import StageUploadForm from "~/components/public/contests/StageUploadForm";
 
@@ -65,7 +65,7 @@ export default function StageMediaUpload() {
                 <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3 uppercase">
                   {contest!.name}
                 </h1>
-                <p className="font-satoshi-medium">{contest.description}</p>
+                <p className="font-satoshi-medium">{contest.desc}</p>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                 <div className="">

@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
-import { tournamentRepo } from "~/models/tournament/tournament.server"
+import { tournamentRepo } from "~/services/tournament/tournament.server"
 import { setToast } from "~/lib/session.server"
 // import { memoryCache as cache } from "~/lib/cache"
 import TournamentCard from "~/components/admin/tournament/TournamentCard"

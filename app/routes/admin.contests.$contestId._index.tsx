@@ -2,8 +2,8 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from '@remix-r
 import { useLoaderData, useNavigate } from '@remix-run/react'
 
 import { setToast } from '~/lib/session.server'
-import { contestRepo, prepareContestPayload } from '~/models/contest/contest.server'
-import { tournamentRepo } from '~/models/tournament/tournament.server'
+import { contestRepo, prepareContestPayload } from '~/services/contest/contest.server'
+import { tournamentRepo } from '~/services/tournament/tournament.server'
 import EditContestForm from '~/components/admin/tournament/EditContestForm'
 import RoundCta from '~/components/reusables/RoundCta'
 import { icons } from '~/assets/icons'

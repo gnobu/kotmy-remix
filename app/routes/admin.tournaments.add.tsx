@@ -4,7 +4,7 @@ import { icons } from '~/assets/icons'
 import CreateTournamentForm from '~/components/admin/tournament/CreateTournamentForm'
 import RoundCta from '~/components/reusables/RoundCta'
 import { setToast } from '~/lib/session.server'
-import { prepareTournamentDto, tournamentRepo } from '~/models/tournament/tournament.server'
+import { prepareTournamentDto, tournamentRepo } from '~/services/tournament/tournament.server'
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData()

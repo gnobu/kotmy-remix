@@ -1,6 +1,7 @@
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { socials } from "~/lib/data/socials"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { StageMediaType } from "~/lib/types/contest.interface"
+import { IContestant, IContestantBiodata } from "~/services/contestant/types/contestant.interface"
 
 export type ContestStatus = 'yet_to_start' | 'registering' | 'ongoing' | 'completed'
 export type StageStatus = "yet_to_start" | "ongoing" | "completed"
@@ -15,6 +16,9 @@ export type Rate = {
     tally: number
     judge: number
     givaah: number
+    bonus?: number
+    price_per_vote?: number
+    vote_currency?: string
 }
 
 export interface IContestDto {
@@ -36,16 +40,18 @@ export interface IContestDto {
     uploaded_by: string
     can_register: boolean
     categories: string[]
-    no_of_stages: number
     stages: IStage[]
+    no_of_stages?: number
+    no_of_winners?: number
 }
 
 export interface IContest {
     _id: string
     id: string
     name: string
-    description: string
+    desc: string
     tournament_unique_id: string
+    contest_unique_id?: string
     image: string | null
     status: ContestStatus
     start_date: string
@@ -56,6 +62,10 @@ export interface IContest {
     terms_cond: string
     add_info: string
     categories: string[]
+
+    no_of_stages?: number
+    no_of_winners?: number
+    image_url?: string
 }
 
 export interface IContestWStage extends IContest {
@@ -66,9 +76,22 @@ export interface IContestWStageWContestant extends IContest {
     stages: IStageWContestant[]
 }
 
+export interface IContestWFinalResult extends IContestDto {
+    final_result_scores?: ContestantResultForContest[]
+    final_result_headings: string[]
+
+}
+
+export interface  ContestantResultForContest{
+    stage_results: { [key: string]: number }
+    position: number;
+    total_votes: number;
+    contestant_biodata: IContestantBiodata
+    table_data: { [key: string]: string | number }
+}
 export interface IStage {
     _id: string
-    contest_unique_id: string
+    contest_unique_id?: string  | null
     stage: number
     weight: number
     start_date: string
@@ -76,13 +99,17 @@ export interface IStage {
     rates: Rate
     success_count: number
     grade: Record<Grade, [number, number]>
-    format: "STRAIGHT" | 'PAIRED' | 'GROUPED'
+    format: "STRAIGHT" | 'PAIRED' | 'GROUPED' | null
     active: boolean // to be removed
     status: StageStatus // 'yet_to_start'
     number_of_contestants: number // 0
     total_registered_contestants: number // 0
     contestants_upload_folder: string
     contestants_view_folder: string
+
+    price_per_vote?: number
+    contest_id?: string
+    media_type?: string | StageMediaType
 }
 
 export interface IStageWContestant extends IStage {
@@ -126,7 +153,7 @@ export function dtoToContest(contest: IContestDto): IContest | IContestWStage {
         _id: contest._id,
         id: contest.contest_unique_id,
         name: contest.name,
-        description: contest.desc,
+        desc: contest.desc,
         tournament_unique_id: contest.tournament_unique_id,
         image: contest.image_url,
         status: contest.status,
@@ -138,7 +165,9 @@ export function dtoToContest(contest: IContestDto): IContest | IContestWStage {
         terms_cond: contest.terms_cond,
         add_info: contest.add_info,
         categories: contest.categories,
-        stages: contest.stages
+        stages: contest.stages,
+        no_of_stages: contest.no_of_stages,
+        no_of_winners: contest.no_of_winners
     }
 }
 
@@ -149,6 +178,35 @@ export function dtoToContestInTournament(contest: Pick<IContestDto, 'contest_uni
         name: contest.name,
         status: contest.status,
     }
+}
+
+
+export interface WinnerResponse {
+  contest_id: string;
+  contestant_code: string;
+  user_id: string;
+  contestant_email: string;
+  admin_remark: string;
+  contestant_remark: string;
+  rank: number;
+  reward_status_updated_date: string | null;
+  reward: any | null;
+  win_type: string;
+  contestant_biodata: any | null;
+  user: any | null;
+  contest: any | null;
+  full_name: string;
+  contest_name: string;
+  image_url: string;
+  remark: string;
+  _id: string;
+}
+
+export interface WinnerQueryDTO {
+  contest_id?: string | null;
+  rank?: number | null;
+  win_type?: string | null;
+  user_id?: string | null;
 }
 
 export interface IContestRepository {
@@ -164,4 +222,6 @@ export interface IContestRepository {
     toggleRegistration(payload: { contestId: string, token: string }): Promise<TFetcherResponse<IContest>>
     getContestantsInStage(stageId: string, headers: { fingerprint: string }): Promise<TFetcherResponse<IStageWContestant>>
     migrateStage(payload: IMigrateStageDTO, token: string): Promise<TFetcherResponse<IStageWContestant>>
+    getWinners(query?: WinnerQueryDTO): Promise<TFetcherResponse<WinnerResponse[]>>
+    getWinnerById(winnerId: string): Promise<TFetcherResponse<WinnerResponse>>
 }

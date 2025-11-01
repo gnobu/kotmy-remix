@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { contestRepo, deleteContest, migrateStage, toggleRegistration, updateStage } from "~/models/contest/contest.server"
+import { contestRepo, deleteContest, migrateStage, toggleRegistration, updateStage } from "~/services/contest/contest.server"
 import { setToast } from "~/lib/session.server"
 import ContestTable from "~/components/admin/contest/ContestTable"
 import Cta from "~/components/reusables/Cta"

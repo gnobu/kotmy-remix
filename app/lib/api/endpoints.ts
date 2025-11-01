@@ -9,6 +9,10 @@ export class ApiEndPoints {
     static getContestsInTournament(tournamentUniqueId: string) {
         return `/v2/api/contest/tournament/${tournamentUniqueId}`
     }
+
+    static finalResultForContest(contestUniqueId: string) {
+        return `/v2/api/contest/final_result/${contestUniqueId}`
+    }
     static getTournamentsPaged(page: number) {
         return `/v2/api/tournament_paged?page=${page}`
     }
@@ -22,7 +26,7 @@ export class ApiEndPoints {
         return "/v2/api/payment"
     }
     static get callTallyWebhook(): string {
-        return "/flutterwave-webhook"
+        return "/v2/api/flutterwave-payment-status"
     }
     static voteContestant(stageId: string) {
         return `/v2/api/contestant/sm_vote/${stageId}`
@@ -87,7 +91,31 @@ export class ApiEndPoints {
     static editContestant(contestantId: string) {
         return `/v2/api/admin/contestant/with_image/${contestantId}`
     }
+
+    static editUserContestant(contestantId: string) {
+        return `/v2/api/contestant/user/${contestantId}`
+    }
     static get toggleEvictContestants() {
         return `/v2/api/admin/contestant/toggle_evict_multiple`
+    }
+
+    static get getWinners() {
+        return `/v2/api/contest/winners`
+    }
+
+    static getWinner(winnerId: string) {
+        return `/v2/api/contest/winners/${winnerId}`
+    }
+
+    static get login() {
+        return "/v2/api/users/signin"
+    }
+
+    static get userPendingUploads(){
+        return `v2/api/contestant/pending_uploads`
+    }
+
+    static userContestantDeets(contestantId: string){
+        return `/v2/api/contestant/details/${contestantId}`;
     }
 }

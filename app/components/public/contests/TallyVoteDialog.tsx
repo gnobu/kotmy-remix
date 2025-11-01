@@ -16,7 +16,7 @@ import {
 } from "~/components/reusables/select-shad"
 import Svg from "~/components/reusables/Svg"
 import VoteLink from "./VoteLink"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { IContestant } from "~/services/contestant/types/contestant.interface"
 import { StageContestantsLoader } from "~/routes/_public.contests.$tournamentId.$contestId"
 
 

@@ -1,5 +1,5 @@
 import StatusTag from "../../reusables/StatusTag"
-import { IContest } from "~/models/contest/types/contest.interface"
+import { IContest } from "~/services/contest/types/contest.interface"
 
 export default function ContestGuidelines({ contest }: { contest: IContest }) {
     return (

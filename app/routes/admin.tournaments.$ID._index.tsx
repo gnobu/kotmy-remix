@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
 import { Link, useLoaderData, useNavigate } from '@remix-run/react'
 
-import { tournamentRepo } from '~/models/tournament/tournament.server'
-import { contestRepo } from '~/models/contest/contest.server'
+import { tournamentRepo } from '~/services/tournament/tournament.server'
+import { contestRepo } from '~/services/contest/contest.server'
 import { setToast } from '~/lib/session.server'
 import ContestTable from '~/components/admin/contest/ContestTable'
 import Toggletip from '~/components/reusables/ToggleTip'

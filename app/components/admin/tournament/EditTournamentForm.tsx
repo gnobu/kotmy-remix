@@ -6,7 +6,7 @@ import Cta from '~/components/reusables/Cta'
 import FormControl from '~/components/reusables/FormControl'
 import Svg from '~/components/reusables/Svg'
 import useFilePreview from '~/hooks/useFilePreview'
-import { ITournament } from '~/models/tournament/types/tournament.interface'
+import { ITournament } from '~/services/tournament/types/tournament.interface'
 
 export default function EditTournamentForm({ tournament }: { tournament: ITournament }) {
     const [fileList, setFileList] = useState<FileList | null>(null)

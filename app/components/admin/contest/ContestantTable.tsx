@@ -4,7 +4,7 @@ import Checkbox from '~/components/reusables/Checkbox'
 import DataTable from '~/components/reusables/DataTable'
 import { DataTableColumnHeader } from '~/components/reusables/DataTableColumnHeader'
 import ContestantTableActions from './ContestantTableActions'
-import { IContestant } from '~/models/contestant/types/contestant.interface'
+import { IContestant } from '~/services/contestant/types/contestant.interface'
 import { formatDate } from '~/lib/dates.utils'
 import StatusTag from '~/components/reusables/StatusTag'
 

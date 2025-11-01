@@ -7,7 +7,7 @@ import Cta from '~/components/reusables/Cta'
 import FormControl from '~/components/reusables/FormControl'
 import GradeInputs from './GradeInputs'
 import { parseDateForInput } from '~/lib/dates.utils'
-import { IContestWStage, Grade, IStage } from '~/models/contest/types/contest.interface'
+import { IContestWStage, Grade, IStage } from '~/services/contest/types/contest.interface'
 
 export default function Stages({ row }: { row: Row<IContestWStage> }) {
   const [selectedStage, setSelectedStage] = useState<IStage | null>(row.original.stages[0] ?? null)

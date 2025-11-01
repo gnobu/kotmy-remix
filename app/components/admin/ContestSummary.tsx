@@ -3,7 +3,7 @@ import ContestTable from "./contest/ContestTable"
 import { Aggregator, AggregatorItem } from "./Aggregator"
 import Svg from "../reusables/Svg"
 import { icons } from "~/assets/icons"
-import { IContestWStage } from "~/models/contest/types/contest.interface"
+import { IContestWStage } from "~/services/contest/types/contest.interface"
 
 export default function ContestSummary({ contests }: { contests: IContestWStage[] }) {
     const ongoingCount = contests.filter(contest => contest.status === 'ongoing').length

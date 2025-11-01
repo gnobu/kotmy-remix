@@ -26,7 +26,7 @@ export default function Navigation() {
                     </NavLink></li>
                     <li><NavLink to="/#contact" className=''>Contact</NavLink></li>
                 </ul>
-                <Button element='a' href={'/'}>Join Now</Button>
+                <Button element='a' href={'/login'}>Join Now</Button>
             </nav>
             <button
                 onClick={() => { setShowNav(true) }}

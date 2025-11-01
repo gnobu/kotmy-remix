@@ -1,15 +1,22 @@
 import { ApiCall } from "~/lib/api/fetcher"
 import { MethodsEnum } from "~/lib/api/types/methods.interface"
 import { ApiEndPoints } from "~/lib/api/endpoints"
-import { Grade, IContest, IContestDto, IContestRepository, IContestWStage, ICreateContestDTO, IMigrateStageDTO, IStage, IStageWContestant, Social, dtoToContest } from "./types/contest.interface"
+import { Grade, IContest, IContestDto, IContestRepository, IContestWFinalResult, IContestWStage, ICreateContestDTO, IMigrateStageDTO, IStage, IStageWContestant, Social, WinnerQueryDTO, WinnerResponse, dtoToContest } from "./types/contest.interface"
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
 import { setToast } from "~/lib/session.server"
 import { json } from "@remix-run/node"
 
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjFkYTc3MTU1MzE3NzdjMDMwZWI2NCIsImVtYWlsIjoiYXR1bWFzYW11ZWxva3BhcmEzQGdtYWlsLmNvbSIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGVzIjpbXSwicGVybWlzc2lvbnMiOltdLCJleHAiOjE3NzExNzM0NDJ9.sHAuj-OTgwKuSpgrsY0vjPeHHnOJNzENSxmYIFo414k"
+let TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjFkYTc3MTU1MzE3NzdjMDMwZWI2NCIsImVtYWlsIjoiYXR1bWFzYW11ZWxva3BhcmEzQGdtYWlsLmNvbSIsImlzX3N0YWZmIjp0cnVlLCJpc19zdXBlcnVzZXIiOnRydWUsInJvbGVzIjpbXSwicGVybWlzc2lvbnMiOltdLCJleHAiOjE3NzExNzM0NDJ9.sHAuj-OTgwKuSpgrsY0vjPeHHnOJNzENSxmYIFo414k"
 
-class ContestRepository implements IContestRepository {
-    async createContest(contest: FormData, token = TOKEN): Promise<TFetcherResponse<IContest>> {
+export class ContestRepository implements IContestRepository {
+
+    
+    /**
+     *
+     */
+    constructor() {
+    }
+    async createContest(contest: FormData,  token = TOKEN): Promise<TFetcherResponse<IContest>> {
         contest.entries().forEach(([key, value]) => {
             console.log(`${key}: ${value}`)
         })
@@ -118,6 +125,29 @@ class ContestRepository implements IContestRepository {
             data: payload
         })
     }
+
+    async getWinners(query?: WinnerQueryDTO): Promise<TFetcherResponse<WinnerResponse[]>> {
+        const queryString = ApiCall.convertObjToQueryString(query || {});
+
+        const { data, error } = await ApiCall.call<WinnerResponse[], unknown>({
+            url: ApiEndPoints.getWinners + "?" + queryString.toString(),
+            method: MethodsEnum.POST,
+        })
+        if (error) return { error: error ?? { detail: "Could not fetch the winners data" } }
+        return { data }
+    }
+
+    async getWinnerById(winnerId: string): Promise<TFetcherResponse<WinnerResponse>> {
+
+        const { data, error } = await ApiCall.call<WinnerResponse, unknown>({
+            url: ApiEndPoints.getWinner(winnerId),
+            method: MethodsEnum.GET,
+        })
+        if (error) return { error: error ?? { detail: "Could not fetch the winner's data" } }
+        return { data }
+    }
+
+    
 }
 export const contestRepo = new ContestRepository()
 
@@ -234,4 +264,13 @@ export async function migrateStage(formData: FormData, request: Request) {
     }
     const { headers } = await setToast({ request, toast: `success::Contestants have been migrated to the next stage::${Date.now()}` })
     return json(data, { headers })
+}
+
+export async function getFinalResultForContest(contestUniqueId: string): Promise<TFetcherResponse<IContestWFinalResult>> {
+    // await ApiCall.call()
+    const { data: contest, error } = await ApiCall.call<IContestWFinalResult, unknown>({
+            url: ApiEndPoints.finalResultForContest(contestUniqueId),
+        })
+        if(contest) return {data: contest}
+        return { error }
 }

@@ -6,8 +6,8 @@ import ContestSummary from "~/components/admin/ContestSummary"
 import TournamentSummary from "~/components/admin/TournamentSummary"
 import TransactionSummary from "~/components/admin/TransactionSummary"
 import { adminUsers } from "~/lib/data/admin"
-import { contestRepo } from "~/models/contest/contest.server"
-import { tournamentRepo } from "~/models/tournament/tournament.server"
+import { contestRepo } from "~/services/contest/contest.server"
+import { tournamentRepo } from "~/services/tournament/tournament.server"
 
 export async function loader({ }: LoaderFunctionArgs) {
     const { data: contests } = await contestRepo.getContests()

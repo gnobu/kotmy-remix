@@ -5,7 +5,7 @@ import Select from "~/components/reusables/Select"
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
 import { socials } from "~/lib/data/socials"
-import { IStage } from '~/models/contest/types/contest.interface'
+import { IStage } from '~/services/contest/types/contest.interface'
 
 type StageAction = 'add' | 'remove' | 'edit_stage_number' | 'edit_stage_weight' | 'edit_sm_type'
 function reducer(stages: Partial<IStage>[], action: { type: StageAction, stageNumber?: number, value?: unknown }) {

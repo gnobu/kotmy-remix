@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import ContestCard from '~/components/reusables/ContestCard'
-import { tournamentRepo } from '~/models/tournament/tournament.server'
+import { tournamentRepo } from '~/services/tournament/tournament.server'
 
 export async function loader() {
   const { data: tournaments, error } = await tournamentRepo.getTournaments()

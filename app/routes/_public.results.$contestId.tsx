@@ -1,56 +1,54 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
+import { table } from "node:console"
 import Pagination from "~/components/reusables/Pagination"
 import Select from "~/components/reusables/Select"
 import StatusTag from "~/components/reusables/StatusTag"
 import { getContest } from "~/lib/data/contest.server"
+import { getFinalResultForContest } from "~/services/contest/contest.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { contestId } = params
-    if (!contestId) return redirect(`/resluts`)
-    const contest = await getContest(contestId)
-    if (!contest) return redirect(`/results`)
-    return json({ result: contest })
+    if (!contestId) return redirect(`/results`)
+    const {data: contest, error} = await getFinalResultForContest(contestId)
+    
+    if (error) redirect(`/results`)
+    return { contest }
 }
-
-const resultData = {
-    's/n': 1,
-    'contestant': 'BAKARE GREAT IREAYOMIDE',
-    'facebook': 0.6,
-    'instagram': 0.6,
-    'twitter': 0.6,
-    'total smv': 1.8,
-    'tally vote': 1.07,
-    'grand total': 2.87,
-    'top 3 positions': '1st'
-}
-const headings = Object.keys(resultData) as (keyof typeof resultData)[]
 
 export default function ContestResult() {
-    const { result } = useLoaderData<typeof loader>()
-    const color = result.status === 'registering'
-        ? 'yellow' : result.status === 'ongoing'
-            ? 'green' : result.status === 'completed'
+    const {  contest } = useLoaderData<typeof loader>()
+    if(!contest) throw redirect(`/results`)
+    
+    const color = contest.status === 'registering'
+        ? 'yellow' : contest.status === 'ongoing'
+            ? 'green' : contest.status === 'completed'
                 ? 'red' : 'gray'
+    let headings: string[] = []
+    let table_results: {[key: string]: string | number}[] = []
+    if(contest?.final_result_scores){
+        headings = contest.final_result_headings
+        table_results = contest.final_result_scores.map(res => res.table_data)
+    }
     return (
         <main className='grow'>
             <header className="wrapper my-16">
                 <h1 className='text-accent text-2xl lg:text-4xl lg:leading-snug font-satoshi-bold max-w-3xl uppercase mb-10'>
-                    {result.name} Result Table
+                    {contest.name} Result Table
                 </h1>
                 <div className="grid gap-6 max-w-2xl">
                     <div className="">
                         <span className="block font-satoshi-bold mb-1">Status</span>
-                        <StatusTag status={result.status} color={color} />
+                        <StatusTag status={contest.status} color={color} />
                     </div>
                     <div className="grid grid-cols-2 gap-14">
                         <div className="">
-                            <span className="block font-satoshi-bold mb-1">Age Categories</span>
-                            <span className="block">0 - 14 Years</span>
+                            <span className="block font-satoshi-bold mb-1">Categories</span>
+                            <span className="block">{contest.categories.join(", ")}</span>
                         </div>
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Stages</span>
-                            <span className="block">3</span>
+                            <span className="block">{contest.no_of_stages ?? 0}</span>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-14">
@@ -60,7 +58,7 @@ export default function ContestResult() {
                         </div>
                         <div className="">
                             <span className="block font-satoshi-bold mb-1">Prizes</span>
-                            <span className="block">3 million naira worth of prizes for winners.</span>
+                            <span className="block">{contest.prizes}</span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +68,7 @@ export default function ContestResult() {
                     <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 justify-between md:items-center py-6">
                         <fieldset className="flex gap-4 flex-wrap sm:justify-end">
                             <Select name="stage" id="stage" containerClass="bg-secondary">
-                                <option value="1">KID OF JUNE 2023 - STAGE 1 RESULT TABLE</option>
+                                <option value="1">{contest.name.toUpperCase()} - {"FINAL RESULT TABLE"}</option>
                             </Select>
                             <Select name="category" id="category" containerClass="bg-secondary">
                                 <option value="">Sort by category</option>
@@ -82,16 +80,20 @@ export default function ContestResult() {
                         <table className="w-full table-auto border border-secondary">
                             <thead>
                                 <tr>
+                                    <th className="text-left uppercase font-satoshi-black border border-secondary px-6 py-4">S/N</th>
                                     {headings.map(heading => (
-                                        <th className="text-left uppercase font-satoshi-black border border-secondary px-6" key={heading}>{heading}</th>
+                                        <th className="text-left uppercase font-satoshi-black border border-secondary px-6 py-4" key={heading}>{heading}</th>
                                     ))}
                                 </tr>
                             </thead>
                             <tbody>
-                                {(new Array(20) as typeof resultData[]).fill(resultData).map((contestant, index) => (
+                                {/* {(new Array(20) as typeof resultData[]).fill(resultData).map((contestant, index) => ( */}
+                                {table_results.map((contestant, index) => (
+                                    
                                     <tr key={index}>
+                                        <td className="border border-secondary px-6 py-4">{index + 1}</td>
                                         {headings.map(heading => (
-                                            <td className="border border-secondary px-6" key={heading}>{contestant[heading]}</td>
+                                            <td className="border border-secondary px-6 py-4" key={heading}>{contestant[heading]}</td>
                                         ))}
                                     </tr>
                                 ))}

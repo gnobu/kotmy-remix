@@ -1,9 +1,9 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { Outlet } from "@remix-run/react"
 
-import { contestRepo } from "~/models/contest/contest.server"
+import { contestRepo } from "~/services/contest/contest.server"
 import { getFingerprint, setToast } from "~/lib/session.server"
-import { callTallyWebhook } from "~/models/contestant/actions.server"
+import { callTallyWebhook } from "~/services/contestant/actions.server"
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { tournamentId, contestId } = params
@@ -25,6 +25,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
         url.searchParams.delete('status')
         url.searchParams.delete('tx_ref')
         url.searchParams.delete('transaction_id')
+        console.log("Redirecting to:", `${url.pathname}?${url.searchParams.toString()}`)
         throw redirect(`${url.pathname}?${url.searchParams.toString()}`, { headers })
     }
 

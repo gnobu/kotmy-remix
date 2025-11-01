@@ -1,6 +1,6 @@
 import { icons } from "~/assets/icons"
-import { IContest } from "~/models/contest/types/contest.interface"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { IContest } from "~/services/contest/types/contest.interface"
+import { IContestant } from "~/services/contestant/types/contestant.interface"
 
 export default function RegistrationSuccess({ contestant, contest }: { contestant: IContestant, contest: IContest }) {
     const fullName = `${contestant.contestant_biodata.first_name} ${contestant.contestant_biodata.last_name}`

@@ -8,7 +8,7 @@ import Svg from "~/components/reusables/Svg"
 import { cn } from "~/lib/utils"
 import { icons } from "~/assets/icons"
 import { noImage } from "~/assets/images"
-import { ITournament } from "~/models/tournament/types/tournament.interface"
+import { ITournament } from "~/services/tournament/types/tournament.interface"
 
 export default function TournamentCard({ tournament, className }: { tournament: ITournament, className?: string }) {
     const mainComponent = <RoundCta icon={icons.optionsIcon} className='border-transparent hover:border-disabled' />

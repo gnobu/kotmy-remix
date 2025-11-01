@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger, D
 import Svg from "~/components/reusables/Svg"
 import { icons } from "~/assets/icons"
 import { cn } from "~/lib/utils"
-import { IContestWStage } from "~/models/contest/types/contest.interface"
+import { IContestWStage } from "~/services/contest/types/contest.interface"
 
 export default function DeleteContestDialog({ contest, disabled }: { contest: IContestWStage; disabled?: boolean }) {
     const fetcher = useFetcher()

@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react"
 
 import StatusTag from "./StatusTag"
-import { ContestStatus } from "~/models/contest/types/contest.interface"
+import { ContestStatus } from "~/services/contest/types/contest.interface"
 import { noImage } from "~/assets/images"
 
 type Props = | {

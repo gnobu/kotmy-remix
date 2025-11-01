@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, json } from "@remix-run/node"
 import { Link, useRouteLoaderData, useSearchParams } from "@remix-run/react"
 
-import { getTallyLink, voteContestant } from "~/models/contestant/actions.server"
+import { getTallyLink, voteContestant } from "~/services/contestant/actions.server"
 import { setToast } from "~/lib/session.server"
 import ContestTimer from "~/components/public/contests/ContestTimer"
 import FormControl from "~/components/reusables/FormControl"
@@ -36,7 +36,7 @@ export default function Scoreboard() {
                 <div className="grid">
                     <div className="max-w-2xl">
                         <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3 uppercase">{contest!.name}</h1>
-                        <p className="font-satoshi-medium">{contest!.description}</p>
+                        <p className="font-satoshi-medium">{contest!.desc}</p>
                     </div>
                     <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                         <div className="">

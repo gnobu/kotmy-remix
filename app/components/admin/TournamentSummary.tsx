@@ -3,7 +3,7 @@ import TournamentCard from "./tournament/TournamentCard"
 import Svg from "../reusables/Svg"
 import { icons } from "~/assets/icons"
 import { Aggregator, AggregatorItem } from "./Aggregator"
-import { ITournament } from "~/models/tournament/types/tournament.interface"
+import { ITournament } from "~/services/tournament/types/tournament.interface"
 
 export default function TournamentSummary({ tournaments }: { tournaments: ITournament[] }) {
     const numberOfContests = tournaments.reduce((total, tournament) => (total + tournament.contests.length), 0)

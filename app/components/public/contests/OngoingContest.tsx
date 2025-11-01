@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~
 import ContestantCard from './ContestantCard'
 import ContestTimer from './ContestTimer'
 import { noImage } from '~/assets/images'
-import { IContestWStage, IStageWContestant } from '~/models/contest/types/contest.interface'
+import { IContestWStage, IStageWContestant } from '~/services/contest/types/contest.interface'
 
 export default function OngoingContest({ contest, stage }: { contest: IContestWStage, stage: IStageWContestant | null }) {
     const [searchParams, setUrlSearchParams] = useSearchParams()
@@ -22,7 +22,7 @@ export default function OngoingContest({ contest, stage }: { contest: IContestWS
                 <div className="grid">
                     <div className="max-w-2xl">
                         <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3 uppercase">{contest.name}</h1>
-                        <p className="font-satoshi-medium">{contest.description}</p>
+                        <p className="font-satoshi-medium">{contest.desc}</p>
                     </div>
                     <div className="mt-6 grid grid-cols-2 gap-2 max-w-4xl">
                         <div className="">

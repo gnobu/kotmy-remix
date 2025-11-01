@@ -12,7 +12,7 @@ import {
 import { cn } from "~/lib/utils"
 import { icons } from "~/assets/icons"
 import Svg from "~/components/reusables/Svg"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { IContestant } from "~/services/contestant/types/contestant.interface"
 
 export default function EvictContestantDialog({ disabled, contestants }: { disabled: boolean, contestants: IContestant[] }) {
     const fetcher = useFetcher()

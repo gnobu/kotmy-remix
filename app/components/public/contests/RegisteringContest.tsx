@@ -6,7 +6,7 @@ import RegistrationForm from './RegistrationForm'
 import ContestantSlider from '../ContestantSlider'
 import ContestTimer from './ContestTimer'
 import { hero1, hero2, hero3, noImage } from '~/assets/images'
-import { IContest } from '~/models/contest/types/contest.interface'
+import { IContest } from '~/services/contest/types/contest.interface'
 import { RegisterAction } from '~/routes/_public.contests.$tournamentId.$contestId._index'
 
 export default function RegisteringContest({ contest }: { contest: IContest }) {
@@ -17,7 +17,7 @@ export default function RegisteringContest({ contest }: { contest: IContest }) {
                 <div className="flex flex-col justify-around">
                     <div className="max-w-2xl">
                         <h1 className="text-accent text-2xl lg:text-4xl font-satoshi-black max-w-3xl mb-3">{contest.name}</h1>
-                        <p className="font-satoshi-medium">{contest.description}</p>
+                        <p className="font-satoshi-medium">{contest.desc}</p>
                     </div>
                     <ContestTimer deadline={new Date(contest.reg_deadline)} title='registration ends in' />
                 </div>

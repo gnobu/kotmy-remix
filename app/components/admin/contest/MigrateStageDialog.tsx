@@ -5,7 +5,7 @@ import {
     DialogTrigger, DialogFooter, DialogHeader, DialogClose
 } from "~/components/reusables/Dialog"
 import { icons } from "~/assets/icons"
-import { IContestWStage, IStage } from "~/models/contest/types/contest.interface"
+import { IContestWStage, IStage } from "~/services/contest/types/contest.interface"
 import RoundCta from "~/components/reusables/RoundCta"
 import Svg from "~/components/reusables/Svg"
 

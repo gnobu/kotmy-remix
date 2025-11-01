@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node"
 import { useRouteLoaderData } from "@remix-run/react"
 
-import { getTallyLink, registerContestant, voteContestant } from "~/models/contestant/actions.server"
+import { getTallyLink, registerContestant, voteContestant } from "~/services/contestant/actions.server"
 import { setToast } from "~/lib/session.server"
 import OngoingContest from "~/components/public/contests/OngoingContest"
 import RegisteringContest from "~/components/public/contests/RegisteringContest"

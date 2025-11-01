@@ -5,7 +5,7 @@ import Button from "../../reusables/Button"
 import DragnDrop from "./DragnDrop"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/reusables/select-shad"
 import { nigerianStates } from "~/lib/data/states"
-import { IContest } from "~/models/contest/types/contest.interface"
+import { IContest } from "~/services/contest/types/contest.interface"
 
 export default function RegistrationForm({ contest }: { contest: IContest }) {
     return (

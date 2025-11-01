@@ -3,6 +3,8 @@ import { socials } from "../data/socials"
 export type Status = 'registering' | 'ongoing' | 'completed'
 export type StageStatus = 'yet_to_start' | 'ongoing' | 'completed'
 
+export type StageMediaType = 'image' | 'video'
+
 export interface Tournament {
     id: string;
     image: string;

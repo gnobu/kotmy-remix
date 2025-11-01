@@ -1,5 +1,5 @@
 import { TFetcherResponse } from "~/lib/api/types/fetcher.interface"
-import { IContest, IContestDto, dtoToContestInTournament } from "~/models/contest/types/contest.interface"
+import { IContest, IContestDto, dtoToContestInTournament } from "~/services/contest/types/contest.interface"
 
 export interface ITournamentDto {
     _id: string

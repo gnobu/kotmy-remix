@@ -7,7 +7,7 @@ import Pagination from '~/components/reusables/Pagination'
 import EditStageForm from './EditStageForm'
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
-import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { IContestWStage } from '~/services/contest/types/contest.interface'
 
 const columns: ColumnDef<IContestWStage>[] = [
     {

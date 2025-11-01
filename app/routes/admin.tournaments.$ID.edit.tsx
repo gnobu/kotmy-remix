@@ -4,7 +4,7 @@ import { icons } from '~/assets/icons'
 import EditTournamentForm from '~/components/admin/tournament/EditTournamentForm'
 import RoundCta from '~/components/reusables/RoundCta'
 import { setToast } from '~/lib/session.server'
-import { prepareTournamentDto, tournamentRepo } from '~/models/tournament/tournament.server'
+import { prepareTournamentDto, tournamentRepo } from '~/services/tournament/tournament.server'
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { data: tournament, error } = await tournamentRepo.getTournamentById(params.ID!)

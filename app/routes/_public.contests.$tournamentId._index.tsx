@@ -3,8 +3,8 @@ import { useLoaderData } from "@remix-run/react"
 
 import Button from "~/components/reusables/Button"
 import ContestCard from "~/components/reusables/ContestCard"
-import { contestRepo } from "~/models/contest/contest.server"
-import { tournamentRepo } from "~/models/tournament/tournament.server"
+import { contestRepo } from "~/services/contest/contest.server"
+import { tournamentRepo } from "~/services/tournament/tournament.server"
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const { tournamentId } = params

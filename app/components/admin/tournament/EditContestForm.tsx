@@ -9,8 +9,8 @@ import { useState } from 'react'
 import useFilePreview from '~/hooks/useFilePreview'
 import Svg from '~/components/reusables/Svg'
 import { icons } from '~/assets/icons'
-import { ITournament } from '~/models/tournament/types/tournament.interface'
-import { IContestWStage } from '~/models/contest/types/contest.interface'
+import { ITournament } from '~/services/tournament/types/tournament.interface'
+import { IContestWStage } from '~/services/contest/types/contest.interface'
 import { noImage } from '~/assets/images'
 
 export default function EditContestForm({ tournaments, contest }: { tournaments: Pick<ITournament, 'id'>[], contest: IContestWStage }) {
@@ -46,7 +46,7 @@ export default function EditContestForm({ tournaments, contest }: { tournaments:
                     ))}
                 </Select>
                 <FormControl as='input' labelText='Contest Name' placeholder='Enter contest name' id='name' name='name' defaultValue={contest.name} required />
-                <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' defaultValue={contest.description} required />
+                <FormControl as='textarea' rows={3} labelClassNames='sm:col-span-2' labelText='Contest Description' placeholder='Enter contest description' id='description' name='description' defaultValue={contest.desc} required />
                 <FormControl as='input' labelText='Unique Contest ID' placeholder='Enter unique ID' id='uniqueId' name='uniqueId' defaultValue={contest.id} required />
                 <FormControl as='input' type='date' labelText='Registration Deadline' id='reg_deadline' name='reg_deadline' defaultValue={parseDateForInput(contest.reg_deadline)} required />
                 <FormControl as='input' type='date' labelText='Contest Start Date' id='start_date' name='start_date' defaultValue={parseDateForInput(contest.start_date)} required />

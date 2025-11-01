@@ -8,7 +8,7 @@ import {
     DialogHeader, DialogTitle, DialogTrigger
 } from "~/components/reusables/Dialog"
 import FormControl from "~/components/reusables/FormControl"
-import { IContestant } from "~/models/contestant/types/contestant.interface"
+import { IContestant } from "~/services/contestant/types/contestant.interface"
 import { icons } from "~/assets/icons"
 import { nigerianStates } from "~/lib/data/states"
 import { noImage } from "~/assets/images"

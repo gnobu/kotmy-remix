@@ -1,12 +1,12 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useLoaderData, useNavigate } from "@remix-run/react"
 
-import { contestRepo } from "~/models/contest/contest.server"
+import { contestRepo } from "~/services/contest/contest.server"
 import { getFingerprint, setToast } from "~/lib/session.server"
 import { icons } from "~/assets/icons"
 import ContestantTable from "~/components/admin/contest/ContestantTable"
 import RoundCta from "~/components/reusables/RoundCta"
-import { editContestant, toggleEvictContestants } from "~/models/contestant/actions.server"
+import { editContestant, toggleEvictContestants } from "~/services/contestant/actions.server"
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { contestId, stageId } = params

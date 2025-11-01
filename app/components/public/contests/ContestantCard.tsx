@@ -1,7 +1,7 @@
-import { IContestant } from '~/models/contestant/types/contestant.interface'
+import { IContestant } from '~/services/contestant/types/contestant.interface'
 import { noImage } from '~/assets/images'
 import SocialLink from './SocialLink'
-import { Social } from '~/models/contest/types/contest.interface'
+import { Social } from '~/services/contest/types/contest.interface'
 import TallyVoteDialog from './TallyVoteDialog'
 
 export default function ContestantCard({ contestant, socialMedia }: { contestant: IContestant, socialMedia: Social }) {

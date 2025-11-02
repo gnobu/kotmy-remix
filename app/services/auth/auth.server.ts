@@ -20,4 +20,5 @@ export default class AuthServer {
     }
 }
 
+
 export const authServer = new AuthServer();

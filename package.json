@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix build",
+    "build": "npx remix build",
     "dev": "remix dev --manual",
-    "start": "remix-serve ./build/index.js",
+    "start": "npx remix-serve ./build/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "@remix-run/serve": "2.9.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tanstack/react-table": "^8.11.3",
+    "@vercel/remix": "^2.16.7",
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",
@@ -35,7 +36,8 @@
     "react-drag-drop-files": "^2.3.10",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@remix-run/dev": "2.9.2",
